@@ -900,118 +900,6 @@
     @keyframes sectionIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     .section-enter { animation: sectionIn 0.3s ease both; }
 
-    /* ── DESKTOP EMPTY STATE ── */
-    .desktop-empty {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: 100%; color: var(--ink-3); font-family: 'Lora', serif; font-style: italic;
-      font-size: 15px; gap: 10px; padding: 40px; text-align: center;
-    }
-    .desktop-empty-icon { font-size: 48px; opacity: 0.3; margin-bottom: 4px; }
-
-    /* ══════════════════════════════════════
-       DESKTOP LAYOUT  (≥ 900px)
-    ══════════════════════════════════════ */
-    @media (min-width: 900px) {
-
-      html, body { height: 100dvh; overflow: hidden; }
-      body { align-items: stretch; }
-
-      /* App → two-panel side-by-side */
-      #app {
-        max-width: 1380px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        height: 100dvh;
-        min-height: unset;
-        overflow: hidden;
-      }
-
-      /* Both screens become independent scrollable columns */
-      .screen {
-        position: relative !important;
-        inset: auto !important;
-        height: 100dvh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        min-height: unset;
-      }
-
-      /* ── Left panel (main content) ── */
-      #mainView {
-        width: 400px;
-        min-width: 320px;
-        max-width: 400px;
-        flex-shrink: 0;
-        border-right: 1px solid var(--border);
-        background: var(--surface);
-        transform: none !important;
-        transition: none !important;
-        z-index: auto;
-        padding-bottom: 68px;
-      }
-
-      /* Slightly more compact masthead */
-      .masthead { padding-top: 40px; }
-
-      /* Active card highlight */
-      .card-wrap.card-active { pointer-events: none; }
-      .card-wrap.card-active .card-info {
-        background: var(--coral-warm);
-        box-shadow: inset 3px 0 0 var(--coral), var(--shadow-m);
-      }
-      .card-wrap.card-active .card-name { color: var(--coral); }
-
-      /* ── Right panel (detail view) ── */
-      #detailView {
-        flex: 1;
-        min-width: 0;
-        transform: none !important;
-        transition: none !important;
-        background: var(--bg);
-        z-index: auto;
-      }
-      #detailView.open { transform: none !important; }
-
-      /* Bottom nav centered at bottom */
-      #bottomNav { max-width: 480px; }
-
-      /* Back button hidden — left panel handles nav */
-      .back-btn { display: none !important; }
-
-      /* Taller hero */
-      .hero { height: 400px; }
-
-      /* 2-column grid for content cards */
-      .tab-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-        padding: 24px 32px 60px;
-        align-items: start;
-      }
-
-      /* Insider tips always full-width */
-      .c-card.insider { grid-column: 1 / -1; }
-
-      /* Desktop placeholder (shown before first selection) */
-      .desktop-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        gap: 10px;
-        color: var(--ink-3);
-        font-family: 'Lora', serif;
-        font-style: italic;
-        font-size: 15px;
-        text-align: center;
-        padding: 40px;
-      }
-      .desktop-placeholder-icon { font-size: 52px; opacity: 0.35; margin-bottom: 4px; }
-
-    } /* /desktop */
 
     /* ── DECORATIVE DIVIDER ── */
     .section-divider {
@@ -1530,8 +1418,6 @@
   let activeId       = null;
   let activeTab      = 'turismo';
 
-  function isDesktop() { return window.innerWidth >= 900; }
-
   /* ── Elements ── */
   const mainView  = document.getElementById('mainView');
   const detailView = document.getElementById('detailView');
@@ -1547,9 +1433,7 @@
     });
     // render
     renderSection();
-    if (!isDesktop()) {
-      detailView.classList.remove('open');
-    }
+    detailView.classList.remove('open');
   }
 
   function renderSection() {
@@ -1576,13 +1460,6 @@
     }
     detailView.scrollTop = 0;
     detailView.classList.add('open');
-    // highlight card on desktop bairros
-    if (isDesktop() && type === 'neighborhood') {
-      document.querySelectorAll('.card-wrap').forEach(c => c.classList.remove('card-active'));
-      const idx = neighborhoods.findIndex(n => n.id === id);
-      const cards = document.querySelectorAll('.card-wrap');
-      if (cards[idx]) cards[idx].classList.add('card-active');
-    }
   }
 
   function closeDetail() {
@@ -1946,9 +1823,6 @@
 
   /* ── INIT ── */
   navigate('home');
-  if (isDesktop()) {
-    openDetail('neighborhood', neighborhoods[0].id);
-  }
 </script>
 </body>
 </html>
