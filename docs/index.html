@@ -63,18 +63,17 @@
       will-change: transform;
       background: var(--bg); /* fix: impede que o home apareça por trás */
     }
-    #homeScreen {
+    #mainView {
       z-index: 1;
       transform: translateX(0);
-      transition: transform 0.44s cubic-bezier(0.4, 0, 0.15, 1);
+      padding-bottom: 68px;
     }
-    #homeScreen.pushed { transform: translateX(-28%); }
-    #neighborhoodScreen {
+    #detailView {
       z-index: 2;
       transform: translateX(100%);
       transition: transform 0.44s cubic-bezier(0.4, 0, 0.15, 1);
     }
-    #neighborhoodScreen.visible { transform: translateX(0); }
+    #detailView.open { transform: translateX(0); }
 
     /* ── SCROLLBAR HIDDEN ── */
     .no-scroll::-webkit-scrollbar { display: none; }
@@ -552,6 +551,249 @@
     }
     .fade-up { animation: fadeUp 0.38s ease both; }
 
+    /* ── BOTTOM NAV ── */
+    #bottomNav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      z-index: 50;
+      background: rgba(253,251,247,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      padding: 6px 0 max(8px, env(safe-area-inset-bottom));
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 5px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink-3);
+      font-family: 'Lora', serif;
+      font-size: 9px;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-btn svg { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .nav-btn.active { color: var(--coral); }
+    .nav-btn.active svg { transform: scale(1.18) translateY(-1px); }
+    .nav-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--coral);
+      transform: scale(0);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-btn.active .nav-dot { transform: scale(1); }
+
+    /* ── PAGE HEADER ── */
+    .page-header { padding: 52px 28px 4px; }
+    .page-eyebrow {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .page-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: 40px;
+      color: var(--ink);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── FILTER CHIPS ── */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 20px 14px;
+      scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .chip {
+      flex-shrink: 0;
+      padding: 7px 15px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      font-family: 'Lora', serif;
+      font-size: 12px;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chip.active {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: white;
+      transform: scale(1.05);
+    }
+    .chip:not(.active):active { transform: scale(0.94); }
+
+    /* ── HOME SHORTCUTS ── */
+    .home-shortcuts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 20px 4px;
+    }
+    .shortcut-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 16px;
+      cursor: pointer;
+      box-shadow: var(--shadow-s);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .shortcut-card:active { transform: scale(0.94); box-shadow: none; }
+    .shortcut-icon { font-size: 26px; margin-bottom: 6px; line-height: 1; display: block; }
+    .shortcut-label { font-family: 'Lora', serif; font-size: 13px; font-weight: 600; color: var(--ink); }
+    .shortcut-count { font-family: 'Lora', serif; font-size: 11px; font-style: italic; color: var(--ink-3); margin-top: 2px; }
+
+    /* ── HOME SECTION LABEL ── */
+    .home-sec-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 16px 28px 10px;
+    }
+    .home-sec-hand { font-family: 'Caveat', cursive; font-size: 17px; color: var(--ink-2); }
+
+    /* ── ITINERARY CARDS ── */
+    .it-cards { padding: 0 20px; display: flex; flex-direction: column; gap: 14px; }
+    .it-card {
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-m);
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .it-card:active { transform: scale(0.98); box-shadow: var(--shadow-s); }
+    .it-header {
+      padding: 20px 20px 16px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .it-header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      pointer-events: none;
+    }
+    .it-emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+    .it-title { font-family: 'Abril Fatface', serif; font-size: 20px; line-height: 1.1; letter-spacing: -0.01em; }
+    .it-subtitle { font-family: 'Lora', serif; font-size: 12px; font-style: italic; opacity: 0.85; margin-top: 4px; }
+    .it-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .it-tag { background: rgba(255,255,255,0.22); border-radius: 20px; padding: 3px 10px; font-family: 'Lora', serif; font-size: 10px; }
+    .it-footer { background: var(--card); padding: 12px 16px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .it-pill { background: var(--surface); border-radius: 12px; padding: 4px 10px; font-family: 'Lora', serif; font-size: 11px; color: var(--ink-2); white-space: nowrap; }
+    .it-pill.first { background: var(--coral-warm); color: var(--coral); }
+    .it-duration { margin-left: auto; font-family: 'Caveat', cursive; font-size: 13px; color: var(--ink-3); }
+
+    /* ── ITINERARY DETAIL ── */
+    .it-detail-hero {
+      padding: 56px 24px 20px;
+      color: white;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .it-detail-hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.12); pointer-events: none; }
+    .it-detail-back {
+      position: absolute;
+      top: 52px; left: 16px;
+      z-index: 5;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(253,251,247,0.88);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .it-steps-list { padding: 8px 20px 80px; }
+    .it-step { display: flex; gap: 14px; padding: 14px 0; position: relative; }
+    .it-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px; top: 38px; bottom: -4px;
+      width: 2px;
+      background: var(--border);
+    }
+    .it-step-time { width: 38px; flex-shrink: 0; text-align: center; }
+    .it-step-time span { font-family: 'Caveat', cursive; font-size: 13px; color: var(--coral); font-weight: 600; white-space: nowrap; display: block; }
+    .it-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); margin: 4px auto 0; position: relative; z-index: 1; }
+    .it-step-body { flex: 1; }
+    .it-step-title { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .it-step-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .it-step-bairro { font-family: 'Caveat', cursive; font-size: 12px; color: var(--coral); }
+    .it-step-type { font-family: 'Lora', serif; font-size: 10px; font-style: italic; color: var(--ink-3); background: var(--surface); border-radius: 8px; padding: 2px 7px; }
+
+    /* ── CROSS-CATEGORY CARDS ── */
+    .x-list { padding: 4px 16px 80px; display: flex; flex-direction: column; gap: 10px; }
+    .x-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-s);
+      transition: transform 0.15s cubic-bezier(0.34,1.56,0.64,1);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .x-card:active { transform: scale(0.98); }
+    .x-card-top { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+    .x-card h4 { flex: 1; font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .bairro-badge {
+      flex-shrink: 0;
+      font-family: 'Caveat', cursive;
+      font-size: 11px;
+      color: var(--coral);
+      background: var(--coral-warm);
+      border-radius: 10px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), background 0.15s, color 0.15s;
+    }
+    .bairro-badge:active { transform: scale(1.1); background: var(--coral); color: white; }
+    .x-card p { font-family: 'Lora', serif; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+    .x-card .meta-hours { font-family: 'Lora', serif; font-size: 12px; color: var(--ink-3); font-style: italic; margin-top: 6px; }
+    .x-card .card-actions { margin-top: 8px; }
+
+    /* ── SECTION ENTER ANIMATION ── */
+    @keyframes sectionIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .section-enter { animation: sectionIn 0.3s ease both; }
+
+    /* ── DESKTOP EMPTY STATE ── */
+    .desktop-empty {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--ink-3); font-family: 'Lora', serif; font-style: italic;
+      font-size: 15px; gap: 10px; padding: 40px; text-align: center;
+    }
+    .desktop-empty-icon { font-size: 48px; opacity: 0.3; margin-bottom: 4px; }
+
     /* ══════════════════════════════════════
        DESKTOP LAYOUT  (≥ 900px)
     ══════════════════════════════════════ */
@@ -581,8 +823,8 @@
         min-height: unset;
       }
 
-      /* ── Left panel (neighbourhood selector) ── */
-      #homeScreen {
+      /* ── Left panel (main content) ── */
+      #mainView {
         width: 400px;
         min-width: 320px;
         max-width: 400px;
@@ -592,8 +834,8 @@
         transform: none !important;
         transition: none !important;
         z-index: auto;
+        padding-bottom: 68px;
       }
-      #homeScreen.pushed { transform: none !important; }
 
       /* Slightly more compact masthead */
       .masthead { padding-top: 40px; }
@@ -606,8 +848,8 @@
       }
       .card-wrap.card-active .card-name { color: var(--coral); }
 
-      /* ── Right panel (neighbourhood detail) ── */
-      #neighborhoodScreen {
+      /* ── Right panel (detail view) ── */
+      #detailView {
         flex: 1;
         min-width: 0;
         transform: none !important;
@@ -615,7 +857,10 @@
         background: var(--bg);
         z-index: auto;
       }
-      #neighborhoodScreen.visible { transform: none !important; }
+      #detailView.open { transform: none !important; }
+
+      /* Bottom nav centered at bottom */
+      #bottomNav { max-width: 480px; }
 
       /* Back button hidden — left panel handles nav */
       .back-btn { display: none !important; }
@@ -679,32 +924,40 @@
 <body>
 <div id="app">
 
-  <!-- ══════════════ HOME ══════════════ -->
-  <div class="screen no-scroll" id="homeScreen">
+  <!-- ══════════════ MAIN VIEW (current section) ══════════════ -->
+  <div class="screen no-scroll" id="mainView"></div>
 
-    <!-- Masthead -->
-    <div class="masthead">
-      <span class="masthead-eyebrow">guia dos amigos</span>
-      <h1 class="masthead-title">Rio de<br><span>Janeiro</span></h1>
-      <div class="masthead-rule"></div>
-      <p class="masthead-sub">Nove bairros, infinitas experiências.<br>Um guia feito por quem mora lá.</p>
-      <span class="masthead-vol">vol. 01 ✦ zona sul & centro</span>
-    </div>
+  <!-- ══════════════ DETAIL VIEW (neighborhood / itinerary) ══════════════ -->
+  <div class="screen no-scroll" id="detailView"></div>
 
-    <!-- Section label -->
-    <div class="section-row">
-      <span class="section-hand">explorar bairros ↓</span>
-      <span class="section-count">08 destinos</span>
-    </div>
-
-    <div class="section-divider"><span>✦</span></div>
-
-    <!-- Cards (injected) -->
-    <div id="cardsList" class="cards-list"></div>
-  </div>
-
-  <!-- ══════════════ NEIGHBORHOOD ══════════════ -->
-  <div class="screen no-scroll" id="neighborhoodScreen"></div>
+  <!-- ══════════════ BOTTOM NAV ══════════════ -->
+  <nav id="bottomNav">
+    <button class="nav-btn active" data-section="home" onclick="navigate('home')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Início</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button class="nav-btn" data-section="bairros" onclick="navigate('bairros')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Bairros</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button class="nav-btn" data-section="restaurantes" onclick="navigate('restaurantes')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"/><path d="M8 6h8l-1 10H9L8 6z"/><path d="M6 20h12"/></svg>
+      <span>Comer</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button class="nav-btn" data-section="cafes" onclick="navigate('cafes')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      <span>Cafés</span>
+      <div class="nav-dot"></div>
+    </button>
+    <button class="nav-btn" data-section="bares" onclick="navigate('bares')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22l4-11 4 11"/><path d="M5 8l14-6-6 14"/></svg>
+      <span>Beber</span>
+      <div class="nav-dot"></div>
+    </button>
+  </nav>
 
 </div>
 
@@ -1092,22 +1345,340 @@
     { key: 'insider',      label: '💡 Insider'       },
   ];
 
+  /* ── ITINERARIES ── */
+  const ITINERARIES = [
+    { id:'centro-dia', emoji:'🏛️', title:'Um dia no Centro', subtitle:'História, arte e o Rio que poucos conhecem', duration:'8–10h', tags:['cultura','história'], color:'#7B5E3A',
+      steps:[
+        { time:'9h',   title:'Museu do Amanhã', bairro:'Centro Histórico', type:'turismo', maps:'Museu+do+Amanhã+Rio+de+Janeiro' },
+        { time:'11h',  title:'MAR + Orla Conde', bairro:'Centro Histórico', type:'turismo', maps:'Museu+de+Arte+do+Rio+MAR' },
+        { time:'13h',  title:'Almoço no Dois de Fevereiro', bairro:'Centro Histórico', type:'restaurante', maps:'Dois+de+Fevereiro+Rio+de+Janeiro' },
+        { time:'15h',  title:'CCBB + Circuito da Pequena África', bairro:'Centro Histórico', type:'turismo', maps:'CCBB+Centro+Cultural+Banco+Brasil+Rio' },
+        { time:'17h',  title:'VLT até os Arcos da Lapa', bairro:'Lapa & Santa Teresa', type:'dica', maps:'Arcos+da+Lapa+Rio+de+Janeiro' },
+        { time:'20h',  title:'Carioca da Gema — samba ao vivo', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Carioca+da+Gema+Lapa+Rio' },
+      ]
+    },
+    { id:'ipanema-leblon', emoji:'🌊', title:'Ipanema & Leblon', subtitle:'Praia, café, pôr do sol e jantar', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#2E7EA8',
+      steps:[
+        { time:'9h',    title:'Café no Zazá (Livraria da Travessa)', bairro:'Ipanema', type:'café', maps:'Zazá+Café+Ipanema+Rio' },
+        { time:'10h30', title:'Praia de Ipanema — Posto 9', bairro:'Ipanema', type:'turismo', maps:'Posto+9+Praia+Ipanema+Rio' },
+        { time:'13h',   title:'Almoço no Totó ou Koba Izakaya', bairro:'Ipanema', type:'restaurante', maps:'Totó+Restaurante+Ipanema+Rio' },
+        { time:'16h',   title:'Caminhada até o Leblon pela orla', bairro:'Leblon', type:'dica', maps:null },
+        { time:'17h30', title:'Pôr do sol na Pedra do Arpoador', bairro:'Ipanema', type:'turismo', maps:'Pedra+do+Arpoador+Rio+de+Janeiro' },
+        { time:'20h',   title:'Jantar no Leblon', bairro:'Leblon', type:'dica', maps:'restaurantes+Leblon+Rio' },
+      ]
+    },
+    { id:'natureza-cultura', emoji:'🌿', title:'Natureza & Cultura', subtitle:'Do jardim botânico ao museu ao entardecer', duration:'8h', tags:['natureza','museus','cultura'], color:'#3D7A3A',
+      steps:[
+        { time:'9h',  title:'Jardim Botânico do Rio', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Jardim+Botânico+Rio+de+Janeiro' },
+        { time:'12h', title:'Almoço na La Bicyclette', bairro:'Jardim Botânico & Gávea', type:'café', maps:'La+Bicyclette+Jardim+Botânico+Rio' },
+        { time:'14h', title:'Parque Lage', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Parque+Lage+Rio+de+Janeiro' },
+        { time:'16h', title:'Instituto Moreira Salles', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Instituto+Moreira+Salles+Rio+de+Janeiro' },
+        { time:'18h', title:'Happy hour na Lagoa', bairro:'Jardim Botânico & Gávea', type:'bar', maps:'Lagoa+Rodrigo+de+Freitas+Rio' },
+        { time:'20h', title:'Jantar no Baixo Gávea', bairro:'Jardim Botânico & Gávea', type:'dica', maps:'Baixo+Gávea+Rio+de+Janeiro' },
+      ]
+    },
+    { id:'botafogo-urca', emoji:'⚡', title:'Botafogo & Urca', subtitle:'O bairro mais vibrante + o mais bucólico', duration:'10h', tags:['gastronomia','vista','natureza'], color:'#C94A2E',
+      steps:[
+        { time:'9h',    title:'Café na The Slow Bakery', bairro:'Botafogo', type:'café', maps:'The+Slow+Bakery+Botafogo+Rio' },
+        { time:'10h30', title:'Mirante do Pasmado', bairro:'Botafogo', type:'turismo', maps:'Mirante+do+Pasmado+Botafogo+Rio' },
+        { time:'12h',   title:'Almoço no Marchezinho', bairro:'Botafogo', type:'restaurante', maps:'Marchezinho+Restaurante+Botafogo+Rio' },
+        { time:'14h30', title:'Pista Cláudio Coutinho', bairro:'Urca', type:'turismo', maps:'Pista+Cláudio+Coutinho+Urca+Rio' },
+        { time:'17h',   title:'Mureta da Urca ao entardecer', bairro:'Urca', type:'bar', maps:'Mureta+da+Urca+Rio+de+Janeiro' },
+        { time:'20h',   title:'Jantar na Rua Arnaldo Quintela', bairro:'Botafogo', type:'dica', maps:'Rua+Arnaldo+Quintela+Botafogo+Rio' },
+      ]
+    },
+    { id:'santa-lapa', emoji:'🎶', title:'Santa Teresa & Lapa', subtitle:'Arte, bonde, samba e noite boêmia', duration:'10h', tags:['arte','samba','boemia'], color:'#7B3FA0',
+      steps:[
+        { time:'10h', title:'Bonde de Santa Teresa', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Bonde+Santa+Teresa+Rio' },
+        { time:'11h', title:'Parque das Ruínas + Chácara do Céu', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Parque+das+Ruínas+Santa+Teresa+Rio' },
+        { time:'13h', title:'Almoço no Bar do Mineiro', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Bar+do+Mineiro+Santa+Teresa+Rio' },
+        { time:'15h', title:'Café no Cafecito (jardim secreto)', bairro:'Lapa & Santa Teresa', type:'café', maps:'Cafecito+Santa+Teresa+Rio' },
+        { time:'17h', title:'Escadaria Selarón + Arcos da Lapa', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Escadaria+Selarón+Lapa+Rio' },
+        { time:'21h', title:'Carioca da Gema — samba ao vivo', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Carioca+da+Gema+Lapa+Rio' },
+      ]
+    },
+    { id:'copa-urca', emoji:'🌅', title:'Copacabana & Urca', subtitle:'Calçadão histórico + a joia escondida', duration:'8h', tags:['praia','história','vista'], color:'#1A6E8A',
+      steps:[
+        { time:'8h',    title:'Café no Farro ou Frédéric', bairro:'Copacabana', type:'café', maps:'Farro+Padaria+Copacabana+Rio' },
+        { time:'9h30',  title:'Calçadão de Copacabana', bairro:'Copacabana', type:'turismo', maps:'Calçadão+Copacabana+Rio+de+Janeiro' },
+        { time:'11h',   title:'Forte do Leme', bairro:'Copacabana', type:'turismo', maps:'Forte+do+Leme+Rio+de+Janeiro' },
+        { time:'13h',   title:'Almoço no Pavão Azul', bairro:'Copacabana', type:'bar', maps:'Pavão+Azul+Copacabana+Rio' },
+        { time:'15h',   title:'Pista Cláudio Coutinho', bairro:'Urca', type:'turismo', maps:'Pista+Cláudio+Coutinho+Urca+Rio' },
+        { time:'17h30', title:'Cerveja na Mureta da Urca', bairro:'Urca', type:'bar', maps:'Mureta+da+Urca+Rio+de+Janeiro' },
+      ]
+    },
+  ];
+
   /* ── State ── */
-  let activeId  = null;
-  let activeTab = 'turismo';
+  let currentSection = 'home';
+  let activeFilter   = null;
+  let detailType     = null;
+  let activeId       = null;
+  let activeTab      = 'turismo';
 
   function isDesktop() { return window.innerWidth >= 900; }
 
   /* ── Elements ── */
-  const homeEl = document.getElementById('homeScreen');
-  const nbEl   = document.getElementById('neighborhoodScreen');
+  const mainView  = document.getElementById('mainView');
+  const detailView = document.getElementById('detailView');
 
-  /* ── RENDER HOME ── */
-  function renderHome() {
+  /* ── NAVIGATE (main router) ── */
+  function navigate(section) {
+    currentSection = section;
+    activeFilter   = null;
+    mainView.scrollTop = 0;
+    // update nav
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.section === section);
+    });
+    // render
+    renderSection();
+    // on desktop, show detail if bairros
+    if (isDesktop() && section === 'bairros') {
+      if (!detailView.classList.contains('open')) {
+        detailView.innerHTML = `<div class="desktop-empty"><div class="desktop-empty-icon">📍</div><p>Escolha um bairro ao lado</p></div>`;
+        detailView.classList.add('open');
+      }
+    } else if (!isDesktop()) {
+      // close detail when switching sections on mobile
+      detailView.classList.remove('open');
+    }
+  }
+
+  function renderSection() {
+    mainView.classList.remove('section-enter');
+    void mainView.offsetWidth; // reflow for animation
+    mainView.classList.add('section-enter');
+    if      (currentSection === 'home')         renderHomeSection();
+    else if (currentSection === 'bairros')      renderBairrosSection();
+    else if (currentSection === 'restaurantes') renderCategorySection('restaurantes', 'Comer', 'Restaurantes');
+    else if (currentSection === 'cafes')        renderCategorySection('cafes', 'Cafés', 'Cafés');
+    else if (currentSection === 'bares')        renderCategorySection('bares', 'Beber', 'Bares');
+  }
+
+  /* ── OPEN / CLOSE DETAIL ── */
+  function openDetail(type, id) {
+    detailType = type;
+    if (type === 'neighborhood') {
+      activeId  = id;
+      activeTab = 'turismo';
+      renderNeighborhoodDetail(id);
+    } else if (type === 'itinerary') {
+      renderItineraryDetail(id);
+    }
+    detailView.scrollTop = 0;
+    detailView.classList.add('open');
+    // highlight card on desktop bairros
+    if (isDesktop() && type === 'neighborhood') {
+      document.querySelectorAll('.card-wrap').forEach(c => c.classList.remove('card-active'));
+      const idx = neighborhoods.findIndex(n => n.id === id);
+      const cards = document.querySelectorAll('.card-wrap');
+      if (cards[idx]) cards[idx].classList.add('card-active');
+    }
+  }
+
+  function closeDetail() {
+    if (isDesktop() && currentSection === 'bairros') return; // keep open on desktop bairros
+    detailView.classList.remove('open');
+  }
+
+  /* ── COUNT HELPERS ── */
+  function countItems(tabKey) {
+    return neighborhoods.reduce((sum, n) => sum + (n.tabs[tabKey] ? n.tabs[tabKey].length : 0), 0);
+  }
+
+  /* ── RENDER HOME SECTION ── */
+  function renderHomeSection() {
+    const restCount = countItems('restaurantes');
+    const cafeCount = countItems('cafes');
+    const barCount  = countItems('bares');
+    mainView.innerHTML = `
+      <div class="masthead">
+        <span class="masthead-eyebrow">guia dos amigos</span>
+        <h1 class="masthead-title">Rio de<br><span>Janeiro</span></h1>
+        <div class="masthead-rule"></div>
+        <p class="masthead-sub">Oito bairros, infinitas experiências.<br>Um guia feito por quem mora lá.</p>
+        <span class="masthead-vol">vol. 01 ✦ zona sul & centro</span>
+      </div>
+
+      <div class="home-shortcuts">
+        <div class="shortcut-card" onclick="navigate('bairros')">
+          <span class="shortcut-icon">📍</span>
+          <div class="shortcut-label">Bairros</div>
+          <div class="shortcut-count">${neighborhoods.length} destinos</div>
+        </div>
+        <div class="shortcut-card" onclick="navigate('restaurantes')">
+          <span class="shortcut-icon">🍽️</span>
+          <div class="shortcut-label">Restaurantes</div>
+          <div class="shortcut-count">${restCount} opções</div>
+        </div>
+        <div class="shortcut-card" onclick="navigate('cafes')">
+          <span class="shortcut-icon">☕</span>
+          <div class="shortcut-label">Cafés</div>
+          <div class="shortcut-count">${cafeCount} lugares</div>
+        </div>
+        <div class="shortcut-card" onclick="navigate('bares')">
+          <span class="shortcut-icon">🍺</span>
+          <div class="shortcut-label">Bares</div>
+          <div class="shortcut-count">${barCount} opções</div>
+        </div>
+      </div>
+
+      <div class="section-row" style="margin-top:12px;">
+        <span class="section-hand">passeios do dia ✦</span>
+        <span class="section-count">${ITINERARIES.length} roteiros</span>
+      </div>
+      <div class="section-divider"><span>✦</span></div>
+
+      <div class="it-cards" style="padding-bottom:80px;">
+        ${ITINERARIES.map((it, i) => `
+          <div class="it-card fade-up" style="animation-delay:${i*0.07}s;" onclick="openDetail('itinerary','${it.id}')">
+            <div class="it-header" style="background:${it.color};">
+              <span class="it-emoji">${it.emoji}</span>
+              <div class="it-title">${it.title}</div>
+              <div class="it-subtitle">${it.subtitle}</div>
+              <div class="it-tags">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}</div>
+            </div>
+            <div class="it-footer">
+              ${it.steps.slice(0,3).map((s,si) => `<span class="it-pill${si===0?' first':''}">${s.time} ${s.title.split(' ').slice(0,3).join(' ')}</span>`).join('')}
+              <span class="it-duration">⏱ ${it.duration}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  /* ── RENDER BAIRROS SECTION ── */
+  function renderBairrosSection() {
+    mainView.innerHTML = `
+      <div class="masthead">
+        <span class="masthead-eyebrow">explorar</span>
+        <h1 class="masthead-title">Bairros<br><span>do Rio</span></h1>
+        <div class="masthead-rule"></div>
+        <p class="masthead-sub">Oito bairros, um guia feito<br>por quem mora lá.</p>
+      </div>
+      <div class="section-row">
+        <span class="section-hand">escolha um bairro ↓</span>
+        <span class="section-count">0${neighborhoods.length} destinos</span>
+      </div>
+      <div class="section-divider"><span>✦</span></div>
+      <div id="cardsList" class="cards-list"></div>
+    `;
+    renderBairrosCards();
+  }
+
+  /* ── RENDER CATEGORY SECTION (restaurantes / cafes / bares) ── */
+  function renderCategorySection(tabKey, eyebrow, title) {
+    const allItems = [];
+    neighborhoods.forEach(n => {
+      (n.tabs[tabKey] || []).forEach(item => {
+        allItems.push({ ...item, bairroName: n.name.replace('\n',' '), bairroId: n.id });
+      });
+    });
+    const filtered = activeFilter ? allItems.filter(it => it.bairroId === activeFilter) : allItems;
+
+    mainView.innerHTML = `
+      <div class="page-header">
+        <span class="page-eyebrow">${eyebrow}</span>
+        <h1 class="page-title">${title}</h1>
+      </div>
+      <div class="filter-row">
+        <button class="chip${!activeFilter?' active':''}" onclick="setFilter(null,'${tabKey}','${eyebrow}','${title}')">Todos</button>
+        ${neighborhoods.map(n => `
+          <button class="chip${activeFilter===n.id?' active':''}"
+                  onclick="setFilter('${n.id}','${tabKey}','${eyebrow}','${title}')">
+            ${n.name.replace('\n',' ')}
+          </button>
+        `).join('')}
+      </div>
+      <div class="x-list">
+        ${filtered.length === 0
+          ? `<p style="font-family:'Lora',serif;font-style:italic;color:var(--ink-3);padding:20px 0;">Nenhum resultado para este filtro.</p>`
+          : filtered.map((item, i) => `
+            <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
+              <div class="x-card-top">
+                <h4>${item.title}</h4>
+                <div style="display:flex;gap:6px;align-items:center;">
+                  ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
+                  <span class="bairro-badge" onclick="event.stopPropagation();openDetail('neighborhood','${item.bairroId}')">${item.bairroName}</span>
+                </div>
+              </div>
+              <p>${item.desc}</p>
+              ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
+              ${(item.maps || item.link) ? `
+                <div class="card-actions">
+                  ${item.maps ? `<a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${item.maps}" target="_blank" rel="noopener noreferrer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Ver no Mapa
+                  </a>` : ''}
+                  ${item.link ? `<a class="site-btn" href="${item.link}" target="_blank" rel="noopener noreferrer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Site
+                  </a>` : ''}
+                </div>` : ''}
+            </div>
+          `).join('')}
+      </div>
+    `;
+  }
+
+  function setFilter(id, tabKey, eyebrow, title) {
+    activeFilter = id;
+    renderCategorySection(tabKey, eyebrow, title);
+    mainView.scrollTop = 0;
+  }
+
+  /* ── RENDER ITINERARY DETAIL ── */
+  function renderItineraryDetail(id) {
+    const it = ITINERARIES.find(x => x.id === id);
+    if (!it) return;
+    detailView.innerHTML = `
+      <div class="it-detail-hero" style="background:${it.color};">
+        <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span style="font-size:40px;display:block;margin-bottom:10px;position:relative;z-index:1;">${it.emoji}</span>
+        <h1 style="font-family:'Abril Fatface',serif;font-size:36px;line-height:1;letter-spacing:-0.02em;position:relative;z-index:1;">${it.title}</h1>
+        <p style="font-family:'Lora',serif;font-size:13px;font-style:italic;opacity:0.85;margin-top:6px;position:relative;z-index:1;">${it.subtitle}</p>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;position:relative;z-index:1;">
+          ${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}
+          <span class="it-tag">⏱ ${it.duration}</span>
+        </div>
+      </div>
+      <div class="it-steps-list">
+        ${it.steps.map(step => `
+          <div class="it-step">
+            <div class="it-step-time">
+              <span>${step.time}</span>
+              <div class="it-step-dot"></div>
+            </div>
+            <div class="it-step-body">
+              <div class="it-step-title">${step.title}</div>
+              <div class="it-step-meta">
+                <span class="it-step-bairro">${step.bairro}</span>
+                <span class="it-step-type">${step.type}</span>
+              </div>
+              ${step.maps ? `
+                <div style="margin-top:8px;">
+                  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${step.maps}" target="_blank" rel="noopener noreferrer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Ver no Mapa
+                  </a>
+                </div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  /* ── RENDER BAIRROS CARDS (into #cardsList) ── */
+  function renderBairrosCards() {
     document.getElementById('cardsList').innerHTML = neighborhoods.map((n, i) => `
-      <div class="card-wrap ${i % 2 === 0 ? '' : ''} fade-up"
+      <div class="card-wrap fade-up"
            style="animation-delay:${i * 0.09}s;"
-           onclick="openNeighborhood('${n.id}')">
+           onclick="openDetail('neighborhood','${n.id}')">
 
         <!-- Photo -->
         <div class="card-photo">
@@ -1138,20 +1709,20 @@
     `).join('');
   }
 
-  /* ── RENDER NEIGHBORHOOD ── */
-  function renderNeighborhood(id) {
+  /* ── RENDER NEIGHBORHOOD DETAIL ── */
+  function renderNeighborhoodDetail(id) {
     const n = neighborhoods.find(x => x.id === id);
     if (!n) return;
 
     const displayName = n.name.replace('\n', '<br>');
     const annotIdx = neighborhoods.indexOf(n);
 
-    nbEl.innerHTML = `
+    detailView.innerHTML = `
       <!-- Hero -->
       <div class="hero">
         <img src="${n.image}" alt="${n.name}" onerror="this.style.background='#C4A882';">
         <div class="hero-overlay"></div>
-        <button class="back-btn" onclick="goBack()" aria-label="Voltar">
+        <button class="back-btn" onclick="closeDetail()" aria-label="Voltar">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"/>
           </svg>
@@ -1228,28 +1799,7 @@
     `).join('');
   }
 
-  /* ── NAVIGATION ── */
-  function openNeighborhood(id) {
-    activeId  = id;
-    activeTab = 'turismo';
-    renderNeighborhood(id);
-    nbEl.scrollTop = 0;
-    if (isDesktop()) {
-      document.querySelectorAll('.card-wrap').forEach(c => c.classList.remove('card-active'));
-      const idx = neighborhoods.findIndex(n => n.id === id);
-      const cards = document.querySelectorAll('.card-wrap');
-      if (cards[idx]) cards[idx].classList.add('card-active');
-    } else {
-      homeEl.classList.add('pushed');
-      nbEl.classList.add('visible');
-    }
-  }
-
-  function goBack() {
-    if (isDesktop()) return;
-    homeEl.classList.remove('pushed');
-    nbEl.classList.remove('visible');
-  }
+  /* (openNeighborhood/goBack replaced by openDetail/closeDetail above) */
 
   /* ── TAB SWITCH ── */
   function switchTab(tabKey) {
@@ -1279,8 +1829,10 @@
   }
 
   /* ── INIT ── */
-  renderHome();
-  if (isDesktop()) openNeighborhood(neighborhoods[0].id);
+  navigate('home');
+  if (isDesktop()) {
+    openDetail('neighborhood', neighborhoods[0].id);
+  }
 </script>
 </body>
 </html>
