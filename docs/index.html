@@ -1051,9 +1051,9 @@
       <span>Início</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="passeios" onclick="navigate('passeios')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span>Passeios</span>
+    <button class="nav-btn" data-section="turismo" onclick="navigate('turismo')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <span>Turismo</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-btn" data-section="restaurantes" onclick="navigate('restaurantes')">
@@ -1557,7 +1557,7 @@
     void mainView.offsetWidth; // reflow for animation
     mainView.classList.add('section-enter');
     if      (currentSection === 'home')         renderHomeSection();
-    else if (currentSection === 'passeios')     renderPasseiosSection();
+    else if (currentSection === 'turismo')      renderCategorySection('turismo', 'Explorar', 'Turismo');
     else if (currentSection === 'restaurantes') renderCategorySection('restaurantes', 'Comer', 'Restaurantes');
     else if (currentSection === 'cafes')        renderCategorySection('cafes', 'Cafés', 'Cafés');
     else if (currentSection === 'bares')        renderCategorySection('bares', 'Beber', 'Bares');
@@ -1598,8 +1598,9 @@
     const restCount = countItems('restaurantes');
     const cafeCount = countItems('cafes');
     const barCount  = countItems('bares');
+    const turismoCount = countItems('turismo');
     const menu = [
-      { section:'passeios',     icon:'☀️',  bg:'#FEF3E2', label:'Passeios do Dia',  count:`${ITINERARIES.length} roteiros` },
+      { section:'turismo',      icon:'📸',  bg:'#E8F4E8', label:'Turismo',           count:`${turismoCount} lugares` },
       { section:'restaurantes', icon:'🍽️',  bg:'#FDE8E3', label:'Restaurantes',     count:`${restCount} opções` },
       { section:'cafes',        icon:'☕',  bg:'#F2EBE0', label:'Cafés',             count:`${cafeCount} lugares` },
       { section:'bares',        icon:'🍺',  bg:'#E3EEF9', label:'Bares',             count:`${barCount} opções` },
