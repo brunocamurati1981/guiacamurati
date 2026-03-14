@@ -644,6 +644,120 @@
     }
     .chip:not(.active):active { transform: scale(0.94); }
 
+    /* ── HOME HERO (full-screen photo + menu) ── */
+    .home-hero-wrap {
+      position: relative;
+      height: 68dvh;
+      min-height: 380px;
+      overflow: hidden;
+    }
+    .home-hero-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      filter: contrast(1.05) saturate(0.9);
+    }
+    .home-hero-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.18) 0%,
+        transparent 30%,
+        rgba(0,0,0,0.55) 75%,
+        rgba(0,0,0,0.78) 100%
+      );
+    }
+    .home-hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 0 28px 28px;
+      color: white;
+    }
+    .home-hero-eyebrow {
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: 0.03em;
+    }
+    .home-hero-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: 56px;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+    .home-hero-title span { color: var(--coral); }
+    .home-hero-rule {
+      width: 40px; height: 2px;
+      background: var(--coral);
+      margin: 14px 0 10px;
+    }
+    .home-hero-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    /* ── HOME MENU ── */
+    .home-menu {
+      padding: 20px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .home-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-s);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .home-menu-item:active { transform: scale(0.97); box-shadow: none; }
+    .home-menu-icon {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .home-menu-text { flex: 1; }
+    .home-menu-label {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+    }
+    .home-menu-count {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--ink-3);
+      margin-top: 2px;
+      display: block;
+    }
+    .home-menu-arrow {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
     /* ── HOME SHORTCUTS ── */
     .home-shortcuts {
       display: grid;
@@ -937,9 +1051,9 @@
       <span>Início</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="bairros" onclick="navigate('bairros')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Bairros</span>
+    <button class="nav-btn" data-section="passeios" onclick="navigate('passeios')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Passeios</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-btn" data-section="restaurantes" onclick="navigate('restaurantes')">
@@ -1433,14 +1547,7 @@
     });
     // render
     renderSection();
-    // on desktop, show detail if bairros
-    if (isDesktop() && section === 'bairros') {
-      if (!detailView.classList.contains('open')) {
-        detailView.innerHTML = `<div class="desktop-empty"><div class="desktop-empty-icon">📍</div><p>Escolha um bairro ao lado</p></div>`;
-        detailView.classList.add('open');
-      }
-    } else if (!isDesktop()) {
-      // close detail when switching sections on mobile
+    if (!isDesktop()) {
       detailView.classList.remove('open');
     }
   }
@@ -1450,7 +1557,7 @@
     void mainView.offsetWidth; // reflow for animation
     mainView.classList.add('section-enter');
     if      (currentSection === 'home')         renderHomeSection();
-    else if (currentSection === 'bairros')      renderBairrosSection();
+    else if (currentSection === 'passeios')     renderPasseiosSection();
     else if (currentSection === 'restaurantes') renderCategorySection('restaurantes', 'Comer', 'Restaurantes');
     else if (currentSection === 'cafes')        renderCategorySection('cafes', 'Cafés', 'Cafés');
     else if (currentSection === 'bares')        renderCategorySection('bares', 'Beber', 'Bares');
@@ -1478,7 +1585,6 @@
   }
 
   function closeDetail() {
-    if (isDesktop() && currentSection === 'bairros') return; // keep open on desktop bairros
     detailView.classList.remove('open');
   }
 
@@ -1492,45 +1598,52 @@
     const restCount = countItems('restaurantes');
     const cafeCount = countItems('cafes');
     const barCount  = countItems('bares');
+    const menu = [
+      { section:'passeios',     icon:'☀️',  bg:'#FEF3E2', label:'Passeios do Dia',  count:`${ITINERARIES.length} roteiros` },
+      { section:'restaurantes', icon:'🍽️',  bg:'#FDE8E3', label:'Restaurantes',     count:`${restCount} opções` },
+      { section:'cafes',        icon:'☕',  bg:'#F2EBE0', label:'Cafés',             count:`${cafeCount} lugares` },
+      { section:'bares',        icon:'🍺',  bg:'#E3EEF9', label:'Bares',             count:`${barCount} opções` },
+    ];
     mainView.innerHTML = `
-      <div class="masthead">
-        <span class="masthead-eyebrow">guia dos amigos</span>
-        <h1 class="masthead-title">Rio de<br><span>Janeiro</span></h1>
-        <div class="masthead-rule"></div>
-        <p class="masthead-sub">Oito bairros, infinitas experiências.<br>Um guia feito por quem mora lá.</p>
-        <span class="masthead-vol">vol. 01 ✦ zona sul & centro</span>
-      </div>
-
-      <div class="home-shortcuts">
-        <div class="shortcut-card" onclick="navigate('bairros')">
-          <span class="shortcut-icon">📍</span>
-          <div class="shortcut-label">Bairros</div>
-          <div class="shortcut-count">${neighborhoods.length} destinos</div>
-        </div>
-        <div class="shortcut-card" onclick="navigate('restaurantes')">
-          <span class="shortcut-icon">🍽️</span>
-          <div class="shortcut-label">Restaurantes</div>
-          <div class="shortcut-count">${restCount} opções</div>
-        </div>
-        <div class="shortcut-card" onclick="navigate('cafes')">
-          <span class="shortcut-icon">☕</span>
-          <div class="shortcut-label">Cafés</div>
-          <div class="shortcut-count">${cafeCount} lugares</div>
-        </div>
-        <div class="shortcut-card" onclick="navigate('bares')">
-          <span class="shortcut-icon">🍺</span>
-          <div class="shortcut-label">Bares</div>
-          <div class="shortcut-count">${barCount} opções</div>
+      <div class="home-hero-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=85"
+          alt="Rio de Janeiro"
+          loading="eager"
+        >
+        <div class="home-hero-content">
+          <span class="home-hero-eyebrow">guia dos amigos</span>
+          <h1 class="home-hero-title">Rio de<br><span>Janeiro</span></h1>
+          <div class="home-hero-rule"></div>
+          <p class="home-hero-sub">Um guia feito por quem mora lá.</p>
         </div>
       </div>
 
-      <div class="section-row" style="margin-top:12px;">
-        <span class="section-hand">passeios do dia ✦</span>
-        <span class="section-count">${ITINERARIES.length} roteiros</span>
+      <div class="home-menu">
+        ${menu.map((m, i) => `
+          <div class="home-menu-item fade-up" style="animation-delay:${i*0.07}s;" onclick="navigate('${m.section}')">
+            <div class="home-menu-icon" style="background:${m.bg};">${m.icon}</div>
+            <div class="home-menu-text">
+              <span class="home-menu-label">${m.label}</span>
+              <span class="home-menu-count">${m.count}</span>
+            </div>
+            <div class="home-menu-arrow">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+        `).join('')}
       </div>
-      <div class="section-divider"><span>✦</span></div>
+    `;
+  }
 
-      <div class="it-cards" style="padding-bottom:80px;">
+  /* ── RENDER PASSEIOS SECTION ── */
+  function renderPasseiosSection() {
+    mainView.innerHTML = `
+      <div class="page-header">
+        <span class="page-eyebrow">roteiros</span>
+        <h1 class="page-title">Passeios<br><span style="color:var(--coral)">do Dia</span></h1>
+      </div>
+      <div class="it-cards" style="padding: 16px 20px 80px; display:flex; flex-direction:column; gap:14px;">
         ${ITINERARIES.map((it, i) => `
           <div class="it-card fade-up" style="animation-delay:${i*0.07}s;" onclick="openDetail('itinerary','${it.id}')">
             <div class="it-header" style="background:${it.color};">
