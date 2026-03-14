@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
 
   <style>
     /* ── TOKENS ── */
@@ -596,7 +596,7 @@
     }
     .nav-btn.active .nav-dot { transform: scale(1); }
 
-    /* ── PAGE HEADER ── */
+    /* ── PAGE HEADER (legacy, kept for bairros/passeios) ── */
     .page-header { padding: 52px 28px 4px; }
     .page-eyebrow {
       font-family: 'Caveat', cursive;
@@ -606,11 +606,58 @@
       margin-bottom: 4px;
     }
     .page-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
       color: var(--ink);
-      line-height: 0.95;
-      letter-spacing: -0.02em;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+    }
+
+    /* ── EDITORIAL SECTION HEADER ── */
+    .ed-header {
+      padding: 56px 28px 0;
+      position: relative;
+    }
+    .ed-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 18px;
+    }
+    .ed-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      white-space: pre-line;
+      margin-bottom: 22px;
+    }
+    .ed-rule {
+      width: 32px; height: 2px;
+      background: var(--coral);
+      margin-bottom: 18px;
+    }
+    .ed-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      line-height: 1.75;
+      color: var(--ink-2);
+      margin-bottom: 14px;
+      max-width: 300px;
+    }
+    .ed-hand {
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--coral);
+      display: inline-block;
+      transform: rotate(-2deg);
+      margin-bottom: 4px;
     }
 
     /* ── FILTER CHIPS ── */
@@ -687,10 +734,11 @@
       letter-spacing: 0.03em;
     }
     .home-hero-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: 56px;
-      line-height: 0.92;
-      letter-spacing: -0.02em;
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 58px;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
       color: white;
     }
     .home-hero-title span { color: var(--coral); }
@@ -700,11 +748,20 @@
       margin: 14px 0 10px;
     }
     .home-hero-sub {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
       color: rgba(255,255,255,0.8);
-      line-height: 1.5;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .home-hero-hand {
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      display: inline-block;
+      transform: rotate(-2deg);
+      margin-top: 10px;
     }
 
     /* ── HOME MENU ── */
@@ -1037,6 +1094,7 @@
           { title: 'Arcos da Lapa', desc: 'O símbolo mais icônico do Rio histórico. Aqueduto do século XVIII que sustenta o bonde elétrico de Santa Teresa — engenharia colonial transformada em ícone cultural.', horario: 'Aberto 24h | Gratuito', maps: 'Arcos+da+Lapa+Rio+de+Janeiro', link: null },
           { title: 'Escadaria Selarón', desc: 'Escadarias cobertas de azulejos doados de mais de 60 países, obra permanente do artista Jorge Selarón. Um dos pontos turísticos mais visitados e fotografados do Brasil.', horario: 'Aberta 24h | Gratuito', maps: 'Escadaria+Selarón+Lapa+Rio', link: null },
           { title: 'Bonde de Santa Teresa', desc: 'O único bonde em operação no Brasil. Saindo dos Arcos da Lapa, sobe tortuoso pelos morros de Santa Teresa com vistas cinematográficas da cidade ao fundo.', horario: 'Seg–Sex 8h–18h | Sáb–Dom 9h–16h | R$20 ida e volta', maps: 'Bonde+Santa+Teresa+Rio', link: null },
+          { title: 'Pedra do Sal', desc: 'O berço do samba carioca — território histórico da Pequena África, onde escravizados chegavam ao Rio. Toda segunda e sexta há roda de samba ao ar livre na rua histórica. Chegue antes das 20h para conseguir lugar.', horario: 'Seg e Sex a partir das 18h | Gratuito', maps: 'Pedra+do+Sal+Rio+de+Janeiro', link: null },
           { title: 'Parque das Ruínas', desc: 'Ruínas de uma mansão histórica transformadas num espaço cultural com galeria, teatro e mirante com vista privilegiada para o Centro e a Baía de Guanabara.', horario: 'Ter–Dom 10h–18h | Gratuito', maps: 'Parque+das+Ruínas+Santa+Teresa+Rio', link: null },
           { title: 'Museu Chácara do Céu', desc: 'Museu com coleção impressionante de arte moderna em casarão histórico de Santa Teresa. Monet, Matisse, Picasso e Di Cavalcanti numa vista de tirar o fôlego.', horario: 'Qua–Seg 12h–17h | R$10', maps: 'Museu+Chácara+do+Céu+Santa+Teresa+Rio', link: null },
         ],
@@ -1055,6 +1113,7 @@
           { title: 'Suru Bafo', desc: 'Bar animado da Lapa com música variada, caipirinhas generosas e ambiente que muda de ritmo conforme a noite avança. Ponto de convergência de cariocas com boa vontade noturna.', horario: 'Qua–Sáb a partir das 19h', preco: '$', maps: 'Suru+Bafo+Lapa+Rio', link: null },
           { title: 'Carioca da Gema', desc: 'A mais famosa casa de samba ao vivo da Lapa. Shows diários de artistas consagrados e novos nomes do samba — a experiência mais autêntica e dançante da noite carioca.', horario: 'Seg–Sáb a partir das 20h | Entrada paga', preco: '$$', maps: 'Carioca+da+Gema+Lapa+Rio', link: null },
           { title: 'Jurema (Lapa)', desc: 'O mesmo boteco querido que existe em Flamengo, com uma unidade na Lapa para os que não querem sair do circuito boêmio. Chope frio, petiscos clássicos e muito barulho bom.', horario: 'Seg–Sáb 11h–23h', preco: '$', maps: 'Jurema+Bar+Lapa+Rio', link: null },
+          { title: 'Quintal da Lapa', desc: 'Bar e restaurante ao ar livre na Lapa com clima de boteco sofisticado. Petiscos criativos, boa seleção de chopes artesanais e ambiente que equilibra a energia boêmia do bairro com um toque mais despretensioso.', horario: 'Qua–Dom a partir das 17h', preco: '$$', maps: 'Quintal+da+Lapa+Rio+de+Janeiro', link: null },
           { title: 'Amarelinho', desc: 'Bar histórico da Cinelândia com mesinhas na calçada em frente à Câmara Municipal. Um dos mais tradicionais do Centro — chope gelado assistindo o fluxo da cidade passar.', horario: 'Seg–Sáb 10h–0h', preco: '$', maps: 'Amarelinho+Bar+Cinelândia+Rio', link: null },
           { title: 'Explorer Bar', desc: 'Bar de Santa Teresa com ambiente de aventureiro e decoração inusitada. Caipirinhas criativas, boa cerveja e uma varanda com vista que justifica a subida até o morro.', horario: 'Qui–Dom a partir das 18h', preco: '$$', maps: 'Explorer+Bar+Santa+Teresa+Rio', link: null },
         ],
@@ -1245,6 +1304,9 @@
           { title: 'Sult', desc: 'Restaurante contemporâneo de Botafogo com menu autoral e ingredientes sazonais. Ambiente de design cuidadoso e cozinha que impressiona tanto pelo sabor quanto pela apresentação.', horario: 'Ter–Sáb 19h–0h | Dom 12h–16h', preco: '$$$', maps: 'Sult+Restaurante+Botafogo+Rio', link: null },
           { title: 'Salva Bar', desc: 'Bar e restaurante de Botafogo com cozinha afetiva, drinques bem feitos e aquela energia descontraída de bairro que faz a noite passar rápida demais.', horario: 'Ter–Dom a partir das 18h', preco: '$$', maps: 'Salva+Bar+Botafogo+Rio', link: null },
           { title: 'Polvo Marisqueira', desc: 'Marisqueira de Botafogo especializada em frutos do mar com preparo português e criativo. Polvo grelhado, mexilhões e um vinho verde gelado que fecha o ciclo da forma mais satisfatória.', horario: 'Ter–Dom 12h–0h', preco: '$$', maps: 'Polvo+Marisqueira+Botafogo+Rio', link: null },
+          { title: 'Irajá Redux', desc: 'Uma das mesas mais comentadas de Botafogo — cozinha autoral com cortes de carne inusitados e técnica apurada. O tipo de restaurante que a cidade inteira fica sabendo pelo boca a boca.', horario: 'Ter–Dom 12h–0h', preco: '$$$', maps: 'Irajá+Redux+Botafogo+Rio', link: null },
+          { title: 'Glorioso Sushi', desc: 'Japonês moderno de Botafogo com sushis criativos e ambiente descontraído. Ótima relação qualidade-preço numa região que já tem de tudo — mas poucos fazem sushi assim.', horario: 'Ter–Dom 12h–15h e 19h–0h', preco: '$$', maps: 'Glorioso+Sushi+Botafogo+Rio', link: null },
+          { title: 'Kalango', desc: 'Bar e restaurante animado de Botafogo com cozinha nordestina urbana. Carne de sol, pirão de peixe e tapiocas criativas num ambiente que une dois mundos com muita personalidade.', horario: 'Ter–Dom a partir das 12h', preco: '$$', maps: 'Kalango+Botafogo+Rio', link: null },
         ],
         bares: [
           { title: 'Botica', desc: 'Bar criativo de Botafogo com drinques botânicos, carta de vinhos naturais e petiscos bem pensados. Ambiente intimista que atrai uma clientela curiosa e exigente.', horario: 'Ter–Dom a partir das 18h', preco: '$$$', maps: 'Botica+Bar+Botafogo+Rio', link: null },
@@ -1254,6 +1316,7 @@
           { title: 'Chopo', desc: 'Bar de chopp artesanal em Botafogo com ambiente descontraído e boa energia. Variedade de estilos no barril e petiscos que seguram bem uma noite longa.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Chopo+Bar+Botafogo+Rio', link: null },
           { title: 'Quartinho', desc: 'Bar intimista de Botafogo com carta de drinques curta e bem-executada. Ambiente que convida a ficar — e fica-se, sempre mais do que o planejado.', horario: 'Qua–Dom a partir das 18h', preco: '$$', maps: 'Quartinho+Bar+Botafogo+Rio', link: null },
           { title: 'Mãe Joana', desc: 'Bar de boteco sofisticado em Botafogo com petiscos criativos e chopp gelado. O nome é carinhoso e o ambiente também — frequentado por moradores fiéis que raramente contam pra ninguém.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Mãe+Joana+Bar+Botafogo+Rio', link: null },
+          { title: 'Brewteco', desc: 'Bar de cervejas artesanais em Botafogo com uma vista privilegiada para a Enseada. Dezenas de torneiras girando rótulos nacionais e internacionais — para quem leva chope a sério.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Brewteco+Botafogo+Rio', link: null },
         ],
         insider: [
           { title: '📍 Botafogo em resumo', desc: 'Prós: polo criativo com vinhos naturais e gastronomia de primeira. Contras: trânsito pesado — especialmente na Voluntários da Pátria no rush. Combine com: Humaitá e a orla até o Aterro.', maps: null },
@@ -1275,6 +1338,7 @@
           { title: 'Parque Lage', desc: 'Jardim tropical com escola de artes e café no palacete histórico. Visual de cinema com o Corcovado ao fundo — puro encantamento. ⚠️ O palacete está fechado para reformas no momento.', horario: 'Ter–Dom 8h–17h | Gratuito (eventos pelo Sympla)', maps: 'Parque+Lage+Rio+de+Janeiro', link: null },
           { title: 'Instituto Moreira Salles', desc: 'Centro cultural de alto nível com exposições de fotografia excepcionais. Arquitetura modernista dos anos 50 que é pura obra de arte — entrada gratuita.', horario: 'Ter–Dom 10h–18h | Gratuito', maps: 'Instituto+Moreira+Salles+Rio+de+Janeiro', link: null },
           { title: 'Lagoa Rodrigo de Freitas', desc: 'Calçadão de 7km ao redor da lagoa com ciclovia e quiosques. A melhor pedida ao entardecer de sexta-feira — quando os cariocas chegam para o happy hour.', horario: 'Aberto 24h | Gratuito', maps: 'Lagoa+Rodrigo+de+Freitas+Rio', link: null },
+          { title: 'Cristo Redentor', desc: 'Uma das 7 maravilhas do mundo moderno e o símbolo máximo do Rio. O trem do Corcovado sai do Cosme Velho — compre ingresso online com antecedência. Prefira dia de semana e chegue cedo para evitar filas e neblina.', horario: 'Diário 8h–19h | Compre em tremdocorcovado.rio', maps: 'Cristo+Redentor+Corcovado+Rio+de+Janeiro', link: 'https://www.tremdocorcovado.rio' },
         ],
         cafes: [
           { title: 'Absurda', desc: 'Cafeteria moderna com café especial de origem e bolos artesanais incríveis. O tipo de lugar que vira ritual de fim de semana para os moradores do bairro.', horario: 'Ter–Dom 9h–18h', preco: '$$', maps: 'Absurda+Café+Jardim+Botânico+Rio', link: null },
@@ -1399,6 +1463,16 @@
         { time:'21h', title:'Carioca da Gema — samba ao vivo', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Carioca+da+Gema+Lapa+Rio' },
       ]
     },
+    { id:'cristo-natureza', emoji:'⛰️', title:'Cristo & Jardim Botânico', subtitle:'Das palmeiras ao topo do mundo', duration:'6–8h', tags:['natureza','vista','cultura'], color:'#2D6A4F',
+      steps:[
+        { time:'8h30', title:'Café no Empório Jardim', bairro:'Jardim Botânico & Gávea', type:'café', maps:'Empório+Jardim+Botânico+Rio' },
+        { time:'9h30', title:'Jardim Botânico do Rio', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Jardim+Botânico+Rio+de+Janeiro' },
+        { time:'12h',  title:'Almoço na La Bicyclette', bairro:'Jardim Botânico & Gávea', type:'café', maps:'La+Bicyclette+Jardim+Botânico+Rio' },
+        { time:'14h',  title:'Trem do Corcovado → Cristo', bairro:'Cosme Velho', type:'turismo', maps:'Cristo+Redentor+Corcovado+Rio+de+Janeiro' },
+        { time:'17h',  title:'Parque Lage ao entardecer', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Parque+Lage+Rio+de+Janeiro' },
+        { time:'19h',  title:'Happy hour no Baixo Gávea', bairro:'Jardim Botânico & Gávea', type:'bar', maps:'Baixo+Gávea+Rio+de+Janeiro' },
+      ]
+    },
     { id:'copa-urca', emoji:'🌅', title:'Copacabana & Urca', subtitle:'Calçadão histórico + a joia escondida', duration:'8h', tags:['praia','história','vista'], color:'#1A6E8A',
       steps:[
         { time:'8h',    title:'Café no Farro ou Frédéric', bairro:'Copacabana', type:'café', maps:'Farro+Padaria+Copacabana+Rio' },
@@ -1442,6 +1516,7 @@
     mainView.classList.add('section-enter');
     if      (currentSection === 'home')         renderHomeSection();
     else if (currentSection === 'bairros')      renderBairrosSection();
+    else if (currentSection === 'passeios')     renderPasseiosSection();
     else if (currentSection === 'turismo')      renderCategorySection('turismo', 'Explorar', 'Turismo');
     else if (currentSection === 'restaurantes') renderCategorySection('restaurantes', 'Comer', 'Restaurantes');
     else if (currentSection === 'cafes')        renderCategorySection('cafes', 'Cafés', 'Cafés');
@@ -1479,6 +1554,7 @@
     const turismoCount = countItems('turismo');
     const menu = [
       { section:'bairros',      icon:'🗺️',  bg:'#EDE8F5', label:'O que fazer em cada bairro', count:`${neighborhoods.length} bairros` },
+      { section:'passeios',     icon:'☀️',  bg:'#FEF3E2', label:'Passeios do Dia',   count:`${ITINERARIES.length} roteiros` },
       { section:'turismo',      icon:'📸',  bg:'#E8F4E8', label:'Turismo',           count:`${turismoCount} lugares` },
       { section:'restaurantes', icon:'🍽️',  bg:'#FDE8E3', label:'Restaurantes',     count:`${restCount} opções` },
       { section:'cafes',        icon:'☕',  bg:'#F2EBE0', label:'Cafés',             count:`${cafeCount} lugares` },
@@ -1493,9 +1569,10 @@
         >
         <div class="home-hero-content">
           <span class="home-hero-eyebrow">guia dos amigos</span>
-          <h1 class="home-hero-title">Rio de<br><span>Janeiro</span></h1>
+          <h1 class="home-hero-title">O meu<br>Rio de<br>Janeiro.</h1>
           <div class="home-hero-rule"></div>
-          <p class="home-hero-sub">Um guia feito por quem mora lá.</p>
+          <p class="home-hero-sub">Fiz esse guia porque cansei de repetir as mesmas dicas no WhatsApp pra vocês. Aqui só tem os lugares que eu frequento, aprovo e garanto — especialmente onde comer.</p>
+          <span class="home-hero-hand">salva no favoritos</span>
         </div>
       </div>
 
@@ -1571,10 +1648,20 @@
     });
     const filtered = activeFilter ? allItems.filter(it => it.bairroId === activeFilter) : allItems;
 
+    const ED = {
+      restaurantes: { title:'Onde eu\nrealmente\ncomo.', sub:'Vocês sabem que eu levo comida muito a sério. A regra aqui é clara: come-se absurdamente bem, mas zero frescura. Não me façam colocar uma calça jeans.', hand:'vai de chinelo mesmo' },
+      bares:        { title:'Eu vou\né pela\ncomida.', sub:'Vocês sabem que eu não sou de beber muito. Mas se o lugar tiver uma comidinha de primeira, um petisco que vale a pena e uns drinks bem feitos pra acompanhar, a gente senta e fica.', hand:'foco na porção' },
+      cafes:        { title:'Açúcar,\ncarboidrato\ne cafeína.', sub:'Isso aqui não é sobre tomar um expresso correndo no balcão. Entram aqui as padarias, as confeitarias e os lugares pra sentar, pedir um doce incrível, um pão bom e enrolar a tarde toda.', hand:'pede o bolo inteiro' },
+      turismo:      { title:'O que\nvale o\npasseio.', sub:null, hand:null },
+    };
+    const ed = ED[tabKey] || {};
     mainView.innerHTML = `
-      <div class="page-header">
-        <span class="page-eyebrow">${eyebrow}</span>
-        <h1 class="page-title">${title}</h1>
+      <div class="ed-header">
+        <span class="ed-eyebrow">${eyebrow}</span>
+        <h1 class="ed-title">${ed.title || title}</h1>
+        <div class="ed-rule"></div>
+        ${ed.sub ? `<p class="ed-sub">${ed.sub}</p>` : ''}
+        ${ed.hand ? `<span class="ed-hand">${ed.hand}</span>` : ''}
       </div>
       <div class="filter-row">
         <button class="chip${!activeFilter?' active':''}" onclick="setFilter(null,'${tabKey}','${eyebrow}','${title}')">Todos</button>
