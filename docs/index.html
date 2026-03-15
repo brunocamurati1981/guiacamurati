@@ -31,10 +31,11 @@
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     * { -webkit-tap-highlight-color: transparent; }
-    html { height: 100%; }
+    html { height: 100%; overflow: hidden; }
 
     body {
       height: 100%;
+      overflow: hidden;
       font-family: 'Lora', serif;
       background: #EDE8DF;
       display: flex;
@@ -50,6 +51,7 @@
       min-height: 100dvh;
       background: var(--bg);
       overflow: hidden;
+      clip-path: inset(0);
       box-shadow: var(--shadow-l);
     }
 
@@ -1124,10 +1126,7 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       height: 52px;
-      background: rgba(253,251,247,0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      background: var(--coral);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1144,7 +1143,7 @@
       border: none;
       padding: 8px 10px;
       cursor: pointer;
-      color: var(--ink);
+      color: #fff;
       font-family: 'Inter', sans-serif;
       font-size: 13px;
       font-weight: 500;
@@ -1156,8 +1155,8 @@
       transform: translateX(-50%);
       font-family: 'Abril Fatface', serif;
       font-size: 15px;
-      color: var(--ink);
-      letter-spacing: -0.01em;
+      color: #fff;
+      letter-spacing: 0.01em;
       pointer-events: none;
     }
     #topBarHelpWrap { position: relative; }
@@ -1169,12 +1168,12 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--ink-2);
+      color: rgba(255,255,255,0.85);
       border-radius: 50%;
       -webkit-tap-highlight-color: transparent;
       transition: background 0.15s;
     }
-    #topBarHelp:active { background: var(--surface); }
+    #topBarHelp:active { background: rgba(0,0,0,0.1); }
     #helpBalloon {
       position: absolute;
       top: 44px;
