@@ -1115,6 +1115,48 @@
       animation: bob 2s ease-in-out infinite;
     }
     @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── PARALLAX SMALL (roteiros) ── */
+    .parallax-section-sm { height: 58dvh; cursor: pointer; }
+    .parallax-section-sm:active { opacity: 0.92; }
+    .parallax-overlay-strong {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.08) 100%);
+    }
+    .parallax-content-sm {
+      position: relative;
+      z-index: 2;
+      padding: 28px 24px 36px;
+      color: #fff;
+      width: 100%;
+    }
+    .parallax-title-sm {
+      font-family: 'Abril Fatface', serif;
+      font-size: 36px;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .parallax-sub-sm {
+      font-family: 'Lora', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      max-width: 320px;
+    }
+    .parallax-cta-sm {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -1559,7 +1601,7 @@
 
   /* ── ITINERARIES ── */
   const ITINERARIES = [
-    { id:'copa-ipanema-leblon', tipo:'sequencia', emoji:'🏖️', title:'Copa → Ipanema → Leblon', subtitle:'Copa → Arpoador → Ipanema → Leblon — e o melhor pôr do sol do mundo', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#1A6E8A',
+    { id:'copa-ipanema-leblon', bg:'https://novabrasilfm.com.br/app/uploads/2024/04/naom_65f987076c86f-1-768x432.jpeg', tipo:'sequencia', emoji:'🏖️', title:'Copa → Ipanema → Leblon', subtitle:'Copa → Arpoador → Ipanema → Leblon — e o melhor pôr do sol do mundo', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#1A6E8A',
       steps:[
         { time:'8h30',  title:'Café no Empório Jardim ou So_lo Café', bairro:'Ipanema', dica:'Abasteça bem — dia longo pela frente.', lugares:['Empório Jardim','So_lo Café'], maps:'Empório+Jardim+Ipanema+Rio' },
         { time:'10h',   title:'Praia — Posto 9 (Ipanema) ou Arpoador', bairro:'Ipanema', dica:'Arpoador tem ondas melhores. Posto 9 tem a galera mais interessante.', lugares:['Posto 9','Arpoador'], maps:'Posto+9+Praia+Ipanema+Rio' },
@@ -1569,15 +1611,15 @@
         { time:'20h',   title:'Jantar no Ferro e Farinha (Leblon)', bairro:'Leblon', dica:'A pizza mais querida do Rio. Fila vale.', lugares:['Ferro e Farinha'], maps:'Ferro+e+Farinha+Leblon+Rio' },
       ]
     },
-    { id:'urca-morro-da-babilonia', tipo:'opcoes', emoji:'🏞️', title:'Urca & Morro da Babilônia', subtitle:'Praia Vermelha, Pão de Açúcar, Mureta e trilha — 4 versões do mesmo roteiro', duration:'8–10h', tags:['natureza','vista','praia'], color:'#2D6A4F',
+    { id:'urca-morro-da-urca', bg:'https://diariodorio.com/wp-content/uploads/2017/07/Urca-atualmente.jpg', tipo:'opcoes', emoji:'🏞️', title:'Urca & Morro da Urca', subtitle:'Praia Vermelha, Pão de Açúcar, Mureta e trilha — 4 versões do mesmo roteiro', duration:'8–10h', tags:['natureza','vista','praia'], color:'#2D6A4F',
       opcoes:[
         { nome:'Versão relaxo — Praia Vermelha + Mureta', desc:'Praia Vermelha pela manhã (pequena, tranquila, linda). Almoço no Canal 6 ou Bar Urca. Cerveja na mureta ao entardecer. Perfeito.', dica:'O ritual correto: praia → almoço → mureta. Nessa ordem.' },
         { nome:'Versão vista — Pão de Açúcar', desc:'Compre ingresso em bondinho.com.br com antecedência. Bondão 1 vai ao Morro da Urca (vista já incrível). Bondão 2 vai ao topo. Ao pôr do sol, incomparável.', dica:'Sessão do entardecer esgota rápido — compre com dias de antecedência.' },
         { nome:'Versão trilha — Pista Cláudio Coutinho', desc:'Trilha gratuita de 1,2km beirando o mar na base do Morro da Urca. Fauna, flora nativa e vista para a Baía. Uma das melhores relações esforço-recompensa do Rio.', dica:'Chegar cedo (antes das 9h) para o frescor da manhã.' },
-        { nome:'Versão aventura — Morro da Babilônia', desc:'Trilha de 40min com vista 360° do Rio. Menos turistas, mais esforço, muito mais recompensa. Leve água e calçado adequado.', dica:'Suba com guia ou em grupo — pergunte localmente.' },
+        { nome:'Versão aventura — Morro da Urca', desc:'Trilha de 40min com vista 360° do Rio. Menos turistas, mais esforço, muito mais recompensa. Leve água e calçado adequado.', dica:'Suba com guia ou em grupo — pergunte localmente.' },
       ]
     },
-    { id:'gloria-lapa-cinelandia', tipo:'sequencia', emoji:'🏛️', title:'Glória → Lapa → Cinelândia', subtitle:'Feira da Glória · Lapa · Centro · Santa Teresa — ótimo para dias nublados', duration:'8–10h', tags:['cultura','história','boemia'], color:'#7B5E3A',
+    { id:'gloria-lapa-cinelandia', bg:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5b/0c/15/caption.jpg?w=800&h=800&s=1', tipo:'sequencia', emoji:'🏛️', title:'Glória → Lapa → Cinelândia', subtitle:'Feira da Glória · Lapa · Centro · Santa Teresa — ótimo para dias nublados', duration:'8–10h', tags:['cultura','história','boemia'], color:'#7B5E3A',
       steps:[
         { time:'9h',    title:'Feira da Glória (dom) ou Brava Doceira', bairro:'Glória', dica:'Domingo de manhã na Feira da Glória é o ritual do bairro. Fora de domingo, a Brava Doceira abre às 10h.', lugares:['Feira da Glória','Brava Doceira'], maps:'Feira+da+Glória+Rio+de+Janeiro' },
         { time:'10h30', title:'Escadaria Selarón + Arcos da Lapa', bairro:'Lapa', dica:'A Selarón é linda mas lotada. Chegue cedo para as fotos sem gente.', lugares:['Escadaria Selarón','Arcos da Lapa'], maps:'Escadaria+Selarón+Lapa+Rio' },
@@ -1587,7 +1629,7 @@
         { time:'18h',   title:'Amarelinho ou Vilarino na Cinelândia', bairro:'Centro', dica:'Mesa na calçada no Amarelinho com vista para a Câmara Municipal. Clássico.', lugares:['Amarelinho','Vilarino'], maps:'Amarelinho+Bar+Cinelândia+Rio' },
       ]
     },
-    { id:'lagoa-e-jardim-botanico', tipo:'sequencia', emoji:'🌳', title:'Lagoa & Jardim Botânico', subtitle:'Jardim Botânico, Lagoa (7,5km de ciclovia) e Cristo', duration:'8h', tags:['natureza','vista','cultura'], color:'#3D7A3A',
+    { id:'lagoa-e-jardim-botanico', bg:'https://fabricadesites.digital/arquivos/fs/2023/08/ed-perspectives-media.jpg', tipo:'sequencia', emoji:'🌳', title:'Lagoa & Jardim Botânico', subtitle:'Jardim Botânico, Lagoa (7,5km de ciclovia) e Cristo', duration:'8h', tags:['natureza','vista','cultura'], color:'#3D7A3A',
       steps:[
         { time:'8h30',  title:'Café no Empório Jardim ou La Bicyclette', bairro:'Jardim Botânico', dica:'La Bicyclette tem o melhor café da manhã do bairro — fila vale.', lugares:['Empório Jardim','La Bicyclette'], maps:'La+Bicyclette+Jardim+Botânico+Rio' },
         { time:'9h30',  title:'Jardim Botânico do Rio', bairro:'Jardim Botânico', dica:'Chegue cedo — sombra pela manhã e menos gente. As palmeiras imperiais são incomparáveis.', lugares:['Jardim Botânico'], maps:'Jardim+Botânico+Rio+de+Janeiro' },
@@ -1597,7 +1639,7 @@
         { time:'19h',   title:'Jantar no Katz Su ou no Baixo Gávea', bairro:'Gávea', dica:'O Baixo Gávea ferve às sextas — bares e restaurantes ao redor da Praça Santos Dumont.', lugares:['Katz Su'], maps:'Katz+Su+Jardim+Botânico+Rio' },
       ]
     },
-    { id:'noite-botafogo', tipo:'sequencia', emoji:'🍺', title:'Noite em Botafogo', subtitle:'Rua Arnaldo Quintela e o Rio que não dorme', duration:'4–5h', tags:['boemia','gastronomia','noite'], color:'#2C1654',
+    { id:'noite-botafogo', bg:'https://s3.sa-east-1.amazonaws.com/site-canopus/Tudo_sobre_a_charmosa_Rua_Arnaldo_Quintela_em_Botafogo_c60bcb404e.jpg', tipo:'sequencia', emoji:'🍺', title:'Noite em Botafogo', subtitle:'Rua Arnaldo Quintela e o Rio que não dorme', duration:'4–5h', tags:['boemia','gastronomia','noite'], color:'#2C1654',
       steps:[
         { time:'18h',   title:'Aperitivo no Botica ou Chopo', bairro:'Botafogo', dica:'Chopo tem os melhores chopes artesanais do bairro.', lugares:['Botica','Chopo'], maps:'Botica+Bar+Botafogo+Rio' },
         { time:'19h',   title:'Treme Treme ou Mãe Joana (Arnaldo Quintela)', bairro:'Botafogo', dica:'Rua Arnaldo Quintela foi eleita Top 10 Time Out 2024. Chegue às 20h e vá escolhendo.', lugares:['Treme Treme','Mãe Joana'], maps:'Treme+Treme+Bar+Botafogo+Rio' },
@@ -1606,14 +1648,14 @@
         { time:'0h',    title:'Carioca da Gema — samba ao vivo', bairro:'Lapa', dica:'A mais famosa casa de samba ao vivo da Lapa. Shows diários de artistas consagrados.', lugares:['Carioca da Gema'], maps:'Carioca+da+Gema+Lapa+Rio' },
       ]
     },
-    { id:'barra-ilha-gigoia', tipo:'opcoes', emoji:'🏝️', title:'Barra & Ilha da Gigoia', subtitle:'Metrô até Jardim Oceânico — dois roteiros, duas saídas', duration:'1 dia', tags:['praia','ilha','metrô'], color:'#2B5FBF',
+    { id:'barra-ilha-gigoia', bg:'https://vejario.abril.com.br/wp-content/uploads/2024/06/image-2.jpg?quality=70&strip=info&resize=1080,565&crop=1', tipo:'opcoes', emoji:'🏝️', title:'Barra & Ilha da Gigoia', subtitle:'Metrô até Jardim Oceânico — dois roteiros, duas saídas', duration:'1 dia', tags:['praia','ilha','metrô'], color:'#2B5FBF',
       opcoes:[
         { nome:'Saída Lagoa → Ilha da Gigoia', desc:'Barqueiro leva até a ilha por ~R$6. Café da Poesia, Ocya, Pantanal Carioca (barco com jacarés e capivaras).', dica:'Confirme horário do barqueiro antes de ir — funciona melhor nos fins de semana.' },
         { nome:'Saída Mar → Praia da Barra', desc:'Praia enorme, quiosques, Praia do Pepê, o Píer. Rua Olegário Maciel: .Org Bistrô e Ferro e Farinha.', dica:'Barra é enorme — pegue Uber para se locomover.' },
         { nome:'Mais longe ainda', desc:'Recreio, Reserva, Pontal, Prainha, Grumari (deserta), Abricó (nudismo). Para tudo isso: Uber.', dica:'Para Grumari e Prainha: leve comida e água — estrutura mínima.' },
       ]
     },
-    { id:'niteroi-dia', tipo:'sequencia', emoji:'⛴️', title:'Niterói', subtitle:'Barca da Praça XV — ver o Rio de outro ângulo', duration:'1 dia', tags:['arquitetura','praia','gastronomia'], color:'#1A6E8A',
+    { id:'niteroi-dia', bg:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/a7/50/b8/museu-de-arte-contemporanea.jpg?w=900&h=500&s=1', tipo:'sequencia', emoji:'⛴️', title:'Niterói', subtitle:'Barca da Praça XV — ver o Rio de outro ângulo', duration:'1 dia', tags:['arquitetura','praia','gastronomia'], color:'#1A6E8A',
       steps:[
         { time:'9h',    title:'Barca da Praça XV', bairro:'Centro', dica:'A travessia de 20min pela Baía já é parte do programa — vista única do Rio.', lugares:['Praça XV'], maps:'Barca+Praça+XV+Niterói' },
         { time:'10h',   title:'MAC Niterói — Oscar Niemeyer', bairro:'Niterói', dica:'O disco voador branco com vista 360° do Rio. Vale tanto pela arquitetura quanto pela vista.', lugares:['MAC Niterói'], maps:'MAC+Museu+Arte+Contemporânea+Niterói' },
@@ -1622,7 +1664,7 @@
         { time:'20h',   title:'Amana — frutos do mar', bairro:'Niterói', dica:'Chef Leo Guida, só 20 lugares — reserva obrigatória. Um dos restaurantes mais especiais do Rio.', alerta:'Reserve com semanas de antecedência.', lugares:['Amana Restaurante'], maps:'Amana+Restaurante+Niterói' },
       ]
     },
-    { id:'zona-norte', tipo:'sequencia', emoji:'🏟️', title:'Zona Norte', subtitle:'O Rio que os turistas não veem', duration:'1 dia', tags:['autêntico','futebol','cultura'], color:'#8B2500',
+    { id:'zona-norte', bg:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNuir6yUfCgzV2dMk1ivvEIl_ilyOsiy_AQw&s', tipo:'sequencia', emoji:'🏟️', title:'Zona Norte', subtitle:'O Rio que os turistas não veem', duration:'1 dia', tags:['autêntico','futebol','cultura'], color:'#8B2500',
       steps:[
         { time:'11h',   title:'Bar do Bode Cheiroso (Tijuca)', bairro:'Tijuca', dica:'Bar da família do Camu — boteco tradicional com toda a alma da Zona Norte.', lugares:['Bar do Bode Cheiroso'], maps:'Bar+do+Bode+Cheiroso+Tijuca' },
         { time:'14h',   title:'Maracanã — tour ou jogo', bairro:'Maracanã', dica:'Sentir o Maracanã num dia de jogo é uma experiência inesquecível. O tour também vale.', lugares:['Maracanã'], maps:'Maracanã+Rio+de+Janeiro' },
@@ -1630,7 +1672,7 @@
         { time:'18h',   title:'Feira de São Cristóvão', bairro:'São Cristóvão', dica:'Baião de dois e forró ao vivo — o maior centro cultural nordestino fora do Nordeste.', lugares:['Feira de São Cristóvão'], maps:'Feira+São+Cristóvão+Rio' },
       ]
     },
-    { id:'ruas-cool', tipo:'rua-cool', emoji:'🚶', title:'Ruas Cool do Rio', subtitle:'5 ruas com personalidade própria — cada uma merece uma visita', duration:'1 noite cada', tags:['bares','gastronomia','noite','passeio'], color:'#C44B1E',
+    { id:'ruas-cool', bg:'https://www.melhoresdestinos.com.br/wp-content/uploads/2025/11/rua-do-senado-rua-mais-cool-do-mundo-2025-capa.jpg', tipo:'rua-cool', emoji:'🚶', title:'Ruas Cool do Rio', subtitle:'5 ruas com personalidade própria — cada uma merece uma visita', duration:'1 noite cada', tags:['bares','gastronomia','noite','passeio'], color:'#C44B1E',
       ruas:[
         { nome:'Rua Arnaldo Quintela — Botafogo', desc:'Top 10 Time Out 2024. O epicentro do fervo carioca contemporâneo. Chegue por volta das 20h e vá escolhendo na hora.', dica:'Destaques: Ferro e Farinha, Treme Treme, Bar Botica, Marchezinho, Glorioso Sushi.' },
         { nome:'Rua do Senado — Centro', desc:'A rua mais cool do mundo em 2025 pela Time Out. Entre a Lapa e a Praça Tiradentes — história centenária com a cena mais vibrante do Centro.', dica:'Qui–Sáb à noite. Destilaria Maravilha, Armazém do Senado (samba aos sábados), Lilia (Michelin).' },
@@ -1639,7 +1681,7 @@
         { nome:'Quadrilátero de Ipanema', desc:'Ruas Aníbal de Mendonça, Barão da Torre, Maria Quitéria e Visconde de Pirajá ao redor da Praça Nossa Senhora da Paz. Voltou a brilhar desde 2022.', dica:'Zazá Bistrô, Maria e o Boi, Babbo Osteria, Jappa da Quitanda, Spicy Fish, Boteco Belmonte.' },
       ]
     },
-    { id:'passeios-alternativos', tipo:'passeio-alternativo', emoji:'✨', title:'Passeios Alternativos', subtitle:'Para quem tem tempo extra ou quer algo fora do circuito', duration:'variável', tags:['especial','único','fora do roteiro'], color:'#5A4A9A',
+    { id:'passeios-alternativos', bg:'https://s2-oglobo.glbimg.com/DQJw7GJZ_aa7EEBM0zC_f-STfyA=/0x232:3464x2616/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/0/y/oez8DPSr6V6CnOh3FJXg/103542369-rs-rio-de-janeiro-rj-30-06-2023-a-marinha-r.jpg', tipo:'passeio-alternativo', emoji:'✨', title:'Passeios Alternativos', subtitle:'Para quem tem tempo extra ou quer algo fora do circuito', duration:'variável', tags:['especial','único','fora do roteiro'], color:'#5A4A9A',
       passeios:[
         { nome:'Passeio de Barco', desc:'Um dos passeios mais especiais do Rio — ver a cidade do mar é único. Busque no Instagram barcos disponíveis. Inclua mergulho se possível.', dica:'Alguns aceitam passageiros avulsos, outros alugam o barco completo. Melhor em dias de sol.' },
         { nome:'Ilha Fiscal', desc:'Palácio neogótico verde-água no meio da Baía de Guanabara. Foi palco do último baile do Império antes da Proclamação da República.', dica:'Visita guiada com saída de barco do Arsenal da Marinha — compre ingresso com antecedência. Combina com o roteiro do Centro.' },
@@ -1653,7 +1695,7 @@
   let activeFilter   = null;
   let detailType     = null;
   let activeId       = null;
-  let activeTab      = 'turismo';
+  let activeTab      = 'insider';
 
   /* ── Elements ── */
   const mainView  = document.getElementById('mainView');
@@ -1694,7 +1736,7 @@
     detailType = type;
     if (type === 'neighborhood') {
       activeId  = id;
-      activeTab = 'turismo';
+      activeTab = 'insider';
       renderNeighborhoodDetail(id);
     } else if (type === 'itinerary') {
       renderItineraryDetail(id);
@@ -1787,28 +1829,19 @@
 
   /* ── RENDER PASSEIOS SECTION ── */
   function renderPasseiosSection() {
-    mainView.innerHTML = `
-      <div class="page-header">
-        <span class="page-eyebrow">roteiros</span>
-        <h1 class="page-title">Passeios<br><span style="color:var(--coral)">do Dia</span></h1>
+    mainView.innerHTML = ITINERARIES.map((it, i) => `
+      <div class="parallax-section parallax-section-sm" style="z-index:${ITINERARIES.length - i + 1};" onclick="openDetail('itinerary','${it.id}')">
+        <div class="parallax-bg" style="background-image:url('${it.bg}');"></div>
+        <div class="parallax-overlay parallax-overlay-strong"></div>
+        <div class="parallax-content parallax-content-sm">
+          <div class="it-tags" style="margin-bottom:10px;">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}<span class="it-tag">⏱ ${it.duration}</span></div>
+          <h2 class="parallax-title-sm">${it.title}</h2>
+          <p class="parallax-sub-sm">${it.subtitle}</p>
+          <span class="parallax-cta-sm">Ver roteiro →</span>
+        </div>
       </div>
-      <div class="it-cards" style="padding: 16px 20px 80px; display:flex; flex-direction:column; gap:14px;">
-        ${ITINERARIES.map((it, i) => `
-          <div class="it-card fade-up" style="animation-delay:${i*0.07}s;" onclick="openDetail('itinerary','${it.id}')">
-            <div class="it-header" style="background:${it.color};">
-              <span class="it-emoji">${it.emoji}</span>
-              <div class="it-title">${it.title}</div>
-              <div class="it-subtitle">${it.subtitle}</div>
-              <div class="it-tags">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}</div>
-            </div>
-            <div class="it-footer">
-              ${(it.steps||it.opcoes||it.ruas||it.passeios||[]).slice(0,3).map((s,si) => `<span class="it-pill${si===0?' first':''}">${s.time ? s.time+' ' : ''}${(s.title||s.nome||'').split(' ').slice(0,3).join(' ')}</span>`).join('')}
-              <span class="it-duration">⏱ ${it.duration}</span>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
+    `).join('') + `<div style="height:68px;"></div>`;
+    requestAnimationFrame(() => initParallax());
   }
 
   /* ── RENDER EXPLORAR SECTION ── */
@@ -1849,20 +1882,25 @@
   /* ── RENDER BAIRROS SECTION ── */
   function renderBairrosSection() {
     mainView.innerHTML = `
-      <div class="masthead">
-        <span class="masthead-eyebrow">explorar</span>
-        <h1 class="masthead-title">Bairros<br><span>do Rio</span></h1>
-        <div class="masthead-rule"></div>
-        <p class="masthead-sub">Oito bairros, um guia feito<br>por quem mora lá.</p>
+      <div class="ed-header">
+        <span class="ed-eyebrow">explorar</span>
+        <h1 class="ed-title">Bairros\ndo Rio.</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Oito bairros, um guia feito por quem mora lá.</p>
       </div>
-      <div class="section-row">
-        <span class="section-hand">escolha um bairro ↓</span>
-        <span class="section-count">0${neighborhoods.length} destinos</span>
+      <div class="x-list">
+        ${neighborhoods.map((n, i) => `
+          <div class="x-card fade-up" style="animation-delay:${i*0.05}s;cursor:pointer;" onclick="openDetail('neighborhood','${n.id}')">
+            <div class="x-card-top">
+              <h4>${n.name.replace('\n',' ')}</h4>
+              <span class="bairro-badge" style="pointer-events:none;">${String(i+1).padStart(2,'0')}</span>
+            </div>
+            <p>${n.subtitle}</p>
+            <p class="tip-note">${ANNOTATIONS[i] || ''}</p>
+          </div>
+        `).join('')}
       </div>
-      <div class="section-divider"><span>✦</span></div>
-      <div id="cardsList" class="cards-list"></div>
     `;
-    renderBairrosCards();
   }
 
   /* ── RENDER CATEGORY SECTION (restaurantes / cafes / bares) ── */
