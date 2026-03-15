@@ -1040,10 +1040,12 @@
       overflow: hidden;
       display: flex;
       align-items: flex-end;
+      margin: 0;
+      padding: 0;
     }
     .parallax-bg {
       position: absolute;
-      inset: -30% 0;
+      inset: -40% 0;
       background-size: cover;
       background-position: center;
       will-change: transform;
@@ -1204,7 +1206,7 @@
     }
 
     /* ── PARALLAX SMALL (roteiros) ── */
-    .parallax-section-sm { height: 58dvh; cursor: pointer; }
+    .parallax-section-sm { height: 58dvh; cursor: pointer; display: block; margin: 0; padding: 0; }
     .parallax-section-sm:active { opacity: 0.92; }
     .parallax-overlay-strong {
       position: absolute;
@@ -1253,7 +1255,7 @@
   <div id="topBar">
     <button id="topBarBack" onclick="navigate('home')" aria-label="Voltar ao início">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      <span>Início</span>
+      <span>Voltar</span>
     </button>
     <span id="topBarTitle">Guia do Rio</span>
     <div id="topBarHelpWrap">
@@ -1960,18 +1962,9 @@
 
   /* ── RENDER PASSEIOS SECTION ── */
   function renderPasseiosSection() {
-    mainView.innerHTML = ITINERARIES.map((it, i) => `
-      <div class="parallax-section parallax-section-sm" style="z-index:${ITINERARIES.length - i + 1};" onclick="openDetail('itinerary','${it.id}')">
-        <div class="parallax-bg" style="background-image:url('${it.bg}');"></div>
-        <div class="parallax-overlay parallax-overlay-strong"></div>
-        <div class="parallax-content parallax-content-sm">
-          <div class="it-tags" style="margin-bottom:10px;">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}<span class="it-tag">⏱ ${it.duration}</span></div>
-          <h2 class="parallax-title-sm">${it.title}</h2>
-          <p class="parallax-sub-sm">${it.subtitle}</p>
-          <span class="parallax-cta-sm">Ver roteiro →</span>
-        </div>
-      </div>
-    `).join('') + `<div style="height:68px;"></div>`;
+    mainView.innerHTML = `<div style="display:flex;flex-direction:column;font-size:0;">` +
+      ITINERARIES.map((it, i) => `<div class="parallax-section parallax-section-sm" onclick="openDetail('itinerary','${it.id}')"><div class="parallax-bg" style="background-image:url('${it.bg}');"></div><div class="parallax-overlay parallax-overlay-strong"></div><div class="parallax-content parallax-content-sm"><div class="it-tags" style="margin-bottom:10px;">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}<span class="it-tag">⏱ ${it.duration}</span></div><h2 class="parallax-title-sm">${it.title}</h2><p class="parallax-sub-sm">${it.subtitle}</p><span class="parallax-cta-sm">Ver roteiro →</span></div></div>`).join('') +
+      `</div><div style="height:68px;"></div>`;
     requestAnimationFrame(() => initParallax());
   }
 
@@ -2170,16 +2163,18 @@
     }
 
     detailView.innerHTML = `
-      <div class="it-detail-hero" style="background:${it.color};">
-        <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <div class="ed-header" style="position:relative;">
+        <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar" style="position:absolute;top:16px;left:4px;background:none;border:none;display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;padding:6px 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
         </button>
-        <span style="font-size:40px;display:block;margin-bottom:10px;position:relative;z-index:1;">${it.emoji}</span>
-        <h1 style="font-family:'Abril Fatface',serif;font-size:36px;line-height:1;letter-spacing:-0.02em;position:relative;z-index:1;">${it.title}</h1>
-        <p style="font-family:'Lora',serif;font-size:13px;font-style:italic;opacity:0.85;margin-top:6px;position:relative;z-index:1;">${it.subtitle}</p>
-        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;position:relative;z-index:1;">
-          ${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}
-          <span class="it-tag">⏱ ${it.duration}</span>
+        <span class="ed-eyebrow" style="margin-top:8px;">${it.tags[0] || 'roteiro'}</span>
+        <h1 class="ed-title">${it.title}</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">${it.subtitle}</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;padding-bottom:4px;">
+          ${it.tags.map(t=>`<span style="font-family:'Lora',serif;font-size:11px;font-style:italic;color:var(--ink-3);background:var(--surface);border-radius:8px;padding:3px 9px;">${t}</span>`).join('')}
+          <span style="font-family:'Lora',serif;font-size:11px;font-style:italic;color:var(--ink-3);background:var(--surface);border-radius:8px;padding:3px 9px;">⏱ ${it.duration}</span>
         </div>
       </div>
       ${bodyHTML}
