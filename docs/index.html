@@ -2173,26 +2173,30 @@
   }
 
   /* ── RENDER CAMU INDICA SECTION ── */
-  function renderCamuIndicaSection() {
-    const allItems = [];
+  let camuActiveTab = 'todos';
+
+  function camuItemsForTab(tab) {
+    const keys = tab === 'todos' ? ['turismo','cafes','restaurantes','bares'] : [tab];
+    const items = [];
     neighborhoods.forEach(n => {
-      ['turismo','cafes','restaurantes','bares'].forEach(tabKey => {
-        (n.tabs[tabKey] || []).forEach(item => {
-          if (item.camu_indica) allItems.push({ ...item, bairroName: n.name, bairroId: n.id });
+      keys.forEach(k => {
+        (n.tabs[k] || []).forEach(item => {
+          if (item.camu_indica) items.push({ ...item, bairroName: n.name, bairroId: n.id });
         });
       });
     });
-    mainView.innerHTML = `
-      <div class="ed-header">
-        <span class="ed-eyebrow">curadoria pessoal</span>
-        <h1 class="ed-title">Camu\nIndica.</h1>
-        <div class="ed-rule"></div>
-        <p class="ed-sub">Os lugares que eu garanto com o meu nome. Se tiver dúvida entre dois, vai no que tem o badge.</p>
-      </div>
-      <div class="x-list">
-        ${allItems.length === 0
-          ? `<p style="font-family:'Lora',serif;font-style:italic;color:var(--ink-3);padding:20px 0;">Em breve — os meus favoritos pessoais aparecerão aqui.</p>`
-          : allItems.map((item, i) => `
+    return items;
+  }
+
+  function renderCamuItems(tab) {
+    const items = camuItemsForTab(tab);
+    const content = document.getElementById('camuContent');
+    if (!content) return;
+    content.classList.add('fading');
+    setTimeout(() => {
+      content.innerHTML = items.length === 0
+        ? `<p style="font-family:'Lora',serif;font-style:italic;color:var(--ink-3);padding:20px 0;">Nenhum item nesta categoria ainda.</p>`
+        : items.map((item, i) => `
             <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
               <div class="x-card-top">
                 <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
@@ -2209,7 +2213,63 @@
               ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
               ${item.maps ? `<div class="card-actions"><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${item.maps}" target="_blank" rel="noopener noreferrer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ver no Mapa</a></div>` : ''}
             </div>
-          `).join('')}
+          `).join('');
+      content.classList.remove('fading');
+    }, 185);
+  }
+
+  function switchCamuTab(tab) {
+    if (tab === camuActiveTab) return;
+    camuActiveTab = tab;
+    document.querySelectorAll('.camu-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+    const active = document.querySelector('.camu-tab-btn.active');
+    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    renderCamuItems(tab);
+  }
+
+  function renderCamuIndicaSection() {
+    camuActiveTab = 'todos';
+    const TABS = [
+      { key: 'todos',        label: 'Todos' },
+      { key: 'turismo',      label: 'Turismo' },
+      { key: 'cafes',        label: 'Cafés' },
+      { key: 'restaurantes', label: 'Restaurantes' },
+      { key: 'bares',        label: 'Bares' },
+    ];
+    const allItems = camuItemsForTab('todos');
+    mainView.innerHTML = `
+      <div class="ed-header">
+        <span class="ed-eyebrow">curadoria pessoal</span>
+        <h1 class="ed-title">Camu\nIndica.</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Os lugares que eu garanto com o meu nome.</p>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-scroll no-scroll">
+          ${TABS.map(t => `<button class="tab-btn camu-tab-btn${t.key === 'todos' ? ' active' : ''}" data-tab="${t.key}" onclick="switchCamuTab('${t.key}')">${t.label}</button>`).join('')}
+        </div>
+      </div>
+      <div class="x-list" id="camuContent">
+        ${allItems.map((item, i) => `
+          <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
+            <div class="x-card-top">
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+                <h4>${item.title}</h4>
+                <span class="camu-badge">✦ camu</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
+                <span class="bairro-badge" onclick="event.stopPropagation();openDetail('neighborhood','${item.bairroId}')">${item.bairroName}</span>
+              </div>
+            </div>
+            <p>${item.desc}</p>
+            ${item.dica ? `<p class="tip-note">${item.dica}</p>` : ''}
+            ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
+            ${item.maps ? `<div class="card-actions"><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${item.maps}" target="_blank" rel="noopener noreferrer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ver no Mapa</a></div>` : ''}
+          </div>
+        `).join('')}
       </div>
     `;
   }
