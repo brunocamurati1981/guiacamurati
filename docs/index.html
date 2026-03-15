@@ -1253,7 +1253,7 @@
 
   <!-- ══════════════ TOP BAR (scroll-up reveal) ══════════════ -->
   <div id="topBar">
-    <button id="topBarBack" onclick="navigate('home')" aria-label="Voltar ao início">
+    <button id="topBarBack" onclick="goBack()" aria-label="Voltar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       <span>Voltar</span>
     </button>
@@ -1813,6 +1813,15 @@
   const topBar = document.getElementById('topBar');
   const helpBalloon = document.getElementById('helpBalloon');
   let lastScrollTop = 0;
+  let navHistory = [];
+
+  function updateTopBar() {
+    if (currentSection === 'home' && !detailView.classList.contains('open')) {
+      topBar.classList.remove('visible');
+    } else if (detailView.classList.contains('open')) {
+      topBar.classList.add('visible');
+    }
+  }
 
   mainView.addEventListener('scroll', () => {
     if (currentSection === 'home') return;
@@ -1832,13 +1841,31 @@
   }
   document.addEventListener('click', () => helpBalloon.classList.remove('open'));
 
-  function navigate(section) {
+  function goBack() {
+    helpBalloon.classList.remove('open');
+    if (detailView.classList.contains('open')) {
+      closeDetail();
+      return;
+    }
+    const prev = navHistory.pop();
+    if (prev && prev !== 'home') {
+      navigate(prev, true);
+    } else {
+      navigate('home', true);
+    }
+  }
+
+  function navigate(section, isBack) {
+    if (!isBack && currentSection !== section) navHistory.push(currentSection);
     currentSection = section;
     activeFilter   = null;
     mainView.scrollTop = 0;
     lastScrollTop  = 0;
-    topBar.classList.remove('visible');
     helpBalloon.classList.remove('open');
+    if (section === 'home') {
+      topBar.classList.remove('visible');
+      navHistory = [];
+    }
     // update nav
     document.querySelectorAll('.nav-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.section === section);
@@ -1876,10 +1903,12 @@
     }
     detailView.scrollTop = 0;
     detailView.classList.add('open');
+    topBar.classList.add('visible');
   }
 
   function closeDetail() {
     detailView.classList.remove('open');
+    updateTopBar();
   }
 
   /* ── COUNT HELPERS ── */
@@ -2163,12 +2192,8 @@
     }
 
     detailView.innerHTML = `
-      <div class="ed-header" style="position:relative;">
-        <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar" style="position:absolute;top:16px;left:4px;background:none;border:none;display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;padding:6px 8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          Voltar
-        </button>
-        <span class="ed-eyebrow" style="margin-top:8px;">${it.tags[0] || 'roteiro'}</span>
+      <div class="ed-header">
+        <span class="ed-eyebrow">${it.tags[0] || 'roteiro'}</span>
         <h1 class="ed-title">${it.title}</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">${it.subtitle}</p>
@@ -2230,11 +2255,6 @@
       <div class="hero">
         <img src="${n.image}" alt="${n.name}" onerror="this.style.background='#C4A882';">
         <div class="hero-overlay"></div>
-        <button class="back-btn" onclick="closeDetail()" aria-label="Voltar">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-        </button>
       </div>
 
       <!-- Title card (bleeds below hero) -->
