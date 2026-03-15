@@ -552,7 +552,7 @@
     .fade-up { animation: fadeUp 0.38s ease both; }
 
     /* ── BOTTOM NAV ── */
-    #bottomNav {
+    #bottomNav, .nav-bar {
       position: fixed;
       bottom: 0;
       left: 50%;
@@ -981,6 +981,112 @@
       font-size: 13px;
       color: var(--ink-3);
     }
+
+    /* ── CAMU BADGE ── */
+    .camu-badge {
+      font-family: 'Caveat', cursive;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--coral);
+      border-radius: 10px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── TIP NOTE ── */
+    .tip-note {
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--coral);
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
+    /* ── PARALLAX SECTIONS ── */
+    .parallax-section {
+      position: relative;
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -30% 0;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+    }
+    .parallax-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%);
+    }
+    .parallax-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px 28px 56px;
+      color: #fff;
+      width: 100%;
+    }
+    .parallax-eyebrow {
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .parallax-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: 52px;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+    .parallax-sub {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+      max-width: 340px;
+      margin-bottom: 20px;
+    }
+    .parallax-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #1A1A1A;
+      background: #fff;
+      border-radius: 100px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s;
+    }
+    .parallax-cta:active { transform: scale(0.96); }
+    .parallax-scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Caveat', cursive;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      z-index: 2;
+      animation: bob 2s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
   </style>
 </head>
 <body>
@@ -993,30 +1099,30 @@
   <div class="screen no-scroll" id="detailView"></div>
 
   <!-- ══════════════ BOTTOM NAV ══════════════ -->
-  <nav id="bottomNav">
+  <nav class="nav-bar" id="mainNav">
     <button class="nav-btn active" data-section="home" onclick="navigate('home')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span>Início</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="turismo" onclick="navigate('turismo')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      <span>Turismo</span>
+    <button class="nav-btn" data-section="passeios" onclick="navigate('passeios')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
+      <span>Roteiros</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="restaurantes" onclick="navigate('restaurantes')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"/><path d="M8 6h8l-1 10H9L8 6z"/><path d="M6 20h12"/></svg>
-      <span>Comer</span>
+    <button class="nav-btn" data-section="camu-indica" onclick="navigate('camu-indica')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Camu Indica</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="cafes" onclick="navigate('cafes')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-      <span>Cafés</span>
+    <button class="nav-btn" data-section="bairros" onclick="navigate('bairros')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+      <span>Explorar</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-btn" data-section="bares" onclick="navigate('bares')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22l4-11 4 11"/><path d="M5 8l14-6-6 14"/></svg>
-      <span>Beber</span>
+    <button class="nav-btn" data-section="antes-de-ir" onclick="navigate('antes-de-ir')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span>Antes de Ir</span>
       <div class="nav-dot"></div>
     </button>
   </nav>
@@ -1425,53 +1531,91 @@
 
   /* ── ITINERARIES ── */
   const ITINERARIES = [
-    { id:'praia-rio', emoji:'🏖️', title:'Dia de Praia', subtitle:'Copa, Ipanema, Leblon — e o melhor pôr do sol do mundo', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#1A6E8A',
+    { id:'copa-ipanema-leblon', tipo:'sequencia', emoji:'🏖️', title:'Copa → Ipanema → Leblon', subtitle:'Copa → Arpoador → Ipanema → Leblon — e o melhor pôr do sol do mundo', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#1A6E8A',
       steps:[
-        { time:'8h30',  title:'Café no Empório Jardim ou So_lo Café', bairro:'Ipanema', type:'café', maps:'Empório+Jardim+Ipanema+Rio' },
-        { time:'10h',   title:'Praia — Posto 9 (Ipanema) ou Arpoador', bairro:'Ipanema', type:'turismo', maps:'Posto+9+Praia+Ipanema+Rio' },
-        { time:'13h',   title:'Almoço: Maria e o Boi ou Zazá Bistrô', bairro:'Ipanema', type:'restaurante', maps:'Maria+e+o+Boi+Ipanema+Rio' },
-        { time:'15h',   title:'Sorvete no Vero Gelato ou Mil Frutas', bairro:'Ipanema', type:'café', maps:'Vero+Gelato+Ipanema+Rio' },
-        { time:'17h',   title:'Pôr do sol na Pedra do Arpoador', bairro:'Ipanema', type:'turismo', maps:'Pedra+do+Arpoador+Rio+de+Janeiro' },
-        { time:'20h',   title:'Jantar no Ferro e Farinha ou Pabu Izakaya', bairro:'Leblon', type:'restaurante', maps:'Ferro+e+Farinha+Botafogo+Rio' },
+        { time:'8h30',  title:'Café no Empório Jardim ou So_lo Café', bairro:'Ipanema', dica:'Abasteça bem — dia longo pela frente.', lugares:['Empório Jardim','So_lo Café'], maps:'Empório+Jardim+Ipanema+Rio' },
+        { time:'10h',   title:'Praia — Posto 9 (Ipanema) ou Arpoador', bairro:'Ipanema', dica:'Arpoador tem ondas melhores. Posto 9 tem a galera mais interessante.', lugares:['Posto 9','Arpoador'], maps:'Posto+9+Praia+Ipanema+Rio' },
+        { time:'13h',   title:'Almoço: Maria e o Boi ou Zazá Bistrô', bairro:'Ipanema', dica:'Maria e o Boi é alta cozinha brasileira. Zazá é eclético e colorido — ambos imperdíveis.', lugares:['Maria e o Boi','Zazá Bistrô'], maps:'Maria+e+o+Boi+Ipanema+Rio' },
+        { time:'15h',   title:'Sorvete no Vero Gelato ou Mil Frutas', bairro:'Ipanema', dica:'Impossível escolher — vá nos dois.', lugares:['Vero Gelato','Mil Frutas'], maps:'Vero+Gelato+Ipanema+Rio' },
+        { time:'17h',   title:'Pôr do sol na Pedra do Arpoador', bairro:'Ipanema', dica:'Chegue antes das 17h. Quando o sol toca o mar, todo mundo aplaude — arrepia.', lugares:['Pedra do Arpoador'], maps:'Pedra+do+Arpoador+Rio+de+Janeiro' },
+        { time:'20h',   title:'Jantar no Ferro e Farinha (Leblon)', bairro:'Leblon', dica:'A pizza mais querida do Rio. Fila vale.', lugares:['Ferro e Farinha'], maps:'Ferro+e+Farinha+Leblon+Rio' },
       ]
     },
-    { id:'urca-aterro', emoji:'🏞️', title:'Urca & Aterro', subtitle:'Praia Vermelha, Pão de Açúcar e mureta ao entardecer', duration:'8–10h', tags:['natureza','vista','praia'], color:'#2D6A4F',
-      steps:[
-        { time:'8h',    title:'Café no Maz ou Casa que Doce', bairro:'Urca', type:'café', maps:'Maz+Café+Botafogo+Rio' },
-        { time:'9h',    title:'Praia Vermelha + Pista Cláudio Coutinho', bairro:'Urca', type:'turismo', maps:'Praia+Vermelha+Urca+Rio+de+Janeiro' },
-        { time:'11h',   title:'Pão de Açúcar (bondinho)', bairro:'Urca', type:'turismo', maps:'Pão+de+Açúcar+Rio+de+Janeiro' },
-        { time:'13h',   title:'Almoço: Gal Bar do Mar, Canal 6 ou Bar Urca', bairro:'Urca', type:'restaurante', maps:'Gal+Bar+do+Mar+Urca+Rio' },
-        { time:'15h',   title:'Aterro do Flamengo de bike até o MAM', bairro:'Glória & Flamengo', type:'dica', maps:'Aterro+do+Flamengo+Rio+de+Janeiro' },
-        { time:'17h30', title:'Cerveja na Mureta da Urca ao entardecer', bairro:'Urca', type:'bar', maps:'Mureta+da+Urca+Rio+de+Janeiro' },
+    { id:'urca-morro-da-babilonia', tipo:'opcoes', emoji:'🏞️', title:'Urca & Morro da Babilônia', subtitle:'Praia Vermelha, Pão de Açúcar, Mureta e trilha — 4 versões do mesmo roteiro', duration:'8–10h', tags:['natureza','vista','praia'], color:'#2D6A4F',
+      opcoes:[
+        { nome:'Versão relaxo — Praia Vermelha + Mureta', desc:'Praia Vermelha pela manhã (pequena, tranquila, linda). Almoço no Canal 6 ou Bar Urca. Cerveja na mureta ao entardecer. Perfeito.', dica:'O ritual correto: praia → almoço → mureta. Nessa ordem.' },
+        { nome:'Versão vista — Pão de Açúcar', desc:'Compre ingresso em bondinho.com.br com antecedência. Bondão 1 vai ao Morro da Urca (vista já incrível). Bondão 2 vai ao topo. Ao pôr do sol, incomparável.', dica:'Sessão do entardecer esgota rápido — compre com dias de antecedência.' },
+        { nome:'Versão trilha — Pista Cláudio Coutinho', desc:'Trilha gratuita de 1,2km beirando o mar na base do Morro da Urca. Fauna, flora nativa e vista para a Baía. Uma das melhores relações esforço-recompensa do Rio.', dica:'Chegar cedo (antes das 9h) para o frescor da manhã.' },
+        { nome:'Versão aventura — Morro da Babilônia', desc:'Trilha de 40min com vista 360° do Rio. Menos turistas, mais esforço, muito mais recompensa. Leve água e calçado adequado.', dica:'Suba com guia ou em grupo — pergunte localmente.' },
       ]
     },
-    { id:'gloria-centro', emoji:'🏛️', title:'Glória → Lapa → Centro', subtitle:'Da feira ao museu, passando pelo samba', duration:'8–10h', tags:['cultura','história','boemia'], color:'#7B5E3A',
+    { id:'gloria-lapa-cinelandia', tipo:'sequencia', emoji:'🏛️', title:'Glória → Lapa → Cinelândia', subtitle:'Feira da Glória · Lapa · Centro · Santa Teresa — ótimo para dias nublados', duration:'8–10h', tags:['cultura','história','boemia'], color:'#7B5E3A',
       steps:[
-        { time:'9h',    title:'Feira da Glória (dom) ou Brava Doceria', bairro:'Glória & Flamengo', type:'café', maps:'Feira+da+Glória+Rio+de+Janeiro' },
-        { time:'10h30', title:'Escadaria Selarón + Arcos da Lapa', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Escadaria+Selarón+Lapa+Rio' },
-        { time:'11h30', title:'Bonde para Santa Teresa + Parque das Ruínas', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Bonde+Santa+Teresa+Rio' },
-        { time:'13h',   title:'Almoço no Bar do Mineiro ou Café do Alto', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Bar+do+Mineiro+Santa+Teresa+Rio' },
-        { time:'15h',   title:'CCBB + Museu do Amanhã + MAR (VLT)', bairro:'Centro Histórico', type:'turismo', maps:'Museu+do+Amanhã+Rio+de+Janeiro' },
-        { time:'18h',   title:'Jantar no Dois de Fevereiro ou Café Teró', bairro:'Centro Histórico', type:'restaurante', maps:'Dois+de+Fevereiro+Rio+de+Janeiro' },
+        { time:'9h',    title:'Feira da Glória (dom) ou Brava Doceira', bairro:'Glória', dica:'Domingo de manhã na Feira da Glória é o ritual do bairro. Fora de domingo, a Brava Doceira abre às 10h.', lugares:['Feira da Glória','Brava Doceira'], maps:'Feira+da+Glória+Rio+de+Janeiro' },
+        { time:'10h30', title:'Escadaria Selarón + Arcos da Lapa', bairro:'Lapa', dica:'A Selarón é linda mas lotada. Chegue cedo para as fotos sem gente.', lugares:['Escadaria Selarón','Arcos da Lapa'], maps:'Escadaria+Selarón+Lapa+Rio' },
+        { time:'11h30', title:'Bonde para Santa Teresa + Parque das Ruínas', bairro:'Santa Teresa', dica:'O bonde vale mais pela experiência do que pela eficiência. Desça no Largo do Guimarães.', lugares:['Bonde de Santa Teresa','Parque das Ruínas'], maps:'Bonde+Santa+Teresa+Rio' },
+        { time:'13h',   title:'Almoço no Bar do Mineiro ou Café do Alto', bairro:'Santa Teresa', dica:'Bar do Mineiro tem o pastel de feijoada mais querido do bairro.', lugares:['Bar do Mineiro','Café do Alto'], maps:'Bar+do+Mineiro+Santa+Teresa+Rio' },
+        { time:'15h',   title:'CCBB + Museu do Amanhã + MAR (VLT)', bairro:'Centro', dica:'O VLT conecta tudo — moderno, gratuito nos pontos turísticos e muito mais agradável que o trânsito.', lugares:['CCBB','Museu do Amanhã','MAR'], maps:'Museu+do+Amanhã+Rio+de+Janeiro' },
+        { time:'18h',   title:'Amarelinho ou Vilarino na Cinelândia', bairro:'Centro', dica:'Mesa na calçada no Amarelinho com vista para a Câmara Municipal. Clássico.', lugares:['Amarelinho','Vilarino'], maps:'Amarelinho+Bar+Cinelândia+Rio' },
       ]
     },
-    { id:'jb-cristo', emoji:'🌳', title:'JB, Parques & Cristo', subtitle:'Das palmeiras imperiais ao topo do mundo', duration:'8h', tags:['natureza','vista','cultura'], color:'#3D7A3A',
+    { id:'lagoa-e-jardim-botanico', tipo:'sequencia', emoji:'🌳', title:'Lagoa & Jardim Botânico', subtitle:'Jardim Botânico, Lagoa (7,5km de ciclovia) e Cristo', duration:'8h', tags:['natureza','vista','cultura'], color:'#3D7A3A',
       steps:[
-        { time:'8h30',  title:'Café no Empório Jardim ou Absurda', bairro:'Jardim Botânico & Gávea', type:'café', maps:'Empório+Jardim+Botânico+Rio' },
-        { time:'9h30',  title:'Jardim Botânico do Rio', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Jardim+Botânico+Rio+de+Janeiro' },
-        { time:'12h',   title:'Almoço na La Bicyclette', bairro:'Jardim Botânico & Gávea', type:'café', maps:'La+Bicyclette+Jardim+Botânico+Rio' },
-        { time:'14h',   title:'Trem do Corcovado → Cristo Redentor', bairro:'Cosme Velho', type:'turismo', maps:'Cristo+Redentor+Corcovado+Rio+de+Janeiro' },
-        { time:'16h30', title:'Parque Lage ao entardecer', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Parque+Lage+Rio+de+Janeiro' },
-        { time:'19h',   title:'Jantar no Katz Su ou Elena (Baixo Gávea)', bairro:'Jardim Botânico & Gávea', type:'restaurante', maps:'Katz+Su+Jardim+Botânico+Rio' },
+        { time:'8h30',  title:'Café no Empório Jardim ou La Bicyclette', bairro:'Jardim Botânico', dica:'La Bicyclette tem o melhor café da manhã do bairro — fila vale.', lugares:['Empório Jardim','La Bicyclette'], maps:'La+Bicyclette+Jardim+Botânico+Rio' },
+        { time:'9h30',  title:'Jardim Botânico do Rio', bairro:'Jardim Botânico', dica:'Chegue cedo — sombra pela manhã e menos gente. As palmeiras imperiais são incomparáveis.', lugares:['Jardim Botânico'], maps:'Jardim+Botânico+Rio+de+Janeiro' },
+        { time:'12h',   title:'Ciclovia da Lagoa (7,5km ao redor)', bairro:'Lagoa', dica:'Alugue uma bike no Uber Bike app. Uma das ciclovias mais bonitas do mundo.', lugares:['Lagoa Rodrigo de Freitas'], maps:'Lagoa+Rodrigo+de+Freitas+Rio' },
+        { time:'14h',   title:'Trem do Corcovado → Cristo Redentor', bairro:'Cosme Velho', dica:'Compre ingresso online em tremdocorcovado.com.br com antecedência.', alerta:'Reserve com dias de antecedência — esgota.', lugares:['Cristo Redentor'], maps:'Cristo+Redentor+Corcovado+Rio+de+Janeiro' },
+        { time:'16h30', title:'Parque Lage ao entardecer', bairro:'Jardim Botânico', dica:'Café no casarão dentro do parque, macacos na árvore, floresta na porta.', lugares:['Parque Lage'], maps:'Parque+Lage+Rio+de+Janeiro' },
+        { time:'19h',   title:'Jantar no Katz Su ou no Baixo Gávea', bairro:'Gávea', dica:'O Baixo Gávea ferve às sextas — bares e restaurantes ao redor da Praça Santos Dumont.', lugares:['Katz Su'], maps:'Katz+Su+Jardim+Botânico+Rio' },
       ]
     },
-    { id:'noite-botafogo', emoji:'🍺', title:'Noite em Botafogo', subtitle:'Rua Arnaldo Quintela e o Rio que não dorme', duration:'4–5h', tags:['boemia','gastronomia','noite'], color:'#2C1654',
+    { id:'noite-botafogo', tipo:'sequencia', emoji:'🍺', title:'Noite em Botafogo', subtitle:'Rua Arnaldo Quintela e o Rio que não dorme', duration:'4–5h', tags:['boemia','gastronomia','noite'], color:'#2C1654',
       steps:[
-        { time:'18h',   title:'Aperitivo no Botica ou Chopo', bairro:'Botafogo', type:'bar', maps:'Botica+Bar+Botafogo+Rio' },
-        { time:'19h',   title:'Treme Treme ou Mãe Joana (Arnaldo Quintela)', bairro:'Botafogo', type:'bar', maps:'Treme+Treme+Bar+Botafogo+Rio' },
-        { time:'20h30', title:'Jantar no Marchezinho ou Ferro e Farinha', bairro:'Botafogo', type:'restaurante', maps:'Marchezinho+Restaurante+Botafogo+Rio' },
-        { time:'22h30', title:'Fatchia ou Deja Vu na Glória', bairro:'Glória & Flamengo', type:'bar', maps:'Fatchia+Bar+Flamengo+Rio' },
-        { time:'0h',    title:'Carioca da Gema — samba ao vivo', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Carioca+da+Gema+Lapa+Rio' },
+        { time:'18h',   title:'Aperitivo no Botica ou Chopo', bairro:'Botafogo', dica:'Chopo tem os melhores chopes artesanais do bairro.', lugares:['Botica','Chopo'], maps:'Botica+Bar+Botafogo+Rio' },
+        { time:'19h',   title:'Treme Treme ou Mãe Joana (Arnaldo Quintela)', bairro:'Botafogo', dica:'Rua Arnaldo Quintela foi eleita Top 10 Time Out 2024. Chegue às 20h e vá escolhendo.', lugares:['Treme Treme','Mãe Joana'], maps:'Treme+Treme+Bar+Botafogo+Rio' },
+        { time:'20h30', title:'Jantar no Marchezinho ou Ferro e Farinha', bairro:'Botafogo', dica:'Marchezinho é bistrô francês descolado. Ferro e Farinha tem a melhor pizza da cidade.', lugares:['Marchezinho','Ferro e Farinha'], maps:'Marchezinho+Restaurante+Botafogo+Rio' },
+        { time:'22h30', title:'Fatchia ou Deja Vu na Glória', bairro:'Glória', dica:'Fatchia: pizza Detroit + disco + LGBTQIA+-friendly. Deja Vu: wine bar retrô.', lugares:['Fatchia','Deja Vu'], maps:'Fatchia+Bar+Flamengo+Rio' },
+        { time:'0h',    title:'Carioca da Gema — samba ao vivo', bairro:'Lapa', dica:'A mais famosa casa de samba ao vivo da Lapa. Shows diários de artistas consagrados.', lugares:['Carioca da Gema'], maps:'Carioca+da+Gema+Lapa+Rio' },
+      ]
+    },
+    { id:'barra-ilha-gigoia', tipo:'opcoes', emoji:'🏝️', title:'Barra & Ilha da Gigoia', subtitle:'Metrô até Jardim Oceânico — dois roteiros, duas saídas', duration:'1 dia', tags:['praia','ilha','metrô'], color:'#2B5FBF',
+      opcoes:[
+        { nome:'Saída Lagoa → Ilha da Gigoia', desc:'Barqueiro leva até a ilha por ~R$6. Café da Poesia, Ocya, Pantanal Carioca (barco com jacarés e capivaras).', dica:'Confirme horário do barqueiro antes de ir — funciona melhor nos fins de semana.' },
+        { nome:'Saída Mar → Praia da Barra', desc:'Praia enorme, quiosques, Praia do Pepê, o Píer. Rua Olegário Maciel: .Org Bistrô e Ferro e Farinha.', dica:'Barra é enorme — pegue Uber para se locomover.' },
+        { nome:'Mais longe ainda', desc:'Recreio, Reserva, Pontal, Prainha, Grumari (deserta), Abricó (nudismo). Para tudo isso: Uber.', dica:'Para Grumari e Prainha: leve comida e água — estrutura mínima.' },
+      ]
+    },
+    { id:'niteroi-dia', tipo:'sequencia', emoji:'⛴️', title:'Niterói', subtitle:'Barca da Praça XV — ver o Rio de outro ângulo', duration:'1 dia', tags:['arquitetura','praia','gastronomia'], color:'#1A6E8A',
+      steps:[
+        { time:'9h',    title:'Barca da Praça XV', bairro:'Centro', dica:'A travessia de 20min pela Baía já é parte do programa — vista única do Rio.', lugares:['Praça XV'], maps:'Barca+Praça+XV+Niterói' },
+        { time:'10h',   title:'MAC Niterói — Oscar Niemeyer', bairro:'Niterói', dica:'O disco voador branco com vista 360° do Rio. Vale tanto pela arquitetura quanto pela vista.', lugares:['MAC Niterói'], maps:'MAC+Museu+Arte+Contemporânea+Niterói' },
+        { time:'12h30', title:'Não me Torra — café na banca', bairro:'Niterói', dica:'Café numa banca de jornal de frente pra praia — charmoso e diferente.', lugares:['Não me Torra'], maps:'Não+me+Torra+Café+Niterói' },
+        { time:'14h',   title:'Passear em Icaraí', bairro:'Niterói', dica:'Praia urbana chique de Niterói com bares e restaurantes à beira-mar.', lugares:['Praia de Icaraí'], maps:'Praia+Icaraí+Niterói' },
+        { time:'20h',   title:'Amana — frutos do mar', bairro:'Niterói', dica:'Chef Leo Guida, só 20 lugares — reserva obrigatória. Um dos restaurantes mais especiais do Rio.', alerta:'Reserve com semanas de antecedência.', lugares:['Amana Restaurante'], maps:'Amana+Restaurante+Niterói' },
+      ]
+    },
+    { id:'zona-norte', tipo:'sequencia', emoji:'🏟️', title:'Zona Norte', subtitle:'O Rio que os turistas não veem', duration:'1 dia', tags:['autêntico','futebol','cultura'], color:'#8B2500',
+      steps:[
+        { time:'11h',   title:'Bar do Bode Cheiroso (Tijuca)', bairro:'Tijuca', dica:'Bar da família do Camu — boteco tradicional com toda a alma da Zona Norte.', lugares:['Bar do Bode Cheiroso'], maps:'Bar+do+Bode+Cheiroso+Tijuca' },
+        { time:'14h',   title:'Maracanã — tour ou jogo', bairro:'Maracanã', dica:'Sentir o Maracanã num dia de jogo é uma experiência inesquecível. O tour também vale.', lugares:['Maracanã'], maps:'Maracanã+Rio+de+Janeiro' },
+        { time:'16h',   title:'Quinta da Boa Vista + Museu Nacional', bairro:'São Cristóvão', dica:'Parque lindo, museu se reerguendo após o incêndio com visitas guiadas. Confirme horários.', lugares:['Quinta da Boa Vista'], maps:'Quinta+da+Boa+Vista+Rio' },
+        { time:'18h',   title:'Feira de São Cristóvão', bairro:'São Cristóvão', dica:'Baião de dois e forró ao vivo — o maior centro cultural nordestino fora do Nordeste.', lugares:['Feira de São Cristóvão'], maps:'Feira+São+Cristóvão+Rio' },
+      ]
+    },
+    { id:'ruas-cool', tipo:'rua-cool', emoji:'🚶', title:'Ruas Cool do Rio', subtitle:'5 ruas com personalidade própria — cada uma merece uma visita', duration:'1 noite cada', tags:['bares','gastronomia','noite','passeio'], color:'#C44B1E',
+      ruas:[
+        { nome:'Rua Arnaldo Quintela — Botafogo', desc:'Top 10 Time Out 2024. O epicentro do fervo carioca contemporâneo. Chegue por volta das 20h e vá escolhendo na hora.', dica:'Destaques: Ferro e Farinha, Treme Treme, Bar Botica, Marchezinho, Glorioso Sushi.' },
+        { nome:'Rua do Senado — Centro', desc:'A rua mais cool do mundo em 2025 pela Time Out. Entre a Lapa e a Praça Tiradentes — história centenária com a cena mais vibrante do Centro.', dica:'Qui–Sáb à noite. Destilaria Maravilha, Armazém do Senado (samba aos sábados), Lilia (Michelin).' },
+        { nome:'Rua Morais e Vale — Glória/Lapa', desc:'A rua que está bombando agora. Aqui moraram Madame Satã e Manuel Bandeira. O Jurema Bar é o coração: samba de rua, cachaça artesanal.', dica:'Também: Surubar, Surubafo, Beco do Rato.' },
+        { nome:'Rua Dias Ferreira — Leblon', desc:'Polo gastronômico oficial do Leblon. 700 metros com alguns dos melhores restaurantes da cidade — do almoço ao fim da noite.', dica:'Ferro e Farinha, Venga, Boteco Rainha, Balcão 201, Sìsì Cucina.' },
+        { nome:'Quadrilátero de Ipanema', desc:'Ruas Aníbal de Mendonça, Barão da Torre, Maria Quitéria e Visconde de Pirajá ao redor da Praça Nossa Senhora da Paz. Voltou a brilhar desde 2022.', dica:'Zazá Bistrô, Maria e o Boi, Babbo Osteria, Jappa da Quitanda, Spicy Fish, Boteco Belmonte.' },
+      ]
+    },
+    { id:'passeios-alternativos', tipo:'passeio-alternativo', emoji:'✨', title:'Passeios Alternativos', subtitle:'Para quem tem tempo extra ou quer algo fora do circuito', duration:'variável', tags:['especial','único','fora do roteiro'], color:'#5A4A9A',
+      passeios:[
+        { nome:'Passeio de Barco', desc:'Um dos passeios mais especiais do Rio — ver a cidade do mar é único. Busque no Instagram barcos disponíveis. Inclua mergulho se possível.', dica:'Alguns aceitam passageiros avulsos, outros alugam o barco completo. Melhor em dias de sol.' },
+        { nome:'Ilha Fiscal', desc:'Palácio neogótico verde-água no meio da Baía de Guanabara. Foi palco do último baile do Império antes da Proclamação da República.', dica:'Visita guiada com saída de barco do Arsenal da Marinha — compre ingresso com antecedência. Combina com o roteiro do Centro.' },
+        { nome:'Ilha de Paquetá', desc:'Ilha sem carro dentro da Baía — transporte é bike e charrete. Casarios coloniais, praias tranquilas, ritmo completamente diferente.', dica:'Barca sai da Praça XV (~1h). Alugue uma bike e dê a volta completa. Prefira dias de semana.' },
       ]
     },
   ];
@@ -1508,6 +1652,8 @@
     if      (currentSection === 'home')         renderHomeSection();
     else if (currentSection === 'bairros')      renderBairrosSection();
     else if (currentSection === 'passeios')     renderPasseiosSection();
+    else if (currentSection === 'camu-indica')  renderCamuIndicaSection();
+    else if (currentSection === 'antes-de-ir')  renderAntesDeIrSection();
     else if (currentSection === 'turismo')      renderCategorySection('turismo', 'Explorar', 'Turismo');
     else if (currentSection === 'restaurantes') renderCategorySection('restaurantes', 'Comer', 'Restaurantes');
     else if (currentSection === 'cafes')        renderCategorySection('cafes', 'Cafés', 'Cafés');
@@ -1537,59 +1683,77 @@
     return neighborhoods.reduce((sum, n) => sum + (n.tabs[tabKey] ? n.tabs[tabKey].length : 0), 0);
   }
 
-  /* ── RENDER HOME SECTION ── */
+  /* ── RENDER HOME SECTION (parallax one-pager) ── */
   function renderHomeSection() {
-    const restCount = countItems('restaurantes');
-    const cafeCount = countItems('cafes');
-    const barCount  = countItems('bares');
-    const turismoCount = countItems('turismo');
-    const DOODLES = {
-      passeios:     `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>`,
-      bairros:      `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>`,
-      turismo:      `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></svg>`,
-      restaurantes: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`,
-      cafes:        `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>`,
-      bares:        `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/></svg>`,
-    };
-    const menu = [
-      { section:'passeios',     label:'Passeios do Dia',          count:`${ITINERARIES.length} roteiros` },
-      { section:'bairros',      label:'O que fazer em cada bairro', count:`${neighborhoods.length} bairros` },
-      { section:'turismo',      label:'Turismo',                  count:`${turismoCount} lugares` },
-      { section:'restaurantes', label:'Restaurantes',             count:`${restCount} opções` },
-      { section:'cafes',        label:'Cafés',                    count:`${cafeCount} lugares` },
-      { section:'bares',        label:'Bares',                    count:`${barCount} opções` },
+    const sections = [
+      {
+        bg: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=85',
+        eyebrow: 'guia dos amigos',
+        title: 'O meu\nRio de\nJaneiro.',
+        sub: 'Fiz esse guia porque cansei de repetir as mesmas dicas no WhatsApp pra vocês.',
+        cta: null,
+        isHero: true,
+      },
+      {
+        bg: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=1200&q=85',
+        eyebrow: 'passeios',
+        title: '16 roteiros\ncurados.',
+        sub: '8 roteiros por dia, 5 ruas cool e 3 passeios alternativos — tudo num só lugar.',
+        cta: { label: 'Ver Roteiros', action: "navigate('passeios')" },
+      },
+      {
+        bg: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85',
+        eyebrow: 'curadoria pessoal',
+        title: 'Camu\nIndica.',
+        sub: 'Os imperdíveis. Os lugares que eu garanto com o meu nome.',
+        cta: { label: 'Ver Indicações', action: "navigate('camu-indica')" },
+      },
+      {
+        bg: 'https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?w=1200&q=85',
+        eyebrow: 'bairros & categorias',
+        title: 'Explorar\no Rio.',
+        sub: 'Por bairro ou por categoria — praia, comer, cultura, noite.',
+        cta: { label: 'Explorar', action: "navigate('bairros')" },
+      },
+      {
+        bg: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=85',
+        eyebrow: 'antes de ir',
+        title: 'Tudo que\nvocê precisa\nsaber.',
+        sub: 'Transporte, segurança, hospedagem e clima — antes de fazer as malas.',
+        cta: { label: 'Ver Dicas', action: "navigate('antes-de-ir')" },
+      },
     ];
-    mainView.innerHTML = `
-      <div class="home-hero-wrap">
-        <img
-          src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=85"
-          alt="Rio de Janeiro"
-          loading="eager"
-        >
-        <div class="home-hero-content">
-          <span class="home-hero-eyebrow">guia dos amigos</span>
-          <h1 class="home-hero-title">O meu<br>Rio de<br>Janeiro.</h1>
-          <div class="home-hero-rule"></div>
-          <p class="home-hero-sub">Fiz esse guia porque cansei de repetir as mesmas dicas no WhatsApp pra vocês. Aqui só tem os lugares que eu frequento, aprovo e garanto — especialmente onde comer.</p>
-          <span class="home-hero-hand">salva no favoritos</span>
+    mainView.innerHTML = sections.map((s, i) => `
+      <div class="parallax-section" style="z-index:${sections.length - i};">
+        <div class="parallax-bg" style="background-image:url('${s.bg}');"></div>
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content">
+          <span class="parallax-eyebrow">${s.eyebrow}</span>
+          <h1 class="parallax-title">${s.title}</h1>
+          <p class="parallax-sub">${s.sub}</p>
+          ${s.cta ? `<button class="parallax-cta" onclick="${s.cta.action}">${s.cta.label} →</button>` : ''}
         </div>
+        ${s.isHero ? `<span class="parallax-scroll-hint">↓ role para explorar</span>` : ''}
       </div>
+    `).join('');
+    requestAnimationFrame(() => initParallax());
+  }
 
-      <div class="home-menu">
-        ${menu.map((m, i) => `
-          <div class="home-menu-item fade-up" style="animation-delay:${i*0.07}s;" onclick="navigate('${m.section}')">
-            <div class="home-menu-icon">${DOODLES[m.section] || ''}</div>
-            <div class="home-menu-text">
-              <span class="home-menu-label">${m.label}</span>
-              <span class="home-menu-count">${m.count}</span>
-            </div>
-            <div class="home-menu-arrow">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
+  /* ── PARALLAX ENGINE (iOS-safe JS-based) ── */
+  function initParallax() {
+    requestAnimationFrame(function tick() {
+      const mainEl = document.getElementById('mainView');
+      if (!mainEl) return;
+      const scrollY = mainEl.scrollTop;
+      document.querySelectorAll('.parallax-bg').forEach(bg => {
+        const section = bg.closest('.parallax-section');
+        const rect = section.getBoundingClientRect();
+        const factor = 0.35;
+        const offset = (rect.top) * factor;
+        bg.style.transform = `translateY(${offset}px)`;
+      });
+      requestAnimationFrame(tick);
+    });
   }
 
   /* ── RENDER PASSEIOS SECTION ── */
@@ -1609,7 +1773,7 @@
               <div class="it-tags">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}</div>
             </div>
             <div class="it-footer">
-              ${it.steps.slice(0,3).map((s,si) => `<span class="it-pill${si===0?' first':''}">${s.time} ${s.title.split(' ').slice(0,3).join(' ')}</span>`).join('')}
+              ${(it.steps||it.opcoes||it.ruas||it.passeios||[]).slice(0,3).map((s,si) => `<span class="it-pill${si===0?' first':''}">${s.time ? s.time+' ' : ''}${(s.title||s.nome||'').split(' ').slice(0,3).join(' ')}</span>`).join('')}
               <span class="it-duration">⏱ ${it.duration}</span>
             </div>
           </div>
@@ -1712,6 +1876,66 @@
   function renderItineraryDetail(id) {
     const it = ITINERARIES.find(x => x.id === id);
     if (!it) return;
+
+    let bodyHTML = '';
+    if (it.steps) {
+      bodyHTML = `<div class="it-steps-list">
+        ${it.steps.map(step => `
+          <div class="it-step">
+            <div class="it-step-time">
+              <span>${step.time}</span>
+              <div class="it-step-dot"></div>
+            </div>
+            <div class="it-step-body">
+              <div class="it-step-title">${step.title}</div>
+              <div class="it-step-meta">
+                <span class="it-step-bairro">${step.bairro}</span>
+              </div>
+              ${step.dica ? `<p style="font-family:'Caveat',cursive;font-size:14px;font-weight:600;color:var(--coral);margin-top:4px;line-height:1.45;">${step.dica}</p>` : ''}
+              ${step.alerta ? `<p style="font-family:'Lora',serif;font-size:12px;color:#B55E00;margin-top:4px;font-style:italic;">⚠️ ${step.alerta}</p>` : ''}
+              ${step.maps ? `
+                <div style="margin-top:8px;">
+                  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${step.maps}" target="_blank" rel="noopener noreferrer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Ver no Mapa
+                  </a>
+                </div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.opcoes) {
+      bodyHTML = `<div style="padding:16px 20px 80px;display:flex;flex-direction:column;gap:12px;">
+        ${it.opcoes.map((op, i) => `
+          <div class="c-card fade-up" style="animation-delay:${i*0.07}s;">
+            <div class="c-card-top"><h4>${op.nome}</h4></div>
+            <p>${op.desc}</p>
+            ${op.dica ? `<p class="tip-note">${op.dica}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.ruas) {
+      bodyHTML = `<div style="padding:16px 20px 80px;display:flex;flex-direction:column;gap:12px;">
+        ${it.ruas.map((r, i) => `
+          <div class="c-card fade-up" style="animation-delay:${i*0.07}s;">
+            <div class="c-card-top"><h4>${r.nome}</h4></div>
+            <p>${r.desc}</p>
+            ${r.dica ? `<p class="tip-note">${r.dica}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.passeios) {
+      bodyHTML = `<div style="padding:16px 20px 80px;display:flex;flex-direction:column;gap:12px;">
+        ${it.passeios.map((p, i) => `
+          <div class="c-card fade-up" style="animation-delay:${i*0.07}s;">
+            <div class="c-card-top"><h4>${p.nome}</h4></div>
+            <p>${p.desc}</p>
+            ${p.dica ? `<p class="tip-note">${p.dica}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    }
+
     detailView.innerHTML = `
       <div class="it-detail-hero" style="background:${it.color};">
         <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar">
@@ -1725,30 +1949,7 @@
           <span class="it-tag">⏱ ${it.duration}</span>
         </div>
       </div>
-      <div class="it-steps-list">
-        ${it.steps.map(step => `
-          <div class="it-step">
-            <div class="it-step-time">
-              <span>${step.time}</span>
-              <div class="it-step-dot"></div>
-            </div>
-            <div class="it-step-body">
-              <div class="it-step-title">${step.title}</div>
-              <div class="it-step-meta">
-                <span class="it-step-bairro">${step.bairro}</span>
-                <span class="it-step-type">${step.type}</span>
-              </div>
-              ${step.maps ? `
-                <div style="margin-top:8px;">
-                  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${step.maps}" target="_blank" rel="noopener noreferrer">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Ver no Mapa
-                  </a>
-                </div>` : ''}
-            </div>
-          </div>
-        `).join('')}
-      </div>
+      ${bodyHTML}
     `;
   }
 
@@ -1905,6 +2106,100 @@
       content.innerHTML = renderItems(n, tabKey);
       content.classList.remove('fading');
     }, 185);
+  }
+
+  /* ── RENDER CAMU INDICA SECTION ── */
+  function renderCamuIndicaSection() {
+    const allItems = [];
+    neighborhoods.forEach(n => {
+      ['turismo','cafes','restaurantes','bares'].forEach(tabKey => {
+        (n.tabs[tabKey] || []).forEach(item => {
+          if (item.camu_indica) allItems.push({ ...item, bairroName: n.name, bairroId: n.id });
+        });
+      });
+    });
+    mainView.innerHTML = `
+      <div class="ed-header">
+        <span class="ed-eyebrow">curadoria pessoal</span>
+        <h1 class="ed-title">Camu\nIndica.</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Os lugares que eu garanto com o meu nome. Se tiver dúvida entre dois, vai no que tem o badge.</p>
+      </div>
+      <div class="x-list">
+        ${allItems.length === 0
+          ? `<p style="font-family:'Lora',serif;font-style:italic;color:var(--ink-3);padding:20px 0;">Em breve — os meus favoritos pessoais aparecerão aqui.</p>`
+          : allItems.map((item, i) => `
+            <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
+              <div class="x-card-top">
+                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+                  <h4>${item.title}</h4>
+                  <span class="camu-badge">✦ camu</span>
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+                  ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
+                  <span class="bairro-badge" onclick="event.stopPropagation();openDetail('neighborhood','${item.bairroId}')">${item.bairroName}</span>
+                </div>
+              </div>
+              <p>${item.desc}</p>
+              ${item.dica ? `<p class="tip-note">${item.dica}</p>` : ''}
+              ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
+              ${item.maps ? `<div class="card-actions"><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${item.maps}" target="_blank" rel="noopener noreferrer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ver no Mapa</a></div>` : ''}
+            </div>
+          `).join('')}
+      </div>
+    `;
+  }
+
+  /* ── RENDER ANTES DE IR SECTION ── */
+  function renderAntesDeIrSection() {
+    const items = [
+      {
+        title: 'Dinheiro',
+        icon: '💳',
+        content: 'Quase tudo aceita cartão de crédito ou Pix. Tenha um dinheirinho trocado para situações específicas como barqueiros e pequenos comércios. Não vai precisar de muito dinheiro em espécie.',
+      },
+      {
+        title: 'Transporte',
+        icon: '🚗',
+        content: '<strong>Uber:</strong> principal forma de se locomover. Confiável e seguro — prefira sempre ao táxi. <strong>Táxi:</strong> evite, especialmente do aeroporto. <strong>Metrô:</strong> aceita cartão de crédito direto na catraca. <strong>Ônibus/VLT/BRT:</strong> app Gira — baixe antes. <strong>Bike:</strong> Itaú Bike pelo app do Uber — ótimo para a orla e o Aterro.',
+      },
+      {
+        title: 'Segurança',
+        icon: '🔒',
+        content: 'O Rio é mais seguro do que muita gente imagina se você tiver bom senso. Não segure o celular na rua desnecessariamente. Não deixe pertences na areia da praia. À noite na Lapa fique mais atento. Uber do aeroporto — sempre.',
+      },
+      {
+        title: 'Onde se hospedar',
+        icon: '🏠',
+        content: '<strong>Recomendados:</strong> Ipanema (foco na praia), Copacabana perto do Posto 6, Botafogo (no meio de tudo, metrô, boemia e praia), Flamengo/Catete (tranquilo, perto da Glória). <strong>Evite:</strong> Barra da Tijuca (longe de tudo), Gávea/Jardim Botânico (pouco transporte).',
+      },
+      {
+        title: 'Clima',
+        icon: '☀️',
+        content: 'O clima do Rio é imprevisível. Maio a julho costuma ter menos chuva. No verão chove mais — mas passa rápido. Cheque antes de ir à praia.',
+      },
+      {
+        title: 'Idioma',
+        icon: '💬',
+        content: 'Poucos cariocas falam inglês fluente. Um sorriso e boa vontade funcionam muito bem. Baixe o Google Translate com o português offline.',
+      },
+    ];
+    mainView.innerHTML = `
+      <div class="page-header">
+        <span class="page-eyebrow">viagem</span>
+        <h1 class="page-title">Antes<br><span style="color:var(--coral)">de Ir.</span></h1>
+      </div>
+      <div style="padding: 8px 16px 80px; display:flex; flex-direction:column; gap:12px;">
+        ${items.map((item, i) => `
+          <div class="c-card fade-up" style="animation-delay:${i*0.07}s;">
+            <div class="c-card-top">
+              <h4>${item.icon} ${item.title}</h4>
+            </div>
+            <p style="font-family:'Lora',serif;font-size:13px;line-height:1.6;color:var(--ink-2);margin-top:6px;">${item.content}</p>
+          </div>
+        `).join('')}
+      </div>
+    `;
   }
 
   /* ── INIT ── */
