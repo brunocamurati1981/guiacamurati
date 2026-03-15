@@ -499,6 +499,60 @@
       line-height: 1.45;
     }
 
+    /* camu_indica badge */
+    .camu-badge {
+      display: inline-flex; align-items: center; gap: 2px;
+      font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--coral); background: rgba(226,88,62,0.1);
+      border-radius: 4px; padding: 2px 5px; vertical-align: middle;
+      margin-left: 4px; flex-shrink: 0;
+    }
+
+    /* tip note (dica_carioca) */
+    .tip-note {
+      font-family: 'Caveat', cursive; font-size: 13px; font-weight: 600;
+      color: var(--coral); margin-top: 6px; line-height: 1.4;
+    }
+    .tip-note::before { content: '→ '; }
+
+    /* alert note */
+    .alert-note {
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      color: #C0392B; margin-top: 5px; line-height: 1.4;
+      padding: 4px 8px; background: rgba(192,57,43,0.07);
+      border-radius: 4px; border-left: 2px solid rgba(192,57,43,0.3);
+    }
+
+    /* itinerary extra types */
+    .it-opcoes-list { padding: 16px 20px 80px; display: flex; flex-direction: column; gap: 10px; }
+    .it-opcao-card {
+      background: var(--card); border-radius: 12px; padding: 14px 16px;
+      border: 1px solid var(--border);
+    }
+    .it-opcao-card h4 { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .it-opcao-card p { font-family: 'Lora', serif; font-size: 12px; color: var(--ink-2); margin-top: 4px; font-style: italic; }
+
+    .it-blocos-list { padding: 16px 20px 80px; display: flex; flex-direction: column; gap: 10px; }
+    .it-bloco-card {
+      background: var(--card); border-radius: 12px; padding: 14px 16px;
+      border: 1px solid var(--border);
+    }
+    .it-bloco-card h4 { font-family: 'Lora', serif; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .it-bloco-card p { font-family: 'Lora', serif; font-size: 12px; color: var(--ink-2); margin-top: 4px; font-style: italic; }
+    .it-bloco-lugares { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .it-bloco-lugar { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500;
+      color: var(--ink-2); background: var(--surface); border-radius: 4px; padding: 2px 7px; }
+
+    .it-ruas-list { padding: 16px 20px 80px; display: flex; flex-direction: column; gap: 14px; }
+    .it-rua-card {
+      background: var(--card); border-radius: 12px; padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .it-rua-card h4 { font-family: 'Lora', serif; font-size: 15px; font-weight: 600; color: var(--ink); }
+    .it-rua-card p { font-family: 'Lora', serif; font-size: 13px; color: var(--ink-2); margin-top: 6px; }
+    .it-rua-dica { font-family: 'Caveat', cursive; font-size: 13px; color: var(--coral); margin-top: 6px; font-weight: 600; }
+
     /* card actions */
     .card-actions {
       display: flex;
@@ -1028,392 +1082,349 @@
   const ANNOTATIONS = [
     'patrimônio histórico ✦',
     'samba, arte & boemia →',
-    'parque & museus ao vivo',
-    'polo gastronômico',
-    'natureza & cultura',
-    'mureta, pão de açúcar & mar →',
-    'pôr do sol perfeito →',
+    'parque, museu & feira →',
+    'gastronomia & noite →',
+    'praia, bossa nova & gelato ✦',
     'o calçadão eterno ✦',
+    'mureta, pão de açúcar & mar →',
+    'natureza & pôr do sol →',
     'luxo discreto & alta gastronomia',
+    'floresta urbana & cultura popular →',
+    'mac, icaraí & travessia de barca →',
+    'praias compridas & ilha da gigoia →',
   ];
 
-  const neighborhoods = [
-    {
-      id: 'centro-historico',
-      name: 'Centro Histórico',
-      subtitle: 'Museus, Patrimônio & Boulevard Olímpico',
-      image: 'https://www.viajenaviagem.com/wp-content/uploads/2016/01/museu-do-amanha-36.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Museu do Amanhã', desc: 'Museu de ciências futurista de Santiago Calatrava à beira da Baía de Guanabara. Arquitetura espetacular e exposições interativas que redefinem o conceito de museu.', horario: 'Qui–Ter 10h–18h | Fecha qua | R$40 / meia R$20 | Grátis maiores 60', maps: 'Museu+do+Amanhã+Rio+de+Janeiro', link: 'https://museudoamanha.org.br' },
-          { title: 'Real Gabinete Português', desc: 'Uma das bibliotecas mais bonitas do mundo. Arquitetura manuelina deslumbrante com acervo de 350 mil volumes históricos. Entrada completamente gratuita.', horario: 'Seg–Sex 10h–17h | Gratuito', maps: 'Real+Gabinete+Português+de+Leitura+Rio', link: null },
-          { title: 'MAR — Museu de Arte do Rio', desc: 'Museu contemporâneo na Praça Mauá com exposições sobre a história e cultura carioca. Vista deslumbrante para a Baía de Guanabara do terraço.', horario: 'Ter–Dom 10h–17h | R$20 / meia R$10 | Grátis terças', maps: 'Museu+de+Arte+do+Rio+MAR', link: null },
-          { title: 'CCBB — Centro Cultural Banco do Brasil', desc: 'Centro cultural com exposições, teatro, videoteca e restaurante num casarão histórico. Programação constante e de altíssima qualidade — entrada gratuita.', horario: 'Ter–Dom 9h–21h | Gratuito', maps: 'CCBB+Centro+Cultural+Banco+Brasil+Rio', link: null },
-          { title: 'Mural Etnias / Boulevard Olímpico', desc: 'O maior mural do mundo, obra de Eduardo Kobra criada para as Olimpíadas de 2016. O Boulevard inteiro é um museu a céu aberto com vistas para a baía.', horario: 'Aberto 24h | Gratuito', maps: 'Mural+Etnias+Kobra+Boulevard+Olímpico+Rio', link: null },
-          { title: 'Igreja da Candelária', desc: 'Uma das igrejas mais imponentes do Brasil. Construção iniciada em 1609, com pinturas murais exuberantes no interior e fachada que domina o centro.', horario: 'Seg–Sex 7h30–16h | Sáb–Dom 8h–13h | Gratuito', maps: 'Igreja+da+Candelária+Rio+de+Janeiro', link: null },
-          { title: 'Paço Imperial', desc: 'O palácio onde D. João VI instalou a Corte em 1808. Centro cultural com exposições gratuitas de alto nível num dos edifícios mais importantes da história do Brasil.', horario: 'Ter–Dom 12h–18h | Gratuito', maps: 'Paço+Imperial+Rio+de+Janeiro', link: null },
-          { title: 'Teatro Municipal', desc: 'Uma das obras arquitetônicas mais majestosas do Brasil. Inaugurado em 1909, inspirado na Ópera de Paris — visita ao saguão vale mesmo sem espetáculo.', horario: 'Seg–Sex 10h–17h | Visitas guiadas disponíveis', maps: 'Teatro+Municipal+Rio+de+Janeiro', link: null },
-          { title: 'Biblioteca Nacional', desc: 'A maior biblioteca da América Latina com mais de 9 milhões de obras. Construção monumental com vitrais e escadaria imperial — entrada gratuita e visitas guiadas.', horario: 'Seg–Sex 9h–21h | Sáb 9h–15h | Gratuito', maps: 'Biblioteca+Nacional+Rio+de+Janeiro', link: null },
-          { title: 'Convento de Santo Antônio', desc: 'Convento franciscano do século XVII com a mais bela azulejaria barroca do Rio. Localizado no Largo da Carioca, a dois passos do metrô — e quase ignorado pelos turistas.', horario: 'Seg–Sex 8h–17h | Sáb 8h–11h | Gratuito', maps: 'Convento+Santo+Antônio+Rio+de+Janeiro', link: null },
-          { title: 'AquaRio', desc: 'O maior aquário marinho da América do Sul. Tubarões, arraias e uma imersão completa nos ecossistemas aquáticos brasileiros num espaço moderno na Zona Portuária.', horario: 'Diário 10h–18h | R$100 / meia R$50', maps: 'AquaRio+Rio+de+Janeiro', link: null },
-          { title: 'Maracanã (Tour)', desc: 'O estádio mais icônico do Brasil e palco de lendas do futebol mundial. O tour pelo memorial, vestiários e gramado é obrigatório para quem é apaixonado por futebol — mas assistir a um jogo é ainda melhor.', horario: 'Diário 9h–17h (sem jogo) | Compre em tourmaracana.com.br', maps: 'Maracanã+Tour+Rio+de+Janeiro', link: 'https://www.tourmaracana.com.br' },
-          { title: 'Feira de São Cristóvão', desc: 'O maior centro cultural nordestino fora do Nordeste. Forró ao vivo, baião de dois, artesanato e a culinária da região num espaço permanente que funciona de terça a domingo. Mergulho total em outra cultura dentro do Rio.', horario: 'Ter–Dom 10h–23h', maps: 'Feira+de+São+Cristóvão+Rio+de+Janeiro', link: 'https://www.feiradesaocristovao.org.br' },
-          { title: 'Circuito Cultural da Pequena África', desc: 'O território de chegada de milhões de africanos escravizados. O Cais do Valongo, Patrimônio da Humanidade pela Unesco, o IPN e o Cemitério dos Pretos Novos contam uma história fundamental do Brasil.', horario: 'Visita livre 24h | Museus: Ter–Dom', maps: 'Cais+do+Valongo+Pequena+África+Rio', link: null },
-        ],
-        cafes: [
-          { title: 'Confeitaria Colombo', desc: 'A confeitaria mais histórica do Brasil desde 1894. Art Nouveau impecável, chás, bolos e o quindim icônico. Dica honesta: entre para ver o salão — é um dos interiores mais belos da América Latina — mas coma na Brava Doceira ou na Casa Cavé.', horario: 'Seg–Sex 9h–19h | Sáb 9h–17h', preco: '$$', maps: 'Confeitaria+Colombo+Centro+Rio', link: 'https://confeitariacolombo.com.br' },
-          { title: 'Casa Cavé', desc: 'Confeitaria histórica fundada em 1860 — a mais antiga em funcionamento do Rio. Ambiente completamente preservado, bombons artesanais e aquele tempo lento que o Centro costumava ter.', horario: 'Seg–Sex 9h–19h | Sáb 9h–17h', preco: '$$', maps: 'Casa+Cavé+Rio+de+Janeiro', link: null },
-          { title: 'Café do CCBB', desc: 'Café dentro do Centro Cultural Banco do Brasil num casarão histórico tombado. Cardápio simples, almoço executivo e o melhor pretexto para estender a visita às exposições.', horario: 'Ter–Dom 9h–21h', preco: '$$', maps: 'Café+CCBB+Centro+Rio', link: null },
-          { title: 'Fazenda Paradiso Café', desc: 'Referência em café especial no Rio. Grãos de Minas Gerais torrados num sobrado histórico tombado. Premiado Revelação Cafeteria pela Revista Espresso.', horario: 'Seg–Sex 8h–19h', preco: '$$', maps: 'Fazenda+Paradiso+Café+Centro+Rio', link: 'https://fazendaparadisocafe.com.br' },
-        ],
-        restaurantes: [
-          { title: 'Lilia', desc: 'Restaurante contemporâneo numa casa histórica da Rua do Senado. Cozinha autoral com ingredientes cariocas e ambiente refinado no coração do Centro histórico.', horario: 'Ter–Sáb 12h–15h e 19h–23h', preco: '$$$', maps: 'Lilia+Restaurante+Rua+Senado+Rio', link: null },
-          { title: 'Cais do Oriente', desc: 'Restaurante histórico instalado num armazém do século XIX na Orla Conde. Cozinha afro-brasileira e mediterrânea num ambiente de grandiosidade rara no Rio.', horario: 'Ter–Dom 12h–16h e 19h–0h', preco: '$$', maps: 'Cais+do+Oriente+Rio+de+Janeiro', link: null },
-          { title: 'Restaurante do MAR', desc: 'Restaurante dentro do Museu de Arte do Rio com vista privilegiada para a Praça Mauá e a Baía de Guanabara. Cozinha leve e cuidadosa — combinar a visita ao museu com o almoço é obrigatório.', horario: 'Ter–Dom 12h–17h', preco: '$$', maps: 'Restaurante+Museu+Arte+Rio+MAR', link: null },
-          { title: 'Casa do Saulo', desc: 'Restaurante do Museu do Amanhã numa área menos comentada que a arquitetura, mas igualmente surpreendente. Cozinha brasileira criativa com ingredientes regionais e vista para a baía.', horario: 'Qui–Ter 10h–17h', preco: '$$', maps: 'Casa+do+Saulo+Museu+do+Amanhã+Rio', link: null },
-          { title: '⭐ Dois de Fevereiro', desc: 'O restaurante mais importante da cena gastronômica do Centro histórico. Cozinha afro-brasileira de autor com ingredientes da diáspora africana — uma experiência que vai além do prato.', horario: 'Ter–Sáb 12h–15h e 19h–22h', preco: '$$$', maps: 'Dois+de+Fevereiro+Rio+de+Janeiro', link: null },
-        ],
-        bares: [
-          { title: 'Bafo da Prainha', desc: 'Bar histórico encravado entre os pescadores da Prainha, no coração do Centro portuário. Ambiente autêntico, cerveja gelada e petiscos de frutos do mar direto do cais.', horario: 'Seg–Sex 11h–21h', preco: '$', maps: 'Bafo+da+Prainha+Rio+de+Janeiro', link: null },
-          { title: 'Angu do Gomes', desc: 'Comida simples, baratíssima e deliciosa. O angu com linguiça é tradição do Centro carioca desde 1950 — história líquida numa tigela que custa menos de R$20.', horario: 'Seg–Sex 11h–16h', preco: '$', maps: 'Angu+do+Gomes+Centro+Rio', link: null },
-          { title: 'Vilarino', desc: 'Bar histórico onde a Bossa Nova nasceu — Tom Jobim e Vinícius de Moraes eram frequentadores assíduos. Ambiente retrô inalterado e a sensação genuína de estar pisando numa lenda.', horario: 'Seg–Sex 11h–22h | Sáb 11h–18h', preco: '$$', maps: 'Vilarino+Bar+Centro+Rio+de+Janeiro', link: null },
-        ],
-        insider: [
-          { title: '📍 Centro em resumo', desc: 'Prós: história em cada esquina, museus de classe mundial. Contras: deserto aos fins de semana — lojas e botecos fecham. Combine com: Santa Teresa para encerrar o dia no alto.', maps: null },
-          { title: '📅 Centro funciona de segunda a sexta', desc: 'O Centro comercial vive durante a semana. Fins de semana os museus abrem, mas o bairro esvazia — ruas vazias significam mais atenção necessária.', maps: null },
-          { title: '🚊 Use o VLT', desc: 'O VLT conecta Praça XV, Museu do Amanhã, Lapa e Central — moderno, gratuito nos pontos turísticos e muito mais agradável que encarar o trânsito.', maps: null },
-          { title: '☕ Colombo vale a entrada', desc: 'Mesmo que não coma nada, entre na Confeitaria Colombo só para ver o salão Art Nouveau. É um dos interiores mais belos da América Latina — de graça para olhar.', maps: null },
-          { title: '🚊 Cinelândia → Praça Mauá a pé', desc: 'Faça o trajeto a pé ao longo da Orla Conde, acompanhando o VLT — passa pelo MAR, Museu do Amanhã, Boulevard Olímpico e Praça Mauá. Um dos percursos mais bonitos do Rio, de graça.', maps: null },
-          { title: '📅 Evite fins de semana no Centro', desc: 'O Centro comercial vive de segunda a sexta. Nos fins de semana os museus abrem mas o bairro esvazia — ruas mais vazias significam mais atenção necessária com pertences.', maps: null },
-          { title: '🔦 Atenção nas adjacências à noite', desc: 'Fique nos eixos principais: Rio Branco, Primeiro de Março, Orla Conde. Ruas transversais à noite pedem atenção extra — como em qualquer metrópole do mundo.', maps: null },
-        ],
-      },
+const neighborhoods = [
+  {
+    id: 'centro-historico',
+    name: 'Centro Histórico',
+    subtitle: 'Museus, Patrimônio & Boulevard Olímpico',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Rio_de_Janeiro_MAR_Museum.jpg/1200px-Rio_de_Janeiro_MAR_Museum.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Centro Histórico', desc: 'Coração histórico da cidade — prédios coloniais, igrejas, museus. Vale um passeio guiado pra entender melhor. Pode ser um pouco caótico.', dica: 'Vá num passeio guiado — o Centro pode ser intimidador sozinho.', alerta: 'Ativa durante o dia — à noite fica perigoso em certos lugares.', horario: 'Dia úteis 10h-17h', preco: 'Grátis (museus $)', maps: 'Centro+Histórico+Rio+de+Janeiro' },
+        { title: 'Museu de Arte Moderna', desc: 'Museu de arte moderna no Rio com bom acervo de arte brasileira contemporânea.', horario: 'Confirmar', preco: '$', maps: 'Museu+de+Arte+Moderna+Rio+de+Janeiro' },
+        { title: 'Passeio Público Rio Antigo', desc: 'Parque pequeno e charmoso no Centro — paisagismo histórico, ideias paisagísticas portuguesas. Tranquilo em meio ao caos do Centro.', horario: 'Confirmar', preco: 'Grátis', maps: 'Passeio+Público+Rio+Antigo+Rio+de+Janeiro' },
+        { title: 'Rua do Ouvidor', desc: 'Rua histórica do Centro — importante na história do Rio. Hoje é uma rua de compras com prédios históricos.', horario: 'Confirmar', preco: 'Grátis', maps: 'Rua+do+Ouvidor+Rio+de+Janeiro' },
+        { title: 'Teatro Municipal', desc: 'Teatro histórico no Centro — shows, óperas, balés. Arquitetura belíssima.', dica: 'Se houver um show que você quer ver — este é o lugar. A arquitetura é belíssima mesmo sem show.', alerta: 'Confirmar programação.', horario: 'Confirmar', preco: '$$$', maps: 'Teatro+Municipal+Rio+de+Janeiro' },
+        { title: 'Orla Projeto Correia', desc: 'Projeto de revitalização da Orla do Rio — caminhos, parques, quiosques. Ótimo pra caminhar.', dica: 'Caminhe a orla — tem muito a descobrir.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Orla+Projeto+Correia+Rio+de+Janeiro' },
+        { title: 'Espaço Cultural da Marinha', desc: 'Museu da Marinha no Centro — navios históricos, história naval. Interessante pra entender a história do Brasil.', horario: 'Confirmar', preco: '$', maps: 'Espaço+Cultural+da+Marinha+Rio+de+Janeiro' },
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '📅 Funciona melhor de segunda a sexta', desc: 'O Centro comercial vive durante a semana. Fins de semana os museus abrem, mas as ruas esvaziam — e ruas vazias pedem mais atenção.', maps: null },
+        { title: '🚊 Use o VLT', desc: 'O VLT conecta Praça XV, Museu do Amanhã, Lapa e Central — gratuito nos pontos turísticos e muito mais confortável que enfrentar o trânsito.', maps: null },
+        { title: '☕ Colombo: entre só pra ver', desc: 'A Confeitaria Colombo tem um dos interiores Art Nouveau mais belos da América Latina. Mesmo que não coma nada, vale entrar para fotografar.', maps: null },
+        { title: '🚶 Cinelândia → Praça Mauá a pé', desc: 'Faça o trajeto a pé pela Orla Conde. Passa pelo MAR, Museu do Amanhã e Praça Mauá — um dos percursos mais bonitos do Rio, de graça.', maps: null },
+        { title: '🔦 Fique nos eixos principais', desc: 'Rio Branco, Primeiro de Março, Orla Conde. Ruas transversais à noite pedem atenção extra, como em qualquer metrópole.', maps: null },
+      ],
     },
-    {
-      id: 'lapa-santa-teresa',
-      name: 'Lapa & Santa Teresa',
-      subtitle: 'Samba, Bonde & Bairro Artístico',
-      image: 'https://portal.loft.com.br/wp-content/uploads/2023/04/lapa-bairro-do-Rio-de-Janeiro.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Arcos da Lapa', desc: 'O símbolo mais icônico do Rio histórico. Aqueduto do século XVIII que sustenta o bonde elétrico de Santa Teresa — engenharia colonial transformada em ícone cultural.', horario: 'Aberto 24h | Gratuito', maps: 'Arcos+da+Lapa+Rio+de+Janeiro', link: null },
-          { title: 'Escadaria Selarón', desc: 'Escadarias cobertas de azulejos doados de mais de 60 países, obra permanente do artista Jorge Selarón. Um dos pontos turísticos mais visitados e fotografados do Brasil.', horario: 'Aberta 24h | Gratuito', maps: 'Escadaria+Selarón+Lapa+Rio', link: null },
-          { title: 'Bonde de Santa Teresa', desc: 'O único bonde em operação no Brasil. Saindo dos Arcos da Lapa, sobe tortuoso pelos morros de Santa Teresa com vistas cinematográficas da cidade ao fundo.', horario: 'Seg–Sex 8h–18h | Sáb–Dom 9h–16h | R$20 ida e volta', maps: 'Bonde+Santa+Teresa+Rio', link: null },
-          { title: 'Pedra do Sal', desc: 'O berço do samba carioca — território histórico da Pequena África, onde escravizados chegavam ao Rio. Toda segunda e sexta há roda de samba ao ar livre na rua histórica. Chegue antes das 20h para conseguir lugar.', horario: 'Seg e Sex a partir das 18h | Gratuito', maps: 'Pedra+do+Sal+Rio+de+Janeiro', link: null },
-          { title: 'Parque das Ruínas', desc: 'Ruínas de uma mansão histórica transformadas num espaço cultural com galeria, teatro e mirante com vista privilegiada para o Centro e a Baía de Guanabara.', horario: 'Ter–Dom 10h–18h | Gratuito', maps: 'Parque+das+Ruínas+Santa+Teresa+Rio', link: null },
-          { title: 'Museu Chácara do Céu', desc: 'Museu com coleção impressionante de arte moderna em casarão histórico de Santa Teresa. Monet, Matisse, Picasso e Di Cavalcanti numa vista de tirar o fôlego.', horario: 'Qua–Seg 12h–17h | R$10', maps: 'Museu+Chácara+do+Céu+Santa+Teresa+Rio', link: null },
-        ],
-        cafes: [
-          { title: 'Cafecito', desc: 'Café escondido num jardim secreto de Santa Teresa — plantas trepadeiras, mesas de madeira e aquele silêncio de bairro que o Rio raramente oferece. Um achado genuíno.', horario: 'Ter–Dom 9h–18h', preco: '$', maps: 'Cafecito+Santa+Teresa+Rio', link: null },
-          { title: 'Cultivar', desc: 'Padaria artesanal com o melhor pão de queijo clássico de Santa Teresa. Ambiente de bairro, café passado na hora e uma simplicidade que o turismo ainda não estragou.', horario: 'Diário 8h–17h', preco: '$', maps: 'Cultivar+Santa+Teresa+Rio', link: null },
-          { title: 'Café do Alto', desc: 'Café e restaurante nordestino no alto de Santa Teresa. Tapiocas, cuscuz e o melhor café com leite de cana do bairro — sabores que não têm nada a provar e provam tudo.', horario: 'Ter–Dom 9h–18h', preco: '$', maps: 'Café+do+Alto+Santa+Teresa+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Aprazível', desc: 'Restaurante premiado com terraço suspenso na floresta, vista panorâmica da cidade e cozinha brasileira de autor. Um dos cenários mais impressionantes do Rio para jantar.', horario: 'Qui–Sáb 12h–16h e 19h–23h | Dom 12h–17h', preco: '$$$', maps: 'Aprazível+Santa+Teresa+Rio', link: null },
-          { title: 'Lilia', desc: 'Restaurante em casarão histórico de Santa Teresa com cozinha afetiva e autoral. Ambiente de mansão viva — ingredientes locais, resultado memorável e reserva essencial.', horario: 'Ter–Sáb 19h–23h | Dom 12h–16h', preco: '$$$', maps: 'Lilia+Santa+Teresa+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Beco do Rato', desc: 'Bar pequeno, escuro e absolutamente perfeito para samba ao vivo. Um clássico da Lapa que os cariocas protegem com carinho — não está nas listas dos turistas, mas deveria.', horario: 'Qui–Sáb a partir das 21h', preco: '$', maps: 'Beco+do+Rato+Lapa+Rio', link: null },
-          { title: 'Bar do Mineiro', desc: 'Boteco querido de Santa Teresa com pastel de feijoada icônico e ambiente completamente descontraído. Frequentado por turistas e moradores com a mesma familiaridade.', horario: 'Ter–Dom 11h–22h', preco: '$', maps: 'Bar+do+Mineiro+Santa+Teresa+Rio', link: null },
-          { title: 'Suru Bafo', desc: 'Bar animado da Lapa com música variada, caipirinhas generosas e ambiente que muda de ritmo conforme a noite avança. Ponto de convergência de cariocas com boa vontade noturna.', horario: 'Qua–Sáb a partir das 19h', preco: '$', maps: 'Suru+Bafo+Lapa+Rio', link: null },
-          { title: 'Carioca da Gema', desc: 'A mais famosa casa de samba ao vivo da Lapa. Shows diários de artistas consagrados e novos nomes do samba — a experiência mais autêntica e dançante da noite carioca.', horario: 'Seg–Sáb a partir das 20h | Entrada paga', preco: '$$', maps: 'Carioca+da+Gema+Lapa+Rio', link: null },
-          { title: 'Jurema (Lapa)', desc: 'O mesmo boteco querido que existe em Flamengo, com uma unidade na Lapa para os que não querem sair do circuito boêmio. Chope frio, petiscos clássicos e muito barulho bom.', horario: 'Seg–Sáb 11h–23h', preco: '$', maps: 'Jurema+Bar+Lapa+Rio', link: null },
-          { title: 'Quintal da Lapa', desc: 'Bar e restaurante ao ar livre na Lapa com clima de boteco sofisticado. Petiscos criativos, boa seleção de chopes artesanais e ambiente que equilibra a energia boêmia do bairro com um toque mais despretensioso.', horario: 'Qua–Dom a partir das 17h', preco: '$$', maps: 'Quintal+da+Lapa+Rio+de+Janeiro', link: null },
-          { title: 'Amarelinho', desc: 'Bar histórico da Cinelândia com mesinhas na calçada em frente à Câmara Municipal. Um dos mais tradicionais do Centro — chope gelado assistindo o fluxo da cidade passar.', horario: 'Seg–Sáb 10h–0h', preco: '$', maps: 'Amarelinho+Bar+Cinelândia+Rio', link: null },
-          { title: 'Explorer Bar', desc: 'Bar de Santa Teresa com ambiente de aventureiro e decoração inusitada. Caipirinhas criativas, boa cerveja e uma varanda com vista que justifica a subida até o morro.', horario: 'Qui–Dom a partir das 18h', preco: '$$', maps: 'Explorer+Bar+Santa+Teresa+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Lapa & Santa Teresa em resumo', desc: 'Prós: alma boêmia insubstituível e vistas lindas de Santa Teresa. Contras: ladeiras cansativas e Lapa pede atenção com pertences à noite. Combine com: Centro — roteiro natural de manhã até a madrugada.', maps: null },
-          { title: '🌙 Lapa na sexta ou sábado', desc: 'A Lapa em noite de sexta ou sábado é uma experiência de outro mundo. Mas guarde o celular no bolso dianteiro — não é paranoia, é protocolo carioca consolidado.', maps: null },
-          { title: '🚊 O bonde vale mais pela experiência', desc: 'O bonde de Santa Teresa vale mais pela viagem do que pela eficiência de transporte. Faça o percurso completo (R$20) e desça no Largo do Guimarães para explorar.', maps: null },
-          { title: '🗓️ Feira do Rio Antigo', desc: 'No primeiro sábado de cada mês, a Rua do Lavradio vira um festival: antiguidades, música ao vivo, bares, restaurantes e o melhor do Centro histórico num só dia.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'lapa-santa-teresa',
+    name: 'Lapa & Santa Teresa',
+    subtitle: 'Samba, Bonde & Arte de Rua',
+    image: 'https://portal.loft.com.br/wp-content/uploads/2023/04/lapa-bairro-do-Rio-de-Janeiro.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Escadaria Selarón', desc: 'Escadaria colorida e artística na Lapa — arte de rua única. Lugar extremamente instagramável.', dica: 'Vá em Sunset — é lindo. Fique atento aos pertences.', alerta: 'Bairro agitado — fique atento.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Escadaria+Selarón+Rio+de+Janeiro' },
+        { title: 'Arcos da Lapa', desc: 'Aqueduto histórico — monumento icônico da Lapa. Centro da vida noturna carioca.', dica: 'Vá para o bairro — é aqui que Lapa acontece.', alerta: 'À noite pode ficar perigoso — fique atento e em grupo.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Arcos+da+Lapa+Rio+de+Janeiro' },
+        { title: 'Atelier Rio', desc: 'Studio de aulas de samba e ritmo — aprenda a dançar como carioca.', dica: 'Uma experiência única — você vai entender a cultura carioca através da dança.', horario: 'Confirmar', preco: '$$', camu_indica: true, maps: 'Atelier+Rio+Rio+de+Janeiro' },
+        { title: 'Academia de Capoeira Carioca', desc: 'Aula de capoeira — arte marcial brasileira única. Vivência autêntica.', dica: 'Vá experimentar — é a luta que é dança que é história.', horario: 'Confirmar', preco: '$$', camu_indica: true, maps: 'Academia+de+Capoeira+Carioca+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Café do Alto', desc: 'Café rooftop na Lapa com vista incrível da região. Bom pra um café da manhã leve ou um drink no final da tarde.', dica: 'Vá pelo visual — é incrível.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Café+do+Alto+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+        { title: 'Aprazível', desc: 'Restaurante sofisticado em Santa Teresa com uma das melhores vistas do Rio. Culinária brasileira reinterpretada com sofisticação.', dica: 'Reserve um lugar na varanda — a vista do pôr do sol é de tirar o fôlego.', alerta: 'Reserve com antecedência. Lugar popular com turistas.', horario: 'Todos os dias 12h–23h', preco: '$$$', link: 'https://www.aprazivel.com.br', camu_indica: true, maps: 'Aprazível+Rio+de+Janeiro' },
+      ],
+      bares: [
+        { title: 'Santa Teresa Hotel', desc: 'Hotel histórico no bairro de Santa Teresa com uma boa restaurante e bar. Pra comer e ver a história do bairro.', dica: 'Vale a pena um drink no bar.', horario: 'Confirmar', preco: '$$', camu_indica: true, maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+        { title: 'Bar do Gómez', desc: 'Um boteco clássico carioca na Lapa. Ótimo pra entender a cultura noturna da cidade.', dica: 'Vá pra sentir a Lapa de verdade.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Bar+do+Gómez+Rio+de+Janeiro' },
+        { title: 'Porta da Luz', desc: 'Bar com história — ponto de encontro de músicos e artistas cariocas.', dica: 'Ambiente autêntico de carioca — vá sentir.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Porta+da+Luz+Rio+de+Janeiro' },
+      ],
+      insider: [
+        { title: '🌙 Lapa na sexta ou sábado', desc: 'A noite na Lapa é uma experiência à parte. Mas guarde o celular no bolso dianteiro — não é paranoia, é protocolo carioca consolidado.', maps: null },
+        { title: '🚊 O bonde vale pela viagem', desc: 'Faça o percurso completo (R$20) e desça no Largo dos Guimarães para explorar. O bonde é mais experiência do que transporte.', maps: null },
+        { title: '🗓️ Feira do Rio Antigo', desc: 'No primeiro sábado de cada mês, a Rua do Lavradio vira festival: antiguidades, música ao vivo e o melhor do Centro boêmio.', maps: null },
+        { title: '🎵 Pedra do Sal: chegue antes das 20h', desc: 'A roda de samba na Pedra do Sal (seg e sex) é gratuita mas fica cheia. Chegue cedo para conseguir espaço perto.', maps: null },
+      ],
     },
-    {
-      id: 'gloria-flamengo',
-      name: 'Glória & Flamengo',
-      subtitle: 'Parque, Museus & Vida de Bairro',
-      image: 'https://ogimg.infoglobo.com.br/in/24934910-e85-3bc/FT1086A/gloria-1.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Parque do Flamengo (Aterro)', desc: 'O maior parque urbano à beira-mar da América do Sul, projetado por Burle Marx nos anos 60. Imensidão verde com ciclovias, quadras, museus e a melhor vista do Pão de Açúcar.', horario: 'Aberto 24h | Gratuito', maps: 'Parque+do+Flamengo+Aterro+Rio', link: null },
-          { title: 'MAM — Museu de Arte Moderna', desc: 'Uma das maiores coleções de arte moderna da América Latina, num belo edifício brutalista dentro do Parque do Flamengo, com jardim de esculturas de Burle Marx.', horario: 'Ter–Sex 11h–18h | Sáb–Dom 12h–18h | R$14 / meia R$7', maps: 'Museu+de+Arte+Moderna+MAM+Rio', link: null },
-          { title: 'Museu da República (Catete)', desc: 'O Palácio do Catete, onde Getúlio Vargas se suicidou em 1954. Museu histórico imperdível num palácio de arquitetura eclética, com jardins e café.', horario: 'Ter–Sex 10h–17h | Sáb–Dom 11h–18h | R$6 | Grátis qua e dom', maps: 'Museu+da+República+Catete+Rio', link: null },
-          { title: 'Igreja Nossa Sra. da Glória do Outeiro', desc: 'Uma das mais belas igrejas do Rio, construída em 1714 num morro com vista panorâmica. Padroeira da família imperial brasileira — arquitetura barroca impecável.', horario: 'Ter–Sex 9h–17h | Sáb 9h–12h | Gratuito', maps: 'Igreja+Nossa+Senhora+da+Glória+do+Outeiro+Rio', link: null },
-          { title: 'Marina da Glória', desc: 'Orla com restaurantes, bares e passeios de barco para a Baía de Guanabara. A vista do Rio visto do mar compensa qualquer fila ou distância percorrida.', horario: 'Aberta 24h | Acesso gratuito', maps: 'Marina+da+Glória+Rio+de+Janeiro', link: null },
-        ],
-        cafes: [
-          { title: 'Brava Doceira', desc: 'Confeitaria artesanal de Flamengo com bolos de encomenda e doces cuidadosamente elaborados. Uma pequena descoberta no miolo do bairro que os moradores guardam pra si.', horario: 'Ter–Sáb 10h–19h', preco: '$$', maps: 'Brava+Doceira+Flamengo+Rio', link: null },
-          { title: 'Feira da Glória', desc: 'Aos domingos, a Praça da Glória se transforma numa feira de produtores com café, pães artesanais, queijos e frutas frescas. O ritual do fim de semana dos moradores do bairro.', horario: 'Domingos 8h–14h', preco: '$', maps: 'Feira+da+Glória+Rio+de+Janeiro', link: null },
-          { title: 'Café do MAM Cinemateca', desc: 'Café dentro do Museu de Arte Moderna com vista para o parque de Burle Marx. Almoço leve, sucos e café especial num ambiente de design impecável — entrada pelo parque.', horario: 'Ter–Dom 12h–17h', preco: '$$', maps: 'Café+MAM+Cinemateca+Flamengo+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Jurema', desc: 'Boteco-restaurante carioca de Flamengo com cardápio de clássicos — feijoada na sexta, bolinho de bacalhau frito e chope cremoso que justifica a caminhada até lá.', horario: 'Seg–Sáb 11h–23h | Dom 11h–18h', preco: '$$', maps: 'Jurema+Restaurante+Flamengo+Rio', link: null },
-          { title: 'Isca', desc: 'Bar-bistrô da Glória com menu de pintxos e petiscos de inspiração espanhola, sob o comando da chef Tatiana Fernandes. Drinques autorais e vinho natural num ambiente descontraído e sem frescura.', horario: 'Qua–Sáb a partir das 18h', preco: '$$', maps: 'Isca+Bar+Glória+Rio', link: null },
-          { title: 'Restaurante do MAM', desc: 'O restaurante do Museu de Arte Moderna tem uma das vistas mais invejáveis do Rio: jardim de Burle Marx de um lado, Baía de Guanabara do outro. Cozinha leve e bem-executada para um almoço inesquecível.', horario: 'Ter–Dom 12h–17h', preco: '$$$', maps: 'Restaurante+MAM+Museu+Arte+Moderna+Rio', link: null },
-          { title: 'Refettorio Gastromotiva', desc: 'Projeto social do chef Massimo Bottura transformado em restaurante aberto ao público. Cozinha sustentável que usa ingredientes excedentes para criar pratos criativos — uma das experiências gastronômicas mais únicas do Rio.', horario: 'Ter–Sáb 12h–15h', preco: '$$', maps: 'Refettorio+Gastromotiva+Glória+Rio', link: null },
-          { title: 'Surubafo', desc: 'Restaurante de carnes na brasa do mesmo grupo do Surubar. Brisket, ossobuco e carne de rump cozidos a bafo e preparados na brasa — vencedor de melhor boteco do Rio Show de Gastronomia 2024.', horario: 'Ter/Qui 17h–1h | Sex–Sáb 12h–1h | Dom 12h–20h', preco: '$$', maps: 'Surubafo+Restaurante+Glória+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Labuta Mar', desc: 'Bar e restaurante de frutos do mar na Glória, aberto em 2023 sob o comando do chef Yan Ramos. Ostras frescas às quartas, frutos do mar criativos e aquele clima de bairro que está tornando a Glória no ponto mais quente do Rio.', horario: 'Ter–Dom 11h30–22h', preco: '$$', maps: 'Labuta+Mar+Glória+Rio', link: null },
-          { title: 'Isca', desc: 'Bar-bistrô de pintxos e petiscos espanhóis da chef Tatiana Fernandes. Ambiente descontraído na Glória com drinques autorais e vinho natural — um dos mais queridos da nova cena do bairro.', horario: 'Qua–Sáb a partir das 18h', preco: '$$', maps: 'Isca+Bar+Glória+Rio', link: null },
-          { title: 'Fatchia', desc: 'Pizza estilo Detroit, disco de vinil e ambiente LGBTQIA+-friendly num dos bares mais animados da Glória. Pizzas quadradas saem a partir das 19h num clima de festa sem pretensão — acessível e muito divertido.', horario: 'Qua–Dom 19h–0h (Qui–Sáb até 1h)', preco: '$', maps: 'Fatchia+Glória+Rio', link: null },
-          { title: 'Deja Vu', desc: 'Wine bar com estética retrô na Glória. Carta de vinhos acessível, coquetéis criativos e boa música — um pré-jantar agradável antes de seguir para Botafogo ou Santa Teresa.', horario: 'Ter–Dom 17h–0h', preco: '$$', maps: 'Deja+Vu+Wine+Bar+Glória+Rio', link: null },
-          { title: 'Jurema', desc: 'À noite o boteco vira ponto de encontro do bairro — chope sempre gelado, petiscos generosos e aquele clima sem glamour que Flamengo preserva melhor do que qualquer outro bairro da zona sul.', horario: 'Seg–Sáb até 23h | Dom até 18h', preco: '$', maps: 'Jurema+Bar+Flamengo+Rio', link: null },
-          { title: 'Surubar', desc: 'Bar de samba e pagode ao vivo com coquetelaria criativa de ingredientes brasileiros. Vencedor de melhor boteco do Rio Show de Gastronomia 2024 — a energia da Glória concentrada num único endereço.', horario: 'Qua–Sáb a partir das 18h', preco: '$$', maps: 'Surubar+Glória+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Glória & Flamengo em resumo', desc: 'Prós: parques incríveis, museus subestimados e vida de bairro autêntica. Contras: evite o Aterro após as 21h. Combine com: Lapa — roteiro natural ao longo do dia.', maps: null },
-          { title: '🚴 Aterro é dos cariocas', desc: 'O Parque do Flamengo é frequentado quase que exclusivamente por moradores — sem turistas, sem frescura. Alugue uma bike e faça o percurso beira-mar até o Botafogo.', maps: null },
-          { title: '🏛️ O Catete é subestimado', desc: 'O Museu da República é uma das visitas mais ignoradas pelos turistas e uma das mais ricas da cidade. O palácio, o jardim e a história do suicídio de Vargas valem cada minuto.', maps: null },
-          { title: '🔥 A Glória virou hype', desc: 'A Glória é o novo epicentro da vida noturna criativa do Rio — bares, restaurantes e uma energia de bairro que está mudando rápido. Venha antes que todo mundo descubra.', maps: null },
-          { title: '🚇 Conexão perfeita', desc: 'Flamengo tem metrô e é ponto de passagem natural entre Centro/Lapa e Botafogo. Monte o roteiro em sequência: Centro → Glória → Flamengo → Botafogo em um dia.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'gloria-flamengo',
+    name: 'Glória & Flamengo',
+    subtitle: 'Parque, Museus & Vida de Bairro',
+    image: 'https://ogimg.infoglobo.com.br/in/24934910-e85-3bc/FT1086A/gloria-1.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Pista de Bike Flamengo', desc: 'Pista de ciclismo dedicada em Flamengo — aluga bikes e oferece aulas. Ótimo pra explorar a orla de bike.', dica: 'Alugue uma bike — é a melhor forma de explorar a Zona Sul.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Pista+de+Bike+Flamengo+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Brava Doceria', desc: 'Nova e incrível doceria e café na Glória. Croissants, brioches e sobremesas empratadas que vão fazer você querer voltar no dia seguinte.', dica: 'Coma as sobremesas empratadas — é o forte da casa.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Brava+Doceria+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+        { title: 'O Escondido', desc: 'Churrascaria autêntica no Glória/Flamengo. Rodízio de ótima qualidade com seleção interessante de carnes.', dica: 'Chegue com fome — a quantidade de carne é impressionante.', horario: 'Confirmar', preco: '$$', camu_indica: true, maps: 'O+Escondido+Rio+de+Janeiro' },
+      ],
+      bares: [
+        { title: 'Boteco Aconchego', desc: 'Boteco tradicional carioca em Glória com ótima comida de rua e drinks. Ambiente acolhedor e frequentado por cariocas de verdade.', dica: 'Venha comer pastéis e chopp gelado.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Boteco+Aconchego+Rio+de+Janeiro' },
+      ],
+      insider: [
+        { title: '🌿 Aterro do Flamengo de bike', desc: 'Alugue uma bike e percorra o Aterro até o MAM — o maior parque urbano de beira-mar da América do Sul, com vista permanente para o Pão de Açúcar.', maps: null },
+        { title: '🥐 Feira da Glória aos domingos', desc: 'Aos domingos, a Praça da Glória tem feira de produtores com pão artesanal, queijo, café e frutas. Ritual do bairro — chegue cedinho.', maps: null },
+        { title: '🏛️ Palácio do Catete', desc: 'O Museu da República no Palácio do Catete (onde Getúlio Vargas se suicidou) é subestimado. Jardins lindos, entrada módica e quase sem fila.', maps: null },
+      ],
     },
-    {
-      id: 'ipanema',
-      name: 'Ipanema',
-      subtitle: 'Praia, Pôr do Sol & Bossa Nova',
-      image: 'https://cdn.sanity.io/images/nxpteyfv/goguides/e94145c8ba398d56aa00f94d37c7f4dfeef7215f-1600x1066.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Pedra do Arpoador', desc: 'O mirante perfeito para o pôr do sol mais famoso do Rio. Centenas de pessoas aplaudem o sol mergulhar no mar todos os dias.', horario: 'Aberto 24h — melhor entre 17h e 18h', maps: 'Pedra+do+Arpoador+Rio+de+Janeiro' },
-          { title: 'Posto 9', desc: 'O posto mais icônico da praia de Ipanema. Ponto de encontro da galera alternativa, com aquela energia característica da orla carioca.', horario: 'Aberto 24h', maps: 'Posto+9+Praia+Ipanema+Rio+de+Janeiro' },
-          { title: 'Praça Nossa Sra. da Paz', desc: 'Praça charmosa no coração do bairro. Ideal para relaxar, tomar um açaí e assistir ao ritmo carioca numa tarde de sábado.', horario: 'Aberto 24h', maps: 'Praça+Nossa+Senhora+da+Paz+Ipanema+Rio' },
-          { title: 'Lagoa Rodrigo de Freitas', desc: 'Calçadão de 7km ao redor da lagoa com ciclovia e quiosques. A melhor pedida ao entardecer de sexta-feira — quando os cariocas chegam para o happy hour.', horario: 'Aberto 24h | Gratuito', maps: 'Lagoa+Rodrigo+de+Freitas+Rio', link: null },
-        ],
-        cafes: [
-          { title: 'Zazá Café', desc: 'Café vibrante e colorido dentro da Livraria da Travessa de Ipanema — a melhor livraria da cidade. Bolos artesanais, cafés especiais e aquele ambiente de bric-à-brac encantador. Chegue com tempo para explorar os livros também.', horario: '8h–20h', preco: '$$', maps: 'Zazá+Café+Ipanema+Rio', link: null },
-          { title: 'Empório Jardim', desc: 'Café saudável muito frequentado pelos moradores antes da praia. Pães artesanais, quiches e bolos num ambiente acolhedor que justifica a fidelidade de quem mora no bairro.', horario: '8h–22h', preco: '$$', maps: 'Empório+Jardim+Ipanema+Rio', link: 'https://emporiojardimrio.com.br' },
-          { title: 'So_lo Café', desc: 'Café-bistrô orgânico com pães artesanais feitos na casa, waffles, sanduíches e café especial. Brunch o dia todo, ambiente aconchegante e tudo com ingredientes orgânicos ou de origem sustentável.', horario: '9h–19h', preco: '$$', maps: 'So_lo+Café+Ipanema+Rio', link: null },
-          { title: 'Vero Gelato', desc: 'Gelato artesanal italiano com sabores criativos e ingredientes brasileiros. Impossível passar na rua sem entrar — e impossível comer só uma bola.', horario: '10h–23h', preco: '$$', maps: 'Vero+Gelato+Ipanema+Rio', link: null },
-          { title: 'Mil Frutas', desc: 'Gelateria artesanal carioca clássica com sabores tropicais impossíveis de resistir. Manga, açaí, maracujá — ingredientes brasileiros num sorvete que tem fãs fanáticos no bairro.', horario: 'Diário 11h–23h', preco: '$', maps: 'Mil+Frutas+Ipanema+Rio', link: null },
-          { title: 'Gringo Café', desc: 'Lanchonete americana clássica com café da manhã e brunch o dia todo: pancakes, waffles, French toast, cheeseburgers e clube sanduíche. Em Ipanema desde 2010 — equipe bilíngue, vibe de diner americano.', horario: 'Diário 8h–18h', preco: '$$', maps: 'Gringo+Café+Ipanema+Rio', link: null },
-          { title: 'Arp Bar', desc: 'Bar e café com vista privilegiada para a rua mais bonita de Ipanema. Do café da manhã ao drinque pré-praia — fique pela vista e pelo jeito que o bairro acontece na calçada.', horario: '7h–23h', preco: '$$', maps: 'Arp+Bar+Ipanema+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Zazá Bistrô', desc: 'Bistrô eclético e colorido com cozinha criativa e ambiente de tirar o fôlego. Um dos espaços mais fotogênicos da zona sul — e tão gostoso quanto bonito.', horario: '12h–0h', preco: '$$', maps: 'Zazá+Bistrô+Ipanema+Rio', link: null },
-          { title: 'Maria e o Boi', desc: 'Restaurante de alta cozinha brasileira da chef Vanessa Rocha, com cortes nobres e acompanhamentos que destacam ingredientes regionais do Brasil. No Guia Michelin — sofisticado sem perder a alma carioca.', horario: 'Seg–Qui 12h–0h | Sex–Sáb 12h–1h | Dom 12h–22h', preco: '$$$', maps: 'Maria+e+o+Boi+Ipanema+Rio', link: null },
-          { title: 'Rudä', desc: 'Bistrô contemporâneo do chef Danilo Parah eleito melhor restaurante brasileiro pela Veja Rio Comer & Beber 2024 (pelo segundo ano consecutivo). Cozinha criativa carioca — descritos como "uma carta de amor ao Rio de Janeiro". No Guia Michelin.', horario: 'Dom–Ter 12h–23h | Qua–Sáb 12h–0h', preco: '$$$', maps: 'Rudä+Restaurante+Ipanema+Rio', link: null },
-          { title: 'Babbo Osteria', desc: 'Osteria italiana do chef suíço-italiano Elia Schramm, aberta em 2021 numa casa duplex em Ipanema. Massas frescas artesanais são o destaque — pappardelle ao ragù de doze horas, tagliolini carbonara. No Guia Michelin.', horario: '12h–16h / 19h–0h', preco: '$$', maps: 'Babbo+Osteria+Ipanema+Rio', link: null },
-          { title: 'Spicy Fish', desc: 'Restaurante asiático com pratos apurados e criatividade nas combinações. Um dos favoritos de quem mora em Ipanema e não quer mais falar em sushi convencional.', horario: 'Ter–Dom 12h–23h', preco: '$$', maps: 'Spicy+Fish+Ipanema+Rio', link: null },
-          { title: 'Totó', desc: 'Restaurante italiano informal com massas frescas do dia e o tipo de ambiente que faz você querer ficar mais uma taça. Lotado nos fins de semana — chegar cedo ou reservar.', horario: 'Ter–Dom 12h–0h', preco: '$$', maps: 'Totó+Restaurante+Ipanema+Rio', link: null },
-          { title: 'Koba Izakaya', desc: 'Izakaya japonesa descontraída com yakitori no carvão, ceviche criativo e sake servido do jeito certo. O tipo de lugar que resume o que Ipanema tem de melhor: sem frescura, com qualidade.', horario: 'Ter–Dom 19h–0h', preco: '$$', maps: 'Koba+Izakaya+Ipanema+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Belmonte', desc: 'O botequim mais querido da zona sul. Chope cremoso, pastel crocante e mesas na calçada que definem o jeito carioca de beber — com uma unidade aqui em Ipanema.', horario: 'Diário 11h–1h', preco: '$', maps: 'Belmonte+Bar+Ipanema+Rio', link: null },
-          { title: 'Nosso', desc: 'Um dos bares mais aclamados do Rio — listado no 50Best Discovery e no topo dos rankings EXAME Casual. Drinques autorais com ingredientes brasileiros em três andares com rooftop, por Daniel Estevan.', horario: 'Ter–Sáb 18h–00h30 | Dom 18h30–23h', preco: '$$$', maps: 'Nosso+Bar+Ipanema+Rio', link: null },
-          { title: 'Bar do Adão', desc: 'O botequim clássico de Ipanema. Cerveja bem gelada e petiscos simples e perfeitos, exatamente o que se espera de um boteco carioca de respeito.', horario: 'Diário 10h–1h', preco: '$', maps: 'Bar+de+Adão+Ipanema+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Ipanema em resumo', desc: 'Prós: o melhor pôr do sol da cidade e gente bonita. Contras: areia lotada no Posto 9 nos fins de semana. Combine com: Leblon — 10 minutos a pé para o oeste.', maps: null },
-          { title: '🌅 O ritual do pôr do sol', desc: 'Chegue à Pedra do Arpoador até as 17h. Quando o sol toca o mar, todo mundo aplaude junto. Arrrepia.', maps: null },
-          { title: '🚫 Regra de ouro na areia', desc: 'Nunca deixe celular e pertences na areia sem alguém de confiança vigiando. Levar o mínimo ao mar é o jeito carioca de não passar sufoco.', maps: null },
-          { title: '🗺️ O mapa dos postos', desc: 'Posto 7 é familiar e tranquilo. Posto 9 é alternativo e descolado. Posto 10 é eclético. Escolha o seu antes de abrir a toalha.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'botafogo',
+    name: 'Botafogo',
+    subtitle: 'Gastronomia, Noite & Vista do Pão de Açúcar',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Botafogo_Rio_de_Janeiro_Brazil.jpg/1280px-Botafogo_Rio_de_Janeiro_Brazil.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Caminho da Babilônia (Botafogo)', desc: 'Trilha de ótima dificuldade que conecta Botafogo até Babilonia. Oferece uma rota alternativa pra chegar lá.', horario: 'Amanhecer a anoitecer', preco: 'Grátis', camu_indica: true, maps: 'Caminho+da+Babilônia+(Botafogo)+Rio+de+Janeiro' },
+        { title: 'Botafogo Praia Shopping', desc: 'Shopping mais descontraído na Zona Sul — lojas, restaurantes, cinema. Bom pra um dia de chuva ou compras.', horario: 'Todos os dias 10h-22h', preco: '$', maps: 'Botafogo+Praia+Shopping+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Empório Jardim', desc: 'Um dos melhores cafés da cidade — café da manhã o dia todo, padaria artesanal, boa mesa. Tem unidades em Ipanema, Botafogo e Jardim Botânico.', dica: 'Não perca a tortinha de chocolate belga.', alerta: 'No fds sem chegar cedo vai ter fila.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Empório+Jardim+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+        { title: 'Ferro e Farinha', desc: 'A melhor pizza do Rio — ponto final. Massa fina de fermentação natural assada em forno a lenha, feita pra comer com a mão. O chef Sei Shiroma revolucionou a pizza carioca. Tem rooftop e mesas na calçada.', dica: 'A melhor pizza do Rio — ponto final. O pão de alho também é show.', horario: 'Qua–Dom: 19h–00h | Seg–Ter: fechado', preco: '$', link: 'https://www.ferroefarinha.com.br', camu_indica: true, maps: 'Ferro+e+Farinha+Rio+de+Janeiro' },
+      ],
+      bares: [
+        { title: 'Six Step', desc: 'Bar de drinques artesanais em Botafogo com ótima proposta de drinks autorais. Ambiente descontraído.', dica: 'Peça recomendação ao bartender — ele sabe o que faz.', horario: 'Confirmar', preco: '$$', camu_indica: true, maps: 'Six+Step+Rio+de+Janeiro' },
+      ],
+      insider: [
+        { title: '🍕 Rua Arnaldo Quintela é a rua', desc: 'A melhor concentração de bares e restaurantes descolados do Rio está aqui. Ferro e Farinha, Treme Treme, Marchezinho — tudo a pé.', maps: null },
+        { title: '🍺 Six Step: reserva é obrigatória', desc: 'O melhor bar de drinques de Botafogo. Pequeno, com bartenders incríveis — reserve antes ou chegue no horário de abertura.', maps: null },
+        { title: '🚢 Vista da Baía', desc: 'Botafogo Praia Shopping tem a melhor vista gratuita da Baía de Guanabara com o Pão de Açúcar ao fundo. Suba ao último andar ao entardecer.', maps: null },
+      ],
     },
-    {
-      id: 'copacabana',
-      name: 'Copacabana',
-      subtitle: 'Ícone, Tradição & Energia 24h',
-      image: 'https://www.metrorio.com.br/Content/Upload/ImgConteudo/navegue_o_rio_0007_copacabana.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Forte de Copacabana', desc: 'Museu histórico com vista panorâmica deslumbrante. A Confeitaria Colombo tem uma filial dentro do Forte — café com vista para o mar.', horario: 'Ter–Dom 10h–20h | Entrada: R$8', maps: 'Forte+de+Copacabana+Rio+de+Janeiro' },
-          { title: 'Estátua de Drummond', desc: 'Escultura em bronze do maior poeta brasileiro, no calçadão no Posto 5. Sente no banco ao lado dele e deixe o sol fazer o resto.', horario: 'Aberto 24h | Gratuito', maps: 'Estátua+Carlos+Drummond+Copacabana+Rio' },
-          { title: 'Copacabana Palace', desc: 'O hotel mais icônico do Rio desde 1923. Vale visitar o lobby grandioso ou tomar um drinque no bar — mesmo sem se hospedar.', horario: 'Lobby livre | Bar Pérgula: diário', maps: 'Copacabana+Palace+Hotel+Rio+de+Janeiro' },
-          { title: 'Forte do Leme', desc: 'Fortaleza histórica no extremo norte de Copacabana com trilha de 1km, fauna preservada e vista panorâmica deslumbrante do Pão de Açúcar. Um dos mirantes mais bonitos e menos conhecidos do Rio.', horario: 'Ter–Dom 9h–16h | R$10', maps: 'Forte+do+Leme+Rio+de+Janeiro', link: null },
-        ],
-        cafes: [
-          { title: 'Farro Padaria', desc: 'O sourdough mais generoso da cidade, doces e tortas impecáveis. Padaria artesanal que levou Copacabana a um novo nível gastronômico.', horario: 'Ter–Dom 7h–19h', preco: '$$', maps: 'Farro+Padaria+Copacabana+Rio', link: null },
-          { title: 'Nusa', desc: 'Cafeteria contemporânea com ambiente aconchegante e cardápio que vai do café especial a refeições leves. Uma adição bem-vinda ao circuito de cafés de Copacabana.', horario: 'Seg–Sáb 8h–19h', preco: '$$', maps: 'Nusa+Café+Copacabana+Rio', link: null },
-          { title: 'Café da Manhã Copacabana Palace', desc: 'O brunch mais icônico do Rio num dos hotéis mais famosos do mundo. Buffet luxuoso com vista para a piscina e o mar — uma experiência que justifica o preço premium.', horario: 'Diário 7h–11h', preco: '$$$$', maps: 'Café+da+Manhã+Copacabana+Palace+Rio', link: null },
-          { title: 'Frédéric Epicerie', desc: 'Padaria artesanal e pâtisserie do chef belga Frédéric De Maeyer e sua esposa Karina Zanette, no Leme. Pães de fermentação natural, doces sazonais e escolhida pelo Rio Gastronomia 2024. Fica no limite Leme/Copa.', horario: 'Ter–Dom 9h–22h', preco: '$$$', maps: 'Frédéric+Epicerie+Leme+Copacabana+Rio', link: null },
-          { title: 'Brisa Mar', desc: 'Café e padaria pertinho da praia — perfeito para o café da manhã antes de entrar na areia. Pães frescos, sucos naturais e aquela energia leve de quem está de férias.', horario: 'Diário 7h–20h', preco: '$', maps: 'Brisa+Mar+Café+Copacabana+Rio', link: null },
-          { title: 'Le Wilt', desc: 'Pâtisserie artesanal especializada em choux e macarons, criada pelas brasileiras Solange e Adriana Wiltgen. Nome de família, não referência belga — doces de nível parisiense feitos em Copacabana.', horario: 'Seg–Sex 9h–18h | Sáb 9h–15h', preco: '$$', maps: 'Le+Wilt+Copacabana+Rio', link: null },
-          { title: 'Sorvetiño', desc: 'Sorvete artesanal com sabores criativos e ingredientes brasileiros numa gelateria compacta e irresistível. A pausa perfeita numa tarde de calçadão.', horario: 'Diário 12h–22h', preco: '$', maps: 'Sorvetiño+Copacabana+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Pérgula', desc: 'Restaurante do Copacabana Palace com piscina e vista para o mar. A experiência gastronômica mais cinematográfica do bairro — café da manhã, almoço e jantar com aquele cenário.', horario: 'Diário 7h–0h', preco: '$$$$', maps: 'Pérgula+Restaurante+Copacabana+Palace+Rio', link: null },
-          { title: 'Joaquina', desc: 'Restaurante de frutos do mar frescos com cardápio que celebra os sabores do mar carioca. Ostras, lagosta e peixe do dia num ambiente descontraído e com boa vista.', horario: 'Ter–Dom 12h–0h', preco: '$$$', maps: 'Joaquina+Restaurante+Copacabana+Rio', link: null },
-          { title: 'Adega Pérola', desc: 'Botequim clássico para petiscos honestos e bacalhau de qualidade. Ambiente autêntico e sem frescura — carioca no DNA, sem ceder ao turismo.', horario: 'Seg–Sáb 10h–22h', preco: '$$', maps: 'Adega+Pérola+Copacabana+Rio+de+Janeiro', link: null },
-          { title: 'Venga', desc: 'Restaurante espanhol animado com tapas criativas e boa carta de vinhos em Copacabana. Ambiente descontraído e barulhento — no bom sentido.', horario: 'Ter–Dom 12h–23h', preco: '$$', maps: 'Venga+Restaurante+Copacabana+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Pavão Azul', desc: 'Botequim histórico e ponto de encontro de escritores, artistas e boêmios. Mesa na calçada, cerveja gelada o dia inteiro e conversas de alto nível.', horario: 'Diário 9h–1h', preco: '$', maps: 'Pavão+Azul+Copacabana+Rio+de+Janeiro', link: null },
-          { title: 'Adega Pérola', desc: 'Botequim clássico que à noite vira ponto de encontro dos cariocas do bairro. Petiscos honestos, bacalhau frito e chope — tudo sem glamour, tudo perfeito.', horario: 'Seg–Sáb até 22h', preco: '$$', maps: 'Adega+Pérola+Copacabana+Rio', link: null },
-          { title: 'Belmonte', desc: 'Referência absoluta de botequim carioca com unidade em Copacabana. Pastel crocante, chope cremoso e mesas na calçada — o ritual de beber bem sem nenhuma pretensão.', horario: 'Diário 11h–1h', preco: '$', maps: 'Belmonte+Bar+Copacabana+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Copacabana em resumo', desc: 'Prós: energia 24h e tudo a distância a pé. Contras: barulhenta e muito turística. Combine com: Urca e a Mureta — 15 minutos e outro mundo.', maps: null },
-          { title: '🌅 Caminhe entre 7h e 9h', desc: 'O calçadão de manhã cedo é uma experiência à parte: cariocas de todas as classes sociais, de shorts e chinelo, no melhor humor possível.', maps: null },
-          { title: '🚇 Use o metrô', desc: 'Cardeal Arcoverde (Posto 3) e Siqueira Campos (Posto 6) cobrem Copa inteira. Mais rápido e mais seguro do que engarrafar na Atlântica.', maps: null },
-          { title: '🌙 Atenção à noite', desc: 'Fique no calçadão iluminado e em áreas movimentadas. As ruas transversais escuras de madrugada pedem mais atenção — como em qualquer metrópole.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'ipanema',
+    name: 'Ipanema',
+    subtitle: 'Praia, Bossa Nova & Alta Gastronomia',
+    image: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=85',
+    tabs: {
+      turismo: [
+        { title: 'Lagoa Rodrigo de Alencar', desc: 'Lagoa central do Rio cercada pelo Jardim Botânico, Jockey Club e residências chiques. Ótimo pra caminhar, correr ou andar de bicicleta.', dica: 'Vá no final da tarde — melhor luz. Tem quiosques de cerveja na volta toda.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+        { title: 'Ipanema', desc: 'A praia chique do Rio — mais clean que Copacabana, com melhor infraestrutura e vibe. O posto 9 é o mais cool. Ipanema é Ipanema — é onde estar.', dica: 'Vá pro Posto 9 — é lá que tem a melhor vibe.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Ipanema+Rio+de+Janeiro' },
+        { title: 'Arpoador', desc: 'Pequenininha praia entre Ipanema e Leblon — perfeita pra um mergulho rápido. Lugar iconic de surf.', dica: 'Vá ver o pôr do sol — é dos melhores do Rio.', alerta: 'Onda pode ser perigosa pra quem não sabe nadar bem.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Arpoador+Rio+de+Janeiro' },
+        { title: 'Mercado Moderno', desc: 'Mercado gourmet em Ipanema — sim, há os pratos prontos, olaria, artesanato carioca. Ótimo pra comprar lembranças autênticas.', horario: 'Confirmar', preco: '$', maps: 'Mercado+Moderno+Rio+de+Janeiro' },
+        { title: 'Feira Hippie de Ipanema', desc: 'Feira de arte e artesanato em Ipanema — 24 anos de tradição. Ótima pra comprar arte local e souvenirs autênticos.', dica: 'Bom pra comprar arte e artesanato — é autêntico.', alerta: 'Domingo de manhã — fica bem cheio.', horario: 'Domingos 9h-18h', preco: '$', camu_indica: true, maps: 'Feira+Hippie+de+Ipanema+Rio+de+Janeiro' },
+        { title: 'Ipanema Praia Shopping', desc: 'Shopping na avenida principal de Ipanema — lojas de marca, restaurantes, cinema.', horario: 'Todos os dias 10h-22h', preco: '$', maps: 'Ipanema+Praia+Shopping+Rio+de+Janeiro' },
+        { title: 'Rua Visconde de Pirajá', desc: 'Principal rua de compras de Ipanema — lojas, cafés, restaurants. Melhor que shopping — rua de verdade.', dica: 'Melhor de Ipanema — rua viva, tem de tudo.', horario: 'Todos os dias', preco: 'Grátis (compras $)', camu_indica: true, maps: 'Rua+Visconde+de+Pirajá+Rio+de+Janeiro' },
+        { title: 'Cineasta Inglês', desc: 'Cinema independente que passa filmes art — sessões especiais e retrô.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Cineasta+Inglês+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Empório Jardim', desc: 'Um dos melhores cafés da cidade — café da manhã o dia todo, padaria artesanal, boa mesa. Tem unidades em Ipanema, Botafogo e Jardim Botânico.', dica: 'Não perca a tortinha de chocolate belga.', alerta: 'No fds sem chegar cedo vai ter fila.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Empório+Jardim+Rio+de+Janeiro' },
+        { title: 'Vero Gelato', desc: 'Gelato artesanal com ingredientes brasileiros. Obrigatório depois do almoço na Zona Sul.', dica: 'Não deixem de tomar o sorvete do Vero.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Vero+Gelato+Rio+de+Janeiro' },
+        { title: 'Mil Frutas', desc: 'Sorvetes artesanais com frutas tropicais brasileiras — acerola, cupuaçu, cajá, jabuticaba. Uma experiência que você não vai ter em nenhum outro lugar do mundo.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Mil+Frutas+Rio+de+Janeiro' },
+        { title: 'Padaria Ipanema', desc: 'Padaria com pão de qualidade — baguete, croissants, brioches. Lugar de carioca de verdade pra comprar pão.', dica: 'De uma volta pela praca e escolha na hora — tem de tudo aqui.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Padaria+Ipanema+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+        { title: 'Ferro e Farinha', desc: 'A melhor pizza do Rio — ponto final. Massa fina de fermentação natural assada em forno a lenha, feita pra comer com a mão. O chef Sei Shiroma revolucionou a pizza carioca. Tem rooftop e mesas na calçada.', dica: 'A melhor pizza do Rio — ponto final. O pão de alho também é show.', horario: 'Qua–Dom: 19h–00h | Seg–Ter: fechado', preco: '$', link: 'https://www.ferroefarinha.com.br', camu_indica: true, maps: 'Ferro+e+Farinha+Rio+de+Janeiro' },
+        { title: 'Zazá Bistrô Tropical', desc: 'Bom pra comer uma boa comida brasileira com toques modernos. As sobremesas também são um show. Se quiser uma versão mais barata vá nos vários Zazá Café — pratos quase iguais por menos.', dica: 'Reserve — fica cheio. Sente no andar de cima.', alerta: 'Reserva recomendada, especialmente para jantar.', horario: 'Seg–Qui: 12h–00h | Sex–Sáb: 12h–00h30 | Dom: 12h30–00h', preco: '$$', camu_indica: true, maps: 'Zazá+Bistrô+Tropical+Rio+de+Janeiro' },
+        { title: 'Maria e o Boi', desc: 'Uma das melhores opções de almoço em Ipanema para quem quer experiência brasileira de verdade. Cozinha autoral com ingredientes locais.', dica: 'Premiado, especial, vale a pena.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Maria+e+o+Boi+Rio+de+Janeiro' },
+      ],
+      bares: [
+        { title: 'Boteco Belmonte', desc: 'Boteco tradicional em Ipanema — cerveja gelada, comida de boteco. Ponto de encontro de cariocas.', dica: 'Ponto de encontro — vá no final da tarde.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Boteco+Belmonte+Rio+de+Janeiro' },
+        { title: 'Boteco Boa Praça', desc: 'Outro boteco clássico em Ipanema — cerveja, comida simples, gente. Menos conhecido que Belmonte.', dica: 'Lugar mais tranquilo — bom pra conversar.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Boteco+Boa+Praça+Rio+de+Janeiro' },
+      ],
+      insider: [
+        { title: '🏖️ Posto 9: a praia real de Ipanema', desc: 'Ipanema é Ipanema — mas o Posto 9 ainda tem aquela energia original de bossa nova. Para águas mais calmas, vá ao Arpoador.', maps: null },
+        { title: '🍦 Gelato antes da praia', desc: 'Vero Gelato ou Mil Frutas — escolha um e não pule. É um ritual local antes ou depois da praia. Ambos são excepcionais.', maps: null },
+        { title: '🛍️ Rua Visconde de Pirajá', desc: 'A rua mais chique de Ipanema. Restaurantes, brechós, livrarias e lojas de design — dê uma volta sem pressa.', maps: null },
+        { title: '📱 Cuidado com celular na praia', desc: 'Ipanema tem movimento — não segure o celular desnecessariamente na areia. Leve o mínimo possível para a praia.', maps: null },
+      ],
     },
-    {
-      id: 'urca',
-      name: 'Urca',
-      subtitle: 'Pão de Açúcar, Mureta & Charme Bucólico',
-      image: 'https://cdn.sanity.io/images/nxpteyfv/goguides/9593a4322e8fc78a3489f37dcf8753625bc965a0-1600x1066.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Pão de Açúcar', desc: 'O cartão-postal mais icônico do Rio. Dois bondões de teleférico com vista 360° da cidade, Baía de Guanabara e o oceano. Ao pôr do sol, incomparável.', horario: 'Diário 8h–20h | Compre online para evitar filas', maps: 'Pão+de+Açúcar+Rio+de+Janeiro', link: 'https://www.bondinho.com.br' },
-          { title: 'Pista Cláudio Coutinho', desc: 'Caminhada de 1,2km beirando o mar na base do Morro da Urca. Fauna, flora nativa e vista para a Baía de Guanabara — um dos passeios mais bonitos e gratuitos do Rio.', horario: 'Diário 6h–18h | Gratuito', maps: 'Pista+Cláudio+Coutinho+Urca+Rio', link: null },
-          { title: 'Trilha do Morro da Urca', desc: 'Trilha fácil de 30-40 minutos que sobe o Morro da Urca pela Pista Cláudio Coutinho. Vista privilegiada sem pagar o teleférico — uma das melhores relações esforço-recompensa do Rio.', horario: 'Diário 6h–18h | Gratuito', maps: 'Morro+da+Urca+Rio+de+Janeiro', link: null },
-          { title: 'Mureta da Urca', desc: 'O programa oficial do bairro: comprar cerveja no Bar Urca, sentar na mureta e contemplar a baía ao entardecer. Um ritual carioca que não precisa de nenhuma explicação.', horario: 'Aberta 24h | Melhor ao entardecer', maps: 'Mureta+da+Urca+Rio+de+Janeiro', link: null },
-          { title: 'Praia Vermelha', desc: 'Praia pequena, protegida e de areia grossa avermelhada — a mais charmosa e tranquila do Rio. Cercada pelos morros, quase sem turistas e com vista direta para o Pão de Açúcar.', horario: 'Aberta 24h | Gratuito', maps: 'Praia+Vermelha+Urca+Rio+de+Janeiro', link: null },
-        ],
-        cafes: [
-          { title: 'Que Doce!', desc: 'Confeitaria artesanal querida do bairro com doces que viraram famosos na Urca. Bolos, brigadeiros e quitutes feitos na hora — o café da tarde perfeito num bairro que sabe viver devagar.', horario: 'Ter–Dom 10h–19h', preco: '$$', maps: 'Que+Doce+Urca+Rio+de+Janeiro', link: null },
-        ],
-        restaurantes: [
-          { title: 'Gal Bar do Mar', desc: 'Frutos do mar super frescos com preparo moderno e criativo. Ostras, polvo e peixe do dia num ambiente contemporâneo que eleva o nível gastronômico da Urca sem perder a personalidade do bairro.', horario: 'Ter–Sáb 12h–23h', preco: '$$$', maps: 'Gal+Bar+do+Mar+Urca+Rio', link: null },
-          { title: 'Bar e Restaurante Urca', desc: 'Clássico do bairro famoso pelo arroz de polvo imperdível. Andar de cima para o restaurante, andar de baixo para a mureta e a cerveja — o único lugar no Rio com dois programas perfeitos no mesmo endereço.', horario: 'Diário 11h–23h', preco: '$$', maps: 'Bar+Restaurante+Urca+Rio+de+Janeiro', link: null },
-          { title: 'Canal 6', desc: 'Restaurante descontraído com cozinha carioca honesta e ambiente que reflete o ritmo bucólico da Urca. Ótima opção para almoço após a Pista Cláudio Coutinho ou a Praia Vermelha.', horario: 'Ter–Dom 12h–0h', preco: '$$', maps: 'Canal+6+Urca+Rio+de+Janeiro', link: null },
-          { title: 'Garota da Urca', desc: 'Restaurante e bar clássico com ambiente descontraído e aquela vista de bairro que o Rio esconde de quem não sabe procurar. Cardápio simples, bem-executado e chope sempre gelado.', horario: 'Diário 11h–0h', preco: '$$', maps: 'Garota+da+Urca+Rio+de+Janeiro', link: null },
-        ],
-        bares: [
-          { title: 'Mureta do Bar Urca', desc: 'O programa mais emblemático do Rio: pegar a cerveja no andar de baixo do Bar Urca, atravessar a rua e sentar na mureta com vista para a Baía de Guanabara. Simples, perfeito, insubstituível.', horario: 'Diário 11h–23h', preco: '$', maps: 'Bar+Urca+Mureta+Rio+de+Janeiro', link: null },
-          { title: 'Canal 6', desc: 'Ótimo para o pós-praia — drinks descontraídos, petiscos leves e aquele clima de bairro residencial que torna a Urca diferente de qualquer outro lugar do Rio.', horario: 'Ter–Dom até 0h', preco: '$$', maps: 'Canal+6+Urca+Rio', link: null },
-          { title: 'Garota da Urca', desc: 'Clássico para chopp gelado com vista de bairro. Um dos lugares mais queridos pelos moradores locais — sem turistas em excesso, sem frescura, apenas chope e conversa.', horario: 'Diário até 0h', preco: '$', maps: 'Garota+da+Urca+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Urca em resumo', desc: 'Prós: segurança total, vistas cinematográficas e silêncio de cidade do interior. Contras: difícil de estacionar e poucas opções de transporte público. Combine com: Botafogo ou Copacabana (Leme).', maps: null },
-          { title: '🚡 Pão de Açúcar: compre online', desc: 'Compre os ingressos do bondinho em bondinho.com.br com antecedência — filas presenciais são longas e as sessões do pôr do sol esgotam rápido.', maps: null },
-          { title: '🍺 O ritual da mureta', desc: 'A sequência correta: Pista Cláudio Coutinho à tarde → banho na Praia Vermelha → cerveja na mureta ao entardecer → jantar no Bar Urca. Perfeito, na ordem, sem improviso.', maps: null },
-          { title: '🍺 Esqueça o "não tem vida noturna"', desc: 'A Mureta ferve — especialmente nas sextas e nos fins de semana ao entardecer. O programa não é beber tarde, é beber bem: cerveja gelada, vista da baía e conversa com gente de bem.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'copacabana',
+    name: 'Copacabana',
+    subtitle: 'O Calçadão Eterno & Forte',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Copacabana_beach_in_Rio_de_Janeiro%2C_Brazil.jpg/1280px-Copacabana_beach_in_Rio_de_Janeiro%2C_Brazil.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Copacabana', desc: 'A praia mais famosa do Rio — longa, com infraestrutura. Ótima pra um primeiro dia. Um pouco poluída, mas é a experiência \'Carioca Clássica\' que todo mundo quer ter.', dica: 'Copacabana é clássica mas entupida de turista. Se quiser praia mais legal, vá pra Ipanema ou Leblon.', alerta: 'Bastante turística. Cuidado com pertences na praia.', horario: '24h', preco: 'Grátis', maps: 'Copacabana+Rio+de+Janeiro' },
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🏰 Forte de Copacabana vs Forte do Leme', desc: 'O Forte de Copacabana tem cafés e fica movimentado. O Forte do Leme é mais vazio e tem vista superior. Prefira o Leme para tranquilidade.', maps: null },
+        { title: '🌊 Leme para mergulho', desc: 'Para nadar de verdade (águas mais limpas e calmas), prefira o Leme ao Posto 6. O extremo leste de Copa tem melhor água.', maps: null },
+        { title: '🍪 Biscoito Globo & Mate', desc: 'Não saia da praia sem comer o Biscoito Globo e tomar o Mate da Praia — ambos são vendidos ambulantemente na areia. Rituais sagrados cariocas.', maps: null },
+        { title: '🎆 Réveillon', desc: 'Copa recebe 3 milhões de pessoas no Ano Novo. Se for em dezembro, isso muda tudo: preços, tráfego, disponibilidade. Planeje com meses de antecedência.', maps: null },
+      ],
     },
-    {
-      id: 'botafogo',
-      name: 'Botafogo',
-      subtitle: 'Polo Gastronômico & Vida Noturna',
-      image: 'https://s2-oglobo.glbimg.com/RE0rIiZDEeKI_pI-z_DH8jKhbkM=/0x0:5200x3467/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/O/0/dIymMnQbOHjmYE1GtSqw/105198257-rs-rio-de-janeiro-rj-01-12-2023-novos-bares-de-botafogo-na-foto-o-treme-treme.-foto.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Mirante do Pasmado', desc: 'Vista 360° do Pão de Açúcar, da enseada e do Centro histórico. Um dos mirantes mais cinematográficos e menos turísticos do Rio.', horario: 'Aberto 24h | Gratuito — melhor ao entardecer', maps: 'Mirante+do+Pasmado+Botafogo+Rio' },
-          { title: 'Enseada de Botafogo', desc: 'Orla tranquila com ciclovia e a vista icônica do Pão de Açúcar ao fundo. Perfeita para caminhar ao entardecer e ver o céu mudar de cor.', horario: 'Aberto 24h | Gratuito', maps: 'Enseada+de+Botafogo+Rio+de+Janeiro' },
-          { title: 'Cobal do Humaitá', desc: 'Mercado gourmet ao ar livre com bares, restaurantes e petiscos variados. O melhor lugar para começar a noite de Botafogo de forma descontraída.', horario: 'Diário 10h–0h', maps: 'Cobal+do+Humaitá+Botafogo+Rio' },
-        ],
-        cafes: [
-          { title: 'The Slow Bakery', desc: 'Padaria artesanal com pães de fermentação natural, croissants de manteiga perfeitos e café especial. Fila no fim de semana — chegue antes das 9h.', horario: '8h–20h', preco: '$$', maps: 'The+Slow+Bakery+Botafogo+Rio', link: null },
-          { title: 'Maz', desc: 'Café-bistrô com influências libanesas e brasileiras, aberto em 2024. Pães, croissants, massas e doces feitos na casa, além de um menu de café da manhã ao almoço. Dos mais comentados de Botafogo.', horario: 'Ter–Sáb 8h–19h | Dom 9h–17h', preco: '$$', maps: 'Maz+Café+Botafogo+Rio', link: null },
-          { title: 'Dainer', desc: 'Café moderno e minimalista com drinks de café criativos. Perfeito para trabalhar ou ter uma reunião descontraída longe do escritório.', horario: 'Seg–Sáb 8h–18h', preco: '$$', maps: 'Dainer+Café+Botafogo+Rio', link: null },
-          { title: 'Chora Café', desc: 'Café descontraído e vibrante de Botafogo, com cardápio diverso de bebidas especiais e ambiente que mistura trabalho e papo. Muito frequentado pela galera criativa do bairro.', horario: 'Seg–Sáb 8h–19h', preco: '$', maps: 'Chora+Café+Botafogo+Rio', link: null },
-          { title: 'Empório Jardim', desc: 'Filial do Empório Jardim dentro da Casa Firjan — o centro cultural de Botafogo. Café artesanal e refeições leves num ambiente inspirador com obras de design ao redor.', horario: 'Seg–Sex 8h–18h', preco: '$$', maps: 'Empório+Jardim+Casa+Firjan+Botafogo+Rio', link: null },
-          { title: 'Café da Livraria da Travessa', desc: 'Café dentro da Livraria da Travessa de Botafogo — uma das melhores do Brasil. Ambiente literário, café especial e a tentação permanente de sair com mais livros do que planejava.', horario: 'Seg–Sáb 9h–22h | Dom 12h–20h', preco: '$$', maps: 'Café+Livraria+Travessa+Botafogo+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Marchezinho', desc: 'Italiana informal com massas frescas, petiscos para compartilhar e carta de vinhos acessível. O tipo de lugar que você descobre num jantar de semana e volta toda semana.', horario: 'Ter–Dom 12h–15h e 19h–0h', preco: '$$', maps: 'Marchezinho+Restaurante+Botafogo+Rio', link: null },
-          { title: 'Ferro e Farinha', desc: 'Pizzaria de forno a lenha com massa de fermentação natural e ingredientes de alta qualidade. Uma das mais bem avaliadas do Rio — a espera pela mesa vale cada minuto.', horario: 'Ter–Dom jantar', preco: '$$', maps: 'Ferro+e+Farinha+Botafogo+Rio', link: null },
-          { title: 'Officina Local', desc: 'Pizzaria de ingredientes artesanais e orgânicos eleita melhor pizza do Rio pela Veja Rio e Rio Show (2022/2023). A sede física em Botafogo (Rua Arnaldo Quintela) abriu em 2024 como expansão da marca vencedora — ~60 sabores de pizza.', horario: 'Qua–Dom jantar', preco: '$$', maps: 'Officina+Local+Pizza+Botafogo+Rio', link: null },
-          { title: 'Sult', desc: 'Restaurante italiano autoral da chef Julia Lottus com Bib Gourmand no Guia Michelin 2025 e no 50Best Discovery. Releituras de clássicos italianos com ingredientes brasileiros — funghi com cacio e pepe, spaghetti vongole com bottarga.', horario: 'Seg 19h–23h | Ter–Sáb 12h–23h | Dom 12h–17h', preco: '$$$', maps: 'Sult+Restaurante+Botafogo+Rio', link: null },
-          { title: 'Salva Bar', desc: 'Bar e restaurante de Botafogo com cozinha afetiva, drinques bem feitos e aquela energia descontraída de bairro que faz a noite passar rápida demais.', horario: 'Ter–Dom a partir das 18h', preco: '$$', maps: 'Salva+Bar+Botafogo+Rio', link: null },
-          { title: 'Polvo Marisqueira', desc: 'Marisqueira de Botafogo especializada em frutos do mar com preparo português e criativo. Polvo grelhado, mexilhões e um vinho verde gelado que fecha o ciclo da forma mais satisfatória.', horario: 'Ter–Dom 12h–0h', preco: '$$', maps: 'Polvo+Marisqueira+Botafogo+Rio', link: null },
-          { title: 'Irajá Redux', desc: 'Restaurante casual do chef Pedro de Artagão — versão do dia a dia do premiado Irajá Gastrô. Menu autoral brasileiro com brisket com spaghetti cacio e pepe, wagyu carpaccio e peixes sazonais. Acessível e sempre cheio.', horario: 'Ter–Dom 12h–0h', preco: '$$', maps: 'Irajá+Redux+Botafogo+Rio', link: null },
-          { title: 'Glorioso Sushi', desc: 'Japonês moderno de Botafogo com sushis criativos e ambiente descontraído. Ótima relação qualidade-preço numa região que já tem de tudo — mas poucos fazem sushi assim.', horario: 'Ter–Dom 12h–15h e 19h–0h', preco: '$$', maps: 'Glorioso+Sushi+Botafogo+Rio', link: null },
-          { title: 'Kalango', desc: 'Bar e restaurante animado de Botafogo com cozinha nordestina urbana. Carne de sol, pirão de peixe e tapiocas criativas num ambiente que une dois mundos com muita personalidade.', horario: 'Ter–Dom a partir das 12h', preco: '$$', maps: 'Kalango+Botafogo+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Botica', desc: 'Bar criativo de Botafogo com drinques botânicos, carta de vinhos naturais e petiscos bem pensados. Ambiente intimista que atrai uma clientela curiosa e exigente.', horario: 'Ter–Dom a partir das 18h', preco: '$$$', maps: 'Botica+Bar+Botafogo+Rio', link: null },
-          { title: 'Treme Treme', desc: 'Bar animado e descontraído no coração de Botafogo. Cerveja artesanal, boa energia e aquele clima de bairro que transformou Botafogo no polo criativo do Rio.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Treme+Treme+Bar+Botafogo+Rio', link: null },
-          { title: 'Chanchada', desc: 'Bar com cerveja artesanal gelada, petiscos criativos e muita energia na calçada. O epicentro da vida noturna jovem de Botafogo — sempre cheio, sempre animado.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Chanchada+Bar+Botafogo+Rio', link: null },
-          { title: 'Polvo Bar', desc: 'Bar de vinhos naturais e petiscos autorais com ambiente descolado e carta impressionante. Um dos favoritos dos amantes de vinho em Botafogo — uma descoberta recorrente.', horario: 'Ter–Dom a partir das 17h', preco: '$$$', maps: 'Polvo+Bar+Botafogo+Rio', link: null },
-          { title: 'Chopo', desc: 'Bar de chopp artesanal em Botafogo com ambiente descontraído e boa energia. Variedade de estilos no barril e petiscos que seguram bem uma noite longa.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Chopo+Bar+Botafogo+Rio', link: null },
-          { title: 'Quartinho', desc: 'Bar intimista de Botafogo com carta de drinques curta e bem-executada. Ambiente que convida a ficar — e fica-se, sempre mais do que o planejado.', horario: 'Qua–Dom a partir das 18h', preco: '$$', maps: 'Quartinho+Bar+Botafogo+Rio', link: null },
-          { title: 'Mãe Joana', desc: 'Bar de boteco sofisticado em Botafogo com petiscos criativos e chopp gelado. O nome é carinhoso e o ambiente também — frequentado por moradores fiéis que raramente contam pra ninguém.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Mãe+Joana+Bar+Botafogo+Rio', link: null },
-          { title: 'Brewteco', desc: 'Bar de cervejas artesanais em Botafogo com uma vista privilegiada para a Enseada. Dezenas de torneiras girando rótulos nacionais e internacionais — para quem leva chope a sério.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Brewteco+Botafogo+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Botafogo em resumo', desc: 'Prós: polo criativo com vinhos naturais e gastronomia de primeira. Contras: trânsito pesado — especialmente na Voluntários da Pátria no rush. Combine com: Humaitá e a orla até o Aterro.', maps: null },
-          { title: '📍 Rua Arnaldo Quintela', desc: 'De quarta a domingo, a Rua Arnaldo Quintela é o lugar para estar em Botafogo. Bares na calçada, mesas na rua e aquela energia de bairro que transformou o logradouro no símbolo do novo Rio gastronômico.', maps: null },
-          { title: '⭐ Reserve com antecedência', desc: 'Lasai e Oteque precisam de reserva com semanas (ou meses!) de antecedência. Mas existem na mesma rua — planeje e faça os dois em dias seguidos.', maps: null },
-          { title: '🌅 Mirante do Pasmado ao entardecer', desc: 'Menos turistas que o Pão de Açúcar, vista igualmente deslumbrante. Um dos segredos mais bonitos do Rio — os cariocas raramente contam.', maps: null },
-          { title: '🚗 Evite a Voluntários às 18h', desc: 'A Rua Voluntários da Pátria engarrafa no rush. Prefira chegar de metrô (estação Botafogo) ou a pé pela orla — é mais bonito de qualquer forma.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'urca',
+    name: 'Urca & Pão de Açúcar',
+    subtitle: 'Mar, Montanha & Mureta ao Entardecer',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Sugarloaf_Mountain_at_Sunset_with_Botafogo_Bay.JPG/1280px-Sugarloaf_Mountain_at_Sunset_with_Botafogo_Bay.JPG',
+    tabs: {
+      turismo: [
+        { title: 'Cristo Redentor', desc: 'O monumento mais icônico do Rio — Patrimônio da Humanidade. Imprescindível na primeira visita. Dá pra chegar de trem, Uber ou a pé (rota mais desafiadora).', dica: 'Vá cedo de manhã — fica muito cheio depois das 10h. No fim da tarde a vista fica incrível mas fica bem cheio.', alerta: 'Muito turístico — espere filas. Leve protetor solar.', horario: 'Todos os dias 8h–19h', preco: '$$', maps: 'Cristo+Redentor+Rio+de+Janeiro' },
+        { title: 'Pão de Açúcar', desc: 'A montanha mais famosa do Rio com teleférico. Vistas de 360° da cidade. Patrimônio da Humanidade.', dica: 'Vá no final da tarde pra pegar o pôr do sol — é mágico. Mas vai estar cheio.', alerta: 'Bastante turístico e cheio. Caro. Leve casaco — faz vento lá em cima.', horario: 'Todos os dias 8h–20h', preco: '$$', maps: 'Pão+de+Açúcar+Rio+de+Janeiro' },
+        { title: 'Morro da Babilônia', desc: 'Morro com trilha rápida (1h) que termina em uma praia paradisíaca isolada. Panorama natural com mata. Experiência mais aventureira.', dica: 'Trilha fácil e rápida com recompensa de praia vazia — imperdível.', alerta: 'Leve água e protetor solar. Não é totalmente seguro depois do anoitecer.', horario: 'Amanhecer a anoitecer', preco: 'Grátis', camu_indica: true, maps: 'Morro+da+Babilônia+Rio+de+Janeiro' },
+        { title: 'Caminho da Babilônia (Botafogo)', desc: 'Trilha de ótima dificuldade que conecta Botafogo até Babilonia. Oferece uma rota alternativa pra chegar lá.', horario: 'Amanhecer a anoitecer', preco: 'Grátis', camu_indica: true, maps: 'Caminho+da+Babilônia+(Botafogo)+Rio+de+Janeiro' },
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🌅 Pão de Açúcar: prefira dias de semana', desc: 'Nos fins de semana e feriados, a fila do bondinho demora mais de 1h. De terça a quinta, você sobe em 20 minutos. O por do sol lá em cima às 17h30 é mágico.', maps: null },
+        { title: '🏘️ Urca é um bairro encantador', desc: 'Passeie pelas ruas residenciais da Urca — casinhas coloniais, clima de vila e quase nenhum turista fora do eixo do Pão de Açúcar.', maps: null },
+        { title: '🍺 Mureta da Urca ao entardecer', desc: 'Compre cerveja e petiscos na Praia da Urca e sente na mureta olhando para a baía. O melhor pôr do sol de graça do Rio, com a vista do Pão de Açúcar.', maps: null },
+        { title: '🏔️ Trilha do Morro da Urca', desc: 'Você pode subir a pé até o Morro da Urca pela trilha que parte da Pista Cláudio Coutinho. Lá de cima pode pegar o bondinho só para o Pão de Açúcar.', maps: null },
+      ],
     },
-    {
-      id: 'jardim-botanico',
-      name: 'Jardim Botânico\n& Gávea',
-      subtitle: 'Natureza, Cultura & Baixo Gávea',
-      image: 'https://diariodorio.com/wp-content/uploads/2023/06/Jardim-Botanico-do-Rio-de-Janeiro-Foto-Pierre-Belart.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Jardim Botânico do Rio', desc: 'Um dos mais belos jardins botânicos do mundo. Palmeiras imperiais do séc. XIX, orquídeas raras e macacos soltos em liberdade. Deslumbrante.', horario: 'Qui–Ter 8h–17h | Qua 11h–17h | R$40 / meia R$20', maps: 'Jardim+Botânico+Rio+de+Janeiro', link: 'https://jbrj.eleventickets.com' },
-          { title: 'Parque Lage', desc: 'Jardim tropical com escola de artes e um dos visuais mais icônicos do Rio — palacete histórico com o Corcovado ao fundo. ⚠️ O palacete está em restauração desde 2025 (previsão de reabertura: junho 2026). O parque e os jardins seguem abertos e gratuitos.', horario: 'Diário 8h–17h | Jardins gratuitos', maps: 'Parque+Lage+Rio+de+Janeiro', link: null },
-          { title: 'Lagoa Rodrigo de Freitas', desc: 'Calçadão de 7km ao redor da lagoa com ciclovia e quiosques. A melhor pedida ao entardecer de sexta-feira — quando os cariocas chegam para o happy hour.', horario: 'Aberto 24h | Gratuito', maps: 'Lagoa+Rodrigo+de+Freitas+Rio', link: null },
-          { title: 'Cristo Redentor', desc: 'Uma das 7 maravilhas do mundo moderno e o símbolo máximo do Rio. O trem do Corcovado sai do Cosme Velho — compre ingresso online com antecedência. Prefira dia de semana e chegue cedo para evitar filas e neblina.', horario: 'Diário 8h–19h | Compre em tremdocorcovado.rio', maps: 'Cristo+Redentor+Corcovado+Rio+de+Janeiro', link: 'https://www.tremdocorcovado.rio' },
-        ],
-        cafes: [
-          { title: 'Absurda', desc: 'Cafeteria moderna com café especial de origem e bolos artesanais incríveis. O tipo de lugar que vira ritual de fim de semana para os moradores do bairro.', horario: 'Ter–Dom 9h–18h', preco: '$$', maps: 'Absurda+Café+Jardim+Botânico+Rio', link: null },
-          { title: 'Empório Jardim', desc: 'Eleito diversas vezes melhor café da manhã do Rio. Pães artesanais, quiches, bolos e um ambiente acolhedor frequentado pelos moradores do bairro.', horario: 'Diário 7h–22h', preco: '$$', maps: 'Empório+Jardim+Botânico+Rio', link: 'https://emporiojardimrio.com.br' },
-          { title: 'La Bicyclette', desc: 'Padaria e bistrô franco-brasileiro premiado várias vezes como melhor pão do Rio. Croissants, quiches e baguetes perfeitos — uma pequena França no JB.', horario: 'Ter–Dom 7h–17h', preco: '$$', maps: 'La+Bicyclette+Jardim+Botânico+Rio', link: null },
-          { title: 'Botânica Café', desc: 'Café no coração do bairro com ambiente verde e tranquilo, rodeado de plantas. Cardápio simples e bem-executado — o ritmo lento aqui é a proposta, e funciona.', horario: 'Ter–Dom 9h–18h', preco: '$$', maps: 'Botânica+Café+Jardim+Botânico+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Katz-Sū', desc: 'Bar pan-asiático do chef Bruno Katz (do Nosso e Chanchada) com cozinha japonesa, tailandesa e coreana. Drinques por Daniel Estevan, ambiente animado e um dos endereços mais comentados do Jardim Botânico.', horario: 'Ter–Sáb 12h–0h | Dom 12h–20h', preco: '$$', maps: 'Katz+Su+Jardim+Botânico+Rio', link: null },
-          { title: 'Gonza', desc: 'Bodega argentina do chef Gonzalo Vidal, aberta em 2025 no Horto, em frente ao Jardim Botânico. Frios artesanais (pastramis, mortadella, salames), grelhados e comfort food portenho "embaralhado com sotaque carioca". Um dos lançamentos mais comentados do ano.', horario: 'Ter–Dom 12h–0h', preco: '$$$', maps: 'Gonza+Restaurante+Horto+Rio', link: null },
-          { title: 'Escama', desc: 'Restaurante especializado em peixes e frutos do mar com técnica apurada e ingredientes impecáveis. Um dos mais premiados da zona sul para quem leva a sério o que vem do mar.', horario: 'Ter–Sáb 12h–15h e 19h–0h | Dom 12h–17h', preco: '$$$', maps: 'Escama+Restaurante+Jardim+Botânico+Rio', link: null },
-          { title: 'Grado', desc: 'Pequeno restaurante italiano do chef Nello Garaventa eleito melhor italiano pelo Veja Rio e O Globo. Massas frescas artesanais são a estrela — ravioli duplo de alcachofra com fontina, tagliatelle com ragù. No 50Best Discovery. Reserva obrigatória.', horario: 'Ter–Dom 12h–15h e 19h–0h', preco: '$$', maps: 'Grado+Restaurante+Jardim+Botânico+Rio', link: null },
-          { title: 'Ella', desc: 'Pizzaria de forno a lenha com massa de fermentação natural e ingredientes selecionados. Um dos favoritos do bairro para um jantar sem pretensão e com muita qualidade.', horario: 'Ter–Dom jantar', preco: '$$', maps: 'Ella+Pizzaria+Jardim+Botânico+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Elena', desc: 'Bar sofisticado e intimista com carta de vinhos naturais cuidadosamente selecionada. Drinques autorais e ambiente de design que atrai uma clientela culta e exigente.', horario: 'Ter–Dom a partir das 18h', preco: '$$$', maps: 'Elena+Bar+Jardim+Botânico+Rio', link: null },
-          { title: 'Belmonte', desc: 'A unidade do Jardim Botânico do botequim mais amado da zona sul. Chope cremoso, pastel crocante e mesas na calçada — o jeito carioca de encerrar um dia no parque.', horario: 'Diário 11h–1h', preco: '$', maps: 'Belmonte+Bar+Jardim+Botânico+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Jardim Botânico em resumo', desc: 'Prós: contato com a natureza a 5 minutos do asfalto. Contras: sem metrô — táxi ou bicicleta são as melhores opções. Combine com: Gávea para o BG na sexta.', maps: null },
-          { title: '🎟️ Jardim Botânico: compre online', desc: 'Compre o ingresso no site jbrj.eleventickets.com antes de ir — fins de semana esgotam na bilheteria e a decepção na fila não é pequena.', maps: null },
-          { title: '☕ Café do Parque Lage', desc: 'O café da Escola de Artes Visuais, dentro da mansão com o Corcovado ao fundo, é um dos cenários mais cinematográficos do Rio. Não passe reto.', maps: null },
-          { title: '🍻 BG é gratuito', desc: 'O Baixo Gávea não cobra entrada — basta chegar com sua cadeirinha dobrável, ou comprar diretamente nos quiosques. O ritual carioca mais democrático da zona sul.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'jb-lagoa',
+    name: 'Jardim Botânico & Lagoa',
+    subtitle: 'Natureza, Gastronomia & Pôr do Sol na Lagoa',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Jardim_Bot%C3%A2nico_do_Rio_de_Janeiro.jpg/1280px-Jardim_Bot%C3%A2nico_do_Rio_de_Janeiro.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Lagoa Rodrigo de Alencar', desc: 'Lagoa central do Rio cercada pelo Jardim Botânico, Jockey Club e residências chiques. Ótimo pra caminhar, correr ou andar de bicicleta.', dica: 'Vá no final da tarde — melhor luz. Tem quiosques de cerveja na volta toda.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+        { title: 'Jardim Botânico', desc: 'Oásis verde no meio da cidade com mais de 6.000 espécies de plantas. Ótimo pra entender a biodiversidade do Brasil e escapar do caos carioca.', dica: 'Vá no final da tarde — menos cheio. Leve água — é quente lá dentro.', alerta: 'Pode ficar bem quente — hidrate-se bem.', horario: 'Ter–Dom 8h–17h | Seg: fechado', preco: '$$', link: 'https://jbrj.gov.br', camu_indica: true, maps: 'Jardim+Botânico+Rio+de+Janeiro' },
+        { title: 'Complexo Lage', desc: 'Centro de arte contemporânea em uma mansão histórica — exposições, instalações, espaço lindíssimo.', dica: 'Espaço muito legal — mistura arte com história e natureza.', horario: 'Confirmar', preco: 'Grátis (exposições $$)', camu_indica: true, maps: 'Complexo+Lage+Rio+de+Janeiro' },
+        { title: 'Gavea Pequena — Trilha do Morro da Gavea', desc: 'Trilha interessante — picos gêmeos com vista de 360° do Rio. Difícil, recomendado ter experiência.', alerta: 'Trilha difícil — não é pra iniciantes. Rocha exposta.', horario: 'Amanhecer a anoitecer', preco: 'Grátis', camu_indica: true, maps: 'Gavea+Pequena+—+Trilha+do+Morro+da+Gavea+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Empório Jardim', desc: 'Um dos melhores cafés da cidade — café da manhã o dia todo, padaria artesanal, boa mesa. Tem unidades em Ipanema, Botafogo e Jardim Botânico.', dica: 'Não perca a tortinha de chocolate belga.', alerta: 'No fds sem chegar cedo vai ter fila.', horario: 'Todos os dias', preco: '$', camu_indica: true, maps: 'Empório+Jardim+Rio+de+Janeiro' },
+        { title: 'Absurda Confeitaria', desc: 'Confeitaria excelente no Jardim Botânico — ótima parada para café da manhã ou lanche antes ou depois do parque.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Absurda+Confeitaria+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🌅 Lagoa ao pôr do sol', desc: 'Alugar uma bike (ou pedalinho) na Lagoa Rodrigo de Freitas e dar uma volta ao entardecer é um dos momentos mais cariocas que existem. Grátis e inesquecível.', maps: null },
+        { title: '⏰ Jardim Botânico fecha às 17h', desc: 'Chegue antes do meio-dia para ter tempo de explorar os cantinhos escondidos. É maior do que parece — separe pelo menos 2h30.', maps: null },
+        { title: '🎨 Complexo Lage: café + arte + Cristo', desc: 'O Parque Lage (Complexo Lage) tem uma das melhores vistas do Cristo ao fundo, café artesanal no casarão e exposições de arte. Gratuito.', maps: null },
+        { title: '🏔️ Gávea Pequena: trilha de alta recompensa', desc: 'A trilha do Morro da Gávea é técnica e exige guia — mas a vista do cume é a melhor do Rio. Só para quem está em forma.', maps: null },
+      ],
     },
-    {
-      id: 'leblon',
-      name: 'Leblon',
-      subtitle: 'Luxo Discreto & Alta Gastronomia',
-      image: 'https://lancamentos-rj.com/wp-content/uploads/2023/02/mirante-do-leblon.jpg',
-      tabs: {
-        turismo: [
-          { title: 'Praia do Leblon', desc: 'A praia mais tranquila e familiar da Zona Sul — menos turística que Ipanema mas igualmente deslumbrante. Frequentada por moradores fiéis que raramente saem do bairro.', horario: 'Aberta 24h | Gratuito', maps: 'Praia+do+Leblon+Rio+de+Janeiro', link: null },
-          { title: 'Rua Dias Ferreira', desc: 'A maior concentração gastronômica premium do Rio. Um quilômetro de restaurantes e bares de alto nível consecutivos — o fenômeno gastronômico mais impressionante da cidade.', horario: 'Estabelecimentos abrem a partir das 12h', maps: 'Rua+Dias+Ferreira+Leblon+Rio', link: null },
-          { title: 'Cobal do Leblon', desc: 'Mercado de frutas e flores que virou polo gastronômico ao ar livre. Ótimo para lanchar, tomar um suco ou iniciar a noite com cerveja e petiscos entre barracas.', horario: 'Diário 10h–1h', maps: 'Cobal+do+Leblon+Rio+de+Janeiro', link: null },
-          { title: 'Canal do Jardim de Alah', desc: 'A divisa natural entre Leblon e Ipanema. A paisagem do canal com as montanhas ao fundo é um dos cartões postais menos fotografados e mais bonitos da zona sul.', horario: 'Aberto 24h | Gratuito', maps: 'Canal+Jardim+de+Alah+Leblon+Rio', link: null },
-        ],
-        cafes: [
-          { title: 'Absurda', desc: 'Cafeteria moderna com café especial de origem e bolos artesanais que justificam a fila. O ritual de fim de semana de quem mora no Leblon — e não troca por nada.', horario: '9h–19h', preco: '$$', maps: 'Absurda+Café+Leblon+Rio', link: null },
-          { title: 'Colher de Pau', desc: 'Café caseiro e acolhedor com doces artesanais e quitutes de vó. Um oásis de simplicidade no bairro mais caro do Brasil — e um dos mais amados pelos moradores.', horario: '10h–21h', preco: '$$', maps: 'Colher+de+Pau+Leblon+Rio', link: null },
-          { title: 'Kurt', desc: 'Padaria alemã histórica do Leblon que resiste ao tempo com o mesmo streusel, o mesmo pão de centeio e o mesmo café com leite que os avós dos moradores atuais já tomavam.', horario: '8h–19h', preco: '$$', maps: 'Kurt+Padaria+Leblon+Rio', link: null },
-          { title: 'So_lo Café', desc: 'Café especial de origem única com métodos filtrados executados com precisão. Minimalismo de ambiente que deixa o café — sempre impecável — falar por si só.', horario: 'Seg–Sáb 9h–18h', preco: '$$$', maps: 'So_lo+Café+Leblon+Rio', link: null },
-        ],
-        restaurantes: [
-          { title: 'Sisi', desc: 'Italiano contemporâneo e elegante no Leblon, com massas artesanais e cardápio que muda com a estação. Um dos favoritos da gastronomia italiana no Rio para quem sabe o que procura.', horario: 'Ter–Sáb 12h–15h e 19h–23h | Dom 12h–16h', preco: '$$$', maps: 'Sisi+Restaurante+Leblon+Rio', link: null },
-          { title: 'Ocyá', desc: 'Restaurante premiado de peixes e frutos do mar do chef-pescador Gerônimo Athuel. Cortes únicos, apresentações criativas e frescor absoluto — indicado pelo Rio Gastronomia 2025.', horario: '12h–23h', preco: '$$$', maps: 'Ocyá+Restaurante+Leblon+Rio', link: null },
-          { title: 'Baduk', desc: 'Cozinha coreana contemporânea que conquistou o Rio com banchan generosos, bibimbap perfeito e yangnyeom chicken irresistível. Fila garantida nos fins de semana.', horario: 'Ter–Dom 12h–15h e 19h–23h', preco: '$$', maps: 'Baduk+Restaurante+Leblon+Rio', link: null },
-          { title: 'Pabu Izakaya', desc: 'Izakaya japonês sofisticado com yakitori impecável, sake bem selecionado e aquele ambiente de barzinho que os japoneses transformaram em obra de arte cultural.', horario: 'Ter–Dom 19h–0h', preco: '$$$', maps: 'Pabu+Izakaya+Leblon+Rio', link: null },
-        ],
-        bares: [
-          { title: 'Jobi', desc: 'O botequim mais histórico e democrático do Leblon desde 1956. Chope impecável, clientela eclética e aquele ambiente de igualdade que o Rio sabe criar quando quer — sem frescura.', horario: 'Ter–Dom 11h–2h', preco: '$', maps: 'Jobi+Bar+Leblon+Rio', link: null },
-          { title: 'Rainha', desc: 'Bar moderno no Leblon com drinques autorais, ambiente descontraído e carta de petiscos bem-pensada. Um dos favoridos da nova geração do bairro para happy hour e noite.', horario: 'Ter–Dom a partir das 17h', preco: '$$', maps: 'Rainha+Bar+Leblon+Rio', link: null },
-          { title: 'Belmonte', desc: 'Unidade do Leblon do botequim mais querido da zona sul. Mesa na calçada, pastel, chope e aquela ironia carioca de ter o boteco mais democrático no bairro mais caro do Brasil.', horario: 'Diário 11h–1h', preco: '$', maps: 'Belmonte+Bar+Leblon+Rio', link: null },
-        ],
-        insider: [
-          { title: '📍 Leblon em resumo', desc: 'Prós: seguro, exclusivo e a melhor gastronomia da cidade numa rua só. Contras: preços elevados em quase tudo. Combine com: Gávea para o BG — o contraste mais divertido do Rio.', maps: null },
-          { title: '⭐ Reserve Oro e SAN com antecedência', desc: 'Os dois restaurantes Michelin do Leblon ficam literalmente na mesma avenida. Reserve ambos com semanas de antecedência — e planeje dois jantares consecutivos para aproveitar.', maps: null },
-          { title: '🍺 Bracarense: o boteco mais democrático do Brasil', desc: 'Num bairro onde o metro quadrado é o mais caro do país, o Bracarense continua com pastel de R$8 e chope honesto. Não pule — é a maior ironia gastronômica do Rio.', maps: null },
-          { title: '🌊 A praia do Leblon é mais tranquila', desc: 'Menos turistas, mais famílias e moradores. Se Ipanema estiver lotada, 10 minutos a pé para o oeste resolvem — e a paisagem das montanhas ao fundo é ainda mais bonita.', maps: null },
-        ],
-      },
+  },
+  {
+    id: 'leblon',
+    name: 'Leblon & Vidigal',
+    subtitle: 'Luxo Discreto, Alta Gastronomia & Praias Selvagens',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Vidigal_Rio_de_Janeiro.jpg/1280px-Vidigal_Rio_de_Janeiro.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Lagoa Rodrigo de Alencar', desc: 'Lagoa central do Rio cercada pelo Jardim Botânico, Jockey Club e residências chiques. Ótimo pra caminhar, correr ou andar de bicicleta.', dica: 'Vá no final da tarde — melhor luz. Tem quiosques de cerveja na volta toda.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+        { title: 'Leblon', desc: 'Praia mais residente e menos turística que Ipanema. Mesmo assim tem infraestrutura e é bonita. Melhor pra quem quer um pouco menos de caos.', dica: 'Leblon é mais tranquilo — bom pra relaxar.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Leblon+Rio+de+Janeiro' },
+        { title: 'Arpoador', desc: 'Pequenininha praia entre Ipanema e Leblon — perfeita pra um mergulho rápido. Lugar iconic de surf.', dica: 'Vá ver o pôr do sol — é dos melhores do Rio.', alerta: 'Onda pode ser perigosa pra quem não sabe nadar bem.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Arpoador+Rio+de+Janeiro' },
+        { title: 'Vidigal', desc: 'Praia entre Leblon e São Conrado — menos conhecida e mais tranquila. Ótima vibe com quiosques legais.', dica: 'Praia menos brava — bom pra relax.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Vidigal+Rio+de+Janeiro' },
+        { title: 'Dois Irmãos', desc: 'Pico duplo que domina a paisagem entre Leblon e Vidigal. Trilha de 1h30 com vista espetacular do Rio. Bem visitada mas menos brava que outras.', dica: 'Vá no fim da tarde pra ficar lá até o pôr do sol — é incrível.', alerta: 'Começar cedo — as trilhas fecham ao anoitecer. Fique na trilha marcada.', horario: 'Amanhecer a anoitecer', preco: 'Grátis', camu_indica: true, maps: 'Dois+Irmãos+Rio+de+Janeiro' },
+        { title: 'Praia Brava', desc: 'Praia selvagem além de São Conrado — mais isolada e agressiva. Pra aventureiro.', dica: 'Se quiser uma praia mais selvagem — esta é.', alerta: 'Praia brava com ondas fortes — cuidado ao nadar.', horario: '24h', preco: 'Grátis', camu_indica: true, maps: 'Praia+Brava+Rio+de+Janeiro' },
+      ],
+      cafes: [
+        { title: 'Gringo Café', desc: 'Café descontraído — ótimo café da manhã e almoço simples. Lugar casual pra se reunir.', dica: 'Bom pra um café rápido ou almoço descontraído.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Gringo+Café+Rio+de+Janeiro' },
+      ],
+      restaurantes: [
+        { title: 'Ferro e Farinha', desc: 'A melhor pizza do Rio — ponto final. Massa fina de fermentação natural assada em forno a lenha, feita pra comer com a mão. O chef Sei Shiroma revolucionou a pizza carioca. Tem rooftop e mesas na calçada.', dica: 'A melhor pizza do Rio — ponto final. O pão de alho também é show.', horario: 'Qua–Dom: 19h–00h | Seg–Ter: fechado', preco: '$', link: 'https://www.ferroefarinha.com.br', camu_indica: true, maps: 'Ferro+e+Farinha+Rio+de+Janeiro' },
+        { title: 'Pabu Izakaya', desc: 'O primeiro izakaya do Rio — boteco japonês de verdade, muito além do sushi. Gyoza no estilo de Osaka, bochecha de peixe grelhada, karaage, tonkatsu, ramen e mais de 20 tipos de saquê. Espaço íntimo com balcão em U.', dica: 'O gyoza é imperdível — peça logo de cara. Vai cedo ou não vai sentar.', alerta: 'Espaço pequeno — reserve ou chegue cedo.', horario: 'Ter–Qui: 12h–00h | Sex–Sáb: 12h–01h | Dom: 13h–22h | Seg: fechado', preco: '$', camu_indica: true, maps: 'Pabu+Izakaya+Rio+de+Janeiro' },
+        { title: 'Venga', desc: 'Restaurante espanhol sofisticado em Leblon — ótimas tapas e ambiente chique.', dica: 'Reserve — fica cheio.', alerta: 'Caro e precisa de reserva.', horario: 'Confirmar', preco: '$$$', camu_indica: true, maps: 'Venga+Rio+de+Janeiro' },
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🌄 Dois Irmãos: a melhor trilha urbana', desc: 'A trilha dos Dois Irmãos parte do Vidigal e oferece vista 360° do Rio — Ipanema, Lagoa, Barra, tudo. Moderada, mas recompensa muito. Vá com guia.', maps: null },
+        { title: '🍕 Ferro e Farinha no Leblon', desc: 'A unidade do Leblon do Ferro e Farinha é a mais nova. Mesmo nível de pizza, ambiente um pouco diferente — se o Botafogo estiver cheio, venha aqui.', maps: null },
+        { title: '🏖️ Praia do Vidigal', desc: 'A praia do Vidigal é menos conhecida, menos cheia e tem ambiente de comunidade. Chegue a pé do morro ou de carro pela estrada do Joá.', maps: null },
+        { title: '🍷 Dias Ferreira: a rua dos restaurantes', desc: 'A Rua Dias Ferreira no Leblon é a rua mais gastronômica do Rio. Venga, Pabu e dezenas de outras opções em 500 metros.', maps: null },
+      ],
     },
-  ];
+  },
+  {
+    id: 'zona-norte',
+    name: 'Zona Norte',
+    subtitle: 'Cultura Popular, Florestas & Rio Autêntico',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Floresta_da_Tijuca.jpg/1280px-Floresta_da_Tijuca.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Museu Nacional', desc: 'Museu histórico importante no Rio — palácio real, acervo sobre história natural e cultura brasileira. Recentemente reabriu após incêndio.', horario: 'Confirmar', preco: '$', maps: 'Museu+Nacional+Rio+de+Janeiro' },
+        { title: 'Quinta da Boa Vista', desc: 'Parque histórico com Museu Nacional, zoo. Parque realmente grande e bonito — ótimo pra caminhar ou descontrair.', alerta: 'Pode ficar perigoso à noite em certos lugares — melhor ir no dia e com companhia.', horario: 'Confirmar', preco: 'Grátis', maps: 'Quinta+da+Boa+Vista+Rio+de+Janeiro' },
+        { title: 'Feira de Saens Peña', desc: 'Feira de rua semanal em Tijuca — comidas, artesanato, plantas. Bom pra entender a vida local carioca.', horario: 'Domingos de manhã', preco: '$', camu_indica: true, maps: 'Feira+de+Saens+Peña+Rio+de+Janeiro' },
+        { title: 'Floresta da Tijuca', desc: 'Maior floresta urbana do mundo dentro de uma cidade — trilhas, cachoeiras, natureza. Pulmão verde do Rio.', dica: 'Vá explorar — tem trilhas lindas e cachoeiras.', alerta: 'Não vá sozinho — ir em grupo é mais seguro. Fique na trilha marcada.', horario: 'Confirmar', preco: 'Grátis', camu_indica: true, maps: 'Floresta+da+Tijuca+Rio+de+Janeiro' },
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🌳 Floresta da Tijuca: a maior floresta urbana do mundo', desc: 'A Floresta da Tijuca é maior do que muita gente imagina — e é possível passar um dia inteiro lá. Cachoeiras, trilhas e completo silêncio a 20 minutos do Centro.', maps: null },
+        { title: '🎵 Feira de São Cristóvão', desc: 'O maior centro cultural nordestino fora do Nordeste. Forró ao vivo, baião de dois, artesanato — um mergulho completo em outra cultura dentro do Rio.', maps: null },
+        { title: '🏛️ Quinta da Boa Vista', desc: 'O antigo parque imperial tem o Museu Nacional (em reconstrução após o incêndio de 2018) e o Jardim Zoológico. Bom para fins de semana com crianças.', maps: null },
+      ],
+    },
+  },
+  {
+    id: 'niteroi',
+    name: 'Niterói',
+    subtitle: 'MAC, Icaraí & A Vista do Rio a Partir do Mar',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Museu_de_Arte_Contempor%C3%A2nea_de_Niter%C3%B3i.jpg/1280px-Museu_de_Arte_Contempor%C3%A2nea_de_Niter%C3%B3i.jpg',
+    tabs: {
+      turismo: [
+        { title: 'Niterói', desc: 'Cidade do lado da baía — 20min de balsa do Centro. Tem museu de arte moderno (MAC), praia e vibe de cidade tranquila.', dica: 'Vá pra ver o MAC — é lindo. A balsa volta é romântica.', horario: 'Confirmar', preco: '$', camu_indica: true, maps: 'Niterói+Rio+de+Janeiro' },
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '⛴️ Pegue a barca da Praça XV', desc: 'A travessia de barca de 20 minutos da Praça XV para Niterói é uma experiência por si só — vista panorâmica do Rio a partir da Baía de Guanabara.', maps: null },
+        { title: '🏛️ MAC: arquitetura de Niemeyer', desc: 'O Museu de Arte Contemporânea de Niterói é obra de Oscar Niemeyer. Mesmo sem entrar, o mirante em volta do museu já vale a viagem pela vista única do Rio.', maps: null },
+        { title: '🏖️ Combine com Icaraí', desc: 'Depois do MAC, vá a pé ou de ônibus à Praia de Icaraí — praia urbana chique de Niterói, com bares e restaurantes à beira-mar.', maps: null },
+      ],
+    },
+  },
+  {
+    id: 'barra',
+    name: 'Barra da Tijuca',
+    subtitle: 'Praias Compridas & Ilha da Gigoia',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Barra_da_Tijuca_Rio_de_Janeiro_aerial.jpg/1280px-Barra_da_Tijuca_Rio_de_Janeiro_aerial.jpg',
+    tabs: {
+      turismo: [
+      ],
+      cafes: [
+      ],
+      restaurantes: [
+        { title: 'Ferro e Farinha', desc: 'A melhor pizza do Rio — ponto final. Massa fina de fermentação natural assada em forno a lenha, feita pra comer com a mão. O chef Sei Shiroma revolucionou a pizza carioca. Tem rooftop e mesas na calçada.', dica: 'A melhor pizza do Rio — ponto final. O pão de alho também é show.', horario: 'Qua–Dom: 19h–00h | Seg–Ter: fechado', preco: '$', link: 'https://www.ferroefarinha.com.br', camu_indica: true, maps: 'Ferro+e+Farinha+Rio+de+Janeiro' },
+      ],
+      bares: [
+      ],
+      insider: [
+        { title: '🏝️ Ilha da Gigoia vale a visita', desc: 'O passeio de barco para a Ilha da Gigoia sai de perto do metrô Jardim Oceânico. Almoço no Ocya na ilha é excelente — ambiente diferente de tudo que existe no Rio.', maps: null },
+        { title: '🏖️ Praia da Barra: 18 km de areia', desc: 'A praia da Barra tem 18 km de extensão. Vá para a parte próxima ao Posto 1 (mais movimentada) ou Posto 5 em diante para tranquilidade.', maps: null },
+        { title: '🚇 Metrô até Jardim Oceânico', desc: 'O metrô chega até o Jardim Oceânico (linha 4, inaugurada nas Olimpíadas). De lá é caminhável até a praia ou aluguel de bike.', maps: null },
+      ],
+    },
+  },
+];
 
   const TABS = [
     { key: 'turismo',      label: '📸 Turismo'      },
@@ -1424,57 +1435,130 @@
   ];
 
   /* ── ITINERARIES ── */
-  const ITINERARIES = [
-    { id:'praia-rio', emoji:'🏖️', title:'Dia de Praia', subtitle:'Copa, Ipanema, Leblon — e o melhor pôr do sol do mundo', duration:'10–12h', tags:['praia','pôr do sol','gastronomia'], color:'#1A6E8A',
-      steps:[
-        { time:'8h30',  title:'Café no Empório Jardim ou So_lo Café', bairro:'Ipanema', type:'café', maps:'Empório+Jardim+Ipanema+Rio' },
-        { time:'10h',   title:'Praia — Posto 9 (Ipanema) ou Arpoador', bairro:'Ipanema', type:'turismo', maps:'Posto+9+Praia+Ipanema+Rio' },
-        { time:'13h',   title:'Almoço: Maria e o Boi ou Zazá Bistrô', bairro:'Ipanema', type:'restaurante', maps:'Maria+e+o+Boi+Ipanema+Rio' },
-        { time:'15h',   title:'Sorvete no Vero Gelato ou Mil Frutas', bairro:'Ipanema', type:'café', maps:'Vero+Gelato+Ipanema+Rio' },
-        { time:'17h',   title:'Pôr do sol na Pedra do Arpoador', bairro:'Ipanema', type:'turismo', maps:'Pedra+do+Arpoador+Rio+de+Janeiro' },
-        { time:'20h',   title:'Jantar no Ferro e Farinha ou Pabu Izakaya', bairro:'Leblon', type:'restaurante', maps:'Ferro+e+Farinha+Botafogo+Rio' },
-      ]
-    },
-    { id:'urca-aterro', emoji:'🏞️', title:'Urca & Aterro', subtitle:'Praia Vermelha, Pão de Açúcar e mureta ao entardecer', duration:'8–10h', tags:['natureza','vista','praia'], color:'#2D6A4F',
-      steps:[
-        { time:'8h',    title:'Café no Maz ou Casa que Doce', bairro:'Urca', type:'café', maps:'Maz+Café+Botafogo+Rio' },
-        { time:'9h',    title:'Praia Vermelha + Pista Cláudio Coutinho', bairro:'Urca', type:'turismo', maps:'Praia+Vermelha+Urca+Rio+de+Janeiro' },
-        { time:'11h',   title:'Pão de Açúcar (bondinho)', bairro:'Urca', type:'turismo', maps:'Pão+de+Açúcar+Rio+de+Janeiro' },
-        { time:'13h',   title:'Almoço: Gal Bar do Mar, Canal 6 ou Bar Urca', bairro:'Urca', type:'restaurante', maps:'Gal+Bar+do+Mar+Urca+Rio' },
-        { time:'15h',   title:'Aterro do Flamengo de bike até o MAM', bairro:'Glória & Flamengo', type:'dica', maps:'Aterro+do+Flamengo+Rio+de+Janeiro' },
-        { time:'17h30', title:'Cerveja na Mureta da Urca ao entardecer', bairro:'Urca', type:'bar', maps:'Mureta+da+Urca+Rio+de+Janeiro' },
-      ]
-    },
-    { id:'gloria-centro', emoji:'🏛️', title:'Glória → Lapa → Centro', subtitle:'Da feira ao museu, passando pelo samba', duration:'8–10h', tags:['cultura','história','boemia'], color:'#7B5E3A',
-      steps:[
-        { time:'9h',    title:'Feira da Glória (dom) ou Brava Doceria', bairro:'Glória & Flamengo', type:'café', maps:'Feira+da+Glória+Rio+de+Janeiro' },
-        { time:'10h30', title:'Escadaria Selarón + Arcos da Lapa', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Escadaria+Selarón+Lapa+Rio' },
-        { time:'11h30', title:'Bonde para Santa Teresa + Parque das Ruínas', bairro:'Lapa & Santa Teresa', type:'turismo', maps:'Bonde+Santa+Teresa+Rio' },
-        { time:'13h',   title:'Almoço no Bar do Mineiro ou Café do Alto', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Bar+do+Mineiro+Santa+Teresa+Rio' },
-        { time:'15h',   title:'CCBB + Museu do Amanhã + MAR (VLT)', bairro:'Centro Histórico', type:'turismo', maps:'Museu+do+Amanhã+Rio+de+Janeiro' },
-        { time:'18h',   title:'Jantar no Dois de Fevereiro ou Café Teró', bairro:'Centro Histórico', type:'restaurante', maps:'Dois+de+Fevereiro+Rio+de+Janeiro' },
-      ]
-    },
-    { id:'jb-cristo', emoji:'🌳', title:'JB, Parques & Cristo', subtitle:'Das palmeiras imperiais ao topo do mundo', duration:'8h', tags:['natureza','vista','cultura'], color:'#3D7A3A',
-      steps:[
-        { time:'8h30',  title:'Café no Empório Jardim ou Absurda', bairro:'Jardim Botânico & Gávea', type:'café', maps:'Empório+Jardim+Botânico+Rio' },
-        { time:'9h30',  title:'Jardim Botânico do Rio', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Jardim+Botânico+Rio+de+Janeiro' },
-        { time:'12h',   title:'Almoço na La Bicyclette', bairro:'Jardim Botânico & Gávea', type:'café', maps:'La+Bicyclette+Jardim+Botânico+Rio' },
-        { time:'14h',   title:'Trem do Corcovado → Cristo Redentor', bairro:'Cosme Velho', type:'turismo', maps:'Cristo+Redentor+Corcovado+Rio+de+Janeiro' },
-        { time:'16h30', title:'Parque Lage ao entardecer', bairro:'Jardim Botânico & Gávea', type:'turismo', maps:'Parque+Lage+Rio+de+Janeiro' },
-        { time:'19h',   title:'Jantar no Katz Su ou Elena (Baixo Gávea)', bairro:'Jardim Botânico & Gávea', type:'restaurante', maps:'Katz+Su+Jardim+Botânico+Rio' },
-      ]
-    },
-    { id:'noite-botafogo', emoji:'🍺', title:'Noite em Botafogo', subtitle:'Rua Arnaldo Quintela e o Rio que não dorme', duration:'4–5h', tags:['boemia','gastronomia','noite'], color:'#2C1654',
-      steps:[
-        { time:'18h',   title:'Aperitivo no Botica ou Chopo', bairro:'Botafogo', type:'bar', maps:'Botica+Bar+Botafogo+Rio' },
-        { time:'19h',   title:'Treme Treme ou Mãe Joana (Arnaldo Quintela)', bairro:'Botafogo', type:'bar', maps:'Treme+Treme+Bar+Botafogo+Rio' },
-        { time:'20h30', title:'Jantar no Marchezinho ou Ferro e Farinha', bairro:'Botafogo', type:'restaurante', maps:'Marchezinho+Restaurante+Botafogo+Rio' },
-        { time:'22h30', title:'Fatchia ou Deja Vu na Glória', bairro:'Glória & Flamengo', type:'bar', maps:'Fatchia+Bar+Flamengo+Rio' },
-        { time:'0h',    title:'Carioca da Gema — samba ao vivo', bairro:'Lapa & Santa Teresa', type:'bar', maps:'Carioca+da+Gema+Lapa+Rio' },
-      ]
-    },
-  ];
+const ITINERARIES = [
+  { id: 'copa-ipanema-leblon', tipo: 'sequencia', emoji: '🏖️', title: 'Copa — Ipanema — Leblon', subtitle: 'O Triângulo Clássico da Zona Sul', duration: '1 dia', tags: ['praia', 'clássico', 'primeira-vez'], color: '#1A6E8A',
+    steps: [
+      { time: '9h', title: 'Comece na Praia de Copacabana', bairro: 'Copacabana', dica: 'Chegue cedo — depois das 10h fica cheio.', lugares: ['Copacabana', 'Empório Jardim'], maps: 'Copacabana+Rio+de+Janeiro' },
+      { time: '13h', title: 'Almoço em Ipanema', bairro: 'Ipanema', dica: 'Tem muitos restaurantes bons. Veja qual tem a sua cara.', lugares: ['Rua Visconde de Pirajá', 'Zazá Bistrô Tropical', 'Pabu Izakaya'], maps: 'Rua+Visconde+de+Pirajá+Rio+de+Janeiro' },
+      { time: '16h', title: 'Praia de Ipanema', bairro: 'Ipanema', dica: 'Ipanema é Ipanema — é lugar de estar.', lugares: ['Ipanema'], maps: 'Ipanema+Rio+de+Janeiro' },
+      { time: '17h30', title: 'Sobremesa/Café em Ipanema', bairro: 'Ipanema', dica: 'Final da tarde em Ipanema é imperdível.', lugares: ['Vero Gelato', 'Mil Frutas', 'Boteco Belmonte'], maps: 'Vero+Gelato+Rio+de+Janeiro' },
+      { time: '19h30', title: 'Praia de Leblon', bairro: 'Leblon', dica: 'Leblon é mais tranquilo — bom pra relaxar se cansou de gente.', lugares: ['Leblon'], maps: 'Leblon+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'gloria-lapa-cinelandia', tipo: 'sequencia', emoji: '🏛️', title: 'Glória — Lapa — Cinelândia', subtitle: 'Noite e Boemia do Rio', duration: '1 noite', tags: ['noite', 'boemia', 'bares', 'história'], color: '#7B5E3A',
+    steps: [
+      { time: '9h', title: 'Começo em Glória', bairro: 'Glória', dica: 'Brava é nova e incrível — as sobremesas são show.', lugares: ['Brava Doceria'], maps: 'Brava+Doceria+Rio+de+Janeiro' },
+      { time: '10h30', title: 'Lapa — Arcos da Lapa', bairro: 'Lapa', dica: 'À noite fica muito agitado — vá no final da tarde first.', lugares: ['Arcos da Lapa'], maps: 'Arcos+da+Lapa+Rio+de+Janeiro' },
+      { time: '11h30', title: 'Escadaria Selarón', bairro: 'Lapa', dica: 'Melhor luz é no sunset — vá no fim da tarde.', lugares: ['Escadaria Selarón'], maps: 'Escadaria+Selarón+Rio+de+Janeiro' },
+      { time: '13h', title: 'Restaurante/Bar em Lapa', bairro: 'Lapa', dica: 'Bares em Lapa — ambiente autêntico.', lugares: ['Bar do Gómez', 'Porta da Luz'], maps: 'Bar+do+Gómez+Rio+de+Janeiro' },
+      { time: '16h', title: 'Volte ao Centro / Cinelândia', bairro: 'Centro', dica: 'Cinelândia à noite é bem agitada — fique atento.', lugares: ['Teatro Municipal', 'Centro Histórico'], maps: 'Teatro+Municipal+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'lagoa-e-jardim-botanico', tipo: 'sequencia', emoji: '🌳', title: 'Lagoa & Jardim Botânico', subtitle: 'Oásis Verde e Natureza', duration: '1 dia', tags: ['natureza', 'relaxo', 'verde', 'pôr do sol'], color: '#3D7A3A',
+    steps: [
+      { time: '8h30', title: 'Café da Manhã', bairro: 'Botafogo', dica: 'Tortinha de chocolate belga do Empório é imperdível.', lugares: ['Empório Jardim', 'Absurda Confeitaria'], maps: 'Empório+Jardim+Rio+de+Janeiro' },
+      { time: '10h', title: 'Jardim Botânico — Exploração', bairro: 'Jardim Botânico', dica: 'Final da tarde é melhor — menos quente, melhor luz.', lugares: ['Jardim Botânico'], maps: 'Jardim+Botânico+Rio+de+Janeiro' },
+      { time: '12h30', title: 'Almoço/Lanche perto', bairro: 'Botafogo', dica: 'Restaurante dentro do parque também é opção.', lugares: ['Empório Jardim', 'Absurda Confeitaria'], maps: 'Empório+Jardim+Rio+de+Janeiro' },
+      { time: '15h', title: 'Lagoa Rodrigo de Alencar — Volta', bairro: 'Lagoa', dica: 'Pôr do sol na Lagoa é mágico — vá nessa hora.', lugares: ['Lagoa Rodrigo de Alencar'], maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+      { time: '17h30', title: 'Bar/Quiosque perto da Lagoa', bairro: 'Lagoa', dica: 'Final da tarde — melhor momento.', lugares: ['Lagoa Rodrigo de Alencar'], maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'cosme-velho-centro', tipo: 'sequencia', emoji: '⛰️', title: 'Cosme Velho — Centro — Santa Teresa', subtitle: 'História, Arte e Cultura', duration: '1 dia', tags: ['história', 'arte', 'cultural', 'bairros-históricos'], color: '#6B4226',
+    steps: [
+      { time: '8h', title: 'Cristo Redentor', bairro: 'Corcovado', dica: 'Chegue antes das 10h — depois fica entupido de turista.', lugares: ['Cristo Redentor'], maps: 'Cristo+Redentor+Rio+de+Janeiro' },
+      { time: '11h', title: 'Mirante do Cristo', bairro: 'Cosme Velho', dica: 'Menos turístico — melhor experiência.', lugares: ['Mirante do Cristo'], maps: 'Mirante+do+Cristo+Rio+de+Janeiro' },
+      { time: '13h', title: 'Santa Teresa — Aprazível', bairro: 'Santa Teresa', dica: 'Reserve com antecedência — lugar muito buscado.', lugares: ['Aprazível', 'Santa Teresa Hotel'], maps: 'Aprazível+Rio+de+Janeiro' },
+      { time: '15h', title: 'Explore Santa Teresa', bairro: 'Santa Teresa', dica: 'Bairro charmoso mas pouco acessível — fique na área turística.', lugares: ['Santa Teresa Hotel'], maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+      { time: '17h30', title: 'Centro — Arcos da Lapa e Cinelândia', bairro: 'Centro', dica: 'Centro é bem agitado — vá no final da tarde, não de noite sozinho.', lugares: ['Teatro Municipal', 'Arcos da Lapa', 'Centro Histórico'], maps: 'Teatro+Municipal+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'urca-morro-da-babilonia', tipo: 'sequencia', emoji: '🏞️', title: 'Urca — Pão de Açúcar — Morro da Babilônia', subtitle: 'Montanhas com Vistas Espetaculares', duration: '1 dia', tags: ['trilhas', 'montanhas', 'vistas', 'aventura'], color: '#2D6A4F',
+    steps: [
+      { time: '9h', title: 'Comece no Pão de Açúcar', bairro: 'Urca', dica: 'Final da tarde é melhor — pôr do sol é mágico. Mas vai estar cheio.', lugares: ['Pão de Açúcar'], maps: 'Pão+de+Açúcar+Rio+de+Janeiro' },
+      { time: '11h', title: 'Trilha de Babilônia', bairro: 'Urca', dica: 'Trilha fácil e rápida com recompensa — imperdível.', lugares: ['Morro da Babilônia'], maps: 'Morro+da+Babilônia+Rio+de+Janeiro' },
+      { time: '14h', title: 'Praia Isolada', bairro: 'Urca', dica: 'Levar água — não tem vendedor lá.', lugares: ['Morro da Babilônia'], maps: 'Morro+da+Babilônia+Rio+de+Janeiro' },
+      { time: '17h', title: 'Volte à Urca', bairro: 'Urca', dica: 'Fim de tarde — aproveite a luz.', lugares: ['Pão de Açúcar'], maps: 'Pão+de+Açúcar+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'santa-teresa-artes', tipo: 'sequencia', emoji: '🎨', title: 'Santa Teresa — Arte e Boemia', subtitle: 'Bairro Histórico com Galeria e Museus', duration: '1 dia', tags: ['arte', 'história', 'bairros-charmosos', 'galerias'], color: '#8B5E83',
+    steps: [
+      { time: '9h', title: 'Café da Manhã em Santa Teresa', bairro: 'Santa Teresa', dica: 'Santa Teresa é charoso — aproveite o ambiente.', lugares: ['Santa Teresa Hotel'], maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+      { time: '10h30', title: 'Explore Galerias de Arte', bairro: 'Santa Teresa', dica: 'Muitos artistas vivem e trabalham lá — bom pra entender a cena carioca.', lugares: ['Santa Teresa Hotel'], maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+      { time: '13h', title: 'Aprazível para Almoço', bairro: 'Santa Teresa', dica: 'Reserve com antecedência.', lugares: ['Aprazível'], maps: 'Aprazível+Rio+de+Janeiro' },
+      { time: '15h', title: 'Complexo Lage', bairro: 'Jardim Botânico', dica: 'Espaço muito legal — arte + história + natureza.', lugares: ['Complexo Lage'], maps: 'Complexo+Lage+Rio+de+Janeiro' },
+      { time: '18h', title: 'Bares à Noite', bairro: 'Santa Teresa', dica: 'Ambiente artístico e descontraído à noite.', lugares: ['Santa Teresa Hotel'], maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'trilhas-natureza', tipo: 'blocos', emoji: '🥾', title: 'Trilhas & Natureza', subtitle: 'Aventura nas Montanhas do Rio', duration: 'Variável (1-3 dias)', tags: ['trilhas', 'aventura', 'natureza', 'montanhas'], color: '#3D7A3A',
+    blocos: [
+      { titulo: 'Trilhas Fáceis (Iniciantes)', desc: 'Pra quem quer começar devagar.', lugares: ['Morro da Babilônia', 'Dois Irmãos', 'Lagoa Rodrigo de Alencar'] },
+      { titulo: 'Trilhas Médias (Intermediários)', desc: 'Pra quem tem experiência.', lugares: ['Floresta da Tijuca', 'Dois Irmãos'] },
+      { titulo: 'Trilhas Difíceis (Avançados)', desc: 'Pra aventureiros de verdade.', lugares: ['Gavea Pequena — Trilha do Morro da Gavea'] },
+    ]
+  },
+  { id: 'praias-do-rio', tipo: 'opcoes', emoji: '🌊', title: 'Praias do Rio', subtitle: 'Opções pra Todo Gosto', duration: 'Variável', tags: ['praia', 'sol', 'mar'], color: '#1A6E8A',
+    opcoes: [
+      { nome: 'Clássica — Copacabana', desc: 'A mais famosa, mas entupida de turista. Ótima primeira parada.' },
+      { nome: 'Chique — Ipanema', desc: 'A mais legal — Zona Sul de verdade. Melhor vibe.' },
+      { nome: 'Tranquila — Leblon', desc: 'Menos turística que Ipanema mas igualmente bonita.' },
+      { nome: 'Icônica — Arpoador', desc: 'Pequenininha mas com o melhor pôr do sol.' },
+      { nome: 'Hippie — Vidigal', desc: 'Mais tranquila e com ótima vibe bohemia.' },
+      { nome: 'Selvagem — Praia Brava', desc: 'Ondas fortes, menos turística, pra quem quer aventura.' },
+    ]
+  },
+  { id: 'rua-cool', tipo: 'rua-cool', emoji: '🛍️', title: 'Ruas Cool do Rio', subtitle: 'Onde a Vida Acontece', duration: '1 dia (cada rua)', tags: ['compras', 'bares', 'vida-noturna', 'passeios'], color: '#C44B1E',
+    ruas: [
+      { nome: 'Rua Visconde de Pirajá — Ipanema', desc: 'Principal rua de Ipanema — lojas, cafés, restaurantes. Melhor de verdade.', dica: 'Caminhe sem pressa — tem muito a descobrir.' },
+      { nome: 'Lapa — Rua da Lapa', desc: 'Coração da boemia — bares, música ao vivo, gente. À noite é imperdível.', dica: 'Melhor à noite — ambiente agitado e autêntico.' },
+      { nome: 'Rua do Ouvidor — Centro', desc: 'Rua histórica com prédios antigos — compras, história.', dica: 'Vá de dia — à noite não é seguro.' },
+    ]
+  },
+  { id: 'passeio-alternativo', tipo: 'passeio-alternativo', emoji: '✨', title: 'Passeios Alternativos', subtitle: 'Fora do Roteiro Comum', duration: 'Variável', tags: ['alternativo', 'local', 'experiências-únicas'], color: '#5A4A9A',
+    passeios: [
+      { nome: 'Aula de Samba — Atelier Rio', desc: 'Aprenda a dançar samba como carioca — experiência cultural única.', dica: 'Reserve com antecedência.' },
+      { nome: 'Aula de Capoeira', desc: 'A luta que é dança que é história — vivência autêntica.', dica: 'Entenda a cultura carioca através da capoeira.' },
+      { nome: 'Bike pela Orla', desc: 'Alugue uma bike e explore a orla — melhor forma de conhecer.', dica: 'Final da tarde é melhor — luz boa e menos quente.' },
+      { nome: 'Explorar Feira Hippie', desc: 'Domingo — Feira Hippie de Ipanema. Arte, artesanato, culture.', dica: 'Compre arte local — é autêntico.' },
+    ]
+  },
+  { id: 'primeira-vez-rio', tipo: 'sequencia', emoji: '🗺️', title: 'Primeira Vez no Rio — Itinerário Completo', subtitle: 'Tudo que Você Precisa Saber pra Primeira Visita', duration: '3-5 dias', tags: ['primeira-vez', 'clássico', 'essencial', 'roteiro-completo'], color: '#B8860B',
+    steps: [
+      { time: 'Dia 1', title: 'Dia 1 — Zona Sul Clássica', bairro: 'Copacabana', dica: 'Siga o roteiro \'Copa-Ipanema-Leblon\'.', lugares: ['Copacabana', 'Ipanema', 'Leblon'], maps: 'Copacabana+Rio+de+Janeiro' },
+      { time: 'Dia 2', title: 'Dia 2 — Montanhas & Vistas', bairro: 'Urca', dica: 'Siga \'Urca-Morro-da-Babilônia\' ou \'Cosme-Velho-Centro\'.', lugares: ['Pão de Açúcar', 'Cristo Redentor', 'Morro da Babilônia'], maps: 'Pão+de+Açúcar+Rio+de+Janeiro' },
+      { time: 'Dia 3', title: 'Dia 3 — Natureza & Parques', bairro: 'Lagoa', dica: 'Siga \'Lagoa-e-Jardim-Botânico\'.', lugares: ['Lagoa Rodrigo de Alencar', 'Jardim Botânico'], maps: 'Lagoa+Rodrigo+de+Alencar+Rio+de+Janeiro' },
+      { time: 'Dia 4', title: 'Dia 4 — Boemia & História', bairro: 'Santa Teresa', dica: 'Siga \'Santa-Teresa-Artes\' ou \'Glória-Lapa-Cinelândia\'.', lugares: ['Santa Teresa Hotel', 'Arcos da Lapa', 'Centro Histórico'], maps: 'Santa+Teresa+Hotel+Rio+de+Janeiro' },
+      { time: 'Dia 5', title: 'Dia 5 — A Seu Gosto', bairro: 'Ipanema', dica: 'Aproveite pra fazer algo que ficou pendente ou explorar um bairro.', lugares: ['Feira Hippie de Ipanema', 'Floresta da Tijuca'], maps: 'Feira+Hippie+de+Ipanema+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'dia-chuva-rio', tipo: 'opcoes', emoji: '🌧️', title: 'Dia de Chuva no Rio', subtitle: 'O que Fazer Quando Não Dá Praia', duration: '1 dia', tags: ['chuva', 'interior', 'museus', 'indoor'], color: '#4A5568',
+    opcoes: [
+      { nome: 'Museus & Galerias', desc: 'MAM, MASP, Pinacoteca — ficar dentro.' },
+      { nome: 'Compras — Shopping', desc: 'Botafogo Praia Shopping, Ipanema Praia Shopping.' },
+      { nome: 'Cinema', desc: 'Cineasta Inglês ou cinemas normais.' },
+      { nome: 'Aulas — Samba ou Capoeira', desc: 'Aproveitar pra aprender — Atelier Rio, Academia de Capoeira.' },
+      { nome: 'Bar & Conversa', desc: 'Boteco local com chopp gelado — carioca de verdade faz isso.' },
+    ]
+  },
+  { id: 'dia-noite-carioca', tipo: 'sequencia', emoji: '🍺', title: 'Noite Carioca — Bar Hopping', subtitle: 'Como Passar uma Noite Carioca de Verdade', duration: '1 noite', tags: ['noite', 'bares', 'drinks', 'boemia'], color: '#2C1654',
+    steps: [
+      { time: '19h', title: '19h — Boteco em Ipanema', bairro: 'Ipanema', dica: 'Carioca de verdade começa assim.', lugares: ['Boteco Belmonte', 'Boteco Boa Praça'], maps: 'Boteco+Belmonte+Rio+de+Janeiro' },
+      { time: '21h', title: '21h — Bar de Drinks em Botafogo', bairro: 'Botafogo', dica: 'Peça recomendação — bartender sabe o que faz.', lugares: ['Six Step'], maps: 'Six+Step+Rio+de+Janeiro' },
+      { time: '22h', title: '22h-23h — Lapa ou Boemia', bairro: 'Lapa', dica: 'Ambiente autêntico — Lapa é onde carioca de verdade vai.', lugares: ['Bar do Gómez', 'Porta da Luz', 'Arcos da Lapa'], maps: 'Bar+do+Gómez+Rio+de+Janeiro' },
+      { time: '0h', title: 'Depois — Festa ou Dormir', bairro: '', dica: 'Rio não dorme cedo — bares e boates ficar abertos.', maps: 'Depois+—+Festa+ou+Dormir+Rio+de+Janeiro' },
+    ]
+  },
+  { id: 'comida-carioca', tipo: 'blocos', emoji: '🍕', title: 'Comida Carioca — Roteiro Gastronômico', subtitle: 'Sabores do Rio', duration: '2-3 dias', tags: ['comida', 'gastronomia', 'restaurantes', 'culinária'], color: '#8B2500',
+    blocos: [
+      { titulo: 'Pizza de Verdade', desc: 'Ferro e Farinha — melhor pizza do Rio segundo carioca.', lugares: ['Ferro e Farinha'] },
+      { titulo: 'Boteco & Cerveja', desc: 'Boteco Belmonte, Boteco Boa Praça — chopp gelado e pasteis.', lugares: ['Boteco Belmonte', 'Boteco Boa Praça', 'Boteco Aconchego'] },
+      { titulo: 'Comida Brasileira', desc: 'Maria e o Boi, Zazá Bistrô — culinária brasileira sofisticada.', lugares: ['Maria e o Boi', 'Zazá Bistrô Tropical'] },
+      { titulo: 'Japonês & Izakaya', desc: 'Pabu Izakaya — primeiro izakaya do Rio.', lugares: ['Pabu Izakaya'] },
+      { titulo: 'Café & Sobremesa', desc: 'Empório Jardim, Vero Gelato, Mil Frutas.', lugares: ['Empório Jardim', 'Vero Gelato', 'Mil Frutas'] },
+      { titulo: 'Sofisticado', desc: 'Aprazível, Venga — comida de nível.', lugares: ['Aprazível', 'Venga'] },
+    ]
+  },
+];
+
 
   /* ── State ── */
   let currentSection = 'home';
@@ -1594,6 +1678,34 @@
 
   /* ── RENDER PASSEIOS SECTION ── */
   function renderPasseiosSection() {
+    function itPreview(it) {
+      if (it.tipo === 'sequencia' && it.steps) {
+        return it.steps.slice(0,3).map((s,si) =>
+          `<span class="it-pill${si===0?' first':''}">${s.time} ${s.title.split(' ').slice(0,3).join(' ')}</span>`
+        ).join('');
+      } else if (it.tipo === 'opcoes' && it.opcoes) {
+        return it.opcoes.slice(0,3).map((o,si) =>
+          `<span class="it-pill${si===0?' first':''}">${o.nome.split('—')[0].trim()}</span>`
+        ).join('');
+      } else if (it.tipo === 'blocos' && it.blocos) {
+        return it.blocos.slice(0,3).map((b,si) =>
+          `<span class="it-pill${si===0?' first':''}">${b.titulo.split(' ').slice(0,3).join(' ')}</span>`
+        ).join('');
+      } else if (it.tipo === 'rua-cool' && it.ruas) {
+        return it.ruas.slice(0,3).map((r,si) =>
+          `<span class="it-pill${si===0?' first':''}">${r.nome.split('—')[0].trim()}</span>`
+        ).join('');
+      } else if (it.tipo === 'passeio-alternativo' && it.passeios) {
+        return it.passeios.slice(0,3).map((p,si) =>
+          `<span class="it-pill${si===0?' first':''}">${p.nome.split('—')[0].trim()}</span>`
+        ).join('');
+      }
+      return '';
+    }
+    function tipoLabel(tipo) {
+      const labels = { 'sequencia':'roteiro', 'opcoes':'escolha', 'blocos':'categorias', 'rua-cool':'rua', 'passeio-alternativo':'alternativo' };
+      return labels[tipo] || tipo;
+    }
     mainView.innerHTML = `
       <div class="page-header">
         <span class="page-eyebrow">roteiros</span>
@@ -1604,12 +1716,15 @@
           <div class="it-card fade-up" style="animation-delay:${i*0.07}s;" onclick="openDetail('itinerary','${it.id}')">
             <div class="it-header" style="background:${it.color};">
               <span class="it-emoji">${it.emoji}</span>
-              <div class="it-title">${it.title}</div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <div class="it-title">${it.title}</div>
+                <span style="font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);border-radius:4px;padding:2px 5px;">${tipoLabel(it.tipo)}</span>
+              </div>
               <div class="it-subtitle">${it.subtitle}</div>
               <div class="it-tags">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}</div>
             </div>
             <div class="it-footer">
-              ${it.steps.slice(0,3).map((s,si) => `<span class="it-pill${si===0?' first':''}">${s.time} ${s.title.split(' ').slice(0,3).join(' ')}</span>`).join('')}
+              ${itPreview(it)}
               <span class="it-duration">⏱ ${it.duration}</span>
             </div>
           </div>
@@ -1625,7 +1740,7 @@
         <span class="masthead-eyebrow">explorar</span>
         <h1 class="masthead-title">Bairros<br><span>do Rio</span></h1>
         <div class="masthead-rule"></div>
-        <p class="masthead-sub">Oito bairros, um guia feito<br>por quem mora lá.</p>
+        <p class="masthead-sub">Doze bairros, um guia feito<br>por quem mora lá.</p>
       </div>
       <div class="section-row">
         <span class="section-hand">escolha um bairro ↓</span>
@@ -1677,13 +1792,17 @@
           : filtered.map((item, i) => `
             <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
               <div class="x-card-top">
-                <h4>${item.title}</h4>
-                <div style="display:flex;gap:6px;align-items:center;">
+                <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+                  <h4>${item.title}</h4>
+                  ${item.camu_indica ? `<span class="camu-badge">✦ camu</span>` : ''}
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
                   ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
                   <span class="bairro-badge" onclick="event.stopPropagation();openDetail('neighborhood','${item.bairroId}')">${item.bairroName}</span>
                 </div>
               </div>
               <p>${item.desc}</p>
+              ${item.dica ? `<p class="tip-note">${item.dica}</p>` : ''}
               ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
               ${(item.maps || item.link) ? `
                 <div class="card-actions">
@@ -1712,7 +1831,8 @@
   function renderItineraryDetail(id) {
     const it = ITINERARIES.find(x => x.id === id);
     if (!it) return;
-    detailView.innerHTML = `
+
+    const hero = `
       <div class="it-detail-hero" style="background:${it.color};">
         <button class="it-detail-back" onclick="closeDetail()" aria-label="Voltar">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1724,8 +1844,20 @@
           ${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}
           <span class="it-tag">⏱ ${it.duration}</span>
         </div>
-      </div>
-      <div class="it-steps-list">
+      </div>`;
+
+    const mapBtn = (maps) => maps ? `
+      <div style="margin-top:8px;">
+        <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${maps}" target="_blank" rel="noopener noreferrer">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ver no Mapa
+        </a>
+      </div>` : '';
+
+    let body = '';
+
+    if (it.tipo === 'sequencia' && it.steps) {
+      body = `<div class="it-steps-list">
         ${it.steps.map(step => `
           <div class="it-step">
             <div class="it-step-time">
@@ -1734,22 +1866,56 @@
             </div>
             <div class="it-step-body">
               <div class="it-step-title">${step.title}</div>
-              <div class="it-step-meta">
-                <span class="it-step-bairro">${step.bairro}</span>
-                <span class="it-step-type">${step.type}</span>
-              </div>
-              ${step.maps ? `
-                <div style="margin-top:8px;">
-                  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${step.maps}" target="_blank" rel="noopener noreferrer">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Ver no Mapa
-                  </a>
-                </div>` : ''}
+              ${step.bairro ? `<div class="it-step-meta"><span class="it-step-bairro">${step.bairro}</span></div>` : ''}
+              ${step.lugares && step.lugares.length ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">${step.lugares.map(l=>`<span class="it-bloco-lugar">${l}</span>`).join('')}</div>` : ''}
+              ${step.dica ? `<p class="tip-note">${step.dica}</p>` : ''}
+              ${mapBtn(step.maps)}
             </div>
           </div>
         `).join('')}
-      </div>
-    `;
+      </div>`;
+    } else if (it.tipo === 'opcoes' && it.opcoes) {
+      body = `<div class="it-opcoes-list">
+        ${it.opcoes.map(o => `
+          <div class="it-opcao-card">
+            <h4>${o.nome}</h4>
+            ${o.desc ? `<p>${o.desc}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.tipo === 'blocos' && it.blocos) {
+      body = `<div class="it-blocos-list">
+        ${it.blocos.map(b => `
+          <div class="it-bloco-card">
+            <h4>${b.titulo}</h4>
+            ${b.desc ? `<p>${b.desc}</p>` : ''}
+            ${b.lugares && b.lugares.length ? `<div class="it-bloco-lugares">${b.lugares.map(l=>`<span class="it-bloco-lugar">${l}</span>`).join('')}</div>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.tipo === 'rua-cool' && it.ruas) {
+      body = `<div class="it-ruas-list">
+        ${it.ruas.map(r => `
+          <div class="it-rua-card">
+            <h4>${r.nome}</h4>
+            ${r.desc ? `<p>${r.desc}</p>` : ''}
+            ${r.dica ? `<p class="it-rua-dica">${r.dica}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    } else if (it.tipo === 'passeio-alternativo' && it.passeios) {
+      body = `<div class="it-ruas-list">
+        ${it.passeios.map(p => `
+          <div class="it-rua-card">
+            <h4>${p.nome}</h4>
+            ${p.desc ? `<p>${p.desc}</p>` : ''}
+            ${p.dica ? `<p class="it-rua-dica">${p.dica}</p>` : ''}
+          </div>
+        `).join('')}
+      </div>`;
+    }
+
+    detailView.innerHTML = hero + body;
   }
 
   /* ── RENDER BAIRROS CARDS (into #cardsList) ── */
@@ -1838,16 +2004,25 @@
     const items = n.tabs[tabKey] || [];
     const isInsider = tabKey === 'insider';
 
+    if (items.length === 0) {
+      return `<p style="font-family:'Lora',serif;font-style:italic;color:var(--ink-3);padding:20px 0;">Em breve.</p>`;
+    }
+
     return items.map((item, i) => `
       <div class="c-card${isInsider ? ' insider' : ''} fade-up" style="animation-delay:${i * 0.07}s;">
 
         <div class="c-card-top">
-          <h4>${item.title}</h4>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+            <h4>${item.title}</h4>
+            ${item.camu_indica ? `<span class="camu-badge">✦ camu</span>` : ''}
+          </div>
           ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
         </div>
 
         ${isInsider ? `<p class="dica-note">${item.desc}</p>` : `<p>${item.desc}</p>`}
 
+        ${item.dica && !isInsider ? `<p class="tip-note">${item.dica}</p>` : ''}
+        ${item.alerta ? `<p class="alert-note">${item.alerta}</p>` : ''}
         ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
 
         ${(item.maps || item.link) && !isInsider ? `
