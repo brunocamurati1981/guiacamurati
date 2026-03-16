@@ -1321,6 +1321,18 @@
     'luxo discreto & alta gastronomia',
   ];
 
+  const NEIGHBORHOOD_HANDS = [
+    'Vale a pena sim!',
+    'Tradição pura',
+    'O hype é real!',
+    'Chique com razão',
+    'Caótica e bela, como o Rio',
+    'Meu bairro perfeitinho',
+    'O point é aqui!',
+    'O verde subestimado',
+    'Um cafezinho, dona Helena?',
+  ];
+
   const neighborhoods = [
     {
       id: 'centro-historico',
@@ -2013,7 +2025,7 @@
         <h1 class="ed-title">${ITINERARIES.length} Roteiros\nCurados.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Passeios por dia, ruas cool e alternativas — tudo num só lugar.</p>
-        <span class="ed-hand">segura o café</span>
+        <span class="ed-hand">Siga essas dicas... ou não!</span>
       </div>
       <div class="x-list">
         ${ITINERARIES.map((it, i) => `
@@ -2048,7 +2060,7 @@
         <h1 class="ed-title">O Rio\n<span style="color:var(--coral)">é seu</span></h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Filtre por categoria ou explore bairro a bairro.</p>
-        <span class="ed-hand">começa por aqui</span>
+        <span class="ed-hand">Vai bater perna!</span>
       </div>
       <div class="explorar-grid">
         ${filters.map(f => `
@@ -2075,7 +2087,7 @@
         <h1 class="ed-title">Bairros\ndo Rio.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Oito bairros, um guia feito por quem mora lá.</p>
-        <span class="ed-hand">escolha o seu favorito</span>
+        <span class="ed-hand">Cada um tem sua magia</span>
       </div>
       <div class="x-list">
         ${neighborhoods.map((n, i) => `
@@ -2103,10 +2115,10 @@
     const filtered = activeFilter ? allItems.filter(it => it.bairroId === activeFilter) : allItems;
 
     const ED = {
-      restaurantes: { title:'Onde eu\nrealmente\ncomo.', sub:'Vocês sabem que eu levo comida muito a sério. A regra aqui é clara: come-se absurdamente bem, mas zero frescura. Não me façam colocar uma calça jeans.', hand:'vai de chinelo mesmo' },
-      bares:        { title:'Eu vou\né pela\ncomida.', sub:'Vocês sabem que eu não sou de beber muito. Mas se o lugar tiver uma comidinha de primeira, um petisco que vale a pena e uns drinks bem feitos pra acompanhar, a gente senta e fica.', hand:'foco na porção' },
-      cafes:        { title:'Açúcar,\ncarboidrato\ne cafeína.', sub:'Isso aqui não é sobre tomar um expresso correndo no balcão. Entram aqui as padarias, as confeitarias e os lugares pra sentar, pedir um doce incrível, um pão bom e enrolar a tarde toda.', hand:'pede o bolo inteiro' },
-      turismo:      { title:'O que\nvale o\npasseio.', sub:'Os clássicos que todo mundo fala — mas com a opinião de quem foi mil vezes e ainda vai de novo. Sem hype vazio.', hand:'não esquece o protetor solar' },
+      restaurantes: { title:'Onde eu\nrealmente\ncomo.', sub:'Vocês sabem que eu levo comida muito a sério. A regra aqui é clara: come-se absurdamente bem, mas zero frescura. Não me façam colocar uma calça jeans.', hand:'São Paulo não tem isso' },
+      bares:        { title:'Eu vou\né pela\ncomida.', sub:'Vocês sabem que eu não sou de beber muito. Mas se o lugar tiver uma comidinha de primeira, um petisco que vale a pena e uns drinks bem feitos pra acompanhar, a gente senta e fica.', hand:'Vai pelo drink, e pelos petiscos claro!' },
+      cafes:        { title:'Açúcar,\ncarboidrato\ne cafeína.', sub:'Isso aqui não é sobre tomar um expresso correndo no balcão. Entram aqui as padarias, as confeitarias e os lugares pra sentar, pedir um doce incrível, um pão bom e enrolar a tarde toda.', hand:'Amo amo amo!' },
+      turismo:      { title:'O que\nvale o\npasseio.', sub:'Os clássicos que todo mundo fala — mas com a opinião de quem foi mil vezes e ainda vai de novo. Sem hype vazio.', hand:'Muita coisa pra poucos dias!' },
     };
     const ed = ED[tabKey] || {};
     mainView.innerHTML = `
@@ -2297,7 +2309,7 @@
         <h1 class="ed-title">${n.name}</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">${n.subtitle}</p>
-        <span class="ed-hand">vai devagar, tem muito pra ver</span>
+        ${NEIGHBORHOOD_HANDS[annotIdx] ? `<span class="ed-hand">${NEIGHBORHOOD_HANDS[annotIdx]}</span>` : ''}
       </div>
 
       <div class="tab-bar">
@@ -2452,7 +2464,7 @@
         <h1 class="ed-title">Antes\nde Ir.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Tudo que você precisa saber antes de fazer as malas.</p>
-        <span class="ed-hand">bota na mala e vai</span>
+        <span class="ed-hand">Não vá dar mole!</span>
       </div>
       <div style="padding: 8px 16px 80px; display:flex; flex-direction:column; gap:12px;">
         ${items.map((item, i) => `
