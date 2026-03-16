@@ -2013,6 +2013,7 @@
         <h1 class="ed-title">${ITINERARIES.length} Roteiros\nCurados.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Passeios por dia, ruas cool e alternativas — tudo num só lugar.</p>
+        <span class="ed-hand">segura o café</span>
       </div>
       <div class="x-list">
         ${ITINERARIES.map((it, i) => `
@@ -2042,13 +2043,13 @@
     ];
 
     mainView.innerHTML = `
-      <div class="masthead">
-        <span class="masthead-eyebrow">explorar</span>
-        <h1 class="masthead-title">O Rio<br><span>é seu</span></h1>
-        <div class="masthead-rule"></div>
-        <p class="masthead-sub">Filtre por categoria ou explore bairro a bairro.</p>
+      <div class="ed-header">
+        <span class="ed-eyebrow">explorar</span>
+        <h1 class="ed-title">O Rio\n<span style="color:var(--coral)">é seu</span></h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Filtre por categoria ou explore bairro a bairro.</p>
+        <span class="ed-hand">começa por aqui</span>
       </div>
-      <div class="section-divider"><span>✦</span></div>
       <div class="explorar-grid">
         ${filters.map(f => `
           <div class="explorar-card" onclick="navigate('${f.key === 'bairros' ? 'bairros' : f.key}')">
@@ -2074,6 +2075,7 @@
         <h1 class="ed-title">Bairros\ndo Rio.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Oito bairros, um guia feito por quem mora lá.</p>
+        <span class="ed-hand">escolha o seu favorito</span>
       </div>
       <div class="x-list">
         ${neighborhoods.map((n, i) => `
@@ -2104,7 +2106,7 @@
       restaurantes: { title:'Onde eu\nrealmente\ncomo.', sub:'Vocês sabem que eu levo comida muito a sério. A regra aqui é clara: come-se absurdamente bem, mas zero frescura. Não me façam colocar uma calça jeans.', hand:'vai de chinelo mesmo' },
       bares:        { title:'Eu vou\né pela\ncomida.', sub:'Vocês sabem que eu não sou de beber muito. Mas se o lugar tiver uma comidinha de primeira, um petisco que vale a pena e uns drinks bem feitos pra acompanhar, a gente senta e fica.', hand:'foco na porção' },
       cafes:        { title:'Açúcar,\ncarboidrato\ne cafeína.', sub:'Isso aqui não é sobre tomar um expresso correndo no balcão. Entram aqui as padarias, as confeitarias e os lugares pra sentar, pedir um doce incrível, um pão bom e enrolar a tarde toda.', hand:'pede o bolo inteiro' },
-      turismo:      { title:'O que\nvale o\npasseio.', sub:null, hand:null },
+      turismo:      { title:'O que\nvale o\npasseio.', sub:'Os clássicos que todo mundo fala — mas com a opinião de quem foi mil vezes e ainda vai de novo. Sem hype vazio.', hand:'não esquece o protetor solar' },
     };
     const ed = ED[tabKey] || {};
     mainView.innerHTML = `
@@ -2130,13 +2132,18 @@
           : filtered.map((item, i) => `
             <div class="x-card fade-up" style="animation-delay:${i*0.04}s;">
               <div class="x-card-top">
-                <h4>${item.title}</h4>
-                <div style="display:flex;gap:6px;align-items:center;">
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                  <h4>${item.title}</h4>
+                  ${item.camu_indica ? `<span class="camu-badge">Indico!</span>` : ''}
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
                   ${item.preco ? `<span class="price-badge">${item.preco}</span>` : ''}
                   <span class="bairro-badge" onclick="event.stopPropagation();openDetail('neighborhood','${item.bairroId}')">${item.bairroName}</span>
                 </div>
               </div>
               <p>${item.desc}</p>
+              ${item.dica ? `<p class="tip-note">${item.dica}</p>` : ''}
+              ${item.alerta ? `<p style="font-family:'Lora',serif;font-size:12px;color:#B55E00;margin-top:4px;font-style:italic;">⚠️ ${item.alerta}</p>` : ''}
               ${item.horario ? `<p class="meta-hours">⏰ ${item.horario}</p>` : ''}
               ${(item.maps || item.link) ? `
                 <div class="card-actions">
@@ -2290,6 +2297,7 @@
         <h1 class="ed-title">${n.name}</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">${n.subtitle}</p>
+        <span class="ed-hand">vai devagar, tem muito pra ver</span>
       </div>
 
       <div class="tab-bar">
@@ -2444,6 +2452,7 @@
         <h1 class="ed-title">Antes\nde Ir.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Tudo que você precisa saber antes de fazer as malas.</p>
+        <span class="ed-hand">bota na mala e vai</span>
       </div>
       <div style="padding: 8px 16px 80px; display:flex; flex-direction:column; gap:12px;">
         ${items.map((item, i) => `
