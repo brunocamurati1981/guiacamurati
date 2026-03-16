@@ -623,7 +623,7 @@
 
     /* ── EDITORIAL SECTION HEADER ── */
     .ed-header {
-      padding: 56px 28px 0;
+      padding: 76px 28px 0;
       position: relative;
     }
     .ed-eyebrow {
@@ -2007,10 +2007,28 @@
 
   /* ── RENDER PASSEIOS SECTION ── */
   function renderPasseiosSection() {
-    mainView.innerHTML = `<div style="display:flex;flex-direction:column;font-size:0;">` +
-      ITINERARIES.map((it, i) => `<div class="parallax-section parallax-section-sm" onclick="openDetail('itinerary','${it.id}')"><div class="parallax-bg" style="background-image:url('${it.bg}');"></div><div class="parallax-overlay parallax-overlay-strong"></div><div class="parallax-content parallax-content-sm"><div class="it-tags" style="margin-bottom:10px;">${it.tags.map(t=>`<span class="it-tag">${t}</span>`).join('')}<span class="it-tag">⏱ ${it.duration}</span></div><h2 class="parallax-title-sm">${it.title}</h2><p class="parallax-sub-sm">${it.subtitle}</p><span class="parallax-cta-sm">Ver roteiro →</span></div></div>`).join('') +
-      `</div><div style="height:68px;"></div>`;
-    requestAnimationFrame(() => initParallax());
+    mainView.innerHTML = `
+      <div class="ed-header">
+        <span class="ed-eyebrow">roteiros</span>
+        <h1 class="ed-title">${ITINERARIES.length} Roteiros\nCurados.</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Passeios por dia, ruas cool e alternativas — tudo num só lugar.</p>
+      </div>
+      <div class="x-list">
+        ${ITINERARIES.map((it, i) => `
+          <div class="x-card fade-up" style="animation-delay:${i*0.05}s;cursor:pointer;" onclick="openDetail('itinerary','${it.id}')">
+            <div class="x-card-top">
+              <h4>${it.emoji ? it.emoji + ' ' : ''}${it.title}</h4>
+              <span class="bairro-badge" style="pointer-events:none;">⏱ ${it.duration}</span>
+            </div>
+            <p>${it.subtitle}</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+              ${it.tags.map(t=>`<span style="font-family:'Lora',serif;font-size:11px;font-style:italic;color:var(--ink-3);background:var(--surface);border-radius:8px;padding:3px 9px;">${t}</span>`).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
   }
 
   /* ── RENDER EXPLORAR SECTION ── */
@@ -2267,20 +2285,13 @@
     const annotIdx = neighborhoods.indexOf(n);
 
     detailView.innerHTML = `
-      <!-- Hero -->
-      <div class="hero">
-        <img src="${n.image}" alt="${n.name}" onerror="this.style.background='#C4A882';">
-        <div class="hero-overlay"></div>
+      <div class="ed-header">
+        <span class="ed-eyebrow">${ANNOTATIONS[annotIdx] || 'bairro carioca'}</span>
+        <h1 class="ed-title">${n.name}</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">${n.subtitle}</p>
       </div>
 
-      <!-- Title card (bleeds below hero) -->
-      <div class="hero-title-card">
-        <span class="hero-annot">${ANNOTATIONS[annotIdx] || 'bairro carioca'}</span>
-        <h1 class="hero-name">${displayName}</h1>
-        <p class="hero-sub">${n.subtitle}</p>
-      </div>
-
-      <!-- Tab bar -->
       <div class="tab-bar">
         <div class="tab-scroll no-scroll" id="tabBar">
           ${TABS.map(t => `
@@ -2291,7 +2302,6 @@
         </div>
       </div>
 
-      <!-- Content -->
       <div class="tab-content" id="tabContent">
         ${renderItems(n, activeTab)}
       </div>
@@ -2429,9 +2439,11 @@
       },
     ];
     mainView.innerHTML = `
-      <div class="page-header">
-        <span class="page-eyebrow">viagem</span>
-        <h1 class="page-title">Antes<br><span style="color:var(--coral)">de Ir.</span></h1>
+      <div class="ed-header">
+        <span class="ed-eyebrow">viagem</span>
+        <h1 class="ed-title">Antes\nde Ir.</h1>
+        <div class="ed-rule"></div>
+        <p class="ed-sub">Tudo que você precisa saber antes de fazer as malas.</p>
       </div>
       <div style="padding: 8px 16px 80px; display:flex; flex-direction:column; gap:12px;">
         ${items.map((item, i) => `
