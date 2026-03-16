@@ -1293,9 +1293,15 @@
       <div class="nav-dot"></div>
     </button>
 
-    <button class="nav-btn" data-section="explorar" onclick="navigate('explorar')">
+    <button class="nav-btn" data-section="bairros" onclick="navigate('bairros')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
-      <span>Explorar</span>
+      <span>Bairros</span>
+      <div class="nav-dot"></div>
+    </button>
+
+    <button class="nav-btn" data-section="explorar" onclick="navigate('explorar')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span>Categorias</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-btn" data-section="antes-de-ir" onclick="navigate('antes-de-ir')">
@@ -2046,7 +2052,6 @@
   /* ── RENDER EXPLORAR SECTION ── */
   function renderExplorarSection() {
     const filters = [
-      { key: 'bairros',     label: 'Por Bairros',     sub: 'Explore bairro a bairro',         icon: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>' },
       { key: 'cafes',       label: 'Cafés',            sub: 'Os melhores cafés da cidade',      icon: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/>' },
       { key: 'restaurantes',label: 'Restaurantes',     sub: 'Onde comer bem no Rio',            icon: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>' },
       { key: 'bares',       label: 'Bares',            sub: 'Botecos, bares e vida noturna',    icon: '<path d="M8 22H6a2 2 0 0 1-2-2V6l2-4h12l2 4v14a2 2 0 0 1-2 2h-2"/><path d="M15 14a3 3 0 1 1-6 0"/><path d="M6 6h12"/>' },
@@ -2055,15 +2060,15 @@
 
     mainView.innerHTML = `
       <div class="ed-header">
-        <span class="ed-eyebrow">explorar</span>
+        <span class="ed-eyebrow">categorias</span>
         <h1 class="ed-title">O Rio\n<span style="color:var(--coral)">é seu</span></h1>
         <div class="ed-rule"></div>
-        <p class="ed-sub">Filtre por categoria ou explore bairro a bairro.</p>
+        <p class="ed-sub">Filtre por categoria e descubra onde comer, beber e passear.</p>
         <span class="ed-hand">Vai bater perna!</span>
       </div>
       <div class="explorar-grid">
         ${filters.map(f => `
-          <div class="explorar-card" onclick="navigate('${f.key === 'bairros' ? 'bairros' : f.key}')">
+          <div class="explorar-card" onclick="navigate('${f.key}')">
             <div class="explorar-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${f.icon}</svg>
             </div>
@@ -2111,7 +2116,8 @@
         allItems.push({ ...item, bairroName: n.name.replace('\n',' '), bairroId: n.id });
       });
     });
-    const filtered = activeFilter ? allItems.filter(it => it.bairroId === activeFilter) : allItems;
+    const filtered = [...(activeFilter ? allItems.filter(it => it.bairroId === activeFilter) : allItems)]
+      .sort((a, b) => (b.camu_indica ? 1 : 0) - (a.camu_indica ? 1 : 0));
 
     const ED = {
       restaurantes: { title:'Onde eu\nrealmente\ncomo.', sub:'Vocês sabem que eu levo comida muito a sério. A regra aqui é clara: come-se absurdamente bem, mas zero frescura. Não me façam colocar uma calça jeans.', hand:'São Paulo não tem isso' },
@@ -2329,8 +2335,9 @@
 
   /* ── RENDER ITEMS ── */
   function renderItems(n, tabKey) {
-    const items = n.tabs[tabKey] || [];
     const isInsider = tabKey === 'insider';
+    const raw = n.tabs[tabKey] || [];
+    const items = isInsider ? raw : [...raw].sort((a, b) => (b.camu_indica ? 1 : 0) - (a.camu_indica ? 1 : 0));
 
     return items.map((item, i) => `
       <div class="c-card${isInsider ? ' insider' : ''} fade-up" style="animation-delay:${i * 0.07}s;">
