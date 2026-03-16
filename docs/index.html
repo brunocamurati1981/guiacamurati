@@ -1289,7 +1289,7 @@
     </button>
     <button class="nav-btn" data-section="passeios" onclick="navigate('passeios')">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
-      <span>Roteiros</span>
+      <span>Guias</span>
       <div class="nav-dot"></div>
     </button>
 
@@ -1972,10 +1972,10 @@
       },
       {
         bg: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=1200&q=85',
-        eyebrow: 'passeios',
-        title: '10 roteiros\ncurados.',
-        sub: 'Passeios por dia, ruas cool e passeios alternativos — tudo num só lugar.',
-        cta: { label: 'Ver Roteiros', action: "navigate('passeios')" },
+        eyebrow: 'guias',
+        title: 'Guias\nTemáticos.',
+        sub: 'Praias, ruas cool, roteiros de dia — tudo num só lugar.',
+        cta: { label: 'Ver Guias', action: "navigate('passeios')" },
       },
 
       {
@@ -2030,8 +2030,8 @@
   function renderPasseiosSection() {
     mainView.innerHTML = `
       <div class="ed-header">
-        <span class="ed-eyebrow">roteiros</span>
-        <h1 class="ed-title">${ITINERARIES.length} Roteiros\nCurados.</h1>
+        <span class="ed-eyebrow">guias</span>
+        <h1 class="ed-title">Guias\nTemáticos.</h1>
         <div class="ed-rule"></div>
         <p class="ed-sub">Passeios por dia, ruas cool e alternativas — tudo num só lugar.</p>
         <span class="ed-hand">Siga essas dicas... ou não!</span>
