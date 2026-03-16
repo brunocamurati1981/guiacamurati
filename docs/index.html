@@ -1795,9 +1795,9 @@
     },
     { id:'passeios-alternativos', bg:'https://s2-oglobo.glbimg.com/DQJw7GJZ_aa7EEBM0zC_f-STfyA=/0x232:3464x2616/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/0/y/oez8DPSr6V6CnOh3FJXg/103542369-rs-rio-de-janeiro-rj-30-06-2023-a-marinha-r.jpg', tipo:'passeio-alternativo', emoji:'✨', title:'Passeios Alternativos', subtitle:'Para quem tem tempo extra ou quer algo fora do circuito', duration:'variável', tags:['especial','único','fora do roteiro'], color:'#5A4A9A',
       passeios:[
-        { nome:'Passeio de Barco', desc:'Um dos passeios mais especiais do Rio — ver a cidade do mar é único. Busque no Instagram barcos disponíveis. Inclua mergulho se possível.', dica:'Alguns aceitam passageiros avulsos, outros alugam o barco completo. Melhor em dias de sol.' },
-        { nome:'Ilha Fiscal', desc:'Palácio neogótico verde-água no meio da Baía de Guanabara. Foi palco do último baile do Império antes da Proclamação da República.', dica:'Visita guiada com saída de barco do Arsenal da Marinha — compre ingresso com antecedência. Combina com o roteiro do Centro.' },
-        { nome:'Ilha de Paquetá', desc:'Ilha sem carro dentro da Baía — transporte é bike e charrete. Casarios coloniais, praias tranquilas, ritmo completamente diferente.', dica:'Barca sai da Praça XV (~1h). Alugue uma bike e dê a volta completa. Prefira dias de semana.' },
+        { nome:'Passeio de Barco', desc:'Um dos passeios mais especiais do Rio — ver a cidade do mar é único. Busque no Instagram barcos disponíveis. Inclua mergulho se possível. Alguns barcos aceitam passageiros avulsos; outros alugam o barco completo para grupos. Um passeio memorável, especialmente em dias de sol.', dica:'Melhor em dias de sol. Busque barcos no Instagram — há opções para todos os tamanhos de grupo.' },
+        { nome:'Ilha Fiscal', desc:'Palácio neogótico verde-água no meio da Baía de Guanabara. Foi palco do último baile do Império antes da Proclamação da República em 1889. Um dos segredos mais charmosos do Rio.', dica:'Visita guiada com saída de barco do Arsenal da Marinha — compre ingresso com antecedência. Combina com o roteiro do Centro.' },
+        { nome:'Ilha de Paquetá', desc:'Ilha sem carro dentro da Baía de Guanabara — transporte é bicicleta e charrete. Casarios coloniais, praias tranquilas e um ritmo completamente diferente do Rio continental. Fica a 1h de barca da Praça XV.', dica:'Barca sai da Praça XV. Alugue uma bike e dê a volta completa pela ilha. Prefira dias de semana — mais tranquilo.' },
       ]
     },
   ];
@@ -1935,8 +1935,8 @@
       {
         bg: 'https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=1200&q=85',
         eyebrow: 'passeios',
-        title: '16 roteiros\ncurados.',
-        sub: '8 roteiros por dia, 5 ruas cool e 3 passeios alternativos — tudo num só lugar.',
+        title: '10 roteiros\ncurados.',
+        sub: 'Passeios por dia, ruas cool e passeios alternativos — tudo num só lugar.',
         cta: { label: 'Ver Roteiros', action: "navigate('passeios')" },
       },
       {
@@ -2467,34 +2467,48 @@
   function renderAntesDeIrSection() {
     const items = [
       {
-        title: 'Dinheiro',
+        title: 'Dinheiro & Pagamentos',
         icon: '💳',
-        content: 'Quase tudo aceita cartão de crédito ou Pix. Tenha um dinheirinho trocado para situações específicas como barqueiros e pequenos comércios. Não vai precisar de muito dinheiro em espécie.',
+        content: 'Quase ninguém usa dinheiro em espécie no Rio — o ideal é ter um cartão de crédito ou débito e usar Pix. Para ônibus, VLT e BRT, o pagamento é pelo app <strong>Gira</strong> (baixe antes e leia o QR code na catraca) ou pelo bilhete RioCard. O metrô aceita cartão de crédito diretamente na catraca — sem bilhete. Tenha sempre algumas notas pequenas para casos pontuais: barracas de praia, biscoito Globo, gorjeta.',
       },
       {
-        title: 'Transporte',
-        icon: '🚗',
-        content: '<strong>Uber:</strong> principal forma de se locomover. Confiável e seguro — prefira sempre ao táxi. <strong>Táxi:</strong> evite, especialmente do aeroporto. <strong>Metrô:</strong> aceita cartão de crédito direto na catraca. <strong>Ônibus/VLT/BRT:</strong> app Gira — baixe antes. <strong>Bike:</strong> Itaú Bike pelo app do Uber — ótimo para a orla e o Aterro.',
+        title: 'Como se locomover',
+        icon: '🚇',
+        content: '<strong>Uber:</strong> a forma mais confiável, acessível e segura — prefira sempre ao táxi, especialmente no aeroporto. <strong>Metrô:</strong> conecta Zona Sul, Centro e Barra; aceita cartão de crédito na catraca. <strong>Bike Itaú:</strong> excelente para a orla e o Aterro — acessível pelo próprio app do Uber, sem precisar baixar outro. <strong>Ônibus / VLT / BRT:</strong> funcionam bem e são baratos — baixe o app Gira antes de viajar.',
+        dica: 'A Bike Itaú é acessível direto do app do Uber — sem precisar baixar outro app.',
       },
       {
         title: 'Segurança',
         icon: '🔒',
-        content: 'O Rio é mais seguro do que muita gente imagina se você tiver bom senso. Não segure o celular na rua desnecessariamente. Não deixe pertences na areia da praia. À noite na Lapa fique mais atento. Uber do aeroporto — sempre.',
+        content: 'O Rio é uma cidade grande com os riscos habituais de qualquer metrópole — nem mais, nem menos do que Paris ou Buenos Aires se você tiver bom senso. Não segure o celular exposto ao caminhar. Não deixe pertences soltos na areia enquanto mergulha. Em feiras e transporte público, mantenha bolsa à frente. À noite na Lapa, fique mais atento aos seus pertences. Do aeroporto: sempre Uber — mais seguro e o preço é transparente antes de entrar no carro.',
+        dica: 'Na praia: deixe o celular no hotel ou com alguém de confiança enquanto mergulha.',
       },
       {
         title: 'Onde se hospedar',
         icon: '🏠',
-        content: '<strong>Recomendados:</strong> Ipanema (foco na praia), Copacabana perto do Posto 6, Botafogo (no meio de tudo, metrô, boemia e praia), Flamengo/Catete (tranquilo, perto da Glória). <strong>Evite:</strong> Barra da Tijuca (longe de tudo), Gávea/Jardim Botânico (pouco transporte).',
+        content: '<strong>Para praia:</strong> Ipanema (perto do Posto 9) ou Copacabana (perto do Posto 6) — acorda e já está na areia. <strong>Para o meio de tudo:</strong> Botafogo perto do metrô é imbatível — praia, Centro e boemia acessíveis. <strong>Tranquilo e central:</strong> Flamengo ou Catete, perto da Glória e do Centro histórico, com praias bonitas. <strong>Evite:</strong> Barra da Tijuca (longe de tudo, sem metrô próximo), Gávea/Jardim Botânico (charmosos mas transporte difícil), Cosme Velho (encantador mas isolado), Centro (funciona mas a Lapa à noite é mais intensa).',
       },
       {
         title: 'Clima',
         icon: '☀️',
-        content: 'O clima do Rio é imprevisível. Maio a julho costuma ter menos chuva. No verão chove mais — mas passa rápido. Cheque antes de ir à praia.',
+        content: 'O clima do Rio é imprevisível — e isso faz parte do charme. De maio a julho chove menos e o calor é mais ameno: ótima época para visitar. No verão (dezembro a fevereiro) as chuvas são mais frequentes, normalmente no final da tarde — mas passam rápido. A cor, temperatura e ondulação da água também variam conforme as chuvas e a corrente. Não planeje o dia com rigidez: o Rio ensina a improvisar.',
       },
       {
-        title: 'Idioma',
+        title: 'Praias — dicas essenciais',
+        icon: '🌊',
+        content: 'Leve o mínimo: toalha, protetor solar e algum trocado para o biscoito Globo e o mate gelado da praia — são obrigatórios e só custam alguns reais. Prefira <strong>Arpoador</strong> para águas rasas e surf; <strong>Posto 9</strong> de Ipanema para a experiência carioca clássica; <strong>Praia Vermelha</strong> para tranquilidade total. Antes de entrar na água em praias menores, cheque se está própria para banho em <strong>praialimpa.net</strong> — especialmente depois de chuvas.',
+        dica: 'Biscoito Globo com mate gelado na areia é um ritual carioca que não tem equivalente.',
+      },
+      {
+        title: 'Passeios especiais',
+        icon: '⛵',
+        content: 'Além dos roteiros clássicos, o Rio oferece passeios únicos que vale considerar com tempo extra: <strong>Aluguel de barco:</strong> ver o Rio do mar é incomparável. Busque no Instagram barcos disponíveis — alguns aceitam passageiros avulsos, outros alugam o barco completo. Inclua mergulho se possível. <strong>Ilha Fiscal:</strong> palácio neogótico verde-água no meio da Baía — visita guiada com saída de barco do Arsenal da Marinha. <strong>Ilha de Paquetá:</strong> ilha sem carro dentro da Baía, a 1h de barca da Praça XV. Alugue uma bicicleta e dê a volta pela ilha.',
+        dica: 'Prefira Paquetá em dias de semana — mais tranquilo e autêntico.',
+      },
+      {
+        title: 'Idioma & Comunicação',
         icon: '💬',
-        content: 'Poucos cariocas falam inglês fluente. Um sorriso e boa vontade funcionam muito bem. Baixe o Google Translate com o português offline.',
+        content: 'Poucos cariocas falam inglês fluente, mas a hospitalidade compensa. Um sorriso e boa vontade funcionam muito bem. Baixe o Google Translate com o português offline antes de chegar. Cariocas adoram ajudar — não hesite em perguntar.',
       },
     ];
     mainView.innerHTML = `
@@ -2509,6 +2523,7 @@
               <h4>${item.icon} ${item.title}</h4>
             </div>
             <p style="font-family:'Lora',serif;font-size:13px;line-height:1.6;color:var(--ink-2);margin-top:6px;">${item.content}</p>
+            ${item.dica ? `<p class="tip-note" style="margin-top:8px;">${item.dica}</p>` : ''}
           </div>
         `).join('')}
       </div>
