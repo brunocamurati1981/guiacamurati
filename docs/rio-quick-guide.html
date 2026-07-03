@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rio Quick Guide — Leblon, Ipanema & arredores</title>
+<meta name="description" content="Guia rápido e pessoal do Rio de Janeiro: restaurantes, bares e passeios em Leblon, Ipanema e arredores, com endereço, horário e links reais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f1e4;
+    --paper:#fffdf8;
+    --ink:#251f16;
+    --ink-soft:#5a5140;
+    --line:#e2d6bb;
+    --line-soft:#ece2ca;
+    --rust:#bb4a2c;
+    --rust-dark:#8f3a22;
+    --teal:#276358;
+    --teal-dark:#1b4a42;
+    --mustard:#b8842a;
+    --mustard-dark:#8e6318;
+    --plum:#6b4570;
+    --plum-dark:#503355;
+    --rose:#b8455f;
+    --rose-dark:#8f3548;
+    --gold:#c99a3c;
+    --shadow: 0 1px 0 rgba(37,31,22,.05), 0 8px 20px -12px rgba(37,31,22,.25);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(37,31,22,.06) 1px, transparent 0);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .guide{max-width:1000px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 28px;
+    text-align:center;
+    position:relative;
+  }
+  .hero-eyebrow{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    font-size:11px;
+    color:var(--rust-dark);
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(40px, 8vw, 68px);
+    line-height:.95;
+    letter-spacing:-.01em;
+    margin:0 0 14px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--rust);
+  }
+  .hero-sub{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:520px;
+    margin:0 auto 18px;
+    line-height:1.5;
+  }
+  .hero-meta{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    letter-spacing:.04em;
+  }
+  .hero-rule{
+    width:64px;height:3px;background:var(--gold);
+    margin:22px auto 0;border-radius:2px;
+  }
+
+  /* ---------- TABBAR ---------- */
+  .tabbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,241,228,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:12px 0;
+    margin:0 -20px 34px;
+    padding-left:20px;padding-right:20px;
+  }
+  .tabbar-inner{
+    max-width:1000px;margin:0 auto;
+    display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  }
+  .search-wrap{flex:1 1 200px;min-width:180px;}
+  #search{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:9px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+  }
+  #search:focus{border-color:var(--rust);}
+  #search::placeholder{color:#a89d84;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.02em;
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .chip:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
+  .no-results{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+  }
+
+  /* ---------- HOOD (neighborhood) ---------- */
+  .hood{
+    scroll-margin-top:150px;
+    margin-bottom:56px;
+  }
+  .hood-header{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:10px;
+    margin-bottom:8px;
+  }
+  .hood-emoji{font-size:22px;line-height:1;}
+  .hood-header h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:30px;
+    margin:0;
+    flex:1;
+  }
+  .hood-header .hood-sub{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .hood-intro{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.55;
+    max-width:640px;
+    margin:12px 0 30px;
+  }
+
+  .hood--rust .hood-header{border-color:var(--rust);}
+  .hood--teal .hood-header{border-color:var(--teal);}
+  .hood--mustard .hood-header{border-color:var(--mustard);}
+  .hood--plum .hood-header{border-color:var(--plum);}
+  .hood--rose .hood-header{border-color:var(--rose);}
+  .hood--star .hood-header{border-color:var(--gold);}
+
+  /* ---------- GROUP ---------- */
+  .group{margin-bottom:30px;}
+  .group-title{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:19px;
+    margin:0 0 3px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .group.featured .group-title::after{
+    content:"destaques";
+    font-family:'Space Mono', monospace;
+    font-style:normal;
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:2px 7px;
+    border-radius:999px;
+  }
+  .group-subtitle{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+    font-style:italic;
+  }
+  .group:not(.featured) .group-title{margin-bottom:14px;}
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(255px, 1fr));
+    gap:14px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 17px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .group.featured .card{border-color:var(--gold);}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .card-top h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16.5px;
+    margin:0;
+    line-height:1.25;
+  }
+  .card-tag{
+    flex:none;
+    font-family:'Space Mono', monospace;
+    font-size:9.5px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:2px 6px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .card-desc{
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .card-meta{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    margin-top:2px;
+  }
+  .meta-row{
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    gap:6px;
+    align-items:flex-start;
+    text-decoration:none;
+    line-height:1.4;
+  }
+  .meta-row .ic{flex:none;opacity:.85;}
+  a.meta-row:hover{color:var(--rust);}
+  .card-price{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--ink);
+  }
+  .card-note{
+    font-size:11px;
+    color:var(--mustard-dark);
+    background:#f5e9cf;
+    border-radius:8px;
+    padding:6px 9px;
+    margin:2px 0 0;
+    line-height:1.4;
+  }
+  .card-links{
+    display:flex;flex-wrap:wrap;gap:6px;
+    margin-top:4px;
+  }
+  .pill{
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    text-decoration:none;
+    padding:5px 10px;
+    border-radius:999px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .pill--outline{background:transparent;color:var(--ink);}
+  .pill--ghost{background:transparent;color:var(--ink-soft);border-color:var(--line);}
+  .pill:hover{opacity:.82;}
+
+  .card.is-hidden, .group.is-hidden, .hood.is-hidden{display:none;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:60px;
+    padding-top:26px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  footer strong{color:var(--ink);}
+
+  @media (max-width:560px){
+    .hero{padding:38px 0 22px;}
+    .tabbar{margin:0 -16px 26px;padding-left:16px;padding-right:16px;}
+    .guide{padding:0 16px 60px;}
+    .cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="guide">
+
+  <header class="hero">
+    <p class="hero-eyebrow">Guia rápido · pessoal · não afiliado</p>
+    <h1>Rio <em>Quick</em> Guide</h1>
+    <p class="hero-sub">Leblon, Ipanema e arredores — restaurantes, bares, cafés e passeios testados e aprovados, com endereço, horário e link direto.</p>
+    <p class="hero-meta">ATUALIZADO EM 03 JUL 2026 · ZONA SUL, RIO DE JANEIRO</p>
+    <div class="hero-rule"></div>
+  </header>
+
+  <nav class="tabbar">
+    <div class="tabbar-inner">
+      <div class="search-wrap">
+        <input type="search" id="search" placeholder="Buscar (ex: pizza, praia, Ocyá, boteco)…" autocomplete="off">
+      </div>
+      <div class="chips">
+        <a href="#leblon" class="chip">🟦 Leblon</a>
+        <a href="#ipanema" class="chip">🟩 Ipanema</a>
+        <a href="#outras" class="chip">🟨 Outros bairros</a>
+        <a href="#sorvetes" class="chip">🍦 Sorvetes</a>
+        <a href="#estrelados" class="chip">⭐ Estrelados</a>
+        <a href="#passeios" class="chip">🗺️ Passeios</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="content"></main>
+  <p class="no-results" id="noResults">Nada encontrado — tenta outro termo.</p>
+
+  <footer>
+    <p><strong>Sobre este guia:</strong> lista pessoal, sem patrocínio, feita para consulta rápida no celular. Endereços e links foram checados no Instagram/site oficial de cada lugar em julho de 2026 — horários de bares e restaurantes no Brasil mudam com frequência, então vale confirmar no Instagram antes de ir, principalmente em feriados. Itens marcados com ⚠️ têm alguma informação não totalmente confirmada.</p>
+    <p>Feito com Claude · guia independente, não relacionado a outros sites/guias do Rio.</p>
+  </footer>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    id: "leblon",
+    emoji: "🟦",
+    accent: "rust",
+    title: "Leblon",
+    sub: "Praia do Leblon",
+    intro: "Base de alta gastronomia premiada, botecos de bairro e a praia mais tranquila pra ir com criança.",
+    groups: [
+      {
+        title: "Alta gastronomia",
+        items: [
+          { name:"Balcão 201", tag:"do time do Casa 201", desc:"Bistrô-bar de João Paulo Frankenfeld. A casa-mãe, Casa 201 (1 estrela Michelin), fica a poucos minutos, no Jardim Botânico (Rua Lopes Quintas, 201).", address:"Rua Dias Ferreira, 113, Leblon", hours:"Ter–Qua 12h–0h · Qui–Sáb 12h–1h · Dom 12h–18h", ig:"balcao201" },
+          { name:"Chez Claude", tag:"Claude Troisgros", desc:"Bistrô do chef Claude Troisgros, cozinha de mercado com cara de casa. No mesmo endereço fica o Madame Olympe, o novo degustação estrelado do Claude (veja em Estrelados).", address:"Rua Conde de Bernadotte, 26, Leblon", hours:"Seg–Sáb 18h30–0h · fechado Dom", ig:"chez.claude", site:"https://chezclaude.com.br/" },
+        ]
+      },
+      {
+        title: "Carnes e burgers premium",
+        items: [
+          { name:"Clan BBQ", desc:"Churrasco no estilo americano, defumados lentos.", address:"Rua Dias Ferreira, 233, Leblon", hours:"Seg 18h–23h · Ter–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", ig:"clanbbq", site:"https://clanbbq.com.br/" },
+          { name:"Malta Beef Club", desc:"Steakhouse, carnes maturadas.", address:"Av. General San Martin, 359, Leblon", hours:"Ter–Sáb 12h–0h · Dom 12h–19h", ig:"malta.beefclub" },
+        ]
+      },
+      {
+        title: "Peixes / frutos do mar",
+        items: [
+          { name:"Ocyá", desc:"Referência em frutos do mar brasileiros. Tem também unidade na Ilha da Gigóia (Barra da Tijuca), só nos fins de semana e com reserva obrigatória — ótima pra combinar com o passeio de barco pelas Ilhas Tijucas.", address:"Rua Aristides Espínola, 88, Leblon", hours:"Ter–Sáb 12h–23h · Dom 12h–18h · fechado Seg", ig:"ocya.rio", site:"https://ocya.com.br/" },
+          { name:"Pabu Izakaya", desc:"Peixe cru e cozinha japonesa de balcão.", address:"Rua Humberto de Campos, 827, loja G, Leblon", hours:"Dom–Ter 12h–23h · Qua–Sáb 12h–0h", ig:"pabuizakayario" },
+        ]
+      },
+      {
+        title: "Italiano e pizza",
+        items: [
+          { name:"Sisi Cucina", desc:"Italiano contemporâneo.", address:"Rua Dias Ferreira, 617, lojas A/B, Leblon", hours:"Seg–Qui 12h–17h e 18h–23h · Sex 12h–17h e 18h–0h · Sáb 12h–0h · Dom 12h–22h", ig:"sisicucina", site:"https://www.sisicucina.com.br/" },
+          { name:"Ferro e Farinha", desc:"Pizza napolitana premiada. Também tem unidade no piso 4 do Shopping Leblon.", address:"Rua Dias Ferreira, 48, Leblon", hours:"conferir no Instagram (shopping: Seg–Sáb 10h–22h · Dom 13h–22h)", ig:"ferroefarinha", site:"https://www.ferroefarinha.com.br/leblon" },
+          { name:"Nido", desc:"Ristorante italiano.", address:"Av. General San Martin, 1011, Leblon", hours:"Ter–Sáb 12h–0h · Dom 12h–22h", ig:"nidoristorante", site:"http://nidoristorante.com.br/" },
+        ]
+      },
+      {
+        title: "Café / brunch / confeitaria",
+        items: [
+          { name:"So_Lo", desc:"Café de especialidade e brunch.", address:"Av. Ataulfo de Paiva, 1120, loja A, Leblon", hours:"Seg–Sáb 8h–21h · Dom 8h–18h", ig:"so_lo.cafe" },
+          { name:"Absurda", tag:"melhor confeitaria da cidade", desc:"Confeitaria autoral. Unidade original do Leblon reabriu em 2026 na Av. Ataulfo de Paiva — vale confirmar o número exato no Instagram antes de ir.", address:"Av. Ataulfo de Paiva, Leblon (número a confirmar)", hours:"referência (unidade Horto): Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", ig:"absurdaconfeitaria", note:"Endereço da unidade Leblon reaberta em 2026 ainda não 100% confirmado — confira no Instagram." },
+          { name:"Colher de Pau", desc:"Clássico do brigadeiro carioca e variações.", address:"Rua Rita Ludolf, 90, Leblon", hours:"Ter–Qui 10h–20h · Sex–Sáb 10h–20h30 · Dom 10h–19h", ig:"a_colherdepau", site:"https://www.acolherdepau.com.br/" },
+        ]
+      },
+      {
+        title: "Oriente Médio",
+        items: [
+          { name:"Baduk", tag:"vale demais a pena", desc:"Cozinha do Oriente Médio, com referências da Turquia, Israel, Iraque, Irã e Palestina — do café ao bar, passando pela comida de rua. Brunch buffet aos sábados e domingos.", address:"Rua Rainha Guilhermina, 95, Leblon", hours:"Dom–Seg 10h–22h · Ter–Sáb 10h–23h", ig:"badukrio" },
+        ]
+      },
+      {
+        title: "Bares",
+        items: [
+          { name:"Jobi", desc:"Boteco clássico, mais de 60 anos. Não aceita reservas.", address:"Av. Ataulfo de Paiva, 1166, loja B, Leblon", hours:"Diariamente 11h–3h", ig:"bar_jobi", site:"https://www.jobileblon.com.br/" },
+          { name:"Bar Bracarense", desc:"Boteco de esquina, clássico de calçada.", address:"Rua José Linhares, 85, loja B, Leblon", hours:"Seg 11h–22h · Ter–Qua 11h–23h · Qui–Sáb 11h–23h55 · Dom 11h–21h", ig:"bar_bracarense" },
+          { name:"Boteco Belmonte", desc:"Boteco de calçada, unidade Leblon.", address:"Rua Dias Ferreira, 521, Leblon", hours:"Diariamente 11h–2h", ig:"boteco_belmonte" },
+          { name:"Rainha", desc:"Boteco de bairro.", address:"Rua Dias Ferreira, 247, Leblon", hours:"consultar Instagram", ig:"boteco_rainha", site:"https://obotecorainha.com.br/", note:"Endereço encontrado com fontes conflitantes — confirme no Google Maps/Instagram antes de ir." },
+          { name:"Veloso", desc:"Bar com raiz na bossa nova.", address:"Rua Aristides Espínola, 44, Leblon", hours:"Diariamente 11h–1h", ig:"bardoveloso", site:"https://velosobar.com.br/" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "ipanema",
+    emoji: "🟩",
+    accent: "teal",
+    title: "Ipanema",
+    sub: "Praia de Ipanema",
+    intro: "Do Guia Michelin aos botecos de esquina, tudo a poucos passos da praia.",
+    groups: [
+      {
+        title: "Restaurantes — destaques",
+        featured: true,
+        items: [
+          { name:"Babbo Osteria", tag:"Guia Michelin 2026", desc:"Italiano de alto nível, chef Elia Schramm.", address:"Rua Barão da Torre, 632, Ipanema", hours:"Seg–Qua 12h–16h, 19h–23h · Qui–Sáb 12h–16h, 19h–0h · Dom 12h–18h", ig:"babboosteria" },
+          { name:"Zazá Bistrô", desc:"Comida brasileira contemporânea, casa charmosa — favorito de turistas.", address:"Rua Joana Angélica, 40, Ipanema", hours:"Seg–Qui 12h–23h30 · Sex–Sáb 12h–0h30 · Dom 12h30–23h30", ig:"zazabistro" },
+          { name:"Maria e o Boi", tag:"Bib Gourmand", desc:"Cozinha brasileira autoral, muito bem avaliada.", address:"Rua Maria Quitéria, 111, 1º andar, Ipanema", hours:"Ter–Dom 12h–23h", note:"Instagram oficial não confirmado com certeza — busque \"Maria e o Boi Ipanema\" antes de ir." },
+          { name:"Spicy Fish", desc:"Cozinha oriental, peixe com toque picante.", address:"Rua Maria Quitéria, 99, Ipanema", hours:"Seg–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", ig:"spicyfish.af" },
+          { name:"Rudä", tag:"2x melhor do Rio · Comer & Beber", desc:"Cozinha brasileira autoral.", address:"Rua Garcia D'Ávila, 118, Ipanema", hours:"Seg–Ter 12h–23h · Qua–Sáb 12h–0h · Dom 12h–23h", ig:"ruda.restaurante" },
+        ]
+      },
+      {
+        title: "Restaurantes — outros",
+        items: [
+          { name:"Quitéria", desc:"Nordestino autoral, dentro do Ipanema Inn.", address:"Rua Maria Quitéria, 27, Ipanema", hours:"Café da manhã 7h–11h · Almoço/jantar 12h–22h30", ig:"quiteria.rio" },
+          { name:"Satyricon", desc:"Frutos do mar, clássico e badalado.", address:"Rua Barão da Torre, 192, Ipanema", hours:"Dom–Qui 12h–0h · Sex–Sáb 12h–1h", ig:"restaurante_satyricon", site:"http://www.satyricon.com.br" },
+          { name:"Toto", desc:"Restaurante de esquina, clima descontraído.", address:"Rua Joana Angélica, 155, Ipanema", hours:"Todos os dias 12h–0h", ig:"toto.ipanema" },
+          { name:"Teva", desc:"100% vegano.", address:"Av. Henrique Dumont, 110, loja B, Ipanema", hours:"8h–23h (confirme no Instagram — fontes divergem)", ig:"tevavegetal", site:"https://tevavegetal.com.br" },
+        ]
+      },
+      {
+        title: "Cafés",
+        items: [
+          { name:"Empório Jardim", desc:"Café e brunch de bairro.", address:"Rua Maria Quitéria, 62, Ipanema", hours:"Todos os dias 8h–19h (cozinha até 18h30)", ig:"emporiojardimrio", site:"https://emporiojardimrio.com.br" },
+          { name:"So_Lo Ipanema", desc:"Café de especialidade.", address:"Rua Garcia D'Ávila, 147, loja B, Ipanema", hours:"Seg–Sáb 8h–22h · Dom 8h–18h", ig:"so_lo.cafe" },
+        ]
+      },
+      {
+        title: "Bares",
+        items: [
+          { name:"Belmonte", desc:"Boteco de calçada, unidade Ipanema.", address:"Ipanema (confirme a unidade — endereço encontrado com fontes conflitantes)", hours:"consultar Instagram", ig:"boteco_belmonte", note:"Rio tem várias unidades do Belmonte — confirme qual fica mais perto no Google Maps." },
+          { name:"Boa Praça", desc:"Boteco na virada pro Arpoador.", address:"Av. Vieira Souto, 110, Ipanema", hours:"Ter 17h–1h · Qua–Qui 16h–1h · Sex–Dom 12h–1h", ig:"botecoboapraca", site:"https://botecoboapraca.com.br" },
+          { name:"Bar Astor", desc:"Bar de esquina em frente à praia, clima retrô.", address:"Av. Vieira Souto, 110, Ipanema", hours:"Seg–Qua 18h–1h · Qui 18h–2h · Sex 13h–3h · Sáb 12h–3h · Dom 12h–22h", ig:"barastor", site:"https://barastor.com.br" },
+          { name:"Mané", desc:"Bar de bairro.", address:"Rua Teixeira de Melo, 31, Ipanema", hours:"consultar Instagram", ig:"mane.rio", note:"Handle do Instagram e horário não totalmente confirmados — confira antes de ir." },
+          { name:"Arp Bar", tag:"Hotel Arpoador", desc:"Bar do hotel, ótima vista.", address:"Rua Francisco Otaviano, 177, Ipanema", hours:"Café da manhã 7h–11h · Seg–Sáb 12h–23h · Dom 12h–22h", ig:"arpbar", site:"https://www.hotelarpoador.com/en/arp" },
+          { name:"Vinicius Bar", desc:"Show bar com música ao vivo, homenagem a Vinícius de Moraes.", address:"Rua Vinícius de Moraes, 39, Ipanema", hours:"Diariamente 12h–23h (shows têm horário próprio à noite)", ig:"viniciusrestaurante.showbar" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "outras",
+    emoji: "🟨",
+    accent: "mustard",
+    title: "Outros bairros",
+    sub: "Jardim Botânico · Botafogo",
+    intro: "Fora do eixo Leblon/Ipanema, mas perto o suficiente pra valer o Uber.",
+    groups: [
+      {
+        title: "Pela cidade",
+        items: [
+          { name:"Dainer", desc:"Brunch o dia todo.", address:"Rua Real Grandeza, 193, Botafogo", hours:"Ter–Sáb 9h–22h · Dom 9h–19h", ig:"dainer.restaurante" },
+          { name:"The Slow Bakery", tag:"a melhor padaria da cidade", desc:"Padaria de fermentação natural. Tem também unidade no Leblon (Rua Conde de Bernadote, 26).", address:"Rua General Polidoro, 25, Botafogo", hours:"Ter–Sáb 8h–20h · Dom 8h–16h", ig:"theslowbakery", site:"https://theslowdigital.com.br" },
+        ]
+      },
+      {
+        title: "Jardim Botânico",
+        items: [
+          { name:"Absurda", desc:"Confeitaria, unidade do Horto — a original antes da reabertura no Leblon.", address:"Rua Pacheco Leão, 792, Jardim Botânico", hours:"Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", ig:"absurdaconfeitaria" },
+          { name:"Grado", desc:"Italiano de bairro.", address:"Rua Visconde de Carandaí, 31, Jardim Botânico", hours:"Ter–Sex 19h–23h · Sáb 12h30–16h30 e 19h–23h · Dom 12h30–17h", ig:"gradorestaurante" },
+          { name:"Katz-Sū", tag:"antigo \"Katsu\"", desc:"Cozinha coreana, do chef Bruno Katz.", address:"Rua Von Martius, 325, Jardim Botânico", hours:"Ter–Sáb 12h–0h · Dom 12h–20h", ig:"katz_su" },
+          { name:"Gonza", desc:"Parrilla argentina.", address:"Rua Pacheco Leão, 868, Jardim Botânico", hours:"Dom, Seg, Qua 12h–23h · Qui–Sáb 12h–0h · fechado Ter", ig:"gonza.restaurante" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "sorvetes",
+    emoji: "🍦",
+    accent: "rose",
+    title: "Sorvetes",
+    sub: "Leblon · Ipanema · Copacabana",
+    intro: "Pra fechar o passeio ou fugir do calor — os favoritos da Zona Sul.",
+    groups: [
+      {
+        title: "Sorveterias",
+        items: [
+          { name:"Mil Frutas", desc:"Clássico carioca de sorvete de frutas, sabores autorais. Rede com várias unidades pela cidade — esta é a mais perto de Leblon/Ipanema.", address:"Rua Garcia D'Ávila, 134, loja A, Ipanema", hours:"Ter–Sex 15h–23h · Sáb–Dom 18h–23h", ig:"milfrutas", note:"Horário é da unidade Café; a rede tem outras lojas na cidade com horários próprios — confira a mais perto de você." },
+          { name:"Vero", tag:"certificado Accademia della Gelateria Italiana", desc:"Gelato italiano, pizza e café, produção própria todos os dias.", address:"Rua Visconde de Pirajá, 229, Ipanema", hours:"Diariamente 11h–0h", ig:"verogelateria" },
+          { name:"Cambada", desc:"Sorvete com iogurte, mel e granola.", address:"Rua Ronald de Carvalho, 132, loja B, Copacabana", hours:"consultar Instagram", ig:"cambadasorvetes", note:"Horário não confirmado — a marca tem anunciado novas unidades no Instagram, vale conferir antes de ir." },
+          { name:"Momo Gelato", desc:"Gelato artesanal italiano, feito na hora à vista do cliente.", address:"Rua Dias Ferreira, 147, Leblon", hours:"Dom–Qui 11h–23h · Sex–Sáb 11h–0h", ig:"momogelateria", site:"https://momogelato.com.br/" },
+          { name:"Sorvetiño", tag:"sorveteiro do ano 2026 · Veja Rio", desc:"Sabores autorais que mudam toda semana, formato soft com coberturas — o clássico fixo é sucrilhos.", address:"Av. Prado Junior, 330, loja D, Copacabana", hours:"Diariamente 12h–20h", ig:"sorvetinhocomtil" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "estrelados",
+    emoji: "⭐",
+    accent: "star",
+    title: "Estrelados",
+    sub: "Menu degustação · Guia Michelin",
+    intro: "Os templos de menu degustação com estrela Michelin da cidade. Caríssimos — mas vai que rola uma ocasião especial.",
+    groups: [
+      {
+        title: "Menu degustação, Guia Michelin",
+        items: [
+          { name:"Oro", tag:"2 estrelas Michelin", desc:"Felipe Bronze — menu degustação autoral, um dos ápices da alta gastronomia carioca.", address:"Rua General San Martin, 889, Leblon", hours:"Ter–Sex 19h30–23h · Sáb 13h–15h e 19h30–23h", ig:"oro_restaurante", site:"https://ororestaurante.com.br/", price:"R$ 690–790 (menu degustação)" },
+          { name:"Lasai", tag:"2 estrelas Michelin", desc:"Alta gastronomia, cerca de 10 lugares por noite — só com reserva.", address:"Rua Conde de Irajá, 191, Botafogo", hours:"Ter–Sáb 19h30–21h30 (só reserva)", ig:"restaurantelasai", site:"https://lasai.com.br/english/" },
+          { name:"Oteque", tag:"1 estrela Michelin", desc:"Menu degustação autoral.", address:"Rua Conde de Irajá, 581, Botafogo", hours:"Ter–Sáb 19h–23h30", site:"https://www.oteque.com/", note:"Instagram oficial não confirmado com certeza — confira no site antes de reservar." },
+          { name:"Madame Olympe", tag:"1 estrela Michelin · novo 2026", desc:"O novo degustação de Claude Troisgros com a chef Jéssica Trindade — ganhou a primeira estrela Michelin com menos de um ano de casa. Só 20 lugares, no mesmo endereço do Chez Claude. Menu de 8 pratos (~R$480–540) ou 4 pratos (~R$380–440), com harmonização à parte.", address:"Rua Conde de Bernadotte, 26, Leblon", hours:"Ter–Sáb 18h30–0h", ig:"madame.olympe", site:"https://madameolympe.com.br/", note:"Preço do menu varia um pouco entre fontes — confirme no site antes de reservar." },
+        ]
+      },
+    ]
+  },
+  {
+    id: "passeios",
+    emoji: "🗺️",
+    accent: "plum",
+    title: "Passeios e coisas para fazer",
+    sub: "Zona Sul · Centro · Urca",
+    intro: "Do clássico Pão de Açúcar aos cantos menos óbvios, pra montar o roteiro por dia.",
+    groups: [
+      {
+        title: "Perto do Leblon / Barra",
+        items: [
+          { name:"Passeio de barco — Ilhas Tijucas", desc:"Sai da Barra da Tijuca, dura poucas horas, dá pra fazer de manhã. Vai bastante gringo, é barato — tem no Airbnb Experiences.", address:"Saída: Av. Armando Lombardi, 370 (Praia dos Amores) e/ou Jardim Oceânico, Barra da Tijuca", hours:"Passeios de ~3–4h, geralmente pela manhã (7h–13h), sujeito a maré/clima", ig:"rioboatexperience", site:"https://rioboatexperience.com.br", price:"a partir de ~R$150–225/pessoa (compartilhado)" },
+          { name:"Almoço no Ocyá — Ilha da Gigóia", desc:"Combina bem com o passeio de barco. Estar na beira da lagoa é incrível. Só fins de semana, reserva obrigatória.", address:"Ilha Primeira, Barra da Tijuca (acesso só por barco)", hours:"Sex 17h30–22h · Sáb 12h–22h · Dom 12h–18h", ig:"ocya.rio", site:"https://ocya.com.br/" },
+        ]
+      },
+      {
+        title: "No Leblon",
+        items: [
+          { name:"Mirante do Leblon", desc:"Vista da Praia do Leblon e de Ipanema, ótimo pro pôr do sol.", address:"Av. Niemeyer, Leblon (próximo ao Posto 12)", hours:"Aberto 24h, área externa", price:"Gratuito" },
+          { name:"Praia do Leblon", desc:"Tem trechos bons pra ir com criança, com brinquedos.", address:"Orla do Leblon, entre o Canal do Jardim de Alah e o Posto 12", hours:"Sem horário fixo", price:"Gratuito" },
+        ]
+      },
+      {
+        title: "Lagoa Rodrigo de Freitas",
+        items: [
+          { name:"Alugar bike ou pedalinho", desc:"Durante a semana tem menos movimento. Parque dos Patins e a área do Cantagalo alugam bike e pedalinho.", address:"Parque dos Patins — Av. Borges de Medeiros, margem da Lagoa", hours:"Aluguel geralmente fins de semana/feriados 9h–17h30 — confirmar dias úteis no local", price:"Pedalinho R$30–50 · Bike de R$3 (15min) a R$20 (48h)" },
+          { name:"Locomoção entre bairros", desc:"A lagoa serve pra ir do Leblon ao Jardim Botânico de bike ou a pé — volta completa: 7,5 km.", address:"Orla da Lagoa Rodrigo de Freitas", hours:"Aberto 24h" },
+          { name:"So_Lo da Lagoa", desc:"Café ou lanche da tarde com vista pro fim de tarde, sem precisar rodear a lagoa toda.", address:"Av. Epitácio Pessoa, Lagoa (quiosque com deck)", hours:"Diariamente 7h–20h", ig:"so_lo.cafe" },
+        ]
+      },
+      {
+        title: "Outros passeios",
+        items: [
+          { name:"Arpoador", desc:"Pôr do sol clássico, aplauso incluso.", address:"Pedra do Arpoador, entre Ipanema e Copacabana (região do Posto 7)", hours:"Sem horário fixo — pôr do sol varia entre ~17h15 (inverno) e ~19h15 (verão)", price:"Gratuito" },
+          { name:"Praia de Copacabana — Posto 6", desc:"Trecho mais tranquilo pra ir com criança, perto do Forte de Copacabana.", address:"Orla de Copacabana, extremo sul, perto da Praça Coronel Eugênio Franco", hours:"Sem horário fixo", price:"Gratuito" },
+          { name:"Forte de Copacabana", desc:"Durante a semana é mais vazio. Tem cafés dentro, especialmente o Café 18 do Forte.", address:"Praça Coronel Eugênio Franco, 1, Posto 6, Copacabana", hours:"Ter–Dom e feriados 10h–19h · fechado Seg", price:"R$10 inteira / R$5 meia · gratuito às terças" },
+          { name:"Café 18 do Forte", desc:"Café dentro do Forte de Copacabana, boa vista.", address:"Dentro do Forte de Copacabana, Posto 6, Copacabana", hours:"consultar Instagram", ig:"cafe18doforte", site:"https://cafe18doforte.com" },
+        ]
+      },
+      {
+        title: "Imperdíveis / turísticos clássicos",
+        items: [
+          { name:"Pão de Açúcar (Bondinho)", desc:"Evitar dias nublados, ir em dia de sol.", address:"Av. Pasteur, 520, Urca", hours:"8h–20h (última entrada 18h30)", site:"https://www.bondinho.com.br", price:"R$85 (carioca) a R$199 (estrangeiro adulto) — varia por categoria, conferir no site" },
+          { name:"Jardim Botânico", desc:"Ótimo passeio em família, crianças adoram. Qualquer época, exceto chuva. Café depois no Empório Jardim ou na Absurda.", address:"Rua Jardim Botânico, 1008, Jardim Botânico", hours:"Qui–Ter 8h–17h · Qua 11h–17h", ig:"jardimbotanicorj", site:"https://www.gov.br/jbrj", price:"R$40 residentes Brasil / R$80 estrangeiros · meia R$20" },
+          { name:"Museu do Amanhã", desc:"Museu interativo sobre os rumos da humanidade. Agendamento recomendado.", address:"Praça Mauá, 1, Centro", hours:"Ter–Dom 10h–18h (última entrada 17h)", site:"https://museudoamanha.org.br", price:"R$40 inteira / R$20 meia · R$10 todo dia 10 do mês" },
+          { name:"Espaço Cultural da Marinha", desc:"Museu Naval ao ar livre, perto do Museu do Amanhã. Dá pra entrar num submarino, num navio de guerra e num helicóptero — bom passeio em família.", address:"Orla Conde (Boulevard Olímpico), s/n, Praça XV, Centro", hours:"Ter–Dom e feriados 11h–17h (último acesso 16h30)", site:"https://www.marinha.mil.br/dphdm/espaco-cultural-da-marinha", price:"R$20 inteira / R$10 meia · gratuito às terças" },
+          { name:"CCBB", tag:"Centro Cultural Banco do Brasil", desc:"Exposições boas, e dá pra conhecer a parte histórica da cidade.", address:"Rua Primeiro de Março, 66, Centro", hours:"Qua–Seg 9h–20h · fechado Ter", site:"https://ccbb.com.br/rio-de-janeiro", price:"Gratuito" },
+        ]
+      },
+      {
+        title: "Menos conhecidos, mas vale a pena",
+        items: [
+          { name:"Parque da Catacumba", desc:"Trilhas curtas e atividades de aventura (arvorismo, tirolesa, rapel).", address:"Av. Epitácio Pessoa, 3000, Lagoa", hours:"Ter–Dom 8h–17h (até 18h no horário de verão)", price:"Entrada gratuita (atividades pagas à parte)" },
+          { name:"Santa Teresa", desc:"Bairro boêmio de ladeiras — vá de bondinho, saindo da Estação Carioca.", address:"Bonde: Rua Lélio Gama, 2, Centro (Estação Carioca)", hours:"Bonde: Seg–Sáb 8h–17h · Dom/feriados 9h–16h, saídas a cada 15min", price:"Bonde R$20 ida e volta" },
+          { name:"Praia Vermelha", desc:"Do lado do Pão de Açúcar (dá pra combinar com a subida). Muito tranquila, faixa de areia pequena, mar quase sem ondas. Tem cafés e restaurantes por perto.", address:"Bairro Urca, aos pés do Pão de Açúcar, final da Av. Pasteur", hours:"Sem horário fixo", price:"Gratuito" },
+          { name:"Urca", desc:"Ótimo bairro pra passear — Pista Cláudio Coutinho e a Mureta da Urca, boa ao entardecer.", address:"Zona Sul, entre Botafogo e Praia Vermelha", hours:"Sem horário fixo", price:"Gratuito" },
+        ]
+      },
+    ]
+  },
+];
+
+const content = document.getElementById("content");
+const noResults = document.getElementById("noResults");
+
+function mapsUrl(name, address){
+  const q = encodeURIComponent(`${name}, ${address || "Rio de Janeiro"}`);
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
+
+function cardHTML(item){
+  const searchBlob = [item.name, item.tag, item.desc, item.address].filter(Boolean).join(" ").toLowerCase();
+  const meta = [];
+  if (item.address) {
+    meta.push(`<a class="meta-row" href="${mapsUrl(item.name, item.address)}" target="_blank" rel="noopener"><span class="ic">📍</span><span>${item.address}</span></a>`);
+  }
+  if (item.hours) {
+    meta.push(`<div class="meta-row"><span class="ic">🕐</span><span>${item.hours}</span></div>`);
+  }
+  if (item.price) {
+    meta.push(`<div class="meta-row card-price"><span class="ic">＄</span><span>${item.price}</span></div>`);
+  }
+  const links = [];
+  if (item.ig) links.push(`<a class="pill" href="https://instagram.com/${item.ig}" target="_blank" rel="noopener">Instagram</a>`);
+  if (item.site) links.push(`<a class="pill pill--outline" href="${item.site}" target="_blank" rel="noopener">Site</a>`);
+  if (item.address) links.push(`<a class="pill pill--ghost" href="${mapsUrl(item.name, item.address)}" target="_blank" rel="noopener">Mapa</a>`);
+
+  return `
+    <article class="card" data-search="${searchBlob.replace(/"/g,'&quot;')}">
+      <div class="card-top">
+        <h4>${item.name}</h4>
+        ${item.tag ? `<span class="card-tag">${item.tag}</span>` : ""}
+      </div>
+      ${item.desc ? `<p class="card-desc">${item.desc}</p>` : ""}
+      ${meta.length ? `<div class="card-meta">${meta.join("")}</div>` : ""}
+      ${links.length ? `<div class="card-links">${links.join("")}</div>` : ""}
+      ${item.note ? `<p class="card-note">⚠️ ${item.note}</p>` : ""}
+    </article>
+  `;
+}
+
+function groupHTML(group){
+  return `
+    <div class="group ${group.featured ? "featured" : ""}">
+      <h3 class="group-title">${group.title}</h3>
+      ${group.subtitle ? `<p class="group-subtitle">${group.subtitle}</p>` : ""}
+      <div class="cards">
+        ${group.items.map(cardHTML).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function hoodHTML(hood){
+  return `
+    <section class="hood hood--${hood.accent}" id="${hood.id}">
+      <div class="hood-header">
+        <span class="hood-emoji">${hood.emoji}</span>
+        <h2>${hood.title}</h2>
+        <span class="hood-sub">${hood.sub}</span>
+      </div>
+      ${hood.intro ? `<p class="hood-intro">${hood.intro}</p>` : ""}
+      ${hood.groups.map(groupHTML).join("")}
+    </section>
+  `;
+}
+
+content.innerHTML = DATA.map(hoodHTML).join("");
+
+// search filter
+const searchInput = document.getElementById("search");
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let anyVisible = false;
+
+  document.querySelectorAll(".hood").forEach(hood => {
+    let hoodHasVisible = false;
+    hood.querySelectorAll(".group").forEach(group => {
+      let groupHasVisible = false;
+      group.querySelectorAll(".card").forEach(card => {
+        const match = !q || card.dataset.search.includes(q);
+        card.classList.toggle("is-hidden", !match);
+        if (match) groupHasVisible = true;
+      });
+      group.classList.toggle("is-hidden", !groupHasVisible);
+      if (groupHasVisible) hoodHasVisible = true;
+    });
+    hood.classList.toggle("is-hidden", !hoodHasVisible);
+    if (hoodHasVisible) anyVisible = true;
+  });
+
+  noResults.style.display = anyVisible ? "none" : "block";
+});
+</script>
+</body>
+</html>
