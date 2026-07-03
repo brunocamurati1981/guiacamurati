@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rio Quick Guide — Leblon, Ipanema & arredores</title>
-<meta name="description" content="Guia rápido e pessoal do Rio de Janeiro: restaurantes, bares e passeios em Leblon, Ipanema e arredores, com endereço, horário e links reais.">
+<title>Rio Quick Guide — Leblon, Ipanema y alrededores</title>
+<meta name="description" content="Guía rápida y personal de Río de Janeiro: restaurantes, bares y paseos en Leblon, Ipanema y alrededores, con dirección, horario y enlaces reales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -61,6 +61,20 @@
     color:var(--rust-dark);
     margin:0 0 14px;
   }
+  .hero-photo{
+    max-width:900px;
+    margin:0 auto 28px;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9;
+  }
+  .hero-photo img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
   .hero h1{
     font-family:'Fraunces', serif;
     font-weight:600;
@@ -106,7 +120,28 @@
     max-width:1000px;margin:0 auto;
     display:flex;gap:12px;align-items:center;flex-wrap:wrap;
   }
-  .search-wrap{flex:1 1 200px;min-width:180px;}
+  .lang-toggle{
+    display:flex;
+    flex:none;
+    border:1px solid var(--line);
+    border-radius:999px;
+    overflow:hidden;
+    order:3;
+    margin-left:auto;
+  }
+  .lang-btn{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:.04em;
+    padding:8px 12px;
+    border:none;
+    background:var(--paper);
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .lang-btn:hover{background:var(--line-soft);}
+  .lang-btn.active{background:var(--ink);color:var(--paper);}
+  .search-wrap{flex:1 1 200px;min-width:180px;order:1;}
   #search{
     width:100%;
     font-family:'Inter',sans-serif;
@@ -120,7 +155,7 @@
   }
   #search:focus{border-color:var(--rust);}
   #search::placeholder{color:#a89d84;}
-  .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;order:2;}
   .chip{
     font-family:'Space Mono', monospace;
     font-size:11.5px;
@@ -196,8 +231,7 @@
     margin:0 0 3px;
     display:flex;align-items:center;gap:8px;
   }
-  .group.featured .group-title::after{
-    content:"destaques";
+  .group-badge{
     font-family:'Space Mono', monospace;
     font-style:normal;
     font-size:10px;
@@ -327,6 +361,7 @@
     .tabbar{margin:0 -16px 26px;padding-left:16px;padding-right:16px;}
     .guide{padding:0 16px 60px;}
     .cards{grid-template-columns:1fr;}
+    .lang-toggle{order:0;margin-left:0;}
   }
 </style>
 </head>
@@ -335,10 +370,12 @@
 <div class="guide">
 
   <header class="hero">
-    <p class="hero-eyebrow">Guia rápido · pessoal · não afiliado</p>
+    <div class="hero-photo">
+      <img src="ipanema-hero.jpg" alt="Praia de Ipanema com o Morro Dois Irmãos ao fundo">
+    </div>
     <h1>Rio <em>Quick</em> Guide</h1>
-    <p class="hero-sub">Leblon, Ipanema e arredores — restaurantes, bares, cafés e passeios testados e aprovados, com endereço, horário e link direto.</p>
-    <p class="hero-meta">ATUALIZADO EM 03 JUL 2026 · ZONA SUL, RIO DE JANEIRO</p>
+    <p class="hero-sub" id="heroSub">Leblon, Ipanema y alrededores — restaurantes, bares, cafés y paseos probados y aprobados, con dirección, horario y enlace directo.</p>
+    <p class="hero-meta" id="heroMeta">ACTUALIZADO EL 03 JUL 2026 · ZONA SUR, RÍO DE JANEIRO</p>
     <div class="hero-rule"></div>
   </header>
 
@@ -347,13 +384,10 @@
       <div class="search-wrap">
         <input type="search" id="search" placeholder="Buscar (ex: pizza, praia, Ocyá, boteco)…" autocomplete="off">
       </div>
-      <div class="chips">
-        <a href="#leblon" class="chip">🟦 Leblon</a>
-        <a href="#ipanema" class="chip">🟩 Ipanema</a>
-        <a href="#outras" class="chip">🟨 Outros bairros</a>
-        <a href="#sorvetes" class="chip">🍦 Sorvetes</a>
-        <a href="#estrelados" class="chip">⭐ Estrelados</a>
-        <a href="#passeios" class="chip">🗺️ Passeios</a>
+      <div class="chips" id="chips"></div>
+      <div class="lang-toggle" role="group" aria-label="Idioma / Idioma">
+        <button type="button" class="lang-btn" data-lang="pt">PT</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
       </div>
     </div>
   </nav>
@@ -362,73 +396,102 @@
   <p class="no-results" id="noResults">Nada encontrado — tenta outro termo.</p>
 
   <footer>
-    <p><strong>Sobre este guia:</strong> lista pessoal, sem patrocínio, feita para consulta rápida no celular. Endereços e links foram checados no Instagram/site oficial de cada lugar em julho de 2026 — horários de bares e restaurantes no Brasil mudam com frequência, então vale confirmar no Instagram antes de ir, principalmente em feriados. Itens marcados com ⚠️ têm alguma informação não totalmente confirmada.</p>
-    <p>Feito com Claude · guia independente, não relacionado a outros sites/guias do Rio.</p>
+    <p id="footerAbout"><strong>Sobre este guia:</strong> lista pessoal, sem patrocínio, feita para consulta rápida no celular. Endereços e links foram checados no Instagram/site oficial de cada lugar em julho de 2026 — horários de bares e restaurantes no Brasil mudam com frequência, então vale confirmar no Instagram antes de ir, principalmente em feriados. Itens marcados com ⚠️ têm alguma informação não totalmente confirmada.</p>
+    <p id="footerCredit">Feito com Claude · guia independente, não relacionado a outros sites/guias do Rio.</p>
   </footer>
 
 </div>
 
 <script>
+const UI = {
+  pt: {
+    title: "Rio Quick Guide — Leblon, Ipanema & arredores",
+    heroSub: "Leblon, Ipanema e arredores — restaurantes, bares, cafés e passeios testados e aprovados, com endereço, horário e link direto.",
+    heroMeta: "ATUALIZADO EM 03 JUL 2026 · ZONA SUL, RIO DE JANEIRO",
+    searchPlaceholder: "Buscar (ex: pizza, praia, Ocyá, boteco)…",
+    noResults: "Nada encontrado — tenta outro termo.",
+    footerLabel: "Sobre este guia:",
+    footerP1: "lista pessoal, sem patrocínio, feita para consulta rápida no celular. Endereços e links foram checados no Instagram/site oficial de cada lugar em julho de 2026 — horários de bares e restaurantes no Brasil mudam com frequência, então vale confirmar no Instagram antes de ir, principalmente em feriados. Itens marcados com ⚠️ têm alguma informação não totalmente confirmada.",
+    footerP2: "Feito com Claude · guia independente, não relacionado a outros sites/guias do Rio.",
+    pillSite: "Site",
+    pillMaps: "Mapa",
+    destaques: "destaques",
+  },
+  es: {
+    title: "Rio Quick Guide — Leblon, Ipanema y alrededores",
+    heroSub: "Leblon, Ipanema y alrededores — restaurantes, bares, cafés y paseos probados y aprobados, con dirección, horario y enlace directo.",
+    heroMeta: "ACTUALIZADO EL 03 JUL 2026 · ZONA SUR, RÍO DE JANEIRO",
+    searchPlaceholder: "Buscar (ej: pizza, playa, Ocyá, bar)…",
+    noResults: "No se encontró nada — prueba con otro término.",
+    footerLabel: "Sobre esta guía:",
+    footerP1: "lista personal, sin patrocinio, hecha para consultar rápido desde el celular. Direcciones y enlaces fueron verificados en el Instagram/sitio oficial de cada lugar en julio de 2026 — los horarios de bares y restaurantes en Brasil cambian con frecuencia, así que conviene confirmar en Instagram antes de ir, sobre todo en feriados. Los ítems marcados con ⚠️ tienen alguna información no del todo confirmada.",
+    footerP2: "Hecho con Claude · guía independiente, no relacionada con otros sitios/guías de Río.",
+    pillSite: "Sitio",
+    pillMaps: "Mapa",
+    destaques: "destacados",
+  }
+};
+
 const DATA = [
   {
     id: "leblon",
     emoji: "🟦",
     accent: "rust",
     title: "Leblon",
-    sub: "Praia do Leblon",
-    intro: "Base de alta gastronomia premiada, botecos de bairro e a praia mais tranquila pra ir com criança.",
+    sub: { pt:"Praia do Leblon", es:"Playa de Leblon" },
+    intro: { pt:"Base de alta gastronomia premiada, botecos de bairro e a praia mais tranquila pra ir com criança.", es:"Base de alta gastronomía premiada, bares de barrio y la playa más tranquila para ir con niños." },
     groups: [
       {
-        title: "Alta gastronomia",
+        title: { pt:"Alta gastronomia", es:"Alta gastronomía" },
         items: [
-          { name:"Balcão 201", tag:"do time do Casa 201", desc:"Bistrô-bar de João Paulo Frankenfeld. A casa-mãe, Casa 201 (1 estrela Michelin), fica a poucos minutos, no Jardim Botânico (Rua Lopes Quintas, 201).", address:"Rua Dias Ferreira, 113, Leblon", hours:"Ter–Qua 12h–0h · Qui–Sáb 12h–1h · Dom 12h–18h", ig:"balcao201" },
-          { name:"Chez Claude", tag:"Claude Troisgros", desc:"Bistrô do chef Claude Troisgros, cozinha de mercado com cara de casa. No mesmo endereço fica o Madame Olympe, o novo degustação estrelado do Claude (veja em Estrelados).", address:"Rua Conde de Bernadotte, 26, Leblon", hours:"Seg–Sáb 18h30–0h · fechado Dom", ig:"chez.claude", site:"https://chezclaude.com.br/" },
+          { name:"Balcão 201", tag:{pt:"do time do Casa 201", es:"del equipo de Casa 201"}, desc:{pt:"Bistrô-bar de João Paulo Frankenfeld. A casa-mãe, Casa 201 (1 estrela Michelin), fica a poucos minutos, no Jardim Botânico (Rua Lopes Quintas, 201).", es:"Bistró-bar de João Paulo Frankenfeld. La casa madre, Casa 201 (1 estrella Michelin), queda a pocos minutos, en Jardim Botânico (Rua Lopes Quintas, 201)."}, address:"Rua Dias Ferreira, 113, Leblon", hours:{pt:"Ter–Qua 12h–0h · Qui–Sáb 12h–1h · Dom 12h–18h", es:"Mar–Mié 12h–0h · Jue–Sáb 12h–1h · Dom 12h–18h"}, ig:"balcao201" },
+          { name:"Chez Claude", tag:"Claude Troisgros", desc:{pt:"Bistrô do chef Claude Troisgros, cozinha de mercado com cara de casa. No mesmo endereço fica o Madame Olympe, o novo degustação estrelado do Claude (veja em Estrelados).", es:"Bistró del chef Claude Troisgros, cocina de mercado con aire de casa. En la misma dirección está el Madame Olympe, el nuevo degustación con estrella de Claude (mira en Estrellados)."}, address:"Rua Conde de Bernadotte, 26, Leblon", hours:{pt:"Seg–Sáb 18h30–0h · fechado Dom", es:"Lun–Sáb 18h30–0h · cerrado Dom"}, ig:"chez.claude", site:"https://chezclaude.com.br/" },
         ]
       },
       {
-        title: "Carnes e burgers premium",
+        title: { pt:"Carnes e burgers premium", es:"Carnes y burgers premium" },
         items: [
-          { name:"Clan BBQ", desc:"Churrasco no estilo americano, defumados lentos.", address:"Rua Dias Ferreira, 233, Leblon", hours:"Seg 18h–23h · Ter–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", ig:"clanbbq", site:"https://clanbbq.com.br/" },
-          { name:"Malta Beef Club", desc:"Steakhouse, carnes maturadas.", address:"Av. General San Martin, 359, Leblon", hours:"Ter–Sáb 12h–0h · Dom 12h–19h", ig:"malta.beefclub" },
+          { name:"Clan BBQ", desc:{pt:"Churrasco no estilo americano, defumados lentos.", es:"Asado al estilo americano, ahumados lentos."}, address:"Rua Dias Ferreira, 233, Leblon", hours:{pt:"Seg 18h–23h · Ter–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", es:"Lun 18h–23h · Mar–Jue 12h–0h · Vie–Sáb 12h–1h · Dom 12h–23h"}, ig:"clanbbq", site:"https://clanbbq.com.br/" },
+          { name:"Malta Beef Club", desc:{pt:"Steakhouse, carnes maturadas.", es:"Steakhouse, carnes maduradas."}, address:"Av. General San Martin, 359, Leblon", hours:{pt:"Ter–Sáb 12h–0h · Dom 12h–19h", es:"Mar–Sáb 12h–0h · Dom 12h–19h"}, ig:"malta.beefclub" },
         ]
       },
       {
-        title: "Peixes / frutos do mar",
+        title: { pt:"Peixes / frutos do mar", es:"Pescados / mariscos" },
         items: [
-          { name:"Ocyá", desc:"Referência em frutos do mar brasileiros. Tem também unidade na Ilha da Gigóia (Barra da Tijuca), só nos fins de semana e com reserva obrigatória — ótima pra combinar com o passeio de barco pelas Ilhas Tijucas.", address:"Rua Aristides Espínola, 88, Leblon", hours:"Ter–Sáb 12h–23h · Dom 12h–18h · fechado Seg", ig:"ocya.rio", site:"https://ocya.com.br/" },
-          { name:"Pabu Izakaya", desc:"Peixe cru e cozinha japonesa de balcão.", address:"Rua Humberto de Campos, 827, loja G, Leblon", hours:"Dom–Ter 12h–23h · Qua–Sáb 12h–0h", ig:"pabuizakayario" },
+          { name:"Ocyá", desc:{pt:"Referência em frutos do mar brasileiros. Tem também unidade na Ilha da Gigóia (Barra da Tijuca), só nos fins de semana e com reserva obrigatória — ótima pra combinar com o passeio de barco pelas Ilhas Tijucas.", es:"Referente en mariscos brasileños. También tiene una sede en la Ilha da Gigóia (Barra da Tijuca), solo los fines de semana y con reserva obligatoria — ideal para combinar con el paseo en barco por las Ilhas Tijucas."}, address:"Rua Aristides Espínola, 88, Leblon", hours:{pt:"Ter–Sáb 12h–23h · Dom 12h–18h · fechado Seg", es:"Mar–Sáb 12h–23h · Dom 12h–18h · cerrado Lun"}, ig:"ocya.rio", site:"https://ocya.com.br/" },
+          { name:"Pabu Izakaya", desc:{pt:"Peixe cru e cozinha japonesa de balcão.", es:"Pescado crudo y cocina japonesa de barra."}, address:"Rua Humberto de Campos, 827, loja G, Leblon", hours:{pt:"Dom–Ter 12h–23h · Qua–Sáb 12h–0h", es:"Dom–Mar 12h–23h · Mié–Sáb 12h–0h"}, ig:"pabuizakayario" },
         ]
       },
       {
-        title: "Italiano e pizza",
+        title: { pt:"Italiano e pizza", es:"Italiano y pizza" },
         items: [
-          { name:"Sisi Cucina", desc:"Italiano contemporâneo.", address:"Rua Dias Ferreira, 617, lojas A/B, Leblon", hours:"Seg–Qui 12h–17h e 18h–23h · Sex 12h–17h e 18h–0h · Sáb 12h–0h · Dom 12h–22h", ig:"sisicucina", site:"https://www.sisicucina.com.br/" },
-          { name:"Ferro e Farinha", desc:"Pizza napolitana premiada. Também tem unidade no piso 4 do Shopping Leblon.", address:"Rua Dias Ferreira, 48, Leblon", hours:"conferir no Instagram (shopping: Seg–Sáb 10h–22h · Dom 13h–22h)", ig:"ferroefarinha", site:"https://www.ferroefarinha.com.br/leblon" },
-          { name:"Nido", desc:"Ristorante italiano.", address:"Av. General San Martin, 1011, Leblon", hours:"Ter–Sáb 12h–0h · Dom 12h–22h", ig:"nidoristorante", site:"http://nidoristorante.com.br/" },
+          { name:"Sisi Cucina", desc:{pt:"Italiano contemporâneo.", es:"Italiano contemporáneo."}, address:"Rua Dias Ferreira, 617, lojas A/B, Leblon", hours:{pt:"Seg–Qui 12h–17h e 18h–23h · Sex 12h–17h e 18h–0h · Sáb 12h–0h · Dom 12h–22h", es:"Lun–Jue 12h–17h y 18h–23h · Vie 12h–17h y 18h–0h · Sáb 12h–0h · Dom 12h–22h"}, ig:"sisicucina", site:"https://www.sisicucina.com.br/" },
+          { name:"Ferro e Farinha", desc:{pt:"Pizza napolitana premiada. Também tem unidade no piso 4 do Shopping Leblon.", es:"Pizza napolitana premiada. También tiene sede en el piso 4 del Shopping Leblon."}, address:"Rua Dias Ferreira, 48, Leblon", hours:{pt:"conferir no Instagram (shopping: Seg–Sáb 10h–22h · Dom 13h–22h)", es:"consultar Instagram (shopping: Lun–Sáb 10h–22h · Dom 13h–22h)"}, ig:"ferroefarinha", site:"https://www.ferroefarinha.com.br/leblon" },
+          { name:"Nido", desc:{pt:"Ristorante italiano.", es:"Ristorante italiano."}, address:"Av. General San Martin, 1011, Leblon", hours:{pt:"Ter–Sáb 12h–0h · Dom 12h–22h", es:"Mar–Sáb 12h–0h · Dom 12h–22h"}, ig:"nidoristorante", site:"http://nidoristorante.com.br/" },
         ]
       },
       {
-        title: "Café / brunch / confeitaria",
+        title: { pt:"Café / brunch / confeitaria", es:"Café / brunch / pastelería" },
         items: [
-          { name:"So_Lo", desc:"Café de especialidade e brunch.", address:"Av. Ataulfo de Paiva, 1120, loja A, Leblon", hours:"Seg–Sáb 8h–21h · Dom 8h–18h", ig:"so_lo.cafe" },
-          { name:"Absurda", tag:"melhor confeitaria da cidade", desc:"Confeitaria autoral. Unidade original do Leblon reabriu em 2026 na Av. Ataulfo de Paiva — vale confirmar o número exato no Instagram antes de ir.", address:"Av. Ataulfo de Paiva, Leblon (número a confirmar)", hours:"referência (unidade Horto): Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", ig:"absurdaconfeitaria", note:"Endereço da unidade Leblon reaberta em 2026 ainda não 100% confirmado — confira no Instagram." },
-          { name:"Colher de Pau", desc:"Clássico do brigadeiro carioca e variações.", address:"Rua Rita Ludolf, 90, Leblon", hours:"Ter–Qui 10h–20h · Sex–Sáb 10h–20h30 · Dom 10h–19h", ig:"a_colherdepau", site:"https://www.acolherdepau.com.br/" },
+          { name:"So_Lo", desc:{pt:"Café de especialidade e brunch.", es:"Café de especialidad y brunch."}, address:"Av. Ataulfo de Paiva, 1120, loja A, Leblon", hours:{pt:"Seg–Sáb 8h–21h · Dom 8h–18h", es:"Lun–Sáb 8h–21h · Dom 8h–18h"}, ig:"so_lo.cafe" },
+          { name:"Absurda", tag:{pt:"melhor confeitaria da cidade", es:"mejor pastelería de la ciudad"}, desc:{pt:"Confeitaria autoral. Unidade original do Leblon reabriu em 2026 na Av. Ataulfo de Paiva — vale confirmar o número exato no Instagram antes de ir.", es:"Pastelería de autor. La sede original de Leblon reabrió en 2026 en la Av. Ataulfo de Paiva — conviene confirmar el número exacto en Instagram antes de ir."}, address:"Av. Ataulfo de Paiva, Leblon (número a confirmar)", hours:{pt:"referência (unidade Horto): Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", es:"referencia (sede Horto): Mar–Vie 11h–19h · Sáb–Dom 9h–19h · cerrado Lun"}, ig:"absurdaconfeitaria", note:{pt:"Endereço da unidade Leblon reaberta em 2026 ainda não 100% confirmado — confira no Instagram.", es:"La dirección de la sede de Leblon reabierta en 2026 todavía no está 100% confirmada — consulta en Instagram."} },
+          { name:"Colher de Pau", desc:{pt:"Clássico do brigadeiro carioca e variações.", es:"Clásico del brigadeiro carioca y variaciones."}, address:"Rua Rita Ludolf, 90, Leblon", hours:{pt:"Ter–Qui 10h–20h · Sex–Sáb 10h–20h30 · Dom 10h–19h", es:"Mar–Jue 10h–20h · Vie–Sáb 10h–20h30 · Dom 10h–19h"}, ig:"a_colherdepau", site:"https://www.acolherdepau.com.br/" },
         ]
       },
       {
-        title: "Oriente Médio",
+        title: { pt:"Oriente Médio", es:"Oriente Medio" },
         items: [
-          { name:"Baduk", tag:"vale demais a pena", desc:"Cozinha do Oriente Médio, com referências da Turquia, Israel, Iraque, Irã e Palestina — do café ao bar, passando pela comida de rua. Brunch buffet aos sábados e domingos.", address:"Rua Rainha Guilhermina, 95, Leblon", hours:"Dom–Seg 10h–22h · Ter–Sáb 10h–23h", ig:"badukrio" },
+          { name:"Baduk", tag:{pt:"vale demais a pena", es:"vale muchísimo la pena"}, desc:{pt:"Cozinha do Oriente Médio, com referências da Turquia, Israel, Iraque, Irã e Palestina — do café ao bar, passando pela comida de rua. Brunch buffet aos sábados e domingos.", es:"Cocina de Oriente Medio, con referencias de Turquía, Israel, Irak, Irán y Palestina — del café al bar, pasando por la comida callejera. Brunch buffet los sábados y domingos."}, address:"Rua Rainha Guilhermina, 95, Leblon", hours:{pt:"Dom–Seg 10h–22h · Ter–Sáb 10h–23h", es:"Dom–Lun 10h–22h · Mar–Sáb 10h–23h"}, ig:"badukrio" },
         ]
       },
       {
-        title: "Bares",
+        title: { pt:"Bares", es:"Bares" },
         items: [
-          { name:"Jobi", desc:"Boteco clássico, mais de 60 anos. Não aceita reservas.", address:"Av. Ataulfo de Paiva, 1166, loja B, Leblon", hours:"Diariamente 11h–3h", ig:"bar_jobi", site:"https://www.jobileblon.com.br/" },
-          { name:"Bar Bracarense", desc:"Boteco de esquina, clássico de calçada.", address:"Rua José Linhares, 85, loja B, Leblon", hours:"Seg 11h–22h · Ter–Qua 11h–23h · Qui–Sáb 11h–23h55 · Dom 11h–21h", ig:"bar_bracarense" },
-          { name:"Boteco Belmonte", desc:"Boteco de calçada, unidade Leblon.", address:"Rua Dias Ferreira, 521, Leblon", hours:"Diariamente 11h–2h", ig:"boteco_belmonte" },
-          { name:"Rainha", desc:"Boteco de bairro.", address:"Rua Dias Ferreira, 247, Leblon", hours:"consultar Instagram", ig:"boteco_rainha", site:"https://obotecorainha.com.br/", note:"Endereço encontrado com fontes conflitantes — confirme no Google Maps/Instagram antes de ir." },
-          { name:"Veloso", desc:"Bar com raiz na bossa nova.", address:"Rua Aristides Espínola, 44, Leblon", hours:"Diariamente 11h–1h", ig:"bardoveloso", site:"https://velosobar.com.br/" },
+          { name:"Jobi", desc:{pt:"Boteco clássico, mais de 60 anos. Não aceita reservas.", es:"Bar clásico de barrio, con más de 60 años. No acepta reservas."}, address:"Av. Ataulfo de Paiva, 1166, loja B, Leblon", hours:{pt:"Diariamente 11h–3h", es:"Todos los días 11h–3h"}, ig:"bar_jobi", site:"https://www.jobileblon.com.br/" },
+          { name:"Bar Bracarense", desc:{pt:"Boteco de esquina, clássico de calçada.", es:"Bar de esquina, clásico de vereda."}, address:"Rua José Linhares, 85, loja B, Leblon", hours:{pt:"Seg 11h–22h · Ter–Qua 11h–23h · Qui–Sáb 11h–23h55 · Dom 11h–21h", es:"Lun 11h–22h · Mar–Mié 11h–23h · Jue–Sáb 11h–23h55 · Dom 11h–21h"}, ig:"bar_bracarense" },
+          { name:"Boteco Belmonte", desc:{pt:"Boteco de calçada, unidade Leblon.", es:"Bar de vereda, sede Leblon."}, address:"Rua Dias Ferreira, 521, Leblon", hours:{pt:"Diariamente 11h–2h", es:"Todos los días 11h–2h"}, ig:"boteco_belmonte" },
+          { name:"Rainha", desc:{pt:"Boteco de bairro.", es:"Bar de barrio."}, address:"Rua Dias Ferreira, 247, Leblon", hours:{pt:"consultar Instagram", es:"consultar Instagram"}, ig:"boteco_rainha", site:"https://obotecorainha.com.br/", note:{pt:"Endereço encontrado com fontes conflitantes — confirme no Google Maps/Instagram antes de ir.", es:"Encontramos direcciones contradictorias entre las fuentes — confirma en Google Maps/Instagram antes de ir."} },
+          { name:"Veloso", desc:{pt:"Bar com raiz na bossa nova.", es:"Bar con raíces en la bossa nova."}, address:"Rua Aristides Espínola, 44, Leblon", hours:{pt:"Diariamente 11h–1h", es:"Todos los días 11h–1h"}, ig:"bardoveloso", site:"https://velosobar.com.br/" },
         ]
       },
     ]
@@ -438,45 +501,45 @@ const DATA = [
     emoji: "🟩",
     accent: "teal",
     title: "Ipanema",
-    sub: "Praia de Ipanema",
-    intro: "Do Guia Michelin aos botecos de esquina, tudo a poucos passos da praia.",
+    sub: { pt:"Praia de Ipanema", es:"Playa de Ipanema" },
+    intro: { pt:"Do Guia Michelin aos botecos de esquina, tudo a poucos passos da praia.", es:"Desde la Guía Michelin hasta los bares de esquina, todo a pocos pasos de la playa." },
     groups: [
       {
-        title: "Restaurantes — destaques",
+        title: { pt:"Restaurantes — destaques", es:"Restaurantes — destacados" },
         featured: true,
         items: [
-          { name:"Babbo Osteria", tag:"Guia Michelin 2026", desc:"Italiano de alto nível, chef Elia Schramm.", address:"Rua Barão da Torre, 632, Ipanema", hours:"Seg–Qua 12h–16h, 19h–23h · Qui–Sáb 12h–16h, 19h–0h · Dom 12h–18h", ig:"babboosteria" },
-          { name:"Zazá Bistrô", desc:"Comida brasileira contemporânea, casa charmosa — favorito de turistas.", address:"Rua Joana Angélica, 40, Ipanema", hours:"Seg–Qui 12h–23h30 · Sex–Sáb 12h–0h30 · Dom 12h30–23h30", ig:"zazabistro" },
-          { name:"Maria e o Boi", tag:"Bib Gourmand", desc:"Cozinha brasileira autoral, muito bem avaliada.", address:"Rua Maria Quitéria, 111, 1º andar, Ipanema", hours:"Ter–Dom 12h–23h", note:"Instagram oficial não confirmado com certeza — busque \"Maria e o Boi Ipanema\" antes de ir." },
-          { name:"Spicy Fish", desc:"Cozinha oriental, peixe com toque picante.", address:"Rua Maria Quitéria, 99, Ipanema", hours:"Seg–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", ig:"spicyfish.af" },
-          { name:"Rudä", tag:"2x melhor do Rio · Comer & Beber", desc:"Cozinha brasileira autoral.", address:"Rua Garcia D'Ávila, 118, Ipanema", hours:"Seg–Ter 12h–23h · Qua–Sáb 12h–0h · Dom 12h–23h", ig:"ruda.restaurante" },
+          { name:"Babbo Osteria", tag:{pt:"Guia Michelin 2026", es:"Guía Michelin 2026"}, desc:{pt:"Italiano de alto nível, chef Elia Schramm.", es:"Italiano de alto nivel, chef Elia Schramm."}, address:"Rua Barão da Torre, 632, Ipanema", hours:{pt:"Seg–Qua 12h–16h, 19h–23h · Qui–Sáb 12h–16h, 19h–0h · Dom 12h–18h", es:"Lun–Mié 12h–16h, 19h–23h · Jue–Sáb 12h–16h, 19h–0h · Dom 12h–18h"}, ig:"babboosteria" },
+          { name:"Zazá Bistrô", desc:{pt:"Comida brasileira contemporânea, casa charmosa — favorito de turistas.", es:"Comida brasileña contemporánea, casa encantadora — favorito de los turistas."}, address:"Rua Joana Angélica, 40, Ipanema", hours:{pt:"Seg–Qui 12h–23h30 · Sex–Sáb 12h–0h30 · Dom 12h30–23h30", es:"Lun–Jue 12h–23h30 · Vie–Sáb 12h–0h30 · Dom 12h30–23h30"}, ig:"zazabistro" },
+          { name:"Maria e o Boi", tag:"Bib Gourmand", desc:{pt:"Cozinha brasileira autoral, muito bem avaliada.", es:"Cocina brasileña de autor, muy bien valorada."}, address:"Rua Maria Quitéria, 111, 1º andar, Ipanema", hours:{pt:"Ter–Dom 12h–23h", es:"Mar–Dom 12h–23h"}, note:{pt:"Instagram oficial não confirmado com certeza — busque \"Maria e o Boi Ipanema\" antes de ir.", es:"No pudimos confirmar con certeza el Instagram oficial — busca \"Maria e o Boi Ipanema\" antes de ir."} },
+          { name:"Spicy Fish", desc:{pt:"Cozinha oriental, peixe com toque picante.", es:"Cocina oriental, pescado con toque picante."}, address:"Rua Maria Quitéria, 99, Ipanema", hours:{pt:"Seg–Qui 12h–0h · Sex–Sáb 12h–1h · Dom 12h–23h", es:"Lun–Jue 12h–0h · Vie–Sáb 12h–1h · Dom 12h–23h"}, ig:"spicyfish.af" },
+          { name:"Rudä", tag:{pt:"2x melhor do Rio · Comer & Beber", es:"2 veces mejor de Río · Comer & Beber"}, desc:{pt:"Cozinha brasileira autoral.", es:"Cocina brasileña de autor."}, address:"Rua Garcia D'Ávila, 118, Ipanema", hours:{pt:"Seg–Ter 12h–23h · Qua–Sáb 12h–0h · Dom 12h–23h", es:"Lun–Mar 12h–23h · Mié–Sáb 12h–0h · Dom 12h–23h"}, ig:"ruda.restaurante" },
         ]
       },
       {
-        title: "Restaurantes — outros",
+        title: { pt:"Restaurantes — outros", es:"Restaurantes — otros" },
         items: [
-          { name:"Quitéria", desc:"Nordestino autoral, dentro do Ipanema Inn.", address:"Rua Maria Quitéria, 27, Ipanema", hours:"Café da manhã 7h–11h · Almoço/jantar 12h–22h30", ig:"quiteria.rio" },
-          { name:"Satyricon", desc:"Frutos do mar, clássico e badalado.", address:"Rua Barão da Torre, 192, Ipanema", hours:"Dom–Qui 12h–0h · Sex–Sáb 12h–1h", ig:"restaurante_satyricon", site:"http://www.satyricon.com.br" },
-          { name:"Toto", desc:"Restaurante de esquina, clima descontraído.", address:"Rua Joana Angélica, 155, Ipanema", hours:"Todos os dias 12h–0h", ig:"toto.ipanema" },
-          { name:"Teva", desc:"100% vegano.", address:"Av. Henrique Dumont, 110, loja B, Ipanema", hours:"8h–23h (confirme no Instagram — fontes divergem)", ig:"tevavegetal", site:"https://tevavegetal.com.br" },
+          { name:"Quitéria", desc:{pt:"Nordestino autoral, dentro do Ipanema Inn.", es:"Cocina del nordeste brasileño de autor, dentro del Ipanema Inn."}, address:"Rua Maria Quitéria, 27, Ipanema", hours:{pt:"Café da manhã 7h–11h · Almoço/jantar 12h–22h30", es:"Desayuno 7h–11h · Almuerzo/cena 12h–22h30"}, ig:"quiteria.rio" },
+          { name:"Satyricon", desc:{pt:"Frutos do mar, clássico e badalado.", es:"Mariscos, clásico y concurrido."}, address:"Rua Barão da Torre, 192, Ipanema", hours:{pt:"Dom–Qui 12h–0h · Sex–Sáb 12h–1h", es:"Dom–Jue 12h–0h · Vie–Sáb 12h–1h"}, ig:"restaurante_satyricon", site:"http://www.satyricon.com.br" },
+          { name:"Toto", desc:{pt:"Restaurante de esquina, clima descontraído.", es:"Restaurante de esquina, ambiente relajado."}, address:"Rua Joana Angélica, 155, Ipanema", hours:{pt:"Todos os dias 12h–0h", es:"Todos los días 12h–0h"}, ig:"toto.ipanema" },
+          { name:"Teva", desc:{pt:"100% vegano.", es:"100% vegano."}, address:"Av. Henrique Dumont, 110, loja B, Ipanema", hours:{pt:"8h–23h (confirme no Instagram — fontes divergem)", es:"8h–23h (confirma en Instagram — las fuentes difieren)"}, ig:"tevavegetal", site:"https://tevavegetal.com.br" },
         ]
       },
       {
-        title: "Cafés",
+        title: { pt:"Cafés", es:"Cafés" },
         items: [
-          { name:"Empório Jardim", desc:"Café e brunch de bairro.", address:"Rua Maria Quitéria, 62, Ipanema", hours:"Todos os dias 8h–19h (cozinha até 18h30)", ig:"emporiojardimrio", site:"https://emporiojardimrio.com.br" },
-          { name:"So_Lo Ipanema", desc:"Café de especialidade.", address:"Rua Garcia D'Ávila, 147, loja B, Ipanema", hours:"Seg–Sáb 8h–22h · Dom 8h–18h", ig:"so_lo.cafe" },
+          { name:"Empório Jardim", desc:{pt:"Café e brunch de bairro.", es:"Café y brunch de barrio."}, address:"Rua Maria Quitéria, 62, Ipanema", hours:{pt:"Todos os dias 8h–19h (cozinha até 18h30)", es:"Todos los días 8h–19h (cocina hasta las 18h30)"}, ig:"emporiojardimrio", site:"https://emporiojardimrio.com.br" },
+          { name:"So_Lo Ipanema", desc:{pt:"Café de especialidade.", es:"Café de especialidad."}, address:"Rua Garcia D'Ávila, 147, loja B, Ipanema", hours:{pt:"Seg–Sáb 8h–22h · Dom 8h–18h", es:"Lun–Sáb 8h–22h · Dom 8h–18h"}, ig:"so_lo.cafe" },
         ]
       },
       {
-        title: "Bares",
+        title: { pt:"Bares", es:"Bares" },
         items: [
-          { name:"Belmonte", desc:"Boteco de calçada, unidade Ipanema.", address:"Ipanema (confirme a unidade — endereço encontrado com fontes conflitantes)", hours:"consultar Instagram", ig:"boteco_belmonte", note:"Rio tem várias unidades do Belmonte — confirme qual fica mais perto no Google Maps." },
-          { name:"Boa Praça", desc:"Boteco na virada pro Arpoador.", address:"Av. Vieira Souto, 110, Ipanema", hours:"Ter 17h–1h · Qua–Qui 16h–1h · Sex–Dom 12h–1h", ig:"botecoboapraca", site:"https://botecoboapraca.com.br" },
-          { name:"Bar Astor", desc:"Bar de esquina em frente à praia, clima retrô.", address:"Av. Vieira Souto, 110, Ipanema", hours:"Seg–Qua 18h–1h · Qui 18h–2h · Sex 13h–3h · Sáb 12h–3h · Dom 12h–22h", ig:"barastor", site:"https://barastor.com.br" },
-          { name:"Mané", desc:"Bar de bairro.", address:"Rua Teixeira de Melo, 31, Ipanema", hours:"consultar Instagram", ig:"mane.rio", note:"Handle do Instagram e horário não totalmente confirmados — confira antes de ir." },
-          { name:"Arp Bar", tag:"Hotel Arpoador", desc:"Bar do hotel, ótima vista.", address:"Rua Francisco Otaviano, 177, Ipanema", hours:"Café da manhã 7h–11h · Seg–Sáb 12h–23h · Dom 12h–22h", ig:"arpbar", site:"https://www.hotelarpoador.com/en/arp" },
-          { name:"Vinicius Bar", desc:"Show bar com música ao vivo, homenagem a Vinícius de Moraes.", address:"Rua Vinícius de Moraes, 39, Ipanema", hours:"Diariamente 12h–23h (shows têm horário próprio à noite)", ig:"viniciusrestaurante.showbar" },
+          { name:"Belmonte", desc:{pt:"Boteco de calçada, unidade Ipanema.", es:"Bar de vereda, sede Ipanema."}, address:"Ipanema (confirme a unidade — endereço encontrado com fontes conflitantes)", hours:{pt:"consultar Instagram", es:"consultar Instagram"}, ig:"boteco_belmonte", note:{pt:"Rio tem várias unidades do Belmonte — confirme qual fica mais perto no Google Maps.", es:"Río tiene varias sedes de Belmonte — confirma cuál queda más cerca en Google Maps."} },
+          { name:"Boa Praça", desc:{pt:"Boteco na virada pro Arpoador.", es:"Bar en la esquina hacia el Arpoador."}, address:"Av. Vieira Souto, 110, Ipanema", hours:{pt:"Ter 17h–1h · Qua–Qui 16h–1h · Sex–Dom 12h–1h", es:"Mar 17h–1h · Mié–Jue 16h–1h · Vie–Dom 12h–1h"}, ig:"botecoboapraca", site:"https://botecoboapraca.com.br" },
+          { name:"Bar Astor", desc:{pt:"Bar de esquina em frente à praia, clima retrô.", es:"Bar de esquina frente a la playa, ambiente retro."}, address:"Av. Vieira Souto, 110, Ipanema", hours:{pt:"Seg–Qua 18h–1h · Qui 18h–2h · Sex 13h–3h · Sáb 12h–3h · Dom 12h–22h", es:"Lun–Mié 18h–1h · Jue 18h–2h · Vie 13h–3h · Sáb 12h–3h · Dom 12h–22h"}, ig:"barastor", site:"https://barastor.com.br" },
+          { name:"Mané", desc:{pt:"Bar de bairro.", es:"Bar de barrio."}, address:"Rua Teixeira de Melo, 31, Ipanema", hours:{pt:"consultar Instagram", es:"consultar Instagram"}, ig:"mane.rio", note:{pt:"Handle do Instagram e horário não totalmente confirmados — confira antes de ir.", es:"El usuario de Instagram y el horario no están totalmente confirmados — confirma antes de ir."} },
+          { name:"Arp Bar", tag:"Hotel Arpoador", desc:{pt:"Bar do hotel, ótima vista.", es:"Bar del hotel, vista excelente."}, address:"Rua Francisco Otaviano, 177, Ipanema", hours:{pt:"Café da manhã 7h–11h · Seg–Sáb 12h–23h · Dom 12h–22h", es:"Desayuno 7h–11h · Lun–Sáb 12h–23h · Dom 12h–22h"}, ig:"arpbar", site:"https://www.hotelarpoador.com/en/arp" },
+          { name:"Vinicius Bar", desc:{pt:"Show bar com música ao vivo, homenagem a Vinícius de Moraes.", es:"Show bar con música en vivo, homenaje a Vinícius de Moraes."}, address:"Rua Vinícius de Moraes, 39, Ipanema", hours:{pt:"Diariamente 12h–23h (shows têm horário próprio à noite)", es:"Todos los días 12h–23h (los shows tienen horario propio por la noche)"}, ig:"viniciusrestaurante.showbar" },
         ]
       },
     ]
@@ -485,24 +548,24 @@ const DATA = [
     id: "outras",
     emoji: "🟨",
     accent: "mustard",
-    title: "Outros bairros",
+    title: { pt:"Outros bairros", es:"Otros barrios" },
     sub: "Jardim Botânico · Botafogo",
-    intro: "Fora do eixo Leblon/Ipanema, mas perto o suficiente pra valer o Uber.",
+    intro: { pt:"Fora do eixo Leblon/Ipanema, mas perto o suficiente pra valer o Uber.", es:"Fuera del eje Leblon/Ipanema, pero lo bastante cerca como para valer la pena el Uber." },
     groups: [
       {
-        title: "Pela cidade",
+        title: { pt:"Pela cidade", es:"Por la ciudad" },
         items: [
-          { name:"Dainer", desc:"Brunch o dia todo.", address:"Rua Real Grandeza, 193, Botafogo", hours:"Ter–Sáb 9h–22h · Dom 9h–19h", ig:"dainer.restaurante" },
-          { name:"The Slow Bakery", tag:"a melhor padaria da cidade", desc:"Padaria de fermentação natural. Tem também unidade no Leblon (Rua Conde de Bernadote, 26).", address:"Rua General Polidoro, 25, Botafogo", hours:"Ter–Sáb 8h–20h · Dom 8h–16h", ig:"theslowbakery", site:"https://theslowdigital.com.br" },
+          { name:"Dainer", desc:{pt:"Brunch o dia todo.", es:"Brunch todo el día."}, address:"Rua Real Grandeza, 193, Botafogo", hours:{pt:"Ter–Sáb 9h–22h · Dom 9h–19h", es:"Mar–Sáb 9h–22h · Dom 9h–19h"}, ig:"dainer.restaurante" },
+          { name:"The Slow Bakery", tag:{pt:"a melhor padaria da cidade", es:"la mejor panadería de la ciudad"}, desc:{pt:"Padaria de fermentação natural. Tem também unidade no Leblon (Rua Conde de Bernadote, 26).", es:"Panadería de fermentación natural. También tiene sede en Leblon (Rua Conde de Bernadote, 26)."}, address:"Rua General Polidoro, 25, Botafogo", hours:{pt:"Ter–Sáb 8h–20h · Dom 8h–16h", es:"Mar–Sáb 8h–20h · Dom 8h–16h"}, ig:"theslowbakery", site:"https://theslowdigital.com.br" },
         ]
       },
       {
         title: "Jardim Botânico",
         items: [
-          { name:"Absurda", desc:"Confeitaria, unidade do Horto — a original antes da reabertura no Leblon.", address:"Rua Pacheco Leão, 792, Jardim Botânico", hours:"Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", ig:"absurdaconfeitaria" },
-          { name:"Grado", desc:"Italiano de bairro.", address:"Rua Visconde de Carandaí, 31, Jardim Botânico", hours:"Ter–Sex 19h–23h · Sáb 12h30–16h30 e 19h–23h · Dom 12h30–17h", ig:"gradorestaurante" },
-          { name:"Katz-Sū", tag:"antigo \"Katsu\"", desc:"Cozinha coreana, do chef Bruno Katz.", address:"Rua Von Martius, 325, Jardim Botânico", hours:"Ter–Sáb 12h–0h · Dom 12h–20h", ig:"katz_su" },
-          { name:"Gonza", desc:"Parrilla argentina.", address:"Rua Pacheco Leão, 868, Jardim Botânico", hours:"Dom, Seg, Qua 12h–23h · Qui–Sáb 12h–0h · fechado Ter", ig:"gonza.restaurante" },
+          { name:"Absurda", desc:{pt:"Confeitaria, unidade do Horto — a original antes da reabertura no Leblon.", es:"Pastelería, sede del Horto — la original, antes de la reapertura en Leblon."}, address:"Rua Pacheco Leão, 792, Jardim Botânico", hours:{pt:"Ter–Sex 11h–19h · Sáb–Dom 9h–19h · fechado Seg", es:"Mar–Vie 11h–19h · Sáb–Dom 9h–19h · cerrado Lun"}, ig:"absurdaconfeitaria" },
+          { name:"Grado", desc:{pt:"Italiano de bairro.", es:"Italiano de barrio."}, address:"Rua Visconde de Carandaí, 31, Jardim Botânico", hours:{pt:"Ter–Sex 19h–23h · Sáb 12h30–16h30 e 19h–23h · Dom 12h30–17h", es:"Mar–Vie 19h–23h · Sáb 12h30–16h30 y 19h–23h · Dom 12h30–17h"}, ig:"gradorestaurante" },
+          { name:"Katz-Sū", tag:{pt:"antigo \"Katsu\"", es:"antes \"Katsu\""}, desc:{pt:"Cozinha coreana, do chef Bruno Katz.", es:"Cocina coreana, del chef Bruno Katz."}, address:"Rua Von Martius, 325, Jardim Botânico", hours:{pt:"Ter–Sáb 12h–0h · Dom 12h–20h", es:"Mar–Sáb 12h–0h · Dom 12h–20h"}, ig:"katz_su" },
+          { name:"Gonza", desc:{pt:"Parrilla argentina.", es:"Parrilla argentina."}, address:"Rua Pacheco Leão, 868, Jardim Botânico", hours:{pt:"Dom, Seg, Qua 12h–23h · Qui–Sáb 12h–0h · fechado Ter", es:"Dom, Lun, Mié 12h–23h · Jue–Sáb 12h–0h · cerrado Mar"}, ig:"gonza.restaurante" },
         ]
       },
     ]
@@ -511,18 +574,18 @@ const DATA = [
     id: "sorvetes",
     emoji: "🍦",
     accent: "rose",
-    title: "Sorvetes",
+    title: { pt:"Sorvetes", es:"Helados" },
     sub: "Leblon · Ipanema · Copacabana",
-    intro: "Pra fechar o passeio ou fugir do calor — os favoritos da Zona Sul.",
+    intro: { pt:"Pra fechar o passeio ou fugir do calor — os favoritos da Zona Sul.", es:"Para cerrar el paseo o escapar del calor — los favoritos de la Zona Sur." },
     groups: [
       {
-        title: "Sorveterias",
+        title: { pt:"Sorveterias", es:"Heladerías" },
         items: [
-          { name:"Mil Frutas", desc:"Clássico carioca de sorvete de frutas, sabores autorais. Rede com várias unidades pela cidade — esta é a mais perto de Leblon/Ipanema.", address:"Rua Garcia D'Ávila, 134, loja A, Ipanema", hours:"Ter–Sex 15h–23h · Sáb–Dom 18h–23h", ig:"milfrutas", note:"Horário é da unidade Café; a rede tem outras lojas na cidade com horários próprios — confira a mais perto de você." },
-          { name:"Vero", tag:"certificado Accademia della Gelateria Italiana", desc:"Gelato italiano, pizza e café, produção própria todos os dias.", address:"Rua Visconde de Pirajá, 229, Ipanema", hours:"Diariamente 11h–0h", ig:"verogelateria" },
-          { name:"Cambada", desc:"Sorvete com iogurte, mel e granola.", address:"Rua Ronald de Carvalho, 132, loja B, Copacabana", hours:"consultar Instagram", ig:"cambadasorvetes", note:"Horário não confirmado — a marca tem anunciado novas unidades no Instagram, vale conferir antes de ir." },
-          { name:"Momo Gelato", desc:"Gelato artesanal italiano, feito na hora à vista do cliente.", address:"Rua Dias Ferreira, 147, Leblon", hours:"Dom–Qui 11h–23h · Sex–Sáb 11h–0h", ig:"momogelateria", site:"https://momogelato.com.br/" },
-          { name:"Sorvetiño", tag:"sorveteiro do ano 2026 · Veja Rio", desc:"Sabores autorais que mudam toda semana, formato soft com coberturas — o clássico fixo é sucrilhos.", address:"Av. Prado Junior, 330, loja D, Copacabana", hours:"Diariamente 12h–20h", ig:"sorvetinhocomtil" },
+          { name:"Mil Frutas", desc:{pt:"Clássico carioca de sorvete de frutas, sabores autorais. Rede com várias unidades pela cidade — esta é a mais perto de Leblon/Ipanema.", es:"Clásico carioca de helado de frutas, sabores de autor. Cadena con varias sedes por la ciudad — esta es la más cercana a Leblon/Ipanema."}, address:"Rua Garcia D'Ávila, 134, loja A, Ipanema", hours:{pt:"Ter–Sex 15h–23h · Sáb–Dom 18h–23h", es:"Mar–Vie 15h–23h · Sáb–Dom 18h–23h"}, ig:"milfrutas", note:{pt:"Horário é da unidade Café; a rede tem outras lojas na cidade com horários próprios — confira a mais perto de você.", es:"El horario es el de la sede Café; la cadena tiene otras tiendas en la ciudad con horarios propios — consulta la más cercana a ti."} },
+          { name:"Vero", tag:{pt:"certificado Accademia della Gelateria Italiana", es:"certificado por la Accademia della Gelateria Italiana"}, desc:{pt:"Gelato italiano, pizza e café, produção própria todos os dias.", es:"Gelato italiano, pizza y café, producción propia todos los días."}, address:"Rua Visconde de Pirajá, 229, Ipanema", hours:{pt:"Diariamente 11h–0h", es:"Todos los días 11h–0h"}, ig:"verogelateria" },
+          { name:"Cambada", desc:{pt:"Sorvete com iogurte, mel e granola.", es:"Helado con yogur, miel y granola."}, address:"Rua Ronald de Carvalho, 132, loja B, Copacabana", hours:{pt:"consultar Instagram", es:"consultar Instagram"}, ig:"cambadasorvetes", note:{pt:"Horário não confirmado — a marca tem anunciado novas unidades no Instagram, vale conferir antes de ir.", es:"Horario no confirmado — la marca ha anunciado nuevas sedes en Instagram, conviene confirmar antes de ir."} },
+          { name:"Momo Gelato", desc:{pt:"Gelato artesanal italiano, feito na hora à vista do cliente.", es:"Gelato artesanal italiano, hecho al momento a la vista del cliente."}, address:"Rua Dias Ferreira, 147, Leblon", hours:{pt:"Dom–Qui 11h–23h · Sex–Sáb 11h–0h", es:"Dom–Jue 11h–23h · Vie–Sáb 11h–0h"}, ig:"momogelateria", site:"https://momogelato.com.br/" },
+          { name:"Sorvetiño", tag:{pt:"sorveteiro do ano 2026 · Veja Rio", es:"heladero del año 2026 · Veja Rio"}, desc:{pt:"Sabores autorais que mudam toda semana, formato soft com coberturas — o clássico fixo é sucrilhos.", es:"Sabores de autor que cambian cada semana, formato soft con toppings — el clásico fijo es de cereales (sucrilhos)."}, address:"Av. Prado Junior, 330, loja D, Copacabana", hours:{pt:"Diariamente 12h–20h", es:"Todos los días 12h–20h"}, ig:"sorvetinhocomtil" },
         ]
       },
     ]
@@ -531,17 +594,17 @@ const DATA = [
     id: "estrelados",
     emoji: "⭐",
     accent: "star",
-    title: "Estrelados",
-    sub: "Menu degustação · Guia Michelin",
-    intro: "Os templos de menu degustação com estrela Michelin da cidade. Caríssimos — mas vai que rola uma ocasião especial.",
+    title: { pt:"Estrelados", es:"Estrellados" },
+    sub: { pt:"Menu degustação · Guia Michelin", es:"Menú degustación · Guía Michelin" },
+    intro: { pt:"Os templos de menu degustação com estrela Michelin da cidade. Caríssimos — mas vai que rola uma ocasião especial.", es:"Los templos del menú degustación con estrella Michelin de la ciudad. Carísimos — pero por si surge una ocasión especial." },
     groups: [
       {
-        title: "Menu degustação, Guia Michelin",
+        title: { pt:"Menu degustação, Guia Michelin", es:"Menú degustación, Guía Michelin" },
         items: [
-          { name:"Oro", tag:"2 estrelas Michelin", desc:"Felipe Bronze — menu degustação autoral, um dos ápices da alta gastronomia carioca.", address:"Rua General San Martin, 889, Leblon", hours:"Ter–Sex 19h30–23h · Sáb 13h–15h e 19h30–23h", ig:"oro_restaurante", site:"https://ororestaurante.com.br/", price:"R$ 690–790 (menu degustação)" },
-          { name:"Lasai", tag:"2 estrelas Michelin", desc:"Alta gastronomia, cerca de 10 lugares por noite — só com reserva.", address:"Rua Conde de Irajá, 191, Botafogo", hours:"Ter–Sáb 19h30–21h30 (só reserva)", ig:"restaurantelasai", site:"https://lasai.com.br/english/" },
-          { name:"Oteque", tag:"1 estrela Michelin", desc:"Menu degustação autoral.", address:"Rua Conde de Irajá, 581, Botafogo", hours:"Ter–Sáb 19h–23h30", site:"https://www.oteque.com/", note:"Instagram oficial não confirmado com certeza — confira no site antes de reservar." },
-          { name:"Madame Olympe", tag:"1 estrela Michelin · novo 2026", desc:"O novo degustação de Claude Troisgros com a chef Jéssica Trindade — ganhou a primeira estrela Michelin com menos de um ano de casa. Só 20 lugares, no mesmo endereço do Chez Claude. Menu de 8 pratos (~R$480–540) ou 4 pratos (~R$380–440), com harmonização à parte.", address:"Rua Conde de Bernadotte, 26, Leblon", hours:"Ter–Sáb 18h30–0h", ig:"madame.olympe", site:"https://madameolympe.com.br/", note:"Preço do menu varia um pouco entre fontes — confirme no site antes de reservar." },
+          { name:"Oro", tag:{pt:"2 estrelas Michelin", es:"2 estrellas Michelin"}, desc:{pt:"Felipe Bronze — menu degustação autoral, um dos ápices da alta gastronomia carioca.", es:"Felipe Bronze — menú degustación de autor, uno de los puntos más altos de la alta gastronomía carioca."}, address:"Rua General San Martin, 889, Leblon", hours:{pt:"Ter–Sex 19h30–23h · Sáb 13h–15h e 19h30–23h", es:"Mar–Vie 19h30–23h · Sáb 13h–15h y 19h30–23h"}, ig:"oro_restaurante", site:"https://ororestaurante.com.br/", price:{pt:"R$ 690–790 (menu degustação)", es:"R$ 690–790 (menú degustación)"} },
+          { name:"Lasai", tag:{pt:"2 estrelas Michelin", es:"2 estrellas Michelin"}, desc:{pt:"Alta gastronomia, cerca de 10 lugares por noite — só com reserva.", es:"Alta gastronomía, unos 10 cubiertos por noche — solo con reserva."}, address:"Rua Conde de Irajá, 191, Botafogo", hours:{pt:"Ter–Sáb 19h30–21h30 (só reserva)", es:"Mar–Sáb 19h30–21h30 (solo reserva)"}, ig:"restaurantelasai", site:"https://lasai.com.br/english/" },
+          { name:"Oteque", tag:{pt:"1 estrela Michelin", es:"1 estrella Michelin"}, desc:{pt:"Menu degustação autoral.", es:"Menú degustación de autor."}, address:"Rua Conde de Irajá, 581, Botafogo", hours:{pt:"Ter–Sáb 19h–23h30", es:"Mar–Sáb 19h–23h30"}, site:"https://www.oteque.com/", note:{pt:"Instagram oficial não confirmado com certeza — confira no site antes de reservar.", es:"No pudimos confirmar con certeza el Instagram oficial — consulta el sitio antes de reservar."} },
+          { name:"Madame Olympe", tag:{pt:"1 estrela Michelin · novo 2026", es:"1 estrella Michelin · nuevo 2026"}, desc:{pt:"O novo degustação de Claude Troisgros com a chef Jéssica Trindade — ganhou a primeira estrela Michelin com menos de um ano de casa. Só 20 lugares, no mesmo endereço do Chez Claude. Menu de 8 pratos (~R$480–540) ou 4 pratos (~R$380–440), com harmonização à parte.", es:"El nuevo degustación de Claude Troisgros con la chef Jéssica Trindade — ganó su primera estrella Michelin con menos de un año de vida. Solo 20 cubiertos, en la misma dirección que Chez Claude. Menú de 8 platos (~R$480–540) o 4 platos (~R$380–440), con maridaje aparte."}, address:"Rua Conde de Bernadotte, 26, Leblon", hours:{pt:"Ter–Sáb 18h30–0h", es:"Mar–Sáb 18h30–0h"}, ig:"madame.olympe", site:"https://madameolympe.com.br/", note:{pt:"Preço do menu varia um pouco entre fontes — confirme no site antes de reservar.", es:"El precio del menú varía un poco entre fuentes — confirma en el sitio antes de reservar."} },
         ]
       },
     ]
@@ -550,108 +613,123 @@ const DATA = [
     id: "passeios",
     emoji: "🗺️",
     accent: "plum",
-    title: "Passeios e coisas para fazer",
-    sub: "Zona Sul · Centro · Urca",
-    intro: "Do clássico Pão de Açúcar aos cantos menos óbvios, pra montar o roteiro por dia.",
+    title: { pt:"Passeios e coisas para fazer", es:"Paseos y cosas para hacer" },
+    nav: { pt:"Passeios", es:"Paseos" },
+    sub: { pt:"Zona Sul · Centro · Urca", es:"Zona Sur · Centro · Urca" },
+    intro: { pt:"Do clássico Pão de Açúcar aos cantos menos óbvios, pra montar o roteiro por dia.", es:"Desde el clásico Pan de Azúcar hasta los rincones menos obvios, para armar el itinerario de cada día." },
     groups: [
       {
-        title: "Perto do Leblon / Barra",
+        title: { pt:"Perto do Leblon / Barra", es:"Cerca de Leblon / Barra" },
         items: [
-          { name:"Passeio de barco — Ilhas Tijucas", desc:"Sai da Barra da Tijuca, dura poucas horas, dá pra fazer de manhã. Vai bastante gringo, é barato — tem no Airbnb Experiences.", address:"Saída: Av. Armando Lombardi, 370 (Praia dos Amores) e/ou Jardim Oceânico, Barra da Tijuca", hours:"Passeios de ~3–4h, geralmente pela manhã (7h–13h), sujeito a maré/clima", ig:"rioboatexperience", site:"https://rioboatexperience.com.br", price:"a partir de ~R$150–225/pessoa (compartilhado)" },
-          { name:"Almoço no Ocyá — Ilha da Gigóia", desc:"Combina bem com o passeio de barco. Estar na beira da lagoa é incrível. Só fins de semana, reserva obrigatória.", address:"Ilha Primeira, Barra da Tijuca (acesso só por barco)", hours:"Sex 17h30–22h · Sáb 12h–22h · Dom 12h–18h", ig:"ocya.rio", site:"https://ocya.com.br/" },
+          { name:{pt:"Passeio de barco — Ilhas Tijucas", es:"Paseo en barco — Ilhas Tijucas"}, desc:{pt:"Sai da Barra da Tijuca, dura poucas horas, dá pra fazer de manhã. Vai bastante gringo, é barato — tem no Airbnb Experiences.", es:"Sale de Barra da Tijuca, dura pocas horas, se puede hacer por la mañana. Va mucho extranjero, es barato — está en Airbnb Experiences."}, address:"Saída: Av. Armando Lombardi, 370 (Praia dos Amores) e/ou Jardim Oceânico, Barra da Tijuca", hours:{pt:"Passeios de ~3–4h, geralmente pela manhã (7h–13h), sujeito a maré/clima", es:"Paseos de ~3–4h, generalmente por la mañana (7h–13h), sujeto a marea/clima"}, ig:"rioboatexperience", site:"https://rioboatexperience.com.br", price:{pt:"a partir de ~R$150–225/pessoa (compartilhado)", es:"desde ~R$150–225/persona (compartido)"} },
+          { name:{pt:"Almoço no Ocyá — Ilha da Gigóia", es:"Almuerzo en el Ocyá — Ilha da Gigóia"}, desc:{pt:"Combina bem com o passeio de barco. Estar na beira da lagoa é incrível. Só fins de semana, reserva obrigatória.", es:"Combina bien con el paseo en barco. Estar a la orilla de la laguna es increíble. Solo fines de semana, reserva obligatoria."}, address:"Ilha Primeira, Barra da Tijuca (acesso só por barco)", hours:{pt:"Sex 17h30–22h · Sáb 12h–22h · Dom 12h–18h", es:"Vie 17h30–22h · Sáb 12h–22h · Dom 12h–18h"}, ig:"ocya.rio", site:"https://ocya.com.br/" },
         ]
       },
       {
-        title: "No Leblon",
+        title: { pt:"No Leblon", es:"En Leblon" },
         items: [
-          { name:"Mirante do Leblon", desc:"Vista da Praia do Leblon e de Ipanema, ótimo pro pôr do sol.", address:"Av. Niemeyer, Leblon (próximo ao Posto 12)", hours:"Aberto 24h, área externa", price:"Gratuito" },
-          { name:"Praia do Leblon", desc:"Tem trechos bons pra ir com criança, com brinquedos.", address:"Orla do Leblon, entre o Canal do Jardim de Alah e o Posto 12", hours:"Sem horário fixo", price:"Gratuito" },
+          { name:"Mirante do Leblon", desc:{pt:"Vista da Praia do Leblon e de Ipanema, ótimo pro pôr do sol.", es:"Vista de la Playa de Leblon y de Ipanema, ideal para el atardecer."}, address:"Av. Niemeyer, Leblon (próximo ao Posto 12)", hours:{pt:"Aberto 24h, área externa", es:"Abierto 24h, espacio al aire libre"}, price:{pt:"Gratuito", es:"Gratis"} },
+          { name:"Praia do Leblon", desc:{pt:"Tem trechos bons pra ir com criança, com brinquedos.", es:"Tiene tramos buenos para ir con niños, con juegos."}, address:"Orla do Leblon, entre o Canal do Jardim de Alah e o Posto 12", hours:{pt:"Sem horário fixo", es:"Sin horario fijo"}, price:{pt:"Gratuito", es:"Gratis"} },
         ]
       },
       {
         title: "Lagoa Rodrigo de Freitas",
         items: [
-          { name:"Alugar bike ou pedalinho", desc:"Durante a semana tem menos movimento. Parque dos Patins e a área do Cantagalo alugam bike e pedalinho.", address:"Parque dos Patins — Av. Borges de Medeiros, margem da Lagoa", hours:"Aluguel geralmente fins de semana/feriados 9h–17h30 — confirmar dias úteis no local", price:"Pedalinho R$30–50 · Bike de R$3 (15min) a R$20 (48h)" },
-          { name:"Locomoção entre bairros", desc:"A lagoa serve pra ir do Leblon ao Jardim Botânico de bike ou a pé — volta completa: 7,5 km.", address:"Orla da Lagoa Rodrigo de Freitas", hours:"Aberto 24h" },
-          { name:"So_Lo da Lagoa", desc:"Café ou lanche da tarde com vista pro fim de tarde, sem precisar rodear a lagoa toda.", address:"Av. Epitácio Pessoa, Lagoa (quiosque com deck)", hours:"Diariamente 7h–20h", ig:"so_lo.cafe" },
+          { name:{pt:"Alugar bike ou pedalinho", es:"Alquilar bici o bote a pedal"}, desc:{pt:"Durante a semana tem menos movimento. Parque dos Patins e a área do Cantagalo alugam bike e pedalinho.", es:"Entre semana hay menos movimiento. Parque dos Patins y la zona de Cantagalo alquilan bicicletas y botes a pedal."}, address:"Parque dos Patins — Av. Borges de Medeiros, margem da Lagoa", hours:{pt:"Aluguel geralmente fins de semana/feriados 9h–17h30 — confirmar dias úteis no local", es:"Alquiler generalmente fines de semana/feriados 9h–17h30 — confirmar días de semana en el lugar"}, price:{pt:"Pedalinho R$30–50 · Bike de R$3 (15min) a R$20 (48h)", es:"Bote a pedal R$30–50 · Bici desde R$3 (15min) hasta R$20 (48h)"} },
+          { name:{pt:"Locomoção entre bairros", es:"Moverse entre barrios"}, desc:{pt:"A lagoa serve pra ir do Leblon ao Jardim Botânico de bike ou a pé — volta completa: 7,5 km.", es:"La laguna sirve para ir de Leblon a Jardim Botânico en bici o a pie — vuelta completa: 7,5 km."}, address:"Orla da Lagoa Rodrigo de Freitas", hours:{pt:"Aberto 24h", es:"Abierto 24h"} },
+          { name:"So_Lo da Lagoa", desc:{pt:"Café ou lanche da tarde com vista pro fim de tarde, sem precisar rodear a lagoa toda.", es:"Café o merienda con vista al atardecer, sin necesidad de rodear toda la laguna."}, address:"Av. Epitácio Pessoa, Lagoa (quiosque com deck)", hours:{pt:"Diariamente 7h–20h", es:"Todos los días 7h–20h"}, ig:"so_lo.cafe" },
         ]
       },
       {
-        title: "Outros passeios",
+        title: { pt:"Outros passeios", es:"Otros paseos" },
         items: [
-          { name:"Arpoador", desc:"Pôr do sol clássico, aplauso incluso.", address:"Pedra do Arpoador, entre Ipanema e Copacabana (região do Posto 7)", hours:"Sem horário fixo — pôr do sol varia entre ~17h15 (inverno) e ~19h15 (verão)", price:"Gratuito" },
-          { name:"Praia de Copacabana — Posto 6", desc:"Trecho mais tranquilo pra ir com criança, perto do Forte de Copacabana.", address:"Orla de Copacabana, extremo sul, perto da Praça Coronel Eugênio Franco", hours:"Sem horário fixo", price:"Gratuito" },
-          { name:"Forte de Copacabana", desc:"Durante a semana é mais vazio. Tem cafés dentro, especialmente o Café 18 do Forte.", address:"Praça Coronel Eugênio Franco, 1, Posto 6, Copacabana", hours:"Ter–Dom e feriados 10h–19h · fechado Seg", price:"R$10 inteira / R$5 meia · gratuito às terças" },
-          { name:"Café 18 do Forte", desc:"Café dentro do Forte de Copacabana, boa vista.", address:"Dentro do Forte de Copacabana, Posto 6, Copacabana", hours:"consultar Instagram", ig:"cafe18doforte", site:"https://cafe18doforte.com" },
+          { name:"Arpoador", desc:{pt:"Pôr do sol clássico, aplauso incluso.", es:"Atardecer clásico, con aplausos incluidos."}, address:"Pedra do Arpoador, entre Ipanema e Copacabana (região do Posto 7)", hours:{pt:"Sem horário fixo — pôr do sol varia entre ~17h15 (inverno) e ~19h15 (verão)", es:"Sin horario fijo — el atardecer varía entre ~17h15 (invierno) y ~19h15 (verano)"}, price:{pt:"Gratuito", es:"Gratis"} },
+          { name:"Praia de Copacabana — Posto 6", desc:{pt:"Trecho mais tranquilo pra ir com criança, perto do Forte de Copacabana.", es:"Tramo más tranquilo para ir con niños, cerca del Forte de Copacabana."}, address:"Orla de Copacabana, extremo sul, perto da Praça Coronel Eugênio Franco", hours:{pt:"Sem horário fixo", es:"Sin horario fijo"}, price:{pt:"Gratuito", es:"Gratis"} },
+          { name:"Forte de Copacabana", desc:{pt:"Durante a semana é mais vazio. Tem cafés dentro, especialmente o Café 18 do Forte.", es:"Entre semana está más vacío. Tiene cafés adentro, especialmente el Café 18 do Forte."}, address:"Praça Coronel Eugênio Franco, 1, Posto 6, Copacabana", hours:{pt:"Ter–Dom e feriados 10h–19h · fechado Seg", es:"Mar–Dom y feriados 10h–19h · cerrado Lun"}, price:{pt:"R$10 inteira / R$5 meia · gratuito às terças", es:"R$10 entrada general / R$5 media entrada · gratis los martes"} },
+          { name:"Café 18 do Forte", desc:{pt:"Café dentro do Forte de Copacabana, boa vista.", es:"Café dentro del Forte de Copacabana, buena vista."}, address:"Dentro do Forte de Copacabana, Posto 6, Copacabana", hours:{pt:"consultar Instagram", es:"consultar Instagram"}, ig:"cafe18doforte", site:"https://cafe18doforte.com" },
         ]
       },
       {
-        title: "Imperdíveis / turísticos clássicos",
+        title: { pt:"Imperdíveis / turísticos clássicos", es:"Imperdibles / clásicos turísticos" },
         items: [
-          { name:"Pão de Açúcar (Bondinho)", desc:"Evitar dias nublados, ir em dia de sol.", address:"Av. Pasteur, 520, Urca", hours:"8h–20h (última entrada 18h30)", site:"https://www.bondinho.com.br", price:"R$85 (carioca) a R$199 (estrangeiro adulto) — varia por categoria, conferir no site" },
-          { name:"Jardim Botânico", desc:"Ótimo passeio em família, crianças adoram. Qualquer época, exceto chuva. Café depois no Empório Jardim ou na Absurda.", address:"Rua Jardim Botânico, 1008, Jardim Botânico", hours:"Qui–Ter 8h–17h · Qua 11h–17h", ig:"jardimbotanicorj", site:"https://www.gov.br/jbrj", price:"R$40 residentes Brasil / R$80 estrangeiros · meia R$20" },
-          { name:"Museu do Amanhã", desc:"Museu interativo sobre os rumos da humanidade. Agendamento recomendado.", address:"Praça Mauá, 1, Centro", hours:"Ter–Dom 10h–18h (última entrada 17h)", site:"https://museudoamanha.org.br", price:"R$40 inteira / R$20 meia · R$10 todo dia 10 do mês" },
-          { name:"Espaço Cultural da Marinha", desc:"Museu Naval ao ar livre, perto do Museu do Amanhã. Dá pra entrar num submarino, num navio de guerra e num helicóptero — bom passeio em família.", address:"Orla Conde (Boulevard Olímpico), s/n, Praça XV, Centro", hours:"Ter–Dom e feriados 11h–17h (último acesso 16h30)", site:"https://www.marinha.mil.br/dphdm/espaco-cultural-da-marinha", price:"R$20 inteira / R$10 meia · gratuito às terças" },
-          { name:"CCBB", tag:"Centro Cultural Banco do Brasil", desc:"Exposições boas, e dá pra conhecer a parte histórica da cidade.", address:"Rua Primeiro de Março, 66, Centro", hours:"Qua–Seg 9h–20h · fechado Ter", site:"https://ccbb.com.br/rio-de-janeiro", price:"Gratuito" },
+          { name:"Pão de Açúcar (Bondinho)", desc:{pt:"Evitar dias nublados, ir em dia de sol.", es:"Evitar días nublados, ir en un día soleado."}, address:"Av. Pasteur, 520, Urca", hours:{pt:"8h–20h (última entrada 18h30)", es:"8h–20h (última entrada 18h30)"}, site:"https://www.bondinho.com.br", price:{pt:"R$85 (carioca) a R$199 (estrangeiro adulto) — varia por categoria, conferir no site", es:"R$85 (carioca) a R$199 (extranjero adulto) — varía según categoría, consultar en el sitio"} },
+          { name:"Jardim Botânico", desc:{pt:"Ótimo passeio em família, crianças adoram. Qualquer época, exceto chuva. Café depois no Empório Jardim ou na Absurda.", es:"Excelente paseo en familia, a los niños les encanta. Cualquier época, excepto lluvia. Café después en Empório Jardim o en Absurda."}, address:"Rua Jardim Botânico, 1008, Jardim Botânico", hours:{pt:"Qui–Ter 8h–17h · Qua 11h–17h", es:"Jue–Mar 8h–17h · Mié 11h–17h"}, ig:"jardimbotanicorj", site:"https://www.gov.br/jbrj", price:{pt:"R$40 residentes Brasil / R$80 estrangeiros · meia R$20", es:"R$40 residentes en Brasil / R$80 extranjeros · media entrada R$20"} },
+          { name:"Museu do Amanhã", desc:{pt:"Museu interativo sobre os rumos da humanidade. Agendamento recomendado.", es:"Museo interactivo sobre los rumbos de la humanidad. Se recomienda reservar horario."}, address:"Praça Mauá, 1, Centro", hours:{pt:"Ter–Dom 10h–18h (última entrada 17h)", es:"Mar–Dom 10h–18h (última entrada 17h)"}, site:"https://museudoamanha.org.br", price:{pt:"R$40 inteira / R$20 meia · R$10 todo dia 10 do mês", es:"R$40 entrada general / R$20 media entrada · R$10 todos los días 10 del mes"} },
+          { name:"Espaço Cultural da Marinha", desc:{pt:"Museu Naval ao ar livre, perto do Museu do Amanhã. Dá pra entrar num submarino, num navio de guerra e num helicóptero — bom passeio em família.", es:"Museo Naval al aire libre, cerca del Museu do Amanhã. Se puede entrar a un submarino, un buque de guerra y un helicóptero — buen paseo en familia."}, address:"Orla Conde (Boulevard Olímpico), s/n, Praça XV, Centro", hours:{pt:"Ter–Dom e feriados 11h–17h (último acesso 16h30)", es:"Mar–Dom y feriados 11h–17h (último acceso 16h30)"}, site:"https://www.marinha.mil.br/dphdm/espaco-cultural-da-marinha", price:{pt:"R$20 inteira / R$10 meia · gratuito às terças", es:"R$20 entrada general / R$10 media entrada · gratis los martes"} },
+          { name:"CCBB", tag:"Centro Cultural Banco do Brasil", desc:{pt:"Exposições boas, e dá pra conhecer a parte histórica da cidade.", es:"Buenas exposiciones, y de paso conoces la parte histórica de la ciudad."}, address:"Rua Primeiro de Março, 66, Centro", hours:{pt:"Qua–Seg 9h–20h · fechado Ter", es:"Mié–Lun 9h–20h · cerrado Mar"}, site:"https://ccbb.com.br/rio-de-janeiro", price:{pt:"Gratuito", es:"Gratis"} },
         ]
       },
       {
-        title: "Menos conhecidos, mas vale a pena",
+        title: { pt:"Menos conhecidos, mas vale a pena", es:"Menos conocidos, pero vale la pena" },
         items: [
-          { name:"Parque da Catacumba", desc:"Trilhas curtas e atividades de aventura (arvorismo, tirolesa, rapel).", address:"Av. Epitácio Pessoa, 3000, Lagoa", hours:"Ter–Dom 8h–17h (até 18h no horário de verão)", price:"Entrada gratuita (atividades pagas à parte)" },
-          { name:"Santa Teresa", desc:"Bairro boêmio de ladeiras — vá de bondinho, saindo da Estação Carioca.", address:"Bonde: Rua Lélio Gama, 2, Centro (Estação Carioca)", hours:"Bonde: Seg–Sáb 8h–17h · Dom/feriados 9h–16h, saídas a cada 15min", price:"Bonde R$20 ida e volta" },
-          { name:"Praia Vermelha", desc:"Do lado do Pão de Açúcar (dá pra combinar com a subida). Muito tranquila, faixa de areia pequena, mar quase sem ondas. Tem cafés e restaurantes por perto.", address:"Bairro Urca, aos pés do Pão de Açúcar, final da Av. Pasteur", hours:"Sem horário fixo", price:"Gratuito" },
-          { name:"Urca", desc:"Ótimo bairro pra passear — Pista Cláudio Coutinho e a Mureta da Urca, boa ao entardecer.", address:"Zona Sul, entre Botafogo e Praia Vermelha", hours:"Sem horário fixo", price:"Gratuito" },
+          { name:"Parque da Catacumba", desc:{pt:"Trilhas curtas e atividades de aventura (arvorismo, tirolesa, rapel).", es:"Senderos cortos y actividades de aventura (arborismo, tirolesa, rapel)."}, address:"Av. Epitácio Pessoa, 3000, Lagoa", hours:{pt:"Ter–Dom 8h–17h (até 18h no horário de verão)", es:"Mar–Dom 8h–17h (hasta 18h en horario de verano)"}, price:{pt:"Entrada gratuita (atividades pagas à parte)", es:"Entrada gratuita (actividades pagas aparte)"} },
+          { name:"Santa Teresa", desc:{pt:"Bairro boêmio de ladeiras — vá de bondinho, saindo da Estação Carioca.", es:"Barrio bohemio de calles empinadas — ve en tranvía, saliendo desde la Estação Carioca."}, address:"Bonde: Rua Lélio Gama, 2, Centro (Estação Carioca)", hours:{pt:"Bonde: Seg–Sáb 8h–17h · Dom/feriados 9h–16h, saídas a cada 15min", es:"Tranvía: Lun–Sáb 8h–17h · Dom/feriados 9h–16h, salidas cada 15min"}, price:{pt:"Bonde R$20 ida e volta", es:"Tranvía R$20 ida y vuelta"} },
+          { name:"Praia Vermelha", desc:{pt:"Do lado do Pão de Açúcar (dá pra combinar com a subida). Muito tranquila, faixa de areia pequena, mar quase sem ondas. Tem cafés e restaurantes por perto.", es:"Al lado del Pan de Azúcar (se puede combinar con la subida). Muy tranquila, franja de arena pequeña, mar casi sin olas. Tiene cafés y restaurantes cerca."}, address:"Bairro Urca, aos pés do Pão de Açúcar, final da Av. Pasteur", hours:{pt:"Sem horário fixo", es:"Sin horario fijo"}, price:{pt:"Gratuito", es:"Gratis"} },
+          { name:"Urca", desc:{pt:"Ótimo bairro pra passear — Pista Cláudio Coutinho e a Mureta da Urca, boa ao entardecer.", es:"Excelente barrio para pasear — Pista Cláudio Coutinho y la Mureta da Urca, buena al atardecer."}, address:"Zona Sul, entre Botafogo e Praia Vermelha", hours:{pt:"Sem horário fixo", es:"Sin horario fijo"}, price:{pt:"Gratuito", es:"Gratis"} },
         ]
       },
     ]
   },
 ];
 
+let currentLang = localStorage.getItem("rioGuideLang") || "es";
+
 const content = document.getElementById("content");
+const chipsEl = document.getElementById("chips");
 const noResults = document.getElementById("noResults");
+const searchInput = document.getElementById("search");
+
+function t(v){
+  if (v && typeof v === "object") return v[currentLang] !== undefined ? v[currentLang] : v.pt;
+  return v;
+}
+function bothLang(v){
+  if (v && typeof v === "object") return [v.pt, v.es].filter(Boolean).join(" ");
+  return v || "";
+}
 
 function mapsUrl(name, address){
-  const q = encodeURIComponent(`${name}, ${address || "Rio de Janeiro"}`);
+  const q = encodeURIComponent(`${t(name)}, ${address || "Rio de Janeiro"}`);
   return `https://www.google.com/maps/search/?api=1&query=${q}`;
 }
 
 function cardHTML(item){
-  const searchBlob = [item.name, item.tag, item.desc, item.address].filter(Boolean).join(" ").toLowerCase();
+  const searchBlob = [bothLang(item.name), bothLang(item.tag), bothLang(item.desc), item.address].filter(Boolean).join(" ").toLowerCase();
   const meta = [];
   if (item.address) {
     meta.push(`<a class="meta-row" href="${mapsUrl(item.name, item.address)}" target="_blank" rel="noopener"><span class="ic">📍</span><span>${item.address}</span></a>`);
   }
   if (item.hours) {
-    meta.push(`<div class="meta-row"><span class="ic">🕐</span><span>${item.hours}</span></div>`);
+    meta.push(`<div class="meta-row"><span class="ic">🕐</span><span>${t(item.hours)}</span></div>`);
   }
   if (item.price) {
-    meta.push(`<div class="meta-row card-price"><span class="ic">＄</span><span>${item.price}</span></div>`);
+    meta.push(`<div class="meta-row card-price"><span class="ic">＄</span><span>${t(item.price)}</span></div>`);
   }
   const links = [];
   if (item.ig) links.push(`<a class="pill" href="https://instagram.com/${item.ig}" target="_blank" rel="noopener">Instagram</a>`);
-  if (item.site) links.push(`<a class="pill pill--outline" href="${item.site}" target="_blank" rel="noopener">Site</a>`);
-  if (item.address) links.push(`<a class="pill pill--ghost" href="${mapsUrl(item.name, item.address)}" target="_blank" rel="noopener">Mapa</a>`);
+  if (item.site) links.push(`<a class="pill pill--outline" href="${item.site}" target="_blank" rel="noopener">${UI[currentLang].pillSite}</a>`);
+  if (item.address) links.push(`<a class="pill pill--ghost" href="${mapsUrl(item.name, item.address)}" target="_blank" rel="noopener">${UI[currentLang].pillMaps}</a>`);
 
   return `
     <article class="card" data-search="${searchBlob.replace(/"/g,'&quot;')}">
       <div class="card-top">
-        <h4>${item.name}</h4>
-        ${item.tag ? `<span class="card-tag">${item.tag}</span>` : ""}
+        <h4>${t(item.name)}</h4>
+        ${item.tag ? `<span class="card-tag">${t(item.tag)}</span>` : ""}
       </div>
-      ${item.desc ? `<p class="card-desc">${item.desc}</p>` : ""}
+      ${item.desc ? `<p class="card-desc">${t(item.desc)}</p>` : ""}
       ${meta.length ? `<div class="card-meta">${meta.join("")}</div>` : ""}
       ${links.length ? `<div class="card-links">${links.join("")}</div>` : ""}
-      ${item.note ? `<p class="card-note">⚠️ ${item.note}</p>` : ""}
+      ${item.note ? `<p class="card-note">⚠️ ${t(item.note)}</p>` : ""}
     </article>
   `;
 }
 
 function groupHTML(group){
+  const badge = group.featured ? `<span class="group-badge">${UI[currentLang].destaques}</span>` : "";
   return `
     <div class="group ${group.featured ? "featured" : ""}">
-      <h3 class="group-title">${group.title}</h3>
-      ${group.subtitle ? `<p class="group-subtitle">${group.subtitle}</p>` : ""}
+      <h3 class="group-title">${t(group.title)}${badge}</h3>
+      ${group.subtitle ? `<p class="group-subtitle">${t(group.subtitle)}</p>` : ""}
       <div class="cards">
         ${group.items.map(cardHTML).join("")}
       </div>
@@ -664,20 +742,16 @@ function hoodHTML(hood){
     <section class="hood hood--${hood.accent}" id="${hood.id}">
       <div class="hood-header">
         <span class="hood-emoji">${hood.emoji}</span>
-        <h2>${hood.title}</h2>
-        <span class="hood-sub">${hood.sub}</span>
+        <h2>${t(hood.title)}</h2>
+        <span class="hood-sub">${t(hood.sub)}</span>
       </div>
-      ${hood.intro ? `<p class="hood-intro">${hood.intro}</p>` : ""}
+      ${hood.intro ? `<p class="hood-intro">${t(hood.intro)}</p>` : ""}
       ${hood.groups.map(groupHTML).join("")}
     </section>
   `;
 }
 
-content.innerHTML = DATA.map(hoodHTML).join("");
-
-// search filter
-const searchInput = document.getElementById("search");
-searchInput.addEventListener("input", () => {
+function applySearchFilter(){
   const q = searchInput.value.trim().toLowerCase();
   let anyVisible = false;
 
@@ -698,7 +772,35 @@ searchInput.addEventListener("input", () => {
   });
 
   noResults.style.display = anyVisible ? "none" : "block";
+}
+
+function render(){
+  chipsEl.innerHTML = DATA.map(h => `<a href="#${h.id}" class="chip">${h.emoji} ${t(h.nav || h.title)}</a>`).join("");
+  content.innerHTML = DATA.map(hoodHTML).join("");
+  applySearchFilter();
+}
+
+function setLanguage(lang){
+  currentLang = lang;
+  localStorage.setItem("rioGuideLang", lang);
+  document.documentElement.lang = lang === "es" ? "es" : "pt-BR";
+  document.title = UI[lang].title;
+  document.getElementById("heroSub").textContent = UI[lang].heroSub;
+  document.getElementById("heroMeta").textContent = UI[lang].heroMeta;
+  document.getElementById("footerAbout").innerHTML = `<strong>${UI[lang].footerLabel}</strong> ${UI[lang].footerP1}`;
+  document.getElementById("footerCredit").textContent = UI[lang].footerP2;
+  searchInput.placeholder = UI[lang].searchPlaceholder;
+  noResults.textContent = UI[lang].noResults;
+  document.querySelectorAll(".lang-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+  render();
+}
+
+document.querySelectorAll(".lang-btn").forEach(b => {
+  b.addEventListener("click", () => setLanguage(b.dataset.lang));
 });
+searchInput.addEventListener("input", applySearchFilter);
+
+setLanguage(currentLang);
 </script>
 </body>
 </html>
